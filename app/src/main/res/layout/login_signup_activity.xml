@@ -43,11 +43,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:background="@drawable/login_bordershape"
                     android:gravity="center"
                     android:text="@string/login"
-                    android:textColor="@color/SecondaryTextColor"
+                    android:textColor="@color/whiteTextColor"
                     android:textSize="14sp"
                     android:layout_marginRight="8dp"
                     android:layout_marginEnd="8dp" />
@@ -57,7 +56,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:layout_weight="1"
                     android:background="@drawable/signup_bordershape"
                     android:gravity="center"
@@ -76,9 +74,9 @@
                 android:layout_marginTop="64dp"
                 android:layout_marginBottom="32dp">
 
-                <view
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
+                    android:layout_height="1dp"
                     android:background="@color/LightGrayColor"
                     android:layout_centerVertical="true"
                     android:layout_toStartOf="@+id/login_with_txt"
@@ -94,9 +92,9 @@
                     android:textStyle="bold"
                     android:layout_centerHorizontal="true"/>
 
-                <view
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
+                    android:layout_height="1dp"
                     android:background="@color/LightGrayColor"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/login_with_txt"
@@ -109,13 +107,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:background="@drawable/gray_login_border_shape"
                 android:gravity="center"
                 android:text="@string/login_with_facebook"
                 android:textColor="@color/PrimaryTextColor"
-                android:textSize="14sp"
-                tools:ignore="UnusedAttribute" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/login_with_google"
@@ -123,13 +119,11 @@
                 android:layout_height="wrap_content"
                 android:focusable="true"
                 android:layout_marginTop="16dp"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:background="@drawable/gray_login_border_shape"
                 android:gravity="center"
                 android:text="@string/login_with_google"
                 android:textColor="@color/PrimaryTextColor"
-                android:textSize="14sp"
-                tools:ignore="UnusedAttribute" />
+                android:textSize="14sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -137,9 +131,9 @@
                 android:layout_marginTop="80dp"
                 android:layout_marginBottom="32dp">
 
-                <view
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
+                    android:layout_height="1dp"
                     android:background="@color/LightGrayColor"
                     android:layout_centerVertical="true"
                     android:layout_toStartOf="@+id/or_txt"
@@ -155,9 +149,9 @@
                     android:textStyle="bold"
                     android:layout_centerHorizontal="true"/>
 
-                <view
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
+                    android:layout_height="1dp"
                     android:background="@color/LightGrayColor"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/or_txt"

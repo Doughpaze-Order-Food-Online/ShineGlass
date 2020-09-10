@@ -5,6 +5,6 @@
     <color name="colorAccent">#448AFF</color>
     <color name="PrimaryTextColor">#757575</color>
     <color name="BlackTextColor">#000000</color>
-    <color name="SecondaryTextColor">#ffffff</color>
-    <color name="LightGrayColor">#eeeeee</color>
+    <color name="whiteTextColor">#ffffff</color>
+    <color name="LightGrayColor">#e0e0e0</color>
 </resources>

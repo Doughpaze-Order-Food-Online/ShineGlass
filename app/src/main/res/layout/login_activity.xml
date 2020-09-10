@@ -21,8 +21,8 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="292dp"
-                app:cardCornerRadius="240dp"
+                android:layout_height="308dp"
+                app:cardCornerRadius="180dp"
                 app:cardElevation="0dp"
                 android:background="@drawable/ic_launcher_background"
                 android:layout_marginTop="-100dp"
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/login"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="32dp"
                         android:textColor="@color/BlackTextColor"
                         android:textSize="28sp"/>
 
@@ -80,8 +80,10 @@
                         style="@style/Widget.Design.TextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
                         android:textColorHint="@color/BlackTextColor"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="32dp"
                         app:endIconMode="clear_text"
                         app:endIconTint="@color/BlackTextColor"
                         app:startIconDrawable="@drawable/ic_baseline_mail_outline_24"
@@ -96,9 +98,10 @@
                         android:hint="@string/email_mobile_number"
                         android:textColorHint="@color/BlackTextColor"
                         android:textSize="12sp"
-                        android:inputType="textEmailAddress|number"
+                        android:inputType="text"
                         android:textColor="@color/BlackTextColor"
-                        android:autofillHints="@null" />
+                        android:autofillHints="@null"
+                        tools:ignore="TextFields" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,6 +110,8 @@
                         style="@style/Widget.Design.TextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
                         android:textColorHint="@color/BlackTextColor"
                         app:endIconMode="password_toggle"
                         app:endIconTint="@color/PrimaryTextColor"
@@ -136,13 +141,11 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="80dp"
                         android:layout_marginBottom="16dp"
-                        android:foreground="?attr/selectableItemBackgroundBorderless"
                         android:background="@drawable/login_bordershape"
                         android:gravity="center"
                         android:text="@string/login"
-                        android:textColor="@color/SecondaryTextColor"
-                        android:textSize="14sp"
-                        tools:ignore="UnusedAttribute" />
+                        android:textColor="@color/whiteTextColor"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/forgot_password_txt"

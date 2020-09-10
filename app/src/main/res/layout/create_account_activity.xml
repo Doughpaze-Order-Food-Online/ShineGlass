@@ -21,8 +21,8 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="292dp"
-                app:cardCornerRadius="240dp"
+                android:layout_height="308dp"
+                app:cardCornerRadius="180dp"
                 app:cardElevation="0dp"
                 android:background="@drawable/ic_launcher_background"
                 android:layout_marginTop="-100dp"
@@ -80,6 +80,8 @@
                         style="@style/Widget.Design.TextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
                         android:textColorHint="@color/BlackTextColor"
                         app:endIconMode="clear_text"
                         app:endIconTint="@color/BlackTextColor"
@@ -106,6 +108,8 @@
                         style="@style/Widget.Design.TextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
                         android:textColorHint="@color/BlackTextColor"
                         app:endIconMode="clear_text"
                         app:endIconTint="@color/BlackTextColor"
@@ -132,6 +136,8 @@
                         style="@style/Widget.Design.TextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
                         android:textColorHint="@color/BlackTextColor"
                         app:endIconMode="clear_text"
                         app:endIconTint="@color/BlackTextColor"
@@ -156,6 +162,8 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/user_password"
                         style="@style/Widget.Design.TextInputLayout"
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/BlackTextColor"
@@ -180,6 +188,8 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/user_re_password"
                         style="@style/Widget.Design.TextInputLayout"
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/BlackTextColor"
@@ -209,18 +219,17 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="80dp"
                         android:layout_marginBottom="16dp"
-                        android:foreground="?attr/selectableItemBackgroundBorderless"
                         android:background="@drawable/login_bordershape"
                         android:gravity="center"
                         android:text="@string/signup"
-                        android:textColor="@color/SecondaryTextColor"
-                        android:textSize="14sp"
-                        tools:ignore="UnusedAttribute" />
+                        android:textColor="@color/whiteTextColor"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/forgot_password_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textAlignment="center"
                         android:text="@string/by_creating_an_account_i_accept_the_terms_and_conditions"
                         android:layout_gravity="center"
                         android:layout_marginBottom="16dp"
