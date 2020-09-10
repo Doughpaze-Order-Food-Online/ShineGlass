@@ -11,8 +11,12 @@
     <string name="don_t_have_an_account">Don\'t have an Account?</string>
     <string name="email_mobile_number">EMAIL/MOBILE NUMBER</string>
     <string name="password">PASSWORD</string>
-    <string name="login">Login</string>
     <string name="login_with_google">login with google</string>
     <string name="login_with_facebook">login with facebook</string>
     <string name="forgot_your_password">Forgot Your Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="user_name">USER NAME</string>
+    <string name="mob_no">MOB NO</string>
+    <string name="email">EMAIL</string>
+    <string name="re_enter_password">RE-ENTER-PASSWORD</string>
 </resources>

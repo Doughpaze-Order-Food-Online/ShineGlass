@@ -68,7 +68,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/login"
+                        android:text="@string/create_account"
                         android:layout_gravity="center"
                         android:layout_marginBottom="16dp"
                         android:textColor="@color/BlackTextColor"
@@ -76,29 +76,80 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/user_email_mobile"
+                        android:id="@+id/user_name"
                         style="@style/Widget.Design.TextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/BlackTextColor"
-                        android:layout_marginBottom="16dp"
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/BlackTextColor"
+                        app:startIconDrawable="@drawable/ic_baseline_perm_identity_24"
+                        app:startIconTint="@color/colorPrimaryDark">
+
+
+                        <EditText
+                            android:id="@+id/user_name_input_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/edt_bg_selector"
+                            android:hint="@string/user_name"
+                            android:textColorHint="@color/BlackTextColor"
+                            android:textSize="12sp"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/BlackTextColor"
+                            android:autofillHints="@null" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/user_email"
+                        style="@style/Widget.Design.TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/BlackTextColor"
                         app:endIconMode="clear_text"
                         app:endIconTint="@color/BlackTextColor"
                         app:startIconDrawable="@drawable/ic_baseline_mail_outline_24"
                         app:startIconTint="@color/colorPrimaryDark">
 
 
-                    <EditText
-                        android:id="@+id/user_email_mobile_input_txt"
+                        <EditText
+                            android:id="@+id/user_email_input_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/edt_bg_selector"
+                            android:hint="@string/email"
+                            android:textColorHint="@color/BlackTextColor"
+                            android:textSize="12sp"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/BlackTextColor"
+                            android:autofillHints="@null" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/user_mobile"
+                        style="@style/Widget.Design.TextInputLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/edt_bg_selector"
-                        android:hint="@string/email_mobile_number"
+                        android:layout_height="wrap_content"
                         android:textColorHint="@color/BlackTextColor"
-                        android:textSize="12sp"
-                        android:inputType="textEmailAddress|number"
-                        android:textColor="@color/BlackTextColor"
-                        android:autofillHints="@null" />
+                        app:endIconMode="clear_text"
+                        app:endIconTint="@color/BlackTextColor"
+                        app:startIconDrawable="@drawable/ic_baseline_smartphone_24"
+                        app:startIconTint="@color/colorPrimaryDark">
+
+
+                        <EditText
+                            android:id="@+id/user_mobile_input_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/edt_bg_selector"
+                            android:hint="@string/mob_no"
+                            android:textColorHint="@color/BlackTextColor"
+                            android:textSize="12sp"
+                            android:inputType="number"
+                            android:textColor="@color/BlackTextColor"
+                            android:autofillHints="@null" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,8 +159,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/BlackTextColor"
-                        app:endIconMode="password_toggle"
-                        app:endIconTint="@color/PrimaryTextColor"
                         app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
                         app:startIconTint="@color/colorPrimaryDark">
 
@@ -119,6 +168,30 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/password"
+                            android:background="@drawable/edt_bg_selector"
+                            android:textColorHint="@color/BlackTextColor"
+                            android:textSize="12sp"
+                            android:inputType="textPassword"
+                            android:textColor="@color/BlackTextColor"
+                            android:autofillHints="@null" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/user_re_password"
+                        style="@style/Widget.Design.TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/BlackTextColor"
+                        app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
+                        app:startIconTint="@color/colorPrimaryDark">
+
+
+                        <EditText
+                            android:id="@+id/re_password_input_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/re_enter_password"
                             android:background="@drawable/edt_bg_selector"
                             android:textColorHint="@color/BlackTextColor"
                             android:textSize="12sp"
