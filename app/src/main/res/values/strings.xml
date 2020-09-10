@@ -19,4 +19,5 @@
     <string name="mob_no">MOB NO</string>
     <string name="email">EMAIL</string>
     <string name="re_enter_password">RE-ENTER-PASSWORD</string>
+    <string name="by_creating_an_account_i_accept_the_terms_and_conditions">By creating an account. I accept the Terms and Conditions</string>
 </resources>

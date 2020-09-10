@@ -212,7 +212,7 @@
                         android:foreground="?attr/selectableItemBackgroundBorderless"
                         android:background="@drawable/login_bordershape"
                         android:gravity="center"
-                        android:text="@string/login"
+                        android:text="@string/signup"
                         android:textColor="@color/SecondaryTextColor"
                         android:textSize="14sp"
                         tools:ignore="UnusedAttribute" />
@@ -221,11 +221,11 @@
                         android:id="@+id/forgot_password_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/forgot_your_password"
+                        android:text="@string/by_creating_an_account_i_accept_the_terms_and_conditions"
                         android:layout_gravity="center"
                         android:layout_marginBottom="16dp"
                         android:textColor="@color/PrimaryTextColor"
-                        android:textSize="14sp"/>
+                        android:textSize="12sp"/>
 
                 </LinearLayout>
 
