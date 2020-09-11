@@ -117,7 +117,7 @@
                         android:textColorHint="@color/BlackTextColor"
                         app:endIconMode="password_toggle"
                         app:endIconTint="@color/PrimaryTextColor"
-                        app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
+                        app:startIconDrawable="@drawable/ic_outline_vpn_key_24"
                         app:startIconTint="@color/colorPrimaryDark">
 
 

@@ -39,14 +39,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="16dp"
+            android:layout_centerVertical="true"
             android:orientation="vertical"
             tools:ignore="RelativeOverlap">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/my_wallet_btn"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="8dp">
@@ -109,7 +109,7 @@
                     android:layout_marginLeft="8dp"
                     android:textAllCaps="true"
                     android:layout_weight="1"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:fontFamily="sans-serif-medium"
                     android:textColor="@color/colorPrimaryDark"
                     android:drawableTint="@color/MediumGrayColor"
@@ -124,7 +124,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:gravity="center"
                     android:text="@string/_12mm_rs_175"
                     android:textColor="@color/BlackTextColor"
@@ -140,7 +140,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:gravity="center"
                     android:text="@string/_12mm_rs_175"
                     android:textColor="@color/BlackTextColor"
@@ -156,7 +156,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     android:gravity="center"
                     android:text="@string/_12mm_rs_175"
                     android:textColor="@color/BlackTextColor"
@@ -172,7 +172,7 @@
                 android:text="@string/shop_by_category"
                 android:textAllCaps="true"
                 android:textColor="@color/BlackTextColor"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="center_horizontal"
                 android:fontFamily="sans-serif-medium"/>
 
@@ -191,10 +191,10 @@
                 android:text="@string/already_have_your_specification_ready"
                 android:textAllCaps="true"
                 android:textColor="@color/BlackTextColor"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textAlignment="center"
                 android:fontFamily="sans-serif-medium"
-                android:gravity="center_horizontal" />
+                android:gravity="center" />
 
             <FrameLayout
                 android:id="@+id/upload_image_pdf_block"
@@ -216,8 +216,8 @@
                     android:fontFamily="sans-serif-medium"
                     android:textAllCaps="true"
                     android:textSize="12sp"
-                    app:drawableStartCompat="@drawable/ic_baseline_crop_original_24"
-                    app:drawableLeftCompat="@drawable/ic_baseline_crop_original_24" />
+                    app:drawableStartCompat="@drawable/ic_baseline_panorama_24"
+                    app:drawableLeftCompat="@drawable/ic_baseline_panorama_24" />
 
 
             </FrameLayout>

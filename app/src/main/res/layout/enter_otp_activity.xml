@@ -186,7 +186,7 @@
                             android:layout_toEndOf="@+id/noAccount_txt"
                             android:text="@string/resend"
                             android:textAllCaps="true"
-                            android:textStyle="bold"
+                            android:fontFamily="sans-serif-medium"
                             android:textColor="@color/colorPrimaryDark"
                             app:fontFamily="sans-serif-medium"
                             android:layout_marginLeft="4dp"

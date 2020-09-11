@@ -32,5 +32,11 @@
     <string name="_12mm_rs_175">12MM=RS 175/</string>
     <string name="shop_by_category">shop by category</string>
     <string name="already_have_your_specification_ready">already have your specification ready?</string>
-    <string name="upload_image_pdf">upload image/pdf</string>
+    <string name="upload_image_pdf">\  upload image/pdf</string>
+    <string name="home">Home</string>
+    <string name="my_requests">My Requests</string>
+    <string name="my_orders">My Orders</string>
+    <string name="My_Account">My Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
