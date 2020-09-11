@@ -72,7 +72,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="16dp"
                         android:textColor="@color/BlackTextColor"
-                        android:textSize="28sp"/>
+                        android:textSize="24sp"/>
 
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +92,7 @@
                         <EditText
                             android:id="@+id/user_name_input_txt"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="@drawable/edt_bg_selector"
                             android:hint="@string/user_name"
                             android:textColorHint="@color/BlackTextColor"
@@ -120,7 +120,7 @@
                         <EditText
                             android:id="@+id/user_email_input_txt"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="@drawable/edt_bg_selector"
                             android:hint="@string/email"
                             android:textColorHint="@color/BlackTextColor"
@@ -148,7 +148,7 @@
                         <EditText
                             android:id="@+id/user_mobile_input_txt"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="@drawable/edt_bg_selector"
                             android:hint="@string/mob_no"
                             android:textColorHint="@color/BlackTextColor"
@@ -174,7 +174,7 @@
                         <EditText
                             android:id="@+id/password_input_txt"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:hint="@string/password"
                             android:background="@drawable/edt_bg_selector"
                             android:textColorHint="@color/BlackTextColor"
@@ -200,7 +200,7 @@
                         <EditText
                             android:id="@+id/re_password_input_txt"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:hint="@string/re_enter_password"
                             android:background="@drawable/edt_bg_selector"
                             android:textColorHint="@color/BlackTextColor"

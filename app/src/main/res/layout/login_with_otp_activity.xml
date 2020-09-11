@@ -68,9 +68,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/login"
+                        android:text="@string/login_with_otp_txt"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="32dp"
+                        android:layout_marginBottom="80dp"
                         android:textColor="@color/BlackTextColor"
                         android:textSize="24sp"/>
 
@@ -86,50 +86,22 @@
                         android:layout_marginBottom="32dp"
                         app:endIconMode="clear_text"
                         app:endIconTint="@color/BlackTextColor"
-                        app:startIconDrawable="@drawable/ic_baseline_mail_outline_24"
-                        app:startIconTint="@color/colorPrimaryDark">
-
-
-                    <EditText
-                        android:id="@+id/user_email_mobile_input_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/edt_bg_selector"
-                        android:hint="@string/email_mobile_number"
-                        android:textColorHint="@color/BlackTextColor"
-                        android:textSize="12sp"
-                        android:inputType="text"
-                        android:textColor="@color/BlackTextColor"
-                        android:autofillHints="@null"
-                        tools:ignore="TextFields" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/user_password"
-                        style="@style/Widget.Design.TextInputLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        app:hintAnimationEnabled="false"
-                        android:textColorHint="@color/BlackTextColor"
-                        app:endIconMode="password_toggle"
-                        app:endIconTint="@color/PrimaryTextColor"
-                        app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
+                        app:startIconDrawable="@drawable/ic_baseline_smartphone_24"
                         app:startIconTint="@color/colorPrimaryDark">
 
 
                         <EditText
-                            android:id="@+id/password_input_txt"
+                            android:id="@+id/user_email_mobile_input_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/password"
                             android:background="@drawable/edt_bg_selector"
+                            android:hint="@string/mobile_number"
                             android:textColorHint="@color/BlackTextColor"
                             android:textSize="12sp"
-                            android:inputType="textPassword"
+                            android:inputType="number"
                             android:textColor="@color/BlackTextColor"
-                            android:autofillHints="@null" />
+                            android:autofillHints="@null"
+                            tools:ignore="TextFields" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,23 +111,13 @@
                         android:layout_height="wrap_content"
                         android:focusable="true"
                         android:layout_gravity="center"
-                        android:layout_marginTop="80dp"
+                        android:layout_marginTop="40dp"
                         android:layout_marginBottom="16dp"
                         android:background="@drawable/login_bordershape"
                         android:gravity="center"
-                        android:text="@string/login"
+                        android:text="@string/get_otp"
                         android:textColor="@color/whiteTextColor"
                         android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/forgot_password_txt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/forgot_your_password"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="16dp"
-                        android:textColor="@color/PrimaryTextColor"
-                        android:textSize="14sp"/>
 
                 </LinearLayout>
 

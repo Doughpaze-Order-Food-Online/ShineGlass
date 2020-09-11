@@ -20,4 +20,10 @@
     <string name="email">EMAIL</string>
     <string name="re_enter_password">RE-ENTER-PASSWORD</string>
     <string name="by_creating_an_account_i_accept_the_terms_and_conditions">By creating an account. I accept the Terms and Conditions</string>
+    <string name="mobile_number">MOBILE NUMBER</string>
+    <string name="login_with_otp_txt">Login with OTP</string>
+    <string name="get_otp">get otp</string>
+    <string name="didn_t_received_otp">Didn\'t received OTP?</string>
+    <string name="resend">Resend</string>
+    <string name="enter_otp_in_59_sec">Enter OTP in 59 sec</string>
 </resources>
