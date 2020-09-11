@@ -7,4 +7,7 @@
     <color name="BlackTextColor">#000000</color>
     <color name="whiteTextColor">#ffffff</color>
     <color name="LightGrayColor">#e0e0e0</color>
+    <color name="MediumGrayColor">#bdbdbd</color>
+    <color name="uploadColorFaintBlue">#e8eaf6</color>
+    <color name="uploadBorderBlue">#7986cb</color>
 </resources>
