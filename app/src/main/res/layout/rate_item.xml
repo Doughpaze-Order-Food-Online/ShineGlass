@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/rate1_txt"
+        android:layout_width="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="8sp"
+        android:gravity="center"
+        android:text="@string/_12mm_rs_175"
+        android:textColor="@color/BlackTextColor"
+        tools:ignore="SmallSp"
+        android:layout_marginStart="8dp" />
+
+    <View
+        android:layout_marginLeft="8dp"
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@color/MediumGrayColor"
+        android:layout_marginStart="8dp" />
+
+</LinearLayout>

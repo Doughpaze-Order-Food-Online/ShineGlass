@@ -1,0 +1,270 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginBottom="32dp"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        >
+
+        <TextView
+            android:id="@+id/upload_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upload"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/BlackTextColor"
+            android:layout_marginBottom="8dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            />
+
+        <TextView
+            android:id="@+id/maximum_size_txt"
+            android:layout_below="@id/upload_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/maximum_size_500kb"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/PrimaryTextColor"
+            />
+
+
+            <TextView
+                android:id="@+id/pdf_txt"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/maximum_size_txt"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/pdf"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/BlackTextColor" />
+
+        <TextView
+                    android:id="@+id/add_btn1"
+                    android:layout_below="@id/maximum_size_txt"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plus"
+                    android:gravity="center"
+                    android:textColor="@color/whiteTextColor"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:background="@drawable/addbackground"
+                    android:layout_alignParentRight="true" />
+
+
+        <FrameLayout
+            android:id="@+id/choose_file_block1"
+            android:layout_width="match_parent"
+            android:layout_below="@id/pdf_txt"
+            android:background="@drawable/roundedrectangle"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/choose_file_txt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_file"
+                android:gravity="center_vertical"
+                android:layout_gravity="center"
+                android:textColor="@color/PrimaryTextColor"
+                android:fontFamily="sans-serif-medium"
+                android:textAllCaps="true"
+                android:textSize="10sp"
+                app:drawableStartCompat="@drawable/folder"
+                app:drawableLeftCompat="@drawable/folder"
+                tools:ignore="SmallSp" />
+
+
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/file_container"
+            android:layout_below="@id/choose_file_block1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:itemCount="3"
+            />
+
+        <View
+            android:id="@+id/dash_line_1"
+            android:layout_below="@id/file_container"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/MediumGrayColor"
+            android:layout_marginTop="32dp"
+            />
+
+
+
+            <TextView
+                android:id="@+id/image_txt"
+                android:layout_below="@id/dash_line_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="IMAGE"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/BlackTextColor"
+                android:gravity="center_vertical"
+                />
+
+        <TextView
+            android:id="@+id/add_btn2"
+            android:layout_below="@id/dash_line_1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plus"
+            android:gravity="center"
+            android:textColor="@color/whiteTextColor"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:background="@drawable/addbackground"
+            android:layout_alignParentRight="true" />
+
+
+
+        <FrameLayout
+            android:id="@+id/choose_file_block2"
+            android:layout_below="@id/image_txt"
+            android:layout_width="match_parent"
+            android:background="@drawable/roundedrectangle"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/choose_file_txt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_file"
+                android:gravity="center_vertical"
+                android:layout_gravity="center"
+                android:textColor="@color/PrimaryTextColor"
+                android:fontFamily="sans-serif-medium"
+                android:textAllCaps="true"
+                android:textSize="10sp"
+                app:drawableStartCompat="@drawable/folder"
+                app:drawableLeftCompat="@drawable/folder"
+                tools:ignore="SmallSp" />
+
+
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/image_container"
+            android:layout_below="@id/choose_file_block2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:itemCount="3"
+            />
+
+        <View
+            android:id="@+id/dash_line_2"
+            android:layout_below="@id/image_container"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/MediumGrayColor"
+            android:layout_marginTop="32dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/request_quotation_btn"
+            android:layout_below="@id/dash_line_2"
+            android:layout_width="192dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="6dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="@drawable/login_bordershape"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/request_quotation_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/request_quotation"
+                android:textAllCaps="true"
+                android:textColor="@color/whiteTextColor"
+                android:textSize="10sp" />
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_toEndOf="@id/request_quotation_txt"
+                android:src="@drawable/loginend"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/request_quotation_txt"
+                android:layout_marginLeft="8dp"
+                android:contentDescription="@string/todo"
+                android:layout_marginStart="8dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/request_quotation_btn"
+            android:id="@+id/cancel_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_width="192dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="32dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingRight="32dp"
+            android:paddingLeft="32dp"
+            android:background="@drawable/signup_bordershape"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cancel_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/cancel"
+                android:textAllCaps="true"
+                android:textColor="@color/PrimaryTextColor"
+                android:textSize="10sp" />
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_toEndOf="@id/cancel_txt"
+                android:src="@drawable/cross"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/cancel_txt"
+                android:layout_marginLeft="8dp"
+                android:contentDescription="@string/todo"
+                android:layout_marginStart="8dp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    </ScrollView>
+
+</androidx.cardview.widget.CardView>
