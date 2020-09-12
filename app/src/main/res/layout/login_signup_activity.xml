@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/loginsignupbackground"
+    tools:context=".LoginSignUpActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,11 +27,12 @@
 
         <ImageView
             android:id="@+id/login_signUp_logo_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/shineglasslogo"
             android:layout_marginTop="80dp"
+            android:scaleType="fitXY"
             android:contentDescription="@string/todo"
             android:layout_marginBottom="64dp"/>
 
@@ -38,19 +41,37 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
+                <RelativeLayout
                     android:id="@+id/login_btn"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:focusable="true"
-                    android:background="@drawable/login_bordershape"
                     android:gravity="center"
-                    android:text="@string/login"
-                    android:textColor="@color/whiteTextColor"
-                    android:textSize="14sp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/login_bordershape"
+                    android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/login_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/login"
+                    android:textAllCaps="true"
+                    android:textColor="@color/whiteTextColor"
+                    android:textSize="14sp" />
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_toEndOf="@id/login_txt"
+                        android:src="@drawable/loginend"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/login_txt"
+                        android:layout_marginLeft="8dp"
+                        android:contentDescription="@string/todo"
+                        android:layout_marginStart="8dp" />
+
+                </RelativeLayout>
 
                 <Button
                     android:id="@+id/login_with_otp_btn"
@@ -103,28 +124,66 @@
             </RelativeLayout>
 
 
-            <Button
-                android:id="@+id/login_with_facebook"
+            <RelativeLayout
+                android:id="@+id/login_with_facebook_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:background="@drawable/gray_login_border_shape"
                 android:gravity="center"
-                android:text="@string/login_with_facebook"
-                android:textColor="@color/PrimaryTextColor"
-                android:textSize="14sp" />
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/gray_login_border_shape"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/login_with_google"
+                <Button
+                    android:id="@+id/login_with_facebook_txt"
+                    android:layout_width="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/login_with_facebook"
+                    android:textAllCaps="true"
+                    android:textColor="@color/PrimaryTextColor"
+                    android:textSize="14sp" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_toStartOf="@id/login_with_facebook_txt"
+                    android:src="@drawable/facebook"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/todo"
+                    android:layout_toLeftOf="@id/login_with_facebook_txt"
+                    android:layout_marginRight="16dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/login_with_google_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/gray_login_border_shape"
                 android:gravity="center"
-                android:text="@string/login_with_google"
-                android:textColor="@color/PrimaryTextColor"
-                android:textSize="14sp" />
+                android:background="@drawable/gray_login_border_shape"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/login_with_google_txt"
+                    android:layout_width="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/login_with_google"
+                    android:textAllCaps="true"
+                    android:textColor="@color/PrimaryTextColor"
+                    android:textSize="14sp" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_toStartOf="@id/login_with_google_txt"
+                    android:src="@drawable/google"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/todo"
+                    android:layout_toLeftOf="@id/login_with_google_txt"
+                    android:layout_marginRight="16dp" />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -180,7 +239,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_toEndOf="@+id/noAccount_txt"
                     android:text="@string/signup"
-                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
                     android:textColor="@color/colorPrimaryDark"
                     app:fontFamily="sans-serif-medium"
                     android:layout_marginLeft="4dp"

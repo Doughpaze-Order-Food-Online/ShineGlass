@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+
 import com.google.android.material.textfield.TextInputLayout;
 
 public class Register_Activity extends Activity {
@@ -16,7 +18,7 @@ public class Register_Activity extends Activity {
             email_EditText,mobile_EditText,
             password_EditText,rpassword_EditText;
 
-    Button register;
+    RelativeLayout register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class Register_Activity extends Activity {
         mobile_EditText=findViewById(R.id.user_email_mobile_input_txt);
         rpassword_EditText=findViewById(R.id.re_password_input_txt);
 
-        register=findViewById(R.id.login_btn);
+        register=findViewById(R.id.signUp_btn);
         register.setOnClickListener(view->Register());
 
 

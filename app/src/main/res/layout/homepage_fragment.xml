@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePageFragment">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="8dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/shineglasslogo" />
+
+        <ImageView
+            android:id="@+id/menu_button"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/menu"
+            app:tint="@color/MediumGrayColor" />
+
+        <LinearLayout
+            android:id="@+id/my_wallet_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            tools:ignore="RelativeOverlap">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/my_wallet_btn"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_horizontal"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/rupey"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="24sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_wallet"
+                android:textAllCaps="true"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
+
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/banner_container"
+                android:layout_width="match_parent"
+                android:layout_height="144dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/LightGrayColor"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/today_rate_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/today_s_rate"
+                    android:gravity="center"
+                    android:textAllCaps="true"
+                    android:layout_weight="1"
+                    android:textSize="8sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:drawableTint="@color/BlackTextColor"
+                    app:drawableTint="@color/BlackTextColor"
+                    app:drawableEndCompat="@drawable/forward_icon"
+                    app:drawableRightCompat="@drawable/forward_icon"
+                    tools:ignore="SmallSp,UnusedAttribute,UseCompatTextViewDrawableXml" />
+
+                <TextView
+                    android:id="@+id/rate1_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="8sp"
+                    android:gravity="center"
+                    android:text="@string/_12mm_rs_175"
+                    android:textColor="@color/BlackTextColor"
+                    tools:ignore="SmallSp" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/MediumGrayColor"/>
+
+                <TextView
+                    android:id="@+id/rate2_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="8sp"
+                    android:gravity="center"
+                    android:text="@string/_12mm_rs_175"
+                    android:textColor="@color/BlackTextColor"
+                    tools:ignore="SmallSp" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/MediumGrayColor"/>
+
+                <TextView
+                    android:id="@+id/rate3_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="8sp"
+                    android:gravity="center"
+                    android:text="@string/_12mm_rs_175"
+                    android:textColor="@color/BlackTextColor"
+                    tools:ignore="SmallSp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/shop_by_category"
+                android:textAllCaps="true"
+                android:textColor="@color/BlackTextColor"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"
+                android:fontFamily="sans-serif-medium"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categories_container"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/already_have_your_specification_ready"
+                android:textAllCaps="true"
+                android:textColor="@color/BlackTextColor"
+                android:textSize="14sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center" />
+
+            <FrameLayout
+                android:id="@+id/upload_image_pdf_block"
+                android:layout_width="match_parent"
+                android:background="@drawable/roundedrectangle"
+                android:layout_height="80dp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp">
+
+                <TextView
+                    android:id="@+id/upload_image_pdf_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upload_image_pdf"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center"
+                    android:textColor="@color/PrimaryTextColor"
+                    android:fontFamily="sans-serif-medium"
+                    android:textAllCaps="true"
+                    android:textSize="10sp"
+                    app:drawableStartCompat="@drawable/upload_icon"
+                    app:drawableLeftCompat="@drawable/upload_icon"
+                    tools:ignore="SmallSp" />
+
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

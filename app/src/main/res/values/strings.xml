@@ -26,4 +26,18 @@
     <string name="didn_t_received_otp">Didn\'t received OTP?</string>
     <string name="resend">Resend</string>
     <string name="enter_otp_in_59_sec">Enter OTP in 59 sec</string>
+    <string name="rupey">₹</string>
+    <string name="my_wallet">my wallet</string>
+    <string name="today_s_rate">today\'s rate</string>
+    <string name="_12mm_rs_175">12MM=RS 175/</string>
+    <string name="shop_by_category">shop by category</string>
+    <string name="already_have_your_specification_ready">already have your specification ready?</string>
+    <string name="upload_image_pdf">\  upload image/pdf</string>
+    <string name="home">Home</string>
+    <string name="my_requests">My Requests</string>
+    <string name="my_orders">My Orders</string>
+    <string name="My_Account">My Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="verify">verify</string>
 </resources>
