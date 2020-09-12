@@ -41,4 +41,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="verify">verify</string>
     <string name="clear_glass">CLEAR GLASS</string>
+    <string name="upload">UPLOAD</string>
+    <string name="maximum_size_500kb">Maximum size 500kb</string>
+    <string name="pdf">PDF</string>
+    <string name="choose_file">\  Choose File</string>
+    <string name="request_quotation">request quotation</string>
+    <string name="cancel">cancel</string>
+    <string name="plus">+</string>
 </resources>
