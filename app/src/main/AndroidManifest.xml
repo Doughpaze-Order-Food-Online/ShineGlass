@@ -11,16 +11,20 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ShineGlassSplashActivity"  android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
-
-        </activity>
-        <activity android:name=".LoginSignUpActivity" />
-        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginSignUpActivity" />
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".Login_Activity" />
+        <activity android:name=".Register_Activity"/>
+        <activity android:name=".Otp_Login_Activity" />
+        <activity android:name=".Enter_Otp_Activtiy"/>
+
+
 
     </application>
 

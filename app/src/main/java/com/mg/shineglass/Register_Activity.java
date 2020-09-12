@@ -198,7 +198,7 @@ public class Register_Activity extends Activity {
 
     private void GoToOtp(String otp,User user){
 
-        Intent intent = new Intent(Register_Activity.this, OTP_Activity.class);
+        Intent intent = new Intent(Register_Activity.this, Enter_Otp_Activtiy.class);
         intent.putExtra("type","local");
         intent.putExtra("otp",otp);
         intent.putExtra("name", user.getUsername());

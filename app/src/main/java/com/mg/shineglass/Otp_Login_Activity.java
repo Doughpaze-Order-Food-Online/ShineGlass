@@ -122,7 +122,7 @@ public class Otp_Login_Activity extends Activity {
 
     private void GoToOtp(String otp,User user,String token){
 
-        Intent intent = new Intent(Otp_Login_Activity.this, OTP_Activity.class);
+        Intent intent = new Intent(Otp_Login_Activity.this, Enter_Otp_Activtiy.class);
         intent.putExtra("type","number");
         intent.putExtra("otp",otp);
         intent.putExtra("token", token);
