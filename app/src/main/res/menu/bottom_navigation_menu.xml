@@ -24,7 +24,7 @@
     <item
         android:id="@+id/my_account_icon"
         android:title="@string/My_Account"
-        android:icon="@drawable/person_icon"
+        android:icon="@drawable/personfinal"
         tools:targetApi="o" />
 
 

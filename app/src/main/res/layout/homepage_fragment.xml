@@ -90,78 +90,10 @@
             android:orientation="vertical">
 
 
-            <androidx.viewpager2.widget.ViewPager2
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/banner_container"
                 android:layout_width="match_parent"
-                android:layout_height="144dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/LightGrayColor"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/today_rate_txt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/today_s_rate"
-                    android:gravity="center"
-                    android:textAllCaps="true"
-                    android:layout_weight="1"
-                    android:textSize="8sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:drawableTint="@color/BlackTextColor"
-                    app:drawableTint="@color/BlackTextColor"
-                    app:drawableEndCompat="@drawable/forward_icon"
-                    app:drawableRightCompat="@drawable/forward_icon"
-                    tools:ignore="SmallSp,UnusedAttribute,UseCompatTextViewDrawableXml" />
-
-                <TextView
-                    android:id="@+id/rate1_txt"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="8sp"
-                    android:gravity="center"
-                    android:text="@string/_12mm_rs_175"
-                    android:textColor="@color/BlackTextColor"
-                    tools:ignore="SmallSp" />
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/MediumGrayColor"/>
-
-                <TextView
-                    android:id="@+id/rate2_txt"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="8sp"
-                    android:gravity="center"
-                    android:text="@string/_12mm_rs_175"
-                    android:textColor="@color/BlackTextColor"
-                    tools:ignore="SmallSp" />
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/MediumGrayColor"/>
-
-                <TextView
-                    android:id="@+id/rate3_txt"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="8sp"
-                    android:gravity="center"
-                    android:text="@string/_12mm_rs_175"
-                    android:textColor="@color/BlackTextColor"
-                    tools:ignore="SmallSp" />
-
-            </LinearLayout>
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -215,8 +147,8 @@
                     android:fontFamily="sans-serif-medium"
                     android:textAllCaps="true"
                     android:textSize="10sp"
-                    app:drawableStartCompat="@drawable/upload_icon"
-                    app:drawableLeftCompat="@drawable/upload_icon"
+                    app:drawableStartCompat="@drawable/uploadfinal"
+                    app:drawableLeftCompat="@drawable/uploadfinal"
                     tools:ignore="SmallSp" />
 
 

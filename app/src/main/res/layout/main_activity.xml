@@ -21,13 +21,11 @@
         app:itemTextAppearanceInactive="@style/BottomNavigationView"
         app:itemTextColor="@color/BlackTextColor"
         app:labelVisibilityMode="labeled"
-        android:elevation="20dp"
         app:menu="@menu/bottom_navigation_menu"
         android:orientation="horizontal"
         app:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:targetApi="lollipop" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
