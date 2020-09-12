@@ -48,4 +48,9 @@
     <string name="request_quotation">request quotation</string>
     <string name="cancel">cancel</string>
     <string name="plus">+</string>
+    <string name="image">IMAGE</string>
+    <string name="_12mm">12MM</string>
+    <string name="rs">=RS\ </string>
+    <string name="colon">/;</string>
+    <string name="_75">75</string>
 </resources>
