@@ -46,11 +46,19 @@
     <string name="pdf">PDF</string>
     <string name="choose_file">\  Choose File</string>
     <string name="request_quotation">request quotation</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="plus">+</string>
     <string name="image">IMAGE</string>
     <string name="_12mm">12MM</string>
     <string name="rs">=RS\ </string>
     <string name="colon">/;</string>
     <string name="_75">75</string>
+    <string name="black_tinted_glass">BLACK TINTED GLASS</string>
+    <string name="type_of_glass">TYPE OF GLASS</string>
+    <string name="inch">INCH</string>
+    <string name="mm">MM</string>
+    <string name="thickness">THICKNESS</string>
+    <string name="width">WIDTH</string>
+    <string name="height">HEIGHT</string>
+    <string name="quantity">QUANTITY</string>
 </resources>
