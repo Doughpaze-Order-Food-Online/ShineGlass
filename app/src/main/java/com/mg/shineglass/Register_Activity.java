@@ -47,6 +47,7 @@ public class Register_Activity extends Activity {
 
     }
 
+
     private void Register() {
     }
 }
