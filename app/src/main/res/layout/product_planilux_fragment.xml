@@ -89,7 +89,7 @@
         app:endIconTint="@color/BlackTextColor"
         app:hintAnimationEnabled="false"
         app:hintEnabled="false"
-        app:startIconDrawable="@drawable/thickness"
+        app:startIconDrawable="@drawable/packagetype"
         app:startIconTint="@color/colorPrimaryDark">
 
         <EditText
