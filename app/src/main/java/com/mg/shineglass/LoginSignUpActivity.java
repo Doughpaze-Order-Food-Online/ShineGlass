@@ -6,11 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class LoginSignUpActivity extends AppCompatActivity {
 
-    Button login = findViewById(R.id.login_btn);
+    RelativeLayout login = findViewById(R.id.login_btn);
     Button otp_login = findViewById(R.id.login_with_otp_btn);
     TextView sign_up = findViewById(R.id.signup_txt);
 

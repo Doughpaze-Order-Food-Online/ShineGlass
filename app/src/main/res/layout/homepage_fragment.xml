@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".HomePageFragment">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -22,15 +23,15 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/todo"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/shineglasslogo" />
 
         <ImageView
             android:id="@+id/menu_button"
-            android:layout_width="36dp"
-            android:layout_height="32dp"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:contentDescription="@string/todo"
-            android:src="@drawable/ic_baseline_menu_24"
+            android:src="@drawable/menu"
             app:tint="@color/MediumGrayColor" />
 
         <LinearLayout
@@ -106,18 +107,16 @@
                     android:layout_height="wrap_content"
                     android:text="@string/today_s_rate"
                     android:gravity="center"
-                    android:layout_marginLeft="8dp"
                     android:textAllCaps="true"
                     android:layout_weight="1"
                     android:textSize="8sp"
                     android:fontFamily="sans-serif-medium"
                     android:textColor="@color/colorPrimaryDark"
-                    android:drawableTint="@color/MediumGrayColor"
-                    app:drawableTint="@color/MediumGrayColor"
-                    app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_24"
-                    app:drawableRightCompat="@drawable/ic_baseline_arrow_forward_ios_24"
-                    tools:ignore="SmallSp,UnusedAttribute,UseCompatTextViewDrawableXml"
-                    android:layout_marginStart="8dp" />
+                    android:drawableTint="@color/BlackTextColor"
+                    app:drawableTint="@color/BlackTextColor"
+                    app:drawableEndCompat="@drawable/forward_icon"
+                    app:drawableRightCompat="@drawable/forward_icon"
+                    tools:ignore="SmallSp,UnusedAttribute,UseCompatTextViewDrawableXml" />
 
                 <TextView
                     android:id="@+id/rate1_txt"
@@ -199,7 +198,7 @@
             <FrameLayout
                 android:id="@+id/upload_image_pdf_block"
                 android:layout_width="match_parent"
-                android:background="@drawable/upload_block_shape"
+                android:background="@drawable/roundedrectangle"
                 android:layout_height="80dp"
                 android:layout_marginBottom="32dp"
                 android:layout_marginRight="16dp"
@@ -215,9 +214,10 @@
                     android:textColor="@color/PrimaryTextColor"
                     android:fontFamily="sans-serif-medium"
                     android:textAllCaps="true"
-                    android:textSize="12sp"
-                    app:drawableStartCompat="@drawable/ic_baseline_panorama_24"
-                    app:drawableLeftCompat="@drawable/ic_baseline_panorama_24" />
+                    android:textSize="10sp"
+                    app:drawableStartCompat="@drawable/upload_icon"
+                    app:drawableLeftCompat="@drawable/upload_icon"
+                    tools:ignore="SmallSp" />
 
 
             </FrameLayout>
