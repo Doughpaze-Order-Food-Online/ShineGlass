@@ -68,7 +68,7 @@
                         android:layout_marginBottom="32dp"
                         app:endIconMode="clear_text"
                         app:endIconTint="@color/BlackTextColor"
-                        app:startIconDrawable="@drawable/mail_icon"
+                        app:startIconDrawable="@drawable/mailfinal"
                         app:startIconTint="@color/colorPrimaryDark">
 
 
@@ -97,7 +97,7 @@
                         android:textColorHint="@color/BlackTextColor"
                         app:endIconMode="password_toggle"
                         app:endIconTint="@color/PrimaryTextColor"
-                        app:startIconDrawable="@drawable/password_key"
+                        app:startIconDrawable="@drawable/keyfinal"
                         app:startIconTint="@color/colorPrimaryDark">
 
 

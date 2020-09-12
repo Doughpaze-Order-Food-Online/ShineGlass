@@ -114,8 +114,8 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:drawableTint="@color/BlackTextColor"
                     app:drawableTint="@color/BlackTextColor"
-                    app:drawableEndCompat="@drawable/forward_icon"
-                    app:drawableRightCompat="@drawable/forward_icon"
+                    app:drawableEndCompat="@drawable/forwardfinal"
+                    app:drawableRightCompat="@drawable/forwardfinal"
                     tools:ignore="SmallSp,UnusedAttribute,UseCompatTextViewDrawableXml" />
 
                 <TextView
@@ -215,8 +215,8 @@
                     android:fontFamily="sans-serif-medium"
                     android:textAllCaps="true"
                     android:textSize="10sp"
-                    app:drawableStartCompat="@drawable/upload_icon"
-                    app:drawableLeftCompat="@drawable/upload_icon"
+                    app:drawableStartCompat="@drawable/uploadfinal"
+                    app:drawableLeftCompat="@drawable/uploadfinal"
                     tools:ignore="SmallSp" />
 
 
