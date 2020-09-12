@@ -1,92 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/banner_box"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-    
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        app:cardCornerRadius="1dp">
-
-        <ImageView
+    android:layout_height="160dp"
+    app:cardCornerRadius="1dp"
+    android:id="@+id/banner_card"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
             android:id="@+id/banner_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/todo" />
-    </androidx.cardview.widget.CardView>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/LightGrayColor"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/today_rate_txt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/today_s_rate"
-            android:gravity="center"
-            android:textAllCaps="true"
-            android:layout_weight="1"
-            android:textSize="8sp"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="@color/colorPrimaryDark"
-            android:drawableTint="@color/BlackTextColor"
-            app:drawableTint="@color/BlackTextColor"
-            app:drawableEndCompat="@drawable/forwardfinal"
-            app:drawableRightCompat="@drawable/forwardfinal"
-            tools:ignore="SmallSp,UnusedAttribute,UseCompatTextViewDrawableXml" />
-
-        <TextView
-            android:id="@+id/rate1_txt"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="8sp"
-            android:gravity="center"
-            android:text="@string/_12mm_rs_175"
-            android:textColor="@color/BlackTextColor"
-            tools:ignore="SmallSp" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/MediumGrayColor"/>
-
-        <TextView
-            android:id="@+id/rate2_txt"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="8sp"
-            android:gravity="center"
-            android:text="@string/_12mm_rs_175"
-            android:textColor="@color/BlackTextColor"
-            tools:ignore="SmallSp" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/MediumGrayColor"/>
-
-        <TextView
-            android:id="@+id/rate3_txt"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="8sp"
-            android:gravity="center"
-            android:text="@string/_12mm_rs_175"
-            android:textColor="@color/BlackTextColor"
-            tools:ignore="SmallSp" />
-
-    </LinearLayout>
-
-    
-</LinearLayout>
+</androidx.cardview.widget.CardView>
