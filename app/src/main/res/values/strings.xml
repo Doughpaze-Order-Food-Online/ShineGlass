@@ -66,4 +66,5 @@
     <string name="strength">STRENGTH</string>
     <string name="pack_type">PACK TYPE</string>
     <string name="add_to_cart">add to cart</string>
+    <string name="filename">filename</string>
 </resources>
