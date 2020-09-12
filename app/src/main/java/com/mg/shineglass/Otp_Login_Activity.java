@@ -125,7 +125,7 @@ public class Otp_Login_Activity extends Activity {
         Intent intent = new Intent(Otp_Login_Activity.this, OTP_Activity.class);
         intent.putExtra("type","number");
         intent.putExtra("otp",otp);
-        intent.putExtra("token", user.getMobile());
+        intent.putExtra("token", token);
         intent.putExtra("phone", user.getMobile());
         intent.putExtra("email", user.getEmail());
         intent.putExtra("name", user.getUsername());

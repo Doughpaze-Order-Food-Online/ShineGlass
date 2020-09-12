@@ -2,12 +2,12 @@ package com.mg.shineglass.network;
 
 
 
+import com.mg.shineglass.models.Banners;
 import com.mg.shineglass.models.BasicResponse;
+import com.mg.shineglass.models.Category;
 import com.mg.shineglass.models.LoginResponse;
+import com.mg.shineglass.models.Rates;
 import com.mg.shineglass.models.User;
-
-import org.json.JSONObject;
-
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -20,11 +20,17 @@ import rx.Observable;
 
 public interface retro_interface {
 
-    @GET("banner")
-    Observable<BasicResponse> IMAGES();
+    @GET("rates")
+    Observable<Response<Rates>> GET_RATES();
+
+    @GET("category")
+    Observable<Response<Category>> GET_CATEGORY();
+
+    @GET("images")
+    Observable<Response<Banners>> GET_IMAGES();
 
     @POST("auth/register")
-    Observable<BasicResponse> register();
+    Observable<BasicResponse> REGISTER(@Body User user);
 
     @POST("auth/register_otp")
     Observable<BasicResponse> REGISTER_OTP(@Body User user);
@@ -35,6 +41,8 @@ public interface retro_interface {
 
     @POST("auth/number_login")
     Observable<Response<LoginResponse>> NUMBER_LOGIN(@Body User user);
+
+
 
 
 }
