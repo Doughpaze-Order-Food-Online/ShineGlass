@@ -61,4 +61,9 @@
     <string name="width">WIDTH</string>
     <string name="height">HEIGHT</string>
     <string name="quantity">QUANTITY</string>
+    <string name="tinted_glass">tinted glass</string>
+    <string name="product_planilux">PRODUCT PLANILUX</string>
+    <string name="strength">STRENGTH</string>
+    <string name="pack_type">PACK TYPE</string>
+    <string name="add_to_cart">add to cart</string>
 </resources>

@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/category_img"
-        android:layout_width="123dp"
-        android:layout_height="137dp"
+        android:layout_width="132dp"
+        android:layout_height="116dp"
         android:src="@drawable/clearglass"
         android:scaleType="fitXY"
         android:contentDescription="@string/todo" />
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/clear_glass"
         android:textColor="@color/whiteTextColor"
