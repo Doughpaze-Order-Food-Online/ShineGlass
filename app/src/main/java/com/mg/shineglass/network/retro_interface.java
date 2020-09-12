@@ -8,6 +8,9 @@ import com.mg.shineglass.models.Category;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.Rates;
 import com.mg.shineglass.models.User;
+
+import java.util.List;
+
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -26,8 +29,8 @@ public interface retro_interface {
     @GET("category")
     Observable<Response<Category>> GET_CATEGORY();
 
-    @GET("images")
-    Observable<Response<Banners>> GET_IMAGES();
+    @GET("banner")
+    Observable<Response<List<Banners>>> GET_IMAGES();
 
     @POST("auth/register")
     Observable<BasicResponse> REGISTER(@Body User user);

@@ -18,11 +18,11 @@
         android:id="@+id/category_name_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/clear_glass"
-        android:textColor="@color/whiteTextColor"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="10sp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="14dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/clear_glass"
+        android:textColor="@color/whiteTextColor"
+        android:textSize="10sp"
         tools:ignore="SmallSp" />
 </androidx.cardview.widget.CardView>

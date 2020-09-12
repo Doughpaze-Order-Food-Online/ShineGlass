@@ -5,7 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mg.shineglass.adapters.BannerAdapter;
 import com.mg.shineglass.models.Banners;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.Category;
@@ -23,6 +28,8 @@ import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.constants;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
@@ -37,6 +44,9 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class HomePageFragment extends Fragment {
     private CompositeSubscription mSubscriptions;
+    private RecyclerView rates,banners;
+    private ViewPager viewPager;
+    private BannerAdapter bannerAdapter;
 
 
     public HomePageFragment() {
@@ -56,6 +66,11 @@ public class HomePageFragment extends Fragment {
 
     private void initView(View view) {
         mSubscriptions = new CompositeSubscription();
+        rates=view.findViewById(R.id.rates_container);
+        banners=view.findViewById(R.id.categories_container);
+        viewPager =  view.findViewById(R.id.banners_container);
+
+        FETCH_DATA();
     }
 
 
@@ -63,12 +78,12 @@ public class HomePageFragment extends Fragment {
 
     private void FETCH_DATA()
     {
-        mSubscriptions.addAll(
+        mSubscriptions.add(
 
-                networkUtils.getRetrofit().GET_RATES()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(this::handleResponse1,this::handleError),
+//                networkUtils.getRetrofit().GET_RATES()
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribeOn(Schedulers.io())
+//                        .subscribe(this::handleResponse1,this::handleError),
 
                 networkUtils.getRetrofit().GET_IMAGES()
                         .observeOn(AndroidSchedulers.mainThread())
@@ -84,16 +99,17 @@ public class HomePageFragment extends Fragment {
 
     }
 
-    private void handleResponse2(Response<Banners> response) {
-
-
-
+    private void handleResponse2(Response<List<Banners>> response) {
+        Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
+        bannerAdapter=new BannerAdapter(Objects.requireNonNull(getContext()),response.body());
+        bannerAdapter.setTimer(viewPager,5,5,1);
+        viewPager.setAdapter(bannerAdapter);
 
     }
 
     private void handleError(Throwable error) {
 
-
+        Log.e("error",error.toString());
 
         if (error instanceof HttpException) {
 
