@@ -10,8 +10,9 @@
     <ImageView
         android:id="@+id/category_img"
         android:layout_width="123dp"
-        android:layout_height="138dp"
-        android:src="@drawable/clearglassfinal"
+        android:layout_height="137dp"
+        android:src="@drawable/clearglass"
+        android:scaleType="fitXY"
         android:contentDescription="@string/todo" />
 
     <TextView
