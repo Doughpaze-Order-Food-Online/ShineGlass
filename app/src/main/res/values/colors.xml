@@ -10,4 +10,5 @@
     <color name="MediumGrayColor">#9e9e9e</color>
     <color name="uploadColorFaintBlue">#e8eaf6</color>
     <color name="uploadBorderBlue">#7986cb</color>
+    <color name="LightBlackColor">#212121</color>
 </resources>

@@ -25,6 +25,6 @@ public class MyRequestsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_requests, container, false);
+        return inflater.inflate(R.layout.my_requests_fragment, container, false);
     }
 }

@@ -67,4 +67,11 @@
     <string name="pack_type">PACK TYPE</string>
     <string name="add_to_cart">add to cart</string>
     <string name="filename">filename</string>
+    <string name="request_no">request no:</string>
+    <string name="_123">123</string>
+    <string name="date">date:</string>
+    <string name="_12_10_2020">12.10.2020</string>
+    <string name="view_quotation">view quotation</string>
+    <string name="reject">reject</string>
+    <string name="accept">accept</string>
 </resources>
