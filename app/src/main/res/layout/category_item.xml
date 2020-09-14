@@ -4,8 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="2dp"
     app:cardElevation="8dp"
+    android:layout_marginRight="16dp"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp">
 
     <ImageView
         android:id="@+id/category_img"
@@ -24,6 +28,6 @@
         android:fontFamily="sans-serif-medium"
         android:text="@string/clear_glass"
         android:textColor="@color/whiteTextColor"
-        android:textSize="10sp"
+        android:textSize="8sp"
         tools:ignore="SmallSp" />
 </androidx.cardview.widget.CardView>
