@@ -34,14 +34,8 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.RatesItemHol
     public void onBindViewHolder(@NonNull RatesAdapter.RatesItemHolder RatesItemHolder, int i) {
         Rates Rate=list.get(i);
 
-
-
-
-
-
-
-
-
+        RatesItemHolder.rate.setText(Rate.getName());
+        RatesItemHolder.price.setText(Rate.getRate());
     }
 
     @Override
@@ -58,7 +52,8 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapter.RatesItemHol
         RatesItemHolder (View itemView) {
             super(itemView);
 
-
+            rate=itemView.findViewById(R.id.rate1a_txt);
+            price=itemView.findViewById(R.id.rate1c_txt);
 
 
         }

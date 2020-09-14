@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -19,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mg.shineglass.adapters.BannerAdapter;
+import com.mg.shineglass.adapters.RatesAdapter;
 import com.mg.shineglass.models.Banners;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.Category;
@@ -47,6 +49,7 @@ public class HomePageFragment extends Fragment {
     private RecyclerView rates,banners;
     private ViewPager viewPager;
     private BannerAdapter bannerAdapter;
+    private RatesAdapter ratesAdapter;
 
 
     public HomePageFragment() {
@@ -78,12 +81,12 @@ public class HomePageFragment extends Fragment {
 
     private void FETCH_DATA()
     {
-        mSubscriptions.add(
+        mSubscriptions.addAll(
 
-//                networkUtils.getRetrofit().GET_RATES()
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribeOn(Schedulers.io())
-//                        .subscribe(this::handleResponse1,this::handleError),
+                networkUtils.getRetrofit().GET_RATES()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(this::handleResponse1,this::handleError),
 
                 networkUtils.getRetrofit().GET_IMAGES()
                         .observeOn(AndroidSchedulers.mainThread())
@@ -93,9 +96,12 @@ public class HomePageFragment extends Fragment {
 
 
 
-    private void handleResponse1(Response<Rates> response) {
+    private void handleResponse1(Response<List<Rates>> response) {
 
-
+         ratesAdapter=new RatesAdapter(response.body());
+        LinearLayoutManager LinearLayout=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        rates.setLayoutManager(LinearLayout);
+        rates.setAdapter(ratesAdapter);
 
     }
 

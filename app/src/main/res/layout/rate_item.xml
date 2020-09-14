@@ -10,12 +10,12 @@
         android:id="@+id/rate1a_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:gravity="center"
         android:text="@string/_12mm"
         android:textColor="@color/BlackTextColor"
-        tools:ignore="SmallSp"
-        android:layout_marginStart="16dp" />
+        tools:ignore="SmallSp" />
 
     <TextView
         android:id="@+id/rate1b_txt"

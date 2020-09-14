@@ -24,7 +24,7 @@ import rx.Observable;
 public interface retro_interface {
 
     @GET("rates")
-    Observable<Response<Rates>> GET_RATES();
+    Observable<Response<List<Rates>>> GET_RATES();
 
     @GET("category")
     Observable<Response<Category>> GET_CATEGORY();
