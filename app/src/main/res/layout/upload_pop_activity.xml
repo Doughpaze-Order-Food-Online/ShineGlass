@@ -9,6 +9,7 @@
     android:layout_marginRight="16dp"
     android:layout_marginLeft="16dp"
     android:layout_marginBottom="32dp"
+    tools:context=".UploadActivity"
     >
 
     <ScrollView

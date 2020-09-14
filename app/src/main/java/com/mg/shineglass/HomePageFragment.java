@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -14,12 +15,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mg.shineglass.adapters.BannerAdapter;
+import com.mg.shineglass.adapters.CategoryAdapter;
 import com.mg.shineglass.adapters.RatesAdapter;
 import com.mg.shineglass.models.Banners;
 import com.mg.shineglass.models.BasicResponse;
@@ -30,6 +33,7 @@ import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.constants;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,10 +50,12 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class HomePageFragment extends Fragment {
     private CompositeSubscription mSubscriptions;
-    private RecyclerView rates,banners;
+    private RecyclerView rates,category;
     private ViewPager viewPager;
     private BannerAdapter bannerAdapter;
     private RatesAdapter ratesAdapter;
+    private CategoryAdapter categoryAdapter;
+    private FrameLayout upload;
 
 
     public HomePageFragment() {
@@ -70,8 +76,33 @@ public class HomePageFragment extends Fragment {
     private void initView(View view) {
         mSubscriptions = new CompositeSubscription();
         rates=view.findViewById(R.id.rates_container);
-        banners=view.findViewById(R.id.categories_container);
+        category=view.findViewById(R.id.categories_container);
         viewPager =  view.findViewById(R.id.banners_container);
+        upload=view.findViewById(R.id.upload_image_pdf_block);
+
+
+        List<Category> categoryList=new ArrayList<>();
+        categoryList.add(new Category("CLEAR GLASS",R.drawable.clearglass));
+        categoryList.add(new Category("REFLECTIVE GLASS",R.drawable.reflectiveglass));
+        categoryList.add(new Category("TINTED GLASS",R.drawable.tintedglass));
+        categoryList.add(new Category("HIGH REFLECTIVE GLASS",R.drawable.highreflectiveglass));
+        categoryList.add(new Category("LACQUERED GLASS",R.drawable.laqueredglass));
+        categoryList.add(new Category("MIRROR",R.drawable.mirror));
+
+        categoryAdapter=new CategoryAdapter(categoryList);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2,LinearLayoutManager.HORIZONTAL,false);
+        category.setLayoutManager(gridLayoutManager);
+        category.setAdapter(categoryAdapter);
+
+
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(),UploadActivity.class);
+                startActivity(i);
+            }
+        });
+
 
         FETCH_DATA();
     }
@@ -136,5 +167,21 @@ public class HomePageFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mSubscriptions!=null)
+        {
+            mSubscriptions.unsubscribe();
+        }
+    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if(mSubscriptions!=null)
+        {
+            mSubscriptions.unsubscribe();
+        }
+    }
 }

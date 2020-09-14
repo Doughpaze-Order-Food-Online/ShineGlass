@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -122,7 +121,7 @@ public class Otp_Login_Activity extends Activity {
 
     private void GoToOtp(String otp,User user,String token){
 
-        Intent intent = new Intent(Otp_Login_Activity.this, Enter_Otp_Activtiy.class);
+        Intent intent = new Intent(Otp_Login_Activity.this, Enter_Otp_Activity.class);
         intent.putExtra("type","number");
         intent.putExtra("otp",otp);
         intent.putExtra("token", token);

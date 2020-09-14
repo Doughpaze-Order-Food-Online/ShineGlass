@@ -20,12 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginSignUpActivity" />
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".Login_Activity" />
-        <activity android:name=".Register_Activity"/>
-        <activity android:name=".Otp_Login_Activity" />
-        <activity android:name=".Enter_Otp_Activtiy"/>
+        <activity android:name=".LoginSignUpActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Login_Activity" android:screenOrientation="portrait"/>
+        <activity android:name=".Register_Activity" android:screenOrientation="portrait"/>
+        <activity android:name=".Otp_Login_Activity" android:screenOrientation="portrait"/>
+        <activity android:name=".Enter_Otp_Activity" android:screenOrientation="portrait"/>
+        <activity android:name=".UploadActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Subcategory_Activity" android:screenOrientation="portrait"/>
 
 
 

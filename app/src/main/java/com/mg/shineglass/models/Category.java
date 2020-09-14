@@ -5,6 +5,22 @@ import java.util.List;
 public class Category {
     String category;
     List<String> subcategoryList;
+    int resourceID;
+
+    Category(){
+
+    }
+
+    public Category(String category, int resourceID)
+    {
+        this.category=category;
+        this.resourceID=resourceID;
+    }
+
+
+    public int getResourceID() {
+        return resourceID;
+    }
 
     public String getCategory() {
         return category;

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -20,7 +19,6 @@ import com.mg.shineglass.network.networkUtils;
 
 import java.util.Objects;
 
-import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -198,7 +196,7 @@ public class Register_Activity extends Activity {
 
     private void GoToOtp(String otp,User user){
 
-        Intent intent = new Intent(Register_Activity.this, Enter_Otp_Activtiy.class);
+        Intent intent = new Intent(Register_Activity.this, Enter_Otp_Activity.class);
         intent.putExtra("type","local");
         intent.putExtra("otp",otp);
         intent.putExtra("name", user.getUsername());

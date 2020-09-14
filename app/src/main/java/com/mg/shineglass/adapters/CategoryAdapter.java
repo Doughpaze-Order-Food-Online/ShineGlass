@@ -37,14 +37,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryAdapter.CategoryItemHolder categoryItemHolder, int i) {
         Category category=list.get(i);
 
+            categoryItemHolder.name.setText(category.getCategory());
 
-
-//        Glide
-//                .with(categoryItemHolder.itemView.getContext())
-//                .load()
-////                .thumbnail(Glide.with(couponItemHolder.itemView.getContext()).load(R.drawable.loading2))
-//                .centerInside()
-//                .into(categoryItemHolder.image);
+        Glide
+                .with(categoryItemHolder.itemView.getContext())
+                .load(category.getResourceID())
+//                .thumbnail(Glide.with(couponItemHolder.itemView.getContext()).load(R.drawable.loading2))
+                .centerInside()
+                .into(categoryItemHolder.image);
 
 
 

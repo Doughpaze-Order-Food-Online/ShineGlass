@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/loginbackgroungd"
-    tools:context=".Enter_Otp_Activtiy">
+    tools:context=".Enter_Otp_Activity">
 
     <ScrollView
         android:layout_width="match_parent"
