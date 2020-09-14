@@ -196,7 +196,7 @@
         <RelativeLayout
             android:id="@+id/request_quotation_btn"
             android:layout_below="@id/dash_line_2"
-            android:layout_width="192dp"
+            android:layout_width="208dp"
             android:gravity="center"
             android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
@@ -232,7 +232,7 @@
             android:layout_below="@id/request_quotation_btn"
             android:id="@+id/cancel_btn"
             android:layout_centerHorizontal="true"
-            android:layout_width="192dp"
+            android:layout_width="208dp"
             android:gravity="center"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="32dp"
