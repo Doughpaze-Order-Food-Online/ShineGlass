@@ -2,11 +2,8 @@ package com.mg.shineglass;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,16 +12,22 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import com.mg.shineglass.Interface.deleteFile;
+import com.mg.shineglass.adapters.FileUploadAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class UploadActivity extends Activity {
+public class UploadActivity extends Activity implements deleteFile {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
     private FrameLayout upload;
+    List<Uri> arrayList=new ArrayList<>();
+    private RecyclerView fileItem;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class UploadActivity extends Activity {
         setContentView(R.layout.upload_pop_activity);
 
         upload = findViewById(R.id.choose_file_block1);
+        fileItem=findViewById(R.id.file_container);
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +54,10 @@ public class UploadActivity extends Activity {
     public void launchGalleryIntent() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        String[] mimeTypes = {"image/*", "application/pdf"};
         intent.setType("image/*|application/pdf");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
         startActivityForResult(intent, REQUEST_EXTERNAL_STORAGE);
     }
 
@@ -83,35 +90,48 @@ public class UploadActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_EXTERNAL_STORAGE && resultCode == RESULT_OK) {
 
-            final List<Bitmap> bitmaps = new ArrayList<>();
-            ClipData clipData = data.getClipData();
+            if (data != null) {
+                if (data.getClipData() != null) {
+                    int count = data.getClipData().getItemCount();
+                    int currentItem = 0;
+                    while (currentItem < count) {
+                        Uri imageUri = data.getClipData().getItemAt(currentItem).getUri();
+                        currentItem = currentItem + 1;
 
-            if (clipData != null) {
-                //multiple images selected
-                for (int i = 0; i < clipData.getItemCount(); i++) {
-                    Uri imageUri = clipData.getItemAt(i).getUri();
-                    Log.d("URI", imageUri.toString());
-                    try {
-                        InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        bitmaps.add(bitmap);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        Log.d("Uri Selected", imageUri.toString());
+
+                        try {
+                            arrayList.add(imageUri);
+                            FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this,this::remove);
+                            LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
+                            fileItem.setLayoutManager(LinearLayout);
+                            fileItem.setAdapter(fileUploadAdapter);
+
+                        } catch (Exception e) {
+                            Log.e("Upload", "File select error", e);
+                        }
                     }
-                }
-            } else {
-                //single image selected
-                Uri imageUri = data.getData();
-                Log.d("URI", imageUri.toString());
-                try {
-                    InputStream inputStream = getContentResolver().openInputStream(imageUri);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    bitmaps.add(bitmap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+
+                } else if (data.getData() != null) {
+
+                    final Uri uri = data.getData();
+                    Log.i("Upload", "Uri = " + uri.toString());
+
+                    try {
+                        arrayList.add(uri);
+                        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this,this::remove);
+                        LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
+                        fileItem.setLayoutManager(LinearLayout);
+                        fileItem.setAdapter(fileUploadAdapter);
+
+                    } catch (Exception e) {
+                        Log.e("Upload", "File select error", e);
+                    }
                 }
 
             }
+
+
 
 //            new Thread(new Runnable() {
 //                @Override
@@ -133,5 +153,16 @@ public class UploadActivity extends Activity {
 //                }
 //            }).start();
         }
+    }
+
+    @Override
+    public void remove(int i) {
+        arrayList.remove(i);
+        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this,this::remove);
+        LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
+        fileItem.setLayoutManager(LinearLayout);
+        fileItem.setAdapter(fileUploadAdapter);
+
+
     }
 }
