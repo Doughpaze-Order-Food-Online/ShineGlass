@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.Banners;
+import com.mg.shineglass.utils.constants;
 
 import java.util.List;
 import java.util.Timer;
@@ -58,7 +59,9 @@ public class BannerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View itemView = layoutInflater.inflate(R.layout.banner_item, container, false);
         ImageView imageView = (ImageView) itemView.findViewById(R.id.banner_image);
-        String url="http://192.168.43.13:3000"+bannersList.get(position).getUrl();
+
+        String url= constants.BANNER_URL+bannersList.get(position).getUrl();
+
         Glide
                 .with(context)
                 .load(url)

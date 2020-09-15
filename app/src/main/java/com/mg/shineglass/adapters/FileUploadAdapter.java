@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,7 +55,6 @@ public class FileUploadAdapter extends RecyclerView.Adapter<FileUploadAdapter.Fi
             @Override
             public void onClick(View v) {
                 deleteFile.remove(i);
-                remove(i);
             }
         });
     }
@@ -68,13 +68,13 @@ public class FileUploadAdapter extends RecyclerView.Adapter<FileUploadAdapter.Fi
     class FileUploadItemHolder extends RecyclerView.ViewHolder {
 
         private TextView name;
-        private ImageView remove;
+        private FrameLayout remove;
 
 
         FileUploadItemHolder (View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.file_name_txt);
-            remove=itemView.findViewById(R.id.remove);
+            remove=itemView.findViewById(R.id.cross_btn);
 
         }
     }
@@ -107,10 +107,7 @@ public class FileUploadAdapter extends RecyclerView.Adapter<FileUploadAdapter.Fi
         return result;
     }
 
-public void remove(int i)
-{
-    list.remove(i);
-}
+
 
 
 }

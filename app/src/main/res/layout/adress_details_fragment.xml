@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="8dp"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/LightGrayColor"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/address_details"
+        android:textAllCaps="true"
+        android:textSize="22sp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/LightBlackColor"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <RelativeLayout
+        android:id="@+id/cancel_btn"
+        android:layout_width="208dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingRight="32dp"
+        android:paddingLeft="32dp"
+        android:background="@drawable/signup_bordershape"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/cancel_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/location_img"
+            android:layout_centerVertical="true"
+            android:text="@string/use_current_location"
+            android:textColor="@color/PrimaryTextColor"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
+            android:layout_toRightOf="@id/location_img" />
+        <ImageView
+            android:id="@+id/location_img"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/location"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/todo"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/or"
+        android:textAllCaps="true"
+        android:textColor="@color/LightBlackColor"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <EditText
+        android:id="@+id/user_email_mobile_input_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edt_bg_selector"
+        android:hint="@string/enter_address_manually"
+        android:layout_marginTop="16dp"
+        android:textColorHint="@color/BlackTextColor"
+        android:textSize="12sp"
+        android:inputType="number"
+        android:textColor="@color/BlackTextColor"
+        android:autofillHints="@null"
+        tools:ignore="TextFields" />
+
+    <View
+        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/MediumGrayColor"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_for_future"
+        android:layout_marginTop="64dp"
+        android:buttonTint="@color/MediumGrayColor"
+        app:buttonTint="@color/MediumGrayColor"
+        android:textSize="12sp"/>
+
+    <RelativeLayout
+        android:id="@+id/proceed_to_buy_btn"
+        android:layout_width="208dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/login_bordershape"
+        android:gravity="center"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:id="@+id/request_quotation_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/proceed_to_buy"
+            android:textAllCaps="true"
+            android:textColor="@color/whiteTextColor"
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@id/request_quotation_txt"
+            android:layout_toRightOf="@id/request_quotation_txt"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/addtocart" />
+
+    </RelativeLayout>
+
+</LinearLayout>

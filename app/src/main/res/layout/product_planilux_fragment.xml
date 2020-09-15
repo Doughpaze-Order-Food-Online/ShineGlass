@@ -106,7 +106,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <RelativeLayout
-        android:id="@+id/request_quotation_btn"
+        android:id="@+id/add_to_cart_btn"
         android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

@@ -134,7 +134,7 @@
 
                     <RelativeLayout
                         android:id="@+id/verify_btn"
-                        android:layout_width="160dp"
+                        android:layout_width="176dp"
                         android:gravity="center"
                         android:layout_marginTop="48dp"
                         android:layout_gravity="center_horizontal"
