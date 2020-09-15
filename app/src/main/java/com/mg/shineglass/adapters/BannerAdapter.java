@@ -58,7 +58,7 @@ public class BannerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View itemView = layoutInflater.inflate(R.layout.banner_item, container, false);
         ImageView imageView = (ImageView) itemView.findViewById(R.id.banner_image);
-        String url="http://192.168.43.13:3001"+bannersList.get(position).getUrl();
+        String url="http://192.168.43.13:3000"+bannersList.get(position).getUrl();
         Glide
                 .with(context)
                 .load(url)

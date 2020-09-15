@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.FileUtils;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class FileUploadAdapter extends RecyclerView.Adapter<FileUploadAdapter.Fi
             @Override
             public void onClick(View v) {
                 deleteFile.remove(i);
+                remove(i);
             }
         });
     }
@@ -105,7 +107,10 @@ public class FileUploadAdapter extends RecyclerView.Adapter<FileUploadAdapter.Fi
         return result;
     }
 
-
+public void remove(int i)
+{
+    list.remove(i);
+}
 
 
 }

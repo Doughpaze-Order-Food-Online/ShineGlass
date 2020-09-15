@@ -2,12 +2,14 @@ package com.mg.shineglass;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.FileUtils;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,11 +30,12 @@ import com.mg.shineglass.adapters.FileUploadAdapter;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.Qoutation;
+import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
-import com.mg.shineglass.utils.constants;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +53,7 @@ public class UploadActivity extends Activity implements deleteFile {
     final int REQUEST_EXTERNAL_STORAGE = 100;
     private FrameLayout upload;
     List<Uri> arrayList = new ArrayList<>();
+    ArrayList<String> files = new ArrayList<>();
     private RecyclerView fileItem;
     private CompositeSubscription mSubscriptions;
     private RelativeLayout cancel,request;
@@ -66,10 +71,18 @@ public class UploadActivity extends Activity implements deleteFile {
         request=findViewById(R.id.request);
 
         cancel.setOnClickListener(view->finish());
-        request.setOnClickListener(view->SEND_REQUEST());
+        request.setOnClickListener(view-> {
+            try {
+                SEND_REQUEST();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        });
 
+        fileItem=findViewById(R.id.file_container);
 
         upload.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
                 if (ActivityCompat.checkSelfPermission(UploadActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -83,16 +96,17 @@ public class UploadActivity extends Activity implements deleteFile {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void launchGalleryIntent() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         String[] mimeTypes = {"image/*", "application/pdf"};
         intent.setType("image/*|application/pdf");
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-        startActivityForResult(intent, REQUEST_EXTERNAL_STORAGE);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(Intent.createChooser(intent,"select file"), REQUEST_EXTERNAL_STORAGE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
@@ -166,15 +180,11 @@ public class UploadActivity extends Activity implements deleteFile {
         }
     }
 
+
+
     @Override
     public void remove(int i) {
         arrayList.remove(i);
-        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove);
-        LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
-        fileItem.setLayoutManager(LinearLayout);
-        fileItem.setAdapter(fileUploadAdapter);
-
-
     }
 
     @NonNull
@@ -183,9 +193,14 @@ public class UploadActivity extends Activity implements deleteFile {
     }
 
     @NonNull
-    private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) {
+    private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) throws URISyntaxException {
         // use the FileUtils to get the actual file by uri
-        File file = new File(String.valueOf(fileUri));
+        String filePath=FileUtils.getPath(this,fileUri);
+        assert filePath != null;
+        File file = new File(filePath);
+
+
+       
 
         // create RequestBody instance from file
         RequestBody requestFile = RequestBody.create(MediaType.parse("*/*"), file);
@@ -195,21 +210,20 @@ public class UploadActivity extends Activity implements deleteFile {
 
     }
 
-    private void SEND_REQUEST()
-    {
-        List<MultipartBody.Part> files = new ArrayList<>();
+    private void SEND_REQUEST() throws URISyntaxException {
+       final List<MultipartBody.Part> files = new ArrayList<>();
 
 
         if (arrayList != null) {
 
             for (int i = 0; i < arrayList.size(); i++) {
-                files.add(prepareFilePart("image", arrayList.get(i)));
+                files.add(prepareFilePart("files", arrayList.get(i))) ;
             }
+
         }
 
-
-        Qoutation qoutation=new Qoutation();
-        mSubscriptions.add(networkUtils.getRetrofit().REQUEST_QUOTATION(files,qoutation)
+        List<Qoutation> list=new ArrayList<>();
+        mSubscriptions.add(networkUtils.getRetrofit().REQUEST_QUOTATION(files,list)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
@@ -231,7 +245,7 @@ public class UploadActivity extends Activity implements deleteFile {
     private void handleError(Throwable error) {
 
 
-
+        Log.e("error",error.toString());
         if (error instanceof HttpException) {
 
             Gson gson = new GsonBuilder().create();
@@ -251,4 +265,9 @@ public class UploadActivity extends Activity implements deleteFile {
         }
     }
 
+
+
+
+
 }
+

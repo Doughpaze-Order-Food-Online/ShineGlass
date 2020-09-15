@@ -4,10 +4,7 @@ public class Qoutation {
     String width,height;
     int quantity;
 
-    public Qoutation()
-    {
 
-    }
 
     public int getQuantity() {
         return quantity;

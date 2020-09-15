@@ -137,7 +137,7 @@ public class HomePageFragment extends Fragment {
     }
 
     private void handleResponse2(Response<List<Banners>> response) {
-        Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
+
         bannerAdapter=new BannerAdapter(Objects.requireNonNull(getContext()),response.body());
         bannerAdapter.setTimer(viewPager,5,5,1);
         viewPager.setAdapter(bannerAdapter);

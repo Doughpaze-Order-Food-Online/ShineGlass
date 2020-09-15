@@ -51,9 +51,7 @@ public interface retro_interface {
 
     @Multipart
     @POST("quotation")
-    Observable<Response<LoginResponse>> REQUEST_QUOTATION(@Part List<MultipartBody.Part> files, @Body Qoutation qoutation);
-
-
+    Observable<Response<LoginResponse>> REQUEST_QUOTATION(@Part List<MultipartBody.Part> files,@Part("quotation") List<Qoutation> quotation);
 
 
 }
