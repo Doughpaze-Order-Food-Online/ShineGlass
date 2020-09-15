@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="@string/address_details"
         android:textAllCaps="true"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/LightBlackColor"
         android:layout_marginTop="16dp"
@@ -91,7 +91,7 @@
         android:layout_height="0.5dp"
         android:background="@color/MediumGrayColor"/>
 
-    <com.google.android.material.checkbox.MaterialCheckBox
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_for_future"

@@ -80,4 +80,11 @@
     <string name="enter_address_manually">Enter Address Manually</string>
     <string name="save_for_future">Save For Future</string>
     <string name="proceed_to_buy">proceed to buy</string>
+    <string name="order_and_payment_details">order and payment details</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="shikha_das">Shikha Das</string>
+    <string name="cash_on_delivery">Cash on Delivery</string>
+    <string name="pay_online_credit_card_debit_card_upi">Pay Online(Credit Card, Debit Card, UPI)</string>
+    <string name="place_order">place order</string>
+    <string name="total">total-</string>
 </resources>
