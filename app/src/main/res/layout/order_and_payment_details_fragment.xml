@@ -180,7 +180,7 @@
                 android:layout_toEndOf="@id/total_txt"
                 android:layout_marginStart="4dp"
                 android:textSize="16sp"
-                android:text="1400"
+                android:text="@string/_1400"
                 android:textColor="@color/BlackTextColor"
                 android:fontFamily="sans-serif-medium"
                 android:layout_toRightOf="@id/total_txt"
