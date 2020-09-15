@@ -119,7 +119,7 @@
             />
 
         <RelativeLayout
-            android:id="@+id/request_quotation_btn"
+            android:id="@+id/request"
             android:layout_below="@id/dash_line_2"
             android:layout_width="208dp"
             android:gravity="center"
@@ -154,7 +154,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_below="@id/request_quotation_btn"
+            android:layout_below="@id/request"
             android:id="@+id/cancel_btn"
             android:layout_centerHorizontal="true"
             android:layout_width="208dp"
@@ -189,6 +189,7 @@
                 android:layout_marginStart="8dp" />
 
         </RelativeLayout>
+
     </RelativeLayout>
 
     </ScrollView>

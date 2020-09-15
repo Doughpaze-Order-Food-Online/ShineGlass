@@ -3,30 +3,55 @@ package com.mg.shineglass;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.FileUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mg.shineglass.Interface.deleteFile;
 import com.mg.shineglass.adapters.FileUploadAdapter;
+import com.mg.shineglass.models.BasicResponse;
+import com.mg.shineglass.models.LoginResponse;
+import com.mg.shineglass.models.Qoutation;
+import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.constants;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Response;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class UploadActivity extends Activity implements deleteFile {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
     private FrameLayout upload;
-    List<Uri> arrayList=new ArrayList<>();
+    List<Uri> arrayList = new ArrayList<>();
     private RecyclerView fileItem;
+    private CompositeSubscription mSubscriptions;
+    private RelativeLayout cancel,request;
 
 
     @Override
@@ -35,7 +60,14 @@ public class UploadActivity extends Activity implements deleteFile {
         setContentView(R.layout.upload_pop_activity);
 
         upload = findViewById(R.id.choose_file_block1);
-        fileItem=findViewById(R.id.file_container);
+        fileItem = findViewById(R.id.file_container);
+        mSubscriptions = new CompositeSubscription();
+        cancel=findViewById(R.id.cancel_btn);
+        request=findViewById(R.id.request);
+
+        cancel.setOnClickListener(view->finish());
+        request.setOnClickListener(view->SEND_REQUEST());
+
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +134,7 @@ public class UploadActivity extends Activity implements deleteFile {
 
                         try {
                             arrayList.add(imageUri);
-                            FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this,this::remove);
+                            FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove);
                             LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
                             fileItem.setLayoutManager(LinearLayout);
                             fileItem.setAdapter(fileUploadAdapter);
@@ -119,7 +151,7 @@ public class UploadActivity extends Activity implements deleteFile {
 
                     try {
                         arrayList.add(uri);
-                        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this,this::remove);
+                        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove);
                         LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
                         fileItem.setLayoutManager(LinearLayout);
                         fileItem.setAdapter(fileUploadAdapter);
@@ -131,38 +163,92 @@ public class UploadActivity extends Activity implements deleteFile {
 
             }
 
-
-
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    for (final Bitmap b : bitmaps) {
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                imageView.setImageBitmap(b);
-//                            }
-//                        });
-//
-//                        try {
-//                            Thread.sleep(3000);
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//            }).start();
         }
     }
 
     @Override
     public void remove(int i) {
         arrayList.remove(i);
-        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this,this::remove);
+        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove);
         LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
         fileItem.setLayoutManager(LinearLayout);
         fileItem.setAdapter(fileUploadAdapter);
 
 
     }
+
+    @NonNull
+    private RequestBody createPartFromString(String descriptionString) {
+        return RequestBody.create(MediaType.parse("*/*"), descriptionString);
+    }
+
+    @NonNull
+    private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) {
+        // use the FileUtils to get the actual file by uri
+        File file = new File(String.valueOf(fileUri));
+
+        // create RequestBody instance from file
+        RequestBody requestFile = RequestBody.create(MediaType.parse("*/*"), file);
+
+        // MultipartBody.Part is used to send also the actual file name
+        return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
+
+    }
+
+    private void SEND_REQUEST()
+    {
+        List<MultipartBody.Part> files = new ArrayList<>();
+
+
+        if (arrayList != null) {
+
+            for (int i = 0; i < arrayList.size(); i++) {
+                files.add(prepareFilePart("image", arrayList.get(i)));
+            }
+        }
+
+
+        Qoutation qoutation=new Qoutation();
+        mSubscriptions.add(networkUtils.getRetrofit().REQUEST_QUOTATION(files,qoutation)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse,this::handleError));
+
+
+    }
+
+    private void handleResponse(Response<LoginResponse> response) {
+
+
+        Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(UploadActivity.this,MainActivity.class );
+        startActivity(intent);
+        finish();
+
+    }
+
+    private void handleError(Throwable error) {
+
+
+
+        if (error instanceof HttpException) {
+
+            Gson gson = new GsonBuilder().create();
+
+            try {
+
+                String errorBody = ((HttpException) error).response().errorBody().string();
+                Response<BasicResponse> response = gson.fromJson(errorBody,Response.class);
+                assert response.body() != null;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+            Toast.makeText(this, "Network Error !", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
