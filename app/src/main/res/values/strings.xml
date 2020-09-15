@@ -74,4 +74,5 @@
     <string name="view_quotation">view quotation</string>
     <string name="reject">reject</string>
     <string name="accept">accept</string>
+    <string name="quotation_no">Quotation NO:</string>
 </resources>
