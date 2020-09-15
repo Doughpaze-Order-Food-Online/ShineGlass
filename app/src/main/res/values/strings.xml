@@ -75,4 +75,9 @@
     <string name="reject">reject</string>
     <string name="accept">accept</string>
     <string name="quotation_no">Quotation NO:</string>
+    <string name="address_details">address details</string>
+    <string name="use_current_location">Use Current Location</string>
+    <string name="enter_address_manually">Enter Address Manually</string>
+    <string name="save_for_future">Save For Future</string>
+    <string name="proceed_to_buy">proceed to buy</string>
 </resources>

@@ -88,7 +88,7 @@
 
                     <RelativeLayout
                         android:id="@+id/send_otp_btn"
-                        android:layout_width="160dp"
+                        android:layout_width="176dp"
                         android:gravity="center"
                         android:layout_marginTop="32dp"
                         android:layout_gravity="center_horizontal"
