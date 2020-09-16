@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginbackgroungd"
     tools:context=".Login_Activity"
     >
 
-    <ScrollView
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,44 +17,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/login_logo_img"
-                android:layout_width="120dp"
-                android:layout_height="100dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="32dp"
-                android:src="@drawable/loginlogo"
-                android:contentDescription="@string/todo" />
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/halfloginbackground"/>
 
 
-            <androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="154dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginBottom="32dp"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="16dp">
+
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/login_logo_img"
-                android:layout_margin="32dp"
-                app:cardElevation="16dp"
-                app:cardCornerRadius="2dp">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="32dp"
-                    android:paddingBottom="32dp"
-                    android:paddingRight="16dp"
+                    android:orientation="vertical"
                     android:paddingLeft="16dp"
-                    android:orientation="vertical">
+                    android:paddingTop="32dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="32dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/login"
                         android:layout_gravity="center"
                         android:layout_marginBottom="32dp"
+                        android:text="@string/login"
                         android:textColor="@color/BlackTextColor"
-                        android:textSize="24sp"/>
+                        android:textSize="24sp" />
 
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -62,28 +63,28 @@
                         style="@style/Widget.Design.TextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        app:hintAnimationEnabled="false"
-                        android:textColorHint="@color/BlackTextColor"
                         android:layout_marginBottom="32dp"
+                        android:textColorHint="@color/BlackTextColor"
                         app:endIconMode="clear_text"
                         app:endIconTint="@color/BlackTextColor"
+                        app:hintAnimationEnabled="false"
+                        app:hintEnabled="false"
                         app:startIconDrawable="@drawable/mailfinal"
                         app:startIconTint="@color/colorPrimaryDark">
 
 
-                    <EditText
-                        android:id="@+id/user_email_mobile_input_txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/edt_bg_selector"
-                        android:hint="@string/email_mobile_number"
-                        android:textColorHint="@color/BlackTextColor"
-                        android:textSize="12sp"
-                        android:inputType="text"
-                        android:textColor="@color/BlackTextColor"
-                        android:autofillHints="@null"
-                        tools:ignore="TextFields" />
+                        <EditText
+                            android:id="@+id/user_email_mobile_input_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="@null"
+                            android:background="@drawable/edt_bg_selector"
+                            android:hint="@string/email_mobile_number"
+                            android:inputType="text"
+                            android:textColor="@color/BlackTextColor"
+                            android:textColorHint="@color/BlackTextColor"
+                            android:textSize="12sp"
+                            tools:ignore="TextFields" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,11 +93,11 @@
                         style="@style/Widget.Design.TextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        app:hintAnimationEnabled="false"
                         android:textColorHint="@color/BlackTextColor"
                         app:endIconMode="password_toggle"
                         app:endIconTint="@color/PrimaryTextColor"
+                        app:hintAnimationEnabled="false"
+                        app:hintEnabled="false"
                         app:startIconDrawable="@drawable/keyfinal"
                         app:startIconTint="@color/colorPrimaryDark">
 
@@ -105,27 +106,27 @@
                             android:id="@+id/password_input_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/password"
+                            android:autofillHints="@null"
                             android:background="@drawable/edt_bg_selector"
-                            android:textColorHint="@color/BlackTextColor"
-                            android:textSize="12sp"
+                            android:hint="@string/password"
                             android:inputType="textPassword"
                             android:textColor="@color/BlackTextColor"
-                            android:autofillHints="@null" />
+                            android:textColorHint="@color/BlackTextColor"
+                            android:textSize="12sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <RelativeLayout
                         android:id="@+id/login_btn"
                         android:layout_width="176dp"
-                        android:gravity="center"
-                        android:layout_marginTop="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="80dp"
                         android:layout_marginBottom="16dp"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
                         android:background="@drawable/login_bordershape"
-                        android:layout_height="wrap_content">
+                        android:gravity="center"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp">
 
                         <TextView
                             android:id="@+id/login_txt"
@@ -136,16 +137,17 @@
                             android:textAllCaps="true"
                             android:textColor="@color/whiteTextColor"
                             android:textSize="14sp" />
+
                         <ImageView
                             android:layout_width="18dp"
                             android:layout_height="18dp"
-                            android:layout_toEndOf="@id/login_txt"
-                            android:src="@drawable/loginend"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@id/login_txt"
+                            android:layout_marginStart="8dp"
                             android:layout_marginLeft="8dp"
+                            android:layout_toEndOf="@id/login_txt"
+                            android:layout_toRightOf="@id/login_txt"
                             android:contentDescription="@string/todo"
-                            android:layout_marginStart="8dp" />
+                            android:src="@drawable/loginend" />
 
                     </RelativeLayout>
 
@@ -154,17 +156,18 @@
                         android:id="@+id/forgot_password_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/forgot_your_password"
                         android:layout_gravity="center"
                         android:layout_marginBottom="16dp"
+                        android:text="@string/forgot_your_password"
                         android:textColor="@color/PrimaryTextColor"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
+            </ScrollView>
 
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
-    </ScrollView>
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
