@@ -119,4 +119,8 @@
     //facebook api
     <string name="facebook_app_id">611652142750083</string>
     <string name="fb_login_protocol_scheme">fb611652142750083</string>
+    <string name="edit_details">edit details</string>
+    <string name="order_no">order no.</string>
+    <string name="status">status</string>
+    <string name="in_transit">in transit</string>
 </resources>

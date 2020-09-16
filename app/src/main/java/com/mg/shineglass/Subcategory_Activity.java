@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,10 +58,20 @@ public class Subcategory_Activity extends Fragment {
         rvItem.setLayoutManager(gridLayoutManager);
         rvItem.setAdapter(subCategoryAdapter);
 
-
+//        OnBackPressedCallback onBackPressedCallback=new OnBackPressedCallback(true) {
+//            @Override
+//            public void handleOnBackPressed() {
+//                MainActivity mainActivity=new MainActivity();
+//                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container,new HomePageFragment()).commit();
+//                getActivity().finish();
+//            }
+//        };
+//        requireActivity().getOnBackPressedDispatcher().addCallback(this,onBackPressedCallback);
 
         return view;
 
     }
+
+
 
 }
