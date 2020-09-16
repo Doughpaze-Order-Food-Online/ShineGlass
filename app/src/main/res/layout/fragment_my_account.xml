@@ -256,12 +256,14 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="VIEW ALL TRANSACTIONS"
-        android:textColor="#fff"
-        android:textSize="12sp"
+        android:id="@+id/logout_btn"
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:background="@drawable/login_bordershape"
+        android:text="@string/logout"
         android:layout_gravity="center_horizontal"
-        />
-
+        android:textAllCaps="true"
+        android:layout_marginBottom="32dp"
+        android:textSize="12sp"
+        android:textColor="@color/whiteTextColor"/>
 </LinearLayout>

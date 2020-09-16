@@ -96,4 +96,5 @@
     <string name="new_password">NEW PASSWORD</string>
     <string name="re_enter_new_password">RE ENTER NEW PASSWORD</string>
     <string name="change">change</string>
+    <string name="logout">logout</string>
 </resources>
