@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     {
                         Intent i=new Intent(MainActivity.this,LoginSignUpActivity.class);
                         startActivity(i);
+                        finish();
                     }
                     else
                     {

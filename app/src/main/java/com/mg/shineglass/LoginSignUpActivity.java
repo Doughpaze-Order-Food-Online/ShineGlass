@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 public class LoginSignUpActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,5 +43,15 @@ public class LoginSignUpActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent i=new Intent(LoginSignUpActivity.this,MainActivity.class);
+        startActivity(i);
+        finish();
     }
 }
