@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -33,7 +37,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class Register_OTP_Activity extends Activity {
+public class Register_OTP_Activity extends AppCompatActivity {
 
     private User user;
     private String otp,type;
@@ -67,7 +71,56 @@ public class Register_OTP_Activity extends Activity {
         E3 = (EditText) findViewById(R.id.edt_3);
         E4 = (EditText) findViewById(R.id.edt_4);
 
+        E1.addTextChangedListener(new GenericTextWatcher(E1));
+        E2.addTextChangedListener(new GenericTextWatcher(E2));
+        E3.addTextChangedListener(new GenericTextWatcher(E3));
+        E4.addTextChangedListener(new GenericTextWatcher(E4));
+
         button.setOnClickListener(view -> register());
+    }
+
+    public class GenericTextWatcher implements TextWatcher {
+        private View view;
+
+        private GenericTextWatcher(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String text = editable.toString();
+            switch (view.getId()) {
+
+                case R.id.edt_1:
+                    if (text.length() == 1)
+                        E2.requestFocus();
+                    break;
+                case R.id.edt_2:
+                    if (text.length() == 1)
+                        E3.requestFocus();
+                    else if (text.length() == 0)
+                        E1.requestFocus();
+                    break;
+                case R.id.edt_3:
+                    if (text.length() == 1)
+                        E4.requestFocus();
+                    else if (text.length() == 0)
+                        E2.requestFocus();
+                    break;
+                case R.id.edt_4:
+                    if (text.length() == 0)
+                        E3.requestFocus();
+                    break;
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
     }
 
     private void register() {

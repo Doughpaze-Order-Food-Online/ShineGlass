@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import com.mg.shineglass.OTP_Acitvities.Register_OTP_Activity;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
@@ -28,7 +31,7 @@ import rx.subscriptions.CompositeSubscription;
 import static com.mg.shineglass.utils.validation.validateFields;
 import static com.mg.shineglass.utils.validation.validatePhone;
 
-public class Otp_Login_Activity extends Activity {
+public class Otp_Login_Activity extends AppCompatActivity {
     TextInputLayout mobile_Layout;
     EditText mobile_EditText;
     private CompositeSubscription mSubscriptions;
@@ -121,7 +124,7 @@ public class Otp_Login_Activity extends Activity {
 
     private void GoToOtp(String otp,User user,String token){
 
-        Intent intent = new Intent(Otp_Login_Activity.this, Enter_Otp_Activity.class);
+        Intent intent = new Intent(Otp_Login_Activity.this, Register_OTP_Activity.class);
         intent.putExtra("type","number");
         intent.putExtra("otp",otp);
         intent.putExtra("token", token);
