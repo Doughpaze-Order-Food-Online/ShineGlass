@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="@string/my_requests"
         android:textAllCaps="true"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/LightBlackColor"
         android:layout_marginTop="32dp"
