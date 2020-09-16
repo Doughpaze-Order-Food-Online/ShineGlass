@@ -5,39 +5,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginbackgroungd"
     tools:context=".Register_Activity"
     >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/login_logo_img"
-                android:layout_width="120dp"
-                android:layout_height="100dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="32dp"
-                android:src="@drawable/loginlogo"
-                android:contentDescription="@string/todo" />
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/halfloginbackground"/>
 
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/login_logo_img"
-                android:layout_margin="32dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginTop="154dp"
                 app:cardElevation="16dp"
                 app:cardCornerRadius="2dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -198,7 +199,7 @@
                         android:id="@+id/signUp_btn"
                         android:layout_width="176dp"
                         android:gravity="center"
-                        android:layout_marginTop="80dp"
+                        android:layout_marginTop="48dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="16dp"
                         android:paddingTop="16dp"
@@ -241,9 +242,9 @@
 
                 </LinearLayout>
 
-
+                </ScrollView>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
-    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

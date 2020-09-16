@@ -233,6 +233,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
             intent.putExtra("type",response.getType());
             intent.putExtra("token",response.getToken());
             intent.putExtra("email",response.getUser().getEmail());
+            intent.putExtra("name",response.getUser().getUsername());
             startActivity(intent);
             //progressDialog.dismiss();
             finish();
@@ -303,9 +304,8 @@ public class LoginSignUpActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-        Intent i=new Intent(LoginSignUpActivity.this,MainActivity.class);
-        startActivity(i);
+//        Intent i=new Intent(LoginSignUpActivity.this,MainActivity.class);
+//        startActivity(i);
         finish();
     }
 

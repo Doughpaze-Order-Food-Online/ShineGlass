@@ -25,9 +25,10 @@
         </activity>
         <activity android:name=".LoginSignUpActivity" android:screenOrientation="portrait"/>
         <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".Login_Activity" android:screenOrientation="portrait"/>
+        <activity android:name=".Login_Activity" android:screenOrientation="portrait"
+            android:theme="@style/loginWindowBackgroundTheme"/>
         <activity android:name=".Register_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".Otp_Login_Activity" android:screenOrientation="portrait"/>
+        <activity android:name=".Otp_Login_Activity" android:screenOrientation="portrait" />
         <activity android:name=".OTP_Acitvities.Register_OTP_Activity" android:screenOrientation="portrait" />
         <activity android:name=".OTP_Acitvities.Number_OTP_Activity" android:screenOrientation="portrait" />
         <activity android:name=".OTP_Acitvities.Google_Otp_Activity" android:screenOrientation="portrait" />

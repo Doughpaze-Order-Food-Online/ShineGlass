@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <!-- Customize your theme here. -->
@@ -23,9 +23,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="loginWindowBackgroundTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="android:windowBackground">@drawable/finalloginbackgroung</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
     <style name="Theme_Dialog" parent="@android:style/Theme.Holo.Light.Dialog.NoActionBar">
         <item name="android:windowMinWidthMajor">94%</item>
-        <item name="android:windowMinWidthMinor">94%</item>
+        <item name="android:windowMinWidthMinor">94%</item>"
     </style>
 
 </resources>

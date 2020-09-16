@@ -124,7 +124,9 @@ public class Otp_Login_Activity extends AppCompatActivity {
 
     private void GoToOtp(String otp,User user,String token){
 
+
         Intent intent = new Intent(Otp_Login_Activity.this, Number_OTP_Activity.class);
+
         intent.putExtra("type","number");
         intent.putExtra("otp",otp);
         intent.putExtra("token", token);
@@ -132,6 +134,7 @@ public class Otp_Login_Activity extends AppCompatActivity {
         intent.putExtra("email", user.getEmail());
         intent.putExtra("name", user.getUsername());
         startActivity(intent);
+        finish();
     }
 
 

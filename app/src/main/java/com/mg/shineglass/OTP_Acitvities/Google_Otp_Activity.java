@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +74,11 @@ public class Google_Otp_Activity extends AppCompatActivity {
         Resend_block=findViewById(R.id.resend_otp_block);
         resend=findViewById(R.id.signup_txt);
 
+        E1.addTextChangedListener(new Google_Otp_Activity.GenericTextWatcher(E1));
+        E2.addTextChangedListener(new Google_Otp_Activity.GenericTextWatcher(E2));
+        E3.addTextChangedListener(new Google_Otp_Activity.GenericTextWatcher(E3));
+        E4.addTextChangedListener(new Google_Otp_Activity.GenericTextWatcher(E4));
+
         button.setOnClickListener(view -> NUMBER_LOGIN());
         resend.setOnClickListener(view->RESEND_OTP(user));
 
@@ -83,17 +90,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
         String enteredOtp = E1.getText().toString() + E2.getText().toString() + E3.getText().toString() + E4.getText().toString();
         if(enteredOtp.equals(otp))
         {
-            Toast.makeText(Google_Otp_Activity.this, "Login success!", Toast.LENGTH_SHORT).show();
-            SharedPreferences sharedPreferences = PreferenceManager
-                    .getDefaultSharedPreferences(this);
 
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(constants.TOKEN,token);
-            editor.putString(constants.EMAIL,user.getEmail());
-            editor.putString(constants.USERNAME,user.getUsername());
-            editor.putString(constants.PHONE,user.getMobile());
-            editor.putString(constants.TYPE,type);
-            editor.apply();
 
             SAVE_NUMBER();
 
@@ -107,7 +104,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
     }
 
     private void SAVE_NUMBER() {
-        mSubscriptions.add(networkUtils.getRetrofit().GOOGLE_FACEBOOK_OTP(user)
+        mSubscriptions.add(networkUtils.getRetrofit().NUMBER_SAVE(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse2,this::handleError));
@@ -123,7 +120,17 @@ public class Google_Otp_Activity extends AppCompatActivity {
     }
 
     private void handleResponse2(LoginResponse response) {
+        Toast.makeText(Google_Otp_Activity.this, "Login success!", Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
 
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(constants.TOKEN,token);
+        editor.putString(constants.EMAIL,user.getEmail());
+        editor.putString(constants.USERNAME,user.getUsername());
+        editor.putString(constants.PHONE,user.getMobile());
+        editor.putString(constants.TYPE,type);
+        editor.apply();
         goToHome();
 
     }
@@ -205,5 +212,49 @@ public class Google_Otp_Activity extends AppCompatActivity {
         Intent intent = new Intent(Google_Otp_Activity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public class GenericTextWatcher implements TextWatcher {
+        private View view;
+
+        private GenericTextWatcher(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String text = editable.toString();
+            switch (view.getId()) {
+
+                case R.id.edt_1:
+                    if (text.length() == 1)
+                        E2.requestFocus();
+                    break;
+                case R.id.edt_2:
+                    if (text.length() == 1)
+                        E3.requestFocus();
+                    else if (text.length() == 0)
+                        E1.requestFocus();
+                    break;
+                case R.id.edt_3:
+                    if (text.length() == 1)
+                        E4.requestFocus();
+                    else if (text.length() == 0)
+                        E2.requestFocus();
+                    break;
+                case R.id.edt_4:
+                    if (text.length() == 0)
+                        E3.requestFocus();
+                    break;
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
     }
 }

@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +74,11 @@ public class Number_OTP_Activity extends AppCompatActivity {
         timer=findViewById(R.id.time_txt);
         Resend_block=findViewById(R.id.resend_otp_block);
         resend=findViewById(R.id.signup_txt);
+
+        E1.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E1));
+        E2.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E2));
+        E3.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E3));
+        E4.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E4));
 
         button.setOnClickListener(view -> NUMBER_LOGIN());
         resend.setOnClickListener(view->RESEND_OTP(user));
@@ -190,5 +197,50 @@ public class Number_OTP_Activity extends AppCompatActivity {
         Intent intent = new Intent(Number_OTP_Activity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+
+    public class GenericTextWatcher implements TextWatcher {
+        private View view;
+
+        private GenericTextWatcher(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String text = editable.toString();
+            switch (view.getId()) {
+
+                case R.id.edt_1:
+                    if (text.length() == 1)
+                        E2.requestFocus();
+                    break;
+                case R.id.edt_2:
+                    if (text.length() == 1)
+                        E3.requestFocus();
+                    else if (text.length() == 0)
+                        E1.requestFocus();
+                    break;
+                case R.id.edt_3:
+                    if (text.length() == 1)
+                        E4.requestFocus();
+                    else if (text.length() == 0)
+                        E2.requestFocus();
+                    break;
+                case R.id.edt_4:
+                    if (text.length() == 0)
+                        E3.requestFocus();
+                    break;
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
     }
 }

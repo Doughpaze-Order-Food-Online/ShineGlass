@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -35,7 +37,7 @@ import static com.mg.shineglass.utils.validation.validateEmail;
 import static com.mg.shineglass.utils.validation.validateFields;
 import static com.mg.shineglass.utils.validation.validatePhone;
 
-public class Register_Activity extends Activity {
+public class Register_Activity extends AppCompatActivity {
 
     private TextInputLayout username_Layout,
             email_Layout,mobile_Layout,
@@ -214,6 +216,7 @@ public class Register_Activity extends Activity {
         intent.putExtra("email", user.getEmail());
         startActivity(intent);
         finish();
+
 
     }
 

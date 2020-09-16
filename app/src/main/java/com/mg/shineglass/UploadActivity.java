@@ -1,6 +1,7 @@
 package com.mg.shineglass;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,6 +59,7 @@ public class UploadActivity extends Activity implements deleteFile {
     ArrayList<String> files = new ArrayList<>();
     private RecyclerView fileItem;
     private CompositeSubscription mSubscriptions;
+    private ActionBar actionBar;
     private RelativeLayout cancel,request;
     private long mLastClickTime = 0;
 
@@ -65,7 +68,6 @@ public class UploadActivity extends Activity implements deleteFile {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_pop_activity);
-
         upload = findViewById(R.id.choose_file_block1);
         fileItem = findViewById(R.id.file_container);
         mSubscriptions = new CompositeSubscription();

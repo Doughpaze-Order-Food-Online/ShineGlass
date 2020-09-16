@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,7 +37,8 @@ public class Google_Enter_Number extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private User user;
     private RelativeLayout button;
-    private String token,type,email,Number;
+    private String token,type,email,Number,username;
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +49,14 @@ public class Google_Enter_Number extends AppCompatActivity {
         token=i.getStringExtra("token");
         type=i.getStringExtra("type");
         email=i.getStringExtra("email");
+        username=i.getStringExtra("name");
         mobile_EditText = findViewById(R.id.user_email_mobile_input_txt);
         mobile_Layout = findViewById(R.id.user_email_mobile);
         mSubscriptions = new CompositeSubscription();
         button = findViewById(R.id.send_otp_btn);
+        title=findViewById(R.id.enter_number);
+
+        title.setText("Enter Mobile Number");
 
         button.setOnClickListener(view -> SEND_OTP());
     }
@@ -98,7 +104,7 @@ public class Google_Enter_Number extends AppCompatActivity {
     private void handleResponse(LoginResponse response) {
 
 
-        GoToOtp(response.getOtp(),response.getUser(),token);
+        GoToOtp(response.getOtp(),token);
     }
 
     private void handleError(Throwable error) {
@@ -112,9 +118,8 @@ public class Google_Enter_Number extends AppCompatActivity {
             try {
 
                 String errorBody = ((HttpException) error).response().errorBody().string();
-                Response<BasicResponse> response = gson.fromJson(errorBody,Response.class);
-                assert response.body() != null;
-                showSnackBarMessage(response.body().getMessage());
+                BasicResponse response = gson.fromJson(errorBody,BasicResponse.class);
+                showSnackBarMessage(response.getMessage());
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -126,16 +131,17 @@ public class Google_Enter_Number extends AppCompatActivity {
         }
     }
 
-    private void GoToOtp(String otp,User user,String token){
+    private void GoToOtp(String otp,String token){
 
         Intent intent = new Intent(Google_Enter_Number.this, Google_Otp_Activity.class);
         intent.putExtra("type",type);
         intent.putExtra("otp",otp);
         intent.putExtra("token", token);
         intent.putExtra("phone", Number);
-        intent.putExtra("email", user.getEmail());
-        intent.putExtra("name", user.getUsername());
+        intent.putExtra("email", email);
+        intent.putExtra("name", username);
         startActivity(intent);
+        finish();
     }
 
 
