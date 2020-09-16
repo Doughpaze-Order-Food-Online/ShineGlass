@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ public class HomePageFragment extends Fragment {
     private RatesAdapter ratesAdapter;
     private CategoryAdapter categoryAdapter;
     private FrameLayout upload;
+    private List<Category> mainList;
 
 
     public HomePageFragment() {
@@ -81,25 +83,16 @@ public class HomePageFragment extends Fragment {
         upload=view.findViewById(R.id.upload_image_pdf_block);
 
 
-        List<Category> categoryList=new ArrayList<>();
-        categoryList.add(new Category("CLEAR GLASS",R.drawable.clearglass));
-        categoryList.add(new Category("REFLECTIVE GLASS",R.drawable.reflectiveglass));
-        categoryList.add(new Category("TINTED GLASS",R.drawable.tintedglass));
-        categoryList.add(new Category("HIGH REFLECTIVE GLASS",R.drawable.highreflectiveglass));
-        categoryList.add(new Category("LACQUERED GLASS",R.drawable.laqueredglass));
-        categoryList.add(new Category("MIRROR",R.drawable.mirror));
 
-        categoryAdapter=new CategoryAdapter(categoryList);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2,LinearLayoutManager.HORIZONTAL,false);
-        category.setLayoutManager(gridLayoutManager);
-        category.setAdapter(categoryAdapter);
 
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i=new Intent(getContext(),UploadActivity.class);
                 startActivity(i);
+
             }
         });
 
@@ -122,7 +115,12 @@ public class HomePageFragment extends Fragment {
                 networkUtils.getRetrofit().GET_IMAGES()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
-                        .subscribe(this::handleResponse2,this::handleError));
+                        .subscribe(this::handleResponse2,this::handleError),
+                networkUtils.getRetrofit().GET_CATEGORY()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(this::handleResponse3,this::handleError)
+                );
     }
 
 
@@ -134,6 +132,22 @@ public class HomePageFragment extends Fragment {
         rates.setLayoutManager(LinearLayout);
         rates.setAdapter(ratesAdapter);
 
+    }
+
+    private void handleResponse3(List<Category> response) {
+
+        List<Category> categoryList=new ArrayList<>();
+        categoryList.add(new Category("CLEAR GLASS",R.drawable.clearglass));
+        categoryList.add(new Category("REFLECTIVE GLASS",R.drawable.reflectiveglass));
+        categoryList.add(new Category("TINTED GLASS",R.drawable.tintedglass));
+        categoryList.add(new Category("HIGH REFLECTIVE GLASS",R.drawable.highreflectiveglass));
+        categoryList.add(new Category("LACQUERED GLASS",R.drawable.laqueredglass));
+        categoryList.add(new Category("MIRROR",R.drawable.mirror));
+
+        categoryAdapter=new CategoryAdapter(categoryList,getActivity(),response);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2,LinearLayoutManager.HORIZONTAL,false);
+        category.setLayoutManager(gridLayoutManager);
+        category.setAdapter(categoryAdapter);
     }
 
     private void handleResponse2(Response<List<Banners>> response) {

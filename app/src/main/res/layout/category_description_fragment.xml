@@ -72,6 +72,7 @@
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/thickness"
         style="@style/Widget.Design.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,6 +107,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/width"
             style="@style/Widget.Design.TextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -136,6 +138,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/height"
             style="@style/Widget.Design.TextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -168,6 +171,7 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/quantity"
         style="@style/Widget.Design.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

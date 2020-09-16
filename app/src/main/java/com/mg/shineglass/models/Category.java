@@ -1,10 +1,15 @@
 package com.mg.shineglass.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Category {
-    String category;
-    List<String> subcategoryList;
+    String name;
+
+    @SerializedName("subcategory")
+    List<String> subcategory;
+
     int resourceID;
 
     Category(){
@@ -13,7 +18,7 @@ public class Category {
 
     public Category(String category, int resourceID)
     {
-        this.category=category;
+        this.name=category;
         this.resourceID=resourceID;
     }
 
@@ -23,18 +28,18 @@ public class Category {
     }
 
     public String getCategory() {
-        return category;
+        return name;
     }
 
     public void setCategory(String category) {
-        this.category = category;
+        this.name = category;
     }
 
     public List<String> getSubcategoryList() {
-        return subcategoryList;
+        return subcategory;
     }
 
     public void setSubcategoryList(List<String> subcategoryList) {
-        this.subcategoryList = subcategoryList;
+        this.subcategory = subcategoryList;
     }
 }

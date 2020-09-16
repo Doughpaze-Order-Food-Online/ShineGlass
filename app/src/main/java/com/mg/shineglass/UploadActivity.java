@@ -5,12 +5,14 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +37,7 @@ import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.Qoutation;
 import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.constants;
 
 import java.io.File;
 import java.io.IOException;
@@ -77,15 +80,30 @@ public class UploadActivity extends Activity implements deleteFile {
         cancel.setOnClickListener(view->finish());
         request.setOnClickListener(view-> {
 
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-                return;
+            SharedPreferences sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(this);
+
+            if(sharedPreferences.getString("token", null) == null)
+            {
+                Toast.makeText(UploadActivity.this, "Login To Request Quotation", Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(UploadActivity.this,LoginSignUpActivity.class);
+                startActivity(i);
+                finish();
             }
-            mLastClickTime = SystemClock.elapsedRealtime();
-            try {
-                SEND_REQUEST();
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
+            else
+            {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                try {
+                    SEND_REQUEST();
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
             }
+
+
         });
 
         fileItem=findViewById(R.id.file_container);
@@ -194,6 +212,10 @@ public class UploadActivity extends Activity implements deleteFile {
     @Override
     public void remove(int i) {
         arrayList.remove(i);
+        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove);
+        LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
+        fileItem.setLayoutManager(LinearLayout);
+        fileItem.setAdapter(fileUploadAdapter);
     }
 
     @NonNull
@@ -242,7 +264,10 @@ public class UploadActivity extends Activity implements deleteFile {
         }
 
         List<Qoutation> list=new ArrayList<>();
-        mSubscriptions.add(networkUtils.getRetrofit().REQUEST_QUOTATION(files,list)
+
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null)).REQUEST_QUOTATION(files,list,sharedPreferences.getString(constants.PHONE, null))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));

@@ -31,7 +31,7 @@ public interface retro_interface {
     Observable<Response<List<Rates>>> GET_RATES();
 
     @GET("category")
-    Observable<Response<Category>> GET_CATEGORY();
+    Observable<List<Category>> GET_CATEGORY();
 
     @GET("banner")
     Observable<Response<List<Banners>>> GET_IMAGES();
@@ -64,7 +64,7 @@ public interface retro_interface {
 
     @Multipart
     @POST("quotation")
-    Observable<Response<LoginResponse>> REQUEST_QUOTATION(@Part List<MultipartBody.Part> files,@Part("quotation") List<Qoutation> quotation);
+    Observable<Response<LoginResponse>> REQUEST_QUOTATION(@Part List<MultipartBody.Part> files,@Part("quotation") List<Qoutation> quotation,@Query("mobile") String mobile);
 
 
 }
