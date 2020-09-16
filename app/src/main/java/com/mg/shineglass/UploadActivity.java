@@ -1,6 +1,7 @@
 package com.mg.shineglass;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -50,7 +51,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class UploadActivity extends AppCompatActivity implements deleteFile {
+public class UploadActivity extends Activity implements deleteFile {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
     private FrameLayout upload;
@@ -58,6 +59,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     ArrayList<String> files = new ArrayList<>();
     private RecyclerView fileItem;
     private CompositeSubscription mSubscriptions;
+    private ActionBar actionBar;
     private RelativeLayout cancel,request;
     private long mLastClickTime = 0;
 
@@ -66,7 +68,6 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_pop_activity);
-
         upload = findViewById(R.id.choose_file_block1);
         fileItem = findViewById(R.id.file_container);
         mSubscriptions = new CompositeSubscription();

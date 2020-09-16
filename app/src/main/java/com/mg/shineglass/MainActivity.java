@@ -21,7 +21,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         mBottomNavigationView=findViewById(R.id.bottom_nav_menu);
         mBottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+        mBottomNavigationView.setSelectedItemId(R.id.home_icon);
         getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, new HomePageFragment()).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mBottomNavigationView.getSelectedItemId()!=R.id.home_icon){
+            mBottomNavigationView.setSelectedItemId(R.id.home_icon);
+            getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, new HomePageFragment()).commit();
+        }
+        else{
+            finishAffinity();
+        }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        mBottomNavigationView.setSelectedItemId(R.id.home_icon);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener=new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -49,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     {
                         Intent i=new Intent(MainActivity.this,LoginSignUpActivity.class);
                         startActivity(i);
-                        finish();
+//                        finish();
                     }
                     else
                     {
