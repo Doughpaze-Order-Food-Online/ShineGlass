@@ -6,7 +6,11 @@ import com.google.gson.annotations.SerializedName;
 public class BasicResponse {
 
     @SerializedName("message")
-    private String message,otp;
+    private String message;
+
+    @SerializedName("otp")
+    private String otp;
+
 
 
     public String getMessage() {

@@ -15,6 +15,9 @@ public class LoginResponse {
     @SerializedName("otp")
     String otp;
 
+    @SerializedName("type")
+    String type;
+
 
     public User getUser() {
         return user;
@@ -38,6 +41,10 @@ public class LoginResponse {
 
     public void setOtp(String otp) {
         this.otp = otp;
+    }
+
+    public String getType() {
+        return type;
     }
 }
 

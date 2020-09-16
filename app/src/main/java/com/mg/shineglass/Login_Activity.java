@@ -125,7 +125,7 @@ public class Login_Activity extends Activity {
         editor.putString("type","local");
         editor.putString(constants.TOKEN,response.headers().get("jwt"));
         editor.putString(constants.EMAIL,response.body().getUser().getUsername());
-        editor.putString(constants.NAME,response.body().getUser().getUsername());
+        editor.putString(constants.USERNAME,response.body().getUser().getUsername());
         editor.putString(constants.PHONE,response.body().getUser().getMobile());
         editor.apply();
 

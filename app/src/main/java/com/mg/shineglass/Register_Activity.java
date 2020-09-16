@@ -8,17 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import com.mg.shineglass.OTP_Acitvities.Register_OTP_Activity;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
 
 import java.util.Objects;
 
+import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -38,6 +41,7 @@ public class Register_Activity extends Activity {
     private EditText username_EditText,
             email_EditText,mobile_EditText,
             password_EditText,rpassword_EditText;
+    private TextView timer;
 
     private CompositeSubscription mSubscriptions;
     private User user;
@@ -47,11 +51,12 @@ public class Register_Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account_activity);
-
         initViews();
     }
 
     private void initViews() {
+
+        mSubscriptions = new CompositeSubscription();
 
         username_Layout= findViewById(R.id.user_name);
         email_Layout=findViewById(R.id.user_email);
@@ -68,6 +73,8 @@ public class Register_Activity extends Activity {
 
         register=findViewById(R.id.signUp_btn);
         register.setOnClickListener(view->Register());
+
+
 
 
     }
@@ -107,7 +114,7 @@ public class Register_Activity extends Activity {
         else if(!VALIDATE_PASSWORD(password))
         {
             err++;
-            password_Layout.setError("Password should have atleast:\n 6 characters \n 1 uppercase\n1 special character \n 1 number");
+            password_Layout.setError("Password should have atleast:\n6 characters \n1 uppercase\n1 special character \n1 number");
         }
 
         if (!validateFields(password2)) {
@@ -140,7 +147,7 @@ public class Register_Activity extends Activity {
 
 
         if (err==0) {
-            user = new User(username,email,password,password2);
+            user = new User(username,email,password,mobile_no);
             SEND_OTP(user);
 
         } else {
@@ -152,23 +159,24 @@ public class Register_Activity extends Activity {
 
     private void SEND_OTP(User u) {
 
-        mSubscriptions.add(networkUtils.getRetrofit().REGISTER_OTP(u)
+        mSubscriptions.add(
+                networkUtils.getRetrofit().REGISTER_OTP(u)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
     }
 
-    private void handleResponse(BasicResponse response) {
+    private void handleResponse(Response<BasicResponse> response) {
 
 
         Toast.makeText(this, "One Time Password Sent Your Mobile Number!", Toast.LENGTH_SHORT).show();
 
-        GoToOtp(response.getOtp(),user);
+        GoToOtp(response.body().getOtp(),user);
     }
 
     private void handleError(Throwable error) {
 
-
+        Log.e("error",error.toString());
 
         if (error instanceof HttpException) {
 
@@ -196,14 +204,15 @@ public class Register_Activity extends Activity {
 
     private void GoToOtp(String otp,User user){
 
-        Intent intent = new Intent(Register_Activity.this, Enter_Otp_Activity.class);
+        Intent intent = new Intent(Register_Activity.this, Register_OTP_Activity.class);
         intent.putExtra("type","local");
         intent.putExtra("otp",otp);
         intent.putExtra("name", user.getUsername());
         intent.putExtra("phone", user.getMobile());
-        intent.putExtra("password", Objects.requireNonNull(password_EditText.getText()).toString());
+        intent.putExtra("password", user.getPassword());
         intent.putExtra("email", user.getEmail());
         startActivity(intent);
+        finish();
 
     }
 

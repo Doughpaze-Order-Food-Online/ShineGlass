@@ -37,10 +37,10 @@ public interface retro_interface {
     Observable<Response<List<Banners>>> GET_IMAGES();
 
     @POST("auth/register")
-    Observable<BasicResponse> REGISTER(@Body User user);
+    Observable<Response<LoginResponse>> REGISTER(@Body User user);
 
     @POST("auth/register_otp")
-    Observable<BasicResponse> REGISTER_OTP(@Body User user);
+    Observable<Response<BasicResponse>> REGISTER_OTP(@Body User user);
 
     @POST("auth/login")
     Observable<Response<LoginResponse>> LOGIN(@Body User user);

@@ -9,8 +9,8 @@ public class constants {
 
     public static final String TOKEN = "token";
     public static final String EMAIL= "email";
-    public static final String NAME= "name";
-    public static final String DOB= "dob";
+    public static final String USERNAME= "username";
+    public static final String TYPE= "type";
     public static final String PHONE= "mobile_no";
 
 

@@ -28,7 +28,7 @@
         <activity android:name=".Login_Activity" android:screenOrientation="portrait"/>
         <activity android:name=".Register_Activity" android:screenOrientation="portrait"/>
         <activity android:name=".Otp_Login_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".Enter_Otp_Activity" android:screenOrientation="portrait" />
+        <activity android:name=".OTP_Acitvities.Register_OTP_Activity" android:screenOrientation="portrait" />
         <activity android:name=".UploadActivity" android:screenOrientation="portrait"
             android:theme="@style/Theme_Dialog"/>
         <activity android:name=".Subcategory_Activity" android:screenOrientation="portrait"/>
