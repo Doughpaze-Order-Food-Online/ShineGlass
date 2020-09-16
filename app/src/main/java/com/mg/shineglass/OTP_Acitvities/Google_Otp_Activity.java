@@ -1,6 +1,5 @@
 package com.mg.shineglass.OTP_Acitvities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.mg.shineglass.MainActivity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.BasicResponse;
@@ -28,18 +25,16 @@ import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.constants;
 
-import java.io.IOException;
-
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class Register_OTP_Activity extends AppCompatActivity {
+public class Google_Otp_Activity extends AppCompatActivity {
 
     private User user;
-    private String otp,type;
+    private String otp,type,token;
     private EditText E1;
     private EditText E2;
     private EditText E3;
@@ -62,6 +57,7 @@ public class Register_OTP_Activity extends AppCompatActivity {
                 intent.getStringExtra("phone"));
         type=intent.getStringExtra("type");
         otp=intent.getStringExtra("otp");
+        token=intent.getStringExtra("token");
 
 
 
@@ -76,71 +72,66 @@ public class Register_OTP_Activity extends AppCompatActivity {
         Resend_block=findViewById(R.id.resend_otp_block);
         resend=findViewById(R.id.signup_txt);
 
-        button.setOnClickListener(view -> register());
-        resend.setOnClickListener(view->SEND_OTP(user));
+        button.setOnClickListener(view -> NUMBER_LOGIN());
+        resend.setOnClickListener(view->RESEND_OTP(user));
 
         CountDownTime();
     }
 
-    private void register() {
+    private void NUMBER_LOGIN() {
 
         String enteredOtp = E1.getText().toString() + E2.getText().toString() + E3.getText().toString() + E4.getText().toString();
+        if(enteredOtp.equals(otp))
+        {
+            Toast.makeText(Google_Otp_Activity.this, "Login success!", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(this);
 
-        if (enteredOtp.equals(otp)) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(constants.TOKEN,token);
+            editor.putString(constants.EMAIL,user.getEmail());
+            editor.putString(constants.USERNAME,user.getUsername());
+            editor.putString(constants.PHONE,user.getMobile());
+            editor.putString(constants.TYPE,type);
+            editor.apply();
 
-            RegisterUser(user);
-        } else {
+            SAVE_NUMBER();
+
+
+        }
+        else
+        {
             showSnackBarMessage("Enter Valid Otp");
             //textView.setVisibility(View.VISIBLE);
-
         }
     }
 
+    private void SAVE_NUMBER() {
+        mSubscriptions.add(networkUtils.getRetrofit().GOOGLE_FACEBOOK_OTP(user)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse2,this::handleError));
 
-        private View getRootView() {
-            final ViewGroup contentViewGroup = (ViewGroup) findViewById(android.R.id.content);
-            View rootView = null;
+    }
 
-            if(contentViewGroup != null)
-                rootView = contentViewGroup.getChildAt(0);
-
-            if(rootView == null)
-                rootView = getWindow().getDecorView().getRootView();
-
-            return rootView;
-        }
-
-        private void showSnackBarMessage(String message) {
-            Snackbar.make(getRootView(),message,Snackbar.LENGTH_LONG).show();
-
-        }
-
-
-    private void RegisterUser(User user) {
-
-        mSubscriptions.add(networkUtils.getRetrofit().REGISTER(user)
+    private void RESEND_OTP(User user)
+    {
+        mSubscriptions.add(networkUtils.getRetrofit().GOOGLE_FACEBOOK_OTP(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
     }
 
+    private void handleResponse2(LoginResponse response) {
+
+        goToHome();
+
+    }
+
     private void handleResponse(LoginResponse response) {
 
-
-        Toast.makeText(Register_OTP_Activity.this, "SignUp success!", Toast.LENGTH_SHORT).show();
-        showSnackBarMessage(response.getMessage());
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(this);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("type","local");
-        editor.putString(constants.TOKEN,response.getToken());
-        editor.putString(constants.EMAIL,response.getUser().getEmail());
-        editor.putString(constants.USERNAME,response.getUser().getUsername());
-        editor.putString(constants.PHONE,response.getUser().getMobile());
-        editor.putString(constants.TYPE,response.getType());
-        editor.apply();
-        goToHome();
+        otp=response.getOtp();
+        token=response.getToken();
 
     }
 
@@ -150,29 +141,46 @@ public class Register_OTP_Activity extends AppCompatActivity {
 
         if (error instanceof HttpException) {
 
-            Gson gson = new GsonBuilder().create();
+            Gson gson = new Gson();
 
             try {
 
                 String errorBody = ((HttpException) error).response().errorBody().string();
-                Response response = gson.fromJson(errorBody,Response.class);
-                showSnackBarMessage(response.message());
+                Response<BasicResponse> response = gson.fromJson(errorBody,Response.class);
+                assert response.body() != null;
+                showSnackBarMessage(response.body().getMessage());
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            Log.e("error", error.toString());
-            showSnackBarMessage(error.toString());
+            Log.e("error",error.toString());
+            showSnackBarMessage( "Network Error !");
+
         }
     }
 
+    private void showSnackBarMessage(String message) {
+        Snackbar.make(getRootView(),message,Snackbar.LENGTH_SHORT).show();
 
-    private void goToHome() {
-        Intent intent = new Intent(Register_OTP_Activity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
+
+    private View getRootView() {
+        final ViewGroup contentViewGroup = (ViewGroup) findViewById(android.R.id.content);
+        View rootView = null;
+
+        if(contentViewGroup != null)
+            rootView = contentViewGroup.getChildAt(0);
+
+        if(rootView == null)
+            rootView = getWindow().getDecorView().getRootView();
+
+        return rootView;
+    }
+
+
+
+
 
     private void CountDownTime(){
 
@@ -193,23 +201,9 @@ public class Register_OTP_Activity extends AppCompatActivity {
         }.start();
     }
 
-
-    private void SEND_OTP(User u) {
-
-        mSubscriptions.add(
-                networkUtils.getRetrofit().REGISTER_OTP(u)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(this::handleResponse2,this::handleError));
-    }
-
-    private void handleResponse2(BasicResponse response) {
-
-
-        Toast.makeText(this, "One Time Password Sent Your Mobile Number!", Toast.LENGTH_SHORT).show();
-        otp=response.getOtp();
-
-
+    private void goToHome() {
+        Intent intent = new Intent(Google_Otp_Activity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
-

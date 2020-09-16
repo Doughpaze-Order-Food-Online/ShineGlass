@@ -90,4 +90,11 @@
     <string name="_1400">1400</string>
     <string name="sec">sec</string>
     <string name="_59">59</string>
+    <string name="server_client_id">286211114529-qha8kqgt2n8csalvtv7mvdo875li44bu.apps.googleusercontent.com</string>
+    <string name="secret_key">R8p8_xOK398lvYv00t8m5xSY</string>
+    <string name="api_key">AIzaSyBbkyU3NIHJV2HiMQXAh40FeO0XFsRkAZM</string>
+
+    //facebook api
+    <string name="facebook_app_id">611652142750083</string>
+    <string name="fb_login_protocol_scheme">fb611652142750083</string>
 </resources>

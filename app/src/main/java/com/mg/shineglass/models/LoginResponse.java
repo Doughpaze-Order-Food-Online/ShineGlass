@@ -9,8 +9,8 @@ public class LoginResponse {
     @SerializedName("message")
     String message;
 
-    @SerializedName("jwt")
-    String jwt;
+    @SerializedName("token")
+    String token;
 
     @SerializedName("otp")
     String otp;
@@ -45,6 +45,10 @@ public class LoginResponse {
 
     public String getType() {
         return type;
+    }
+
+    public String getToken() {
+        return token;
     }
 }
 

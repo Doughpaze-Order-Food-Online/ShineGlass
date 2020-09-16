@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -32,7 +35,7 @@ import rx.subscriptions.CompositeSubscription;
 
 import static com.mg.shineglass.utils.validation.validateFields;
 
-public class Login_Activity extends Activity {
+public class Login_Activity extends AppCompatActivity {
 
 
    private TextInputLayout userfield_Layout, password_Layout;
@@ -115,18 +118,18 @@ public class Login_Activity extends Activity {
 
     }
 
-    private void handleResponse(Response<LoginResponse> response) {
+    private void handleResponse(LoginResponse response) {
 
 
-        assert response.body() != null;
-        Toast.makeText(Login_Activity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(Login_Activity.this, response.getMessage(), Toast.LENGTH_SHORT).show();
 
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString("type","local");
-        editor.putString(constants.TOKEN,response.headers().get("jwt"));
-        editor.putString(constants.EMAIL,response.body().getUser().getUsername());
-        editor.putString(constants.USERNAME,response.body().getUser().getUsername());
-        editor.putString(constants.PHONE,response.body().getUser().getMobile());
+        editor.putString(constants.TOKEN,response.getToken());
+        editor.putString(constants.EMAIL,response.getUser().getEmail());
+        editor.putString(constants.USERNAME,response.getUser().getUsername());
+        editor.putString(constants.PHONE,response.getUser().getMobile());
         editor.apply();
 
         userfield_EditText.setText(null);
@@ -149,9 +152,8 @@ public class Login_Activity extends Activity {
             try {
 
                 String errorBody = ((HttpException) error).response().errorBody().string();
-                Response<BasicResponse> response = gson.fromJson(errorBody,Response.class);
-                assert response.body() != null;
-                showSnackBarMessage(response.body().getMessage());
+                BasicResponse response = gson.fromJson(errorBody,BasicResponse.class);
+                showSnackBarMessage(response.getMessage());
 
             } catch (IOException e) {
                 e.printStackTrace();

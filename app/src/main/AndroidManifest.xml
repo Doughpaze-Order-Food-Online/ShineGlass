@@ -29,9 +29,22 @@
         <activity android:name=".Register_Activity" android:screenOrientation="portrait"/>
         <activity android:name=".Otp_Login_Activity" android:screenOrientation="portrait"/>
         <activity android:name=".OTP_Acitvities.Register_OTP_Activity" android:screenOrientation="portrait" />
+        <activity android:name=".OTP_Acitvities.Number_OTP_Activity" android:screenOrientation="portrait" />
+        <activity android:name=".OTP_Acitvities.Google_Otp_Activity" android:screenOrientation="portrait" />
+        <activity android:name=".Google_Enter_Number" android:screenOrientation="portrait" />
         <activity android:name=".UploadActivity" android:screenOrientation="portrait"
             android:theme="@style/Theme_Dialog"/>
         <activity android:name=".Subcategory_Activity" android:screenOrientation="portrait"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBbkyU3NIHJV2HiMQXAh40FeO0XFsRkAZM" />
 
 
 

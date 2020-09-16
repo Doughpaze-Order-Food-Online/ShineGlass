@@ -37,17 +37,30 @@ public interface retro_interface {
     Observable<Response<List<Banners>>> GET_IMAGES();
 
     @POST("auth/register")
-    Observable<Response<LoginResponse>> REGISTER(@Body User user);
+    Observable<LoginResponse> REGISTER(@Body User user);
 
     @POST("auth/register_otp")
-    Observable<Response<BasicResponse>> REGISTER_OTP(@Body User user);
+    Observable<BasicResponse> REGISTER_OTP(@Body User user);
 
     @POST("auth/login")
-    Observable<Response<LoginResponse>> LOGIN(@Body User user);
+    Observable<LoginResponse> LOGIN(@Body User user);
+
+
+    @POST("auth/google")
+    Observable<LoginResponse> GOOGLE_LOGIN(@Body User user);
+
+    @POST("auth/facebook")
+    Observable<LoginResponse> FACEBOOK_LOGIN(@Body User user);
+
+    @POST("auth/google_otp")
+    Observable<LoginResponse> GOOGLE_FACEBOOK_OTP(@Body User user);
+
+    @POST("auth/number_save")
+    Observable<LoginResponse> NUMBER_SAVE(@Body User user);
 
 
     @POST("auth/number_login")
-    Observable<Response<LoginResponse>> NUMBER_LOGIN(@Body User user);
+    Observable<LoginResponse> NUMBER_LOGIN(@Body User user);
 
     @Multipart
     @POST("quotation")

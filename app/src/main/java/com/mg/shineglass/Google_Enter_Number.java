@@ -1,6 +1,5 @@
 package com.mg.shineglass;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
-import com.mg.shineglass.OTP_Acitvities.Number_OTP_Activity;
+import com.mg.shineglass.OTP_Acitvities.Google_Otp_Activity;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
@@ -31,26 +30,32 @@ import rx.subscriptions.CompositeSubscription;
 import static com.mg.shineglass.utils.validation.validateFields;
 import static com.mg.shineglass.utils.validation.validatePhone;
 
-public class Otp_Login_Activity extends AppCompatActivity {
+public class Google_Enter_Number extends AppCompatActivity {
     TextInputLayout mobile_Layout;
     EditText mobile_EditText;
     private CompositeSubscription mSubscriptions;
     private User user;
     private RelativeLayout button;
+    private String token,type,email,Number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_with_otp_activity);
+
+        Intent i=getIntent();
+        token=i.getStringExtra("token");
+        type=i.getStringExtra("type");
+        email=i.getStringExtra("email");
         mobile_EditText = findViewById(R.id.user_email_mobile_input_txt);
         mobile_Layout = findViewById(R.id.user_email_mobile);
         mSubscriptions = new CompositeSubscription();
         button = findViewById(R.id.send_otp_btn);
 
-        button.setOnClickListener(view -> NUMBER_LOGIN());
+        button.setOnClickListener(view -> SEND_OTP());
     }
 
-    private void NUMBER_LOGIN() {
+    private void SEND_OTP() {
         setError();
 
         String number = Objects.requireNonNull(mobile_EditText.getText()).toString();
@@ -72,9 +77,14 @@ public class Otp_Login_Activity extends AppCompatActivity {
         }
 
         if (err == 0) {
+            Number=number;
             user = new User(number);
+            user.setEmail(email);
 
-            SEND_OTP(user);
+            mSubscriptions.add(networkUtils.getRetrofit().GOOGLE_FACEBOOK_OTP(user)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::handleResponse,this::handleError));
 
         } else {
             showSnackBarMessage("Enter Valid Details !");
@@ -83,18 +93,12 @@ public class Otp_Login_Activity extends AppCompatActivity {
 
     }
 
-    private void SEND_OTP(User user)
-    {
-        mSubscriptions.add(networkUtils.getRetrofit().NUMBER_LOGIN(user)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse,this::handleError));
-    }
+
 
     private void handleResponse(LoginResponse response) {
 
 
-        GoToOtp(response.getOtp(),response.getUser(),response.getToken());
+        GoToOtp(response.getOtp(),response.getUser(),token);
     }
 
     private void handleError(Throwable error) {
@@ -124,11 +128,11 @@ public class Otp_Login_Activity extends AppCompatActivity {
 
     private void GoToOtp(String otp,User user,String token){
 
-        Intent intent = new Intent(Otp_Login_Activity.this, Number_OTP_Activity.class);
-        intent.putExtra("type","number");
+        Intent intent = new Intent(Google_Enter_Number.this, Google_Otp_Activity.class);
+        intent.putExtra("type",type);
         intent.putExtra("otp",otp);
         intent.putExtra("token", token);
-        intent.putExtra("phone", user.getMobile());
+        intent.putExtra("phone", Number);
         intent.putExtra("email", user.getEmail());
         intent.putExtra("name", user.getUsername());
         startActivity(intent);
@@ -163,3 +167,4 @@ public class Otp_Login_Activity extends AppCompatActivity {
 
 
 }
+

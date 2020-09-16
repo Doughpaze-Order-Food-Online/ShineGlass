@@ -14,11 +14,14 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mg.shineglass.OTP_Acitvities.Register_OTP_Activity;
 import com.mg.shineglass.models.BasicResponse;
+import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
 
+import java.io.IOException;
 import java.util.Objects;
 
 import retrofit2.Response;
@@ -166,38 +169,36 @@ public class Register_Activity extends Activity {
                 .subscribe(this::handleResponse,this::handleError));
     }
 
-    private void handleResponse(Response<BasicResponse> response) {
+    private void handleResponse(BasicResponse response) {
 
 
-        Toast.makeText(this, "One Time Password Sent Your Mobile Number!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
 
-        GoToOtp(response.body().getOtp(),user);
+        GoToOtp(response.getOtp(),user);
     }
 
     private void handleError(Throwable error) {
 
-        Log.e("error",error.toString());
+
 
         if (error instanceof HttpException) {
 
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().create();
 
             try {
 
-                assert ((HttpException) error).response().errorBody() != null;
                 String errorBody = ((HttpException) error).response().errorBody().string();
                 BasicResponse response = gson.fromJson(errorBody,BasicResponse.class);
                 showSnackBarMessage(response.getMessage());
 
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            Log.e("error",error.toString());
+
             showSnackBarMessage("Network Error !");
         }
     }
-
 
 
 
