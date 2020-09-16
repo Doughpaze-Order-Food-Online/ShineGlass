@@ -25,7 +25,7 @@
     <string name="get_otp">get otp</string>
     <string name="didn_t_received_otp">Didn\'t received OTP?</string>
     <string name="resend">Resend</string>
-    <string name="enter_otp_in_59_sec">Enter OTP in 59 sec</string>
+    <string name="enter_otp_in_59_sec">Enter OTP in</string>
     <string name="rupey">₹</string>
     <string name="my_wallet">my wallet</string>
     <string name="today_s_rate">today\'s rate</string>
@@ -88,4 +88,6 @@
     <string name="place_order">place order</string>
     <string name="total">total-</string>
     <string name="_1400">1400</string>
+    <string name="sec">sec</string>
+    <string name="_59">59</string>
 </resources>
