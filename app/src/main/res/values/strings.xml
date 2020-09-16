@@ -91,4 +91,9 @@
     <string name="sec">sec</string>
     <string name="_59">59</string>
     <string name="invalid_otp">Invalid OTP</string>
+    <string name="change_password">change password</string>
+    <string name="enter_your_old_password">ENTER YOUR OLD PASSWORD</string>
+    <string name="new_password">NEW PASSWORD</string>
+    <string name="re_enter_new_password">RE ENTER NEW PASSWORD</string>
+    <string name="change">change</string>
 </resources>
