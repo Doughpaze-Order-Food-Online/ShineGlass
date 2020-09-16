@@ -39,8 +39,8 @@ public class Otp_Login_Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_with_otp_activity);
-        mobile_EditText = findViewById(R.id.user_mobile_input_txt);
-        mobile_Layout = findViewById(R.id.user_mobile);
+        mobile_EditText = findViewById(R.id.user_email_mobile_input_txt);
+        mobile_Layout = findViewById(R.id.user_email_mobile);
         mSubscriptions = new CompositeSubscription();
         button = findViewById(R.id.send_otp_btn);
 

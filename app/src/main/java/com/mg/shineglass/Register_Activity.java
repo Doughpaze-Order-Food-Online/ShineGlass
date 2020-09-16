@@ -63,7 +63,7 @@ public class Register_Activity extends Activity {
         username_EditText=findViewById(R.id.user_name_input_txt);
         email_EditText=findViewById(R.id.user_email_input_txt);
         password_EditText=findViewById(R.id.password_input_txt);
-        mobile_EditText=findViewById(R.id.user_email_mobile_input_txt);
+        mobile_EditText=findViewById(R.id.user_mobile_input_txt);
         rpassword_EditText=findViewById(R.id.re_password_input_txt);
 
         register=findViewById(R.id.signUp_btn);
@@ -107,7 +107,7 @@ public class Register_Activity extends Activity {
         else if(!VALIDATE_PASSWORD(password))
         {
             err++;
-            password_Layout.setError("Password should have atleast 6 characters with 1 uppercase, 1 special character and 1 number");
+            password_Layout.setError("Password should have atleast:\n 6 characters \n 1 uppercase\n1 special character \n 1 number");
         }
 
         if (!validateFields(password2)) {
@@ -139,7 +139,7 @@ public class Register_Activity extends Activity {
         }
 
 
-        if (err == 0) {
+        if (err==0) {
             user = new User(username,email,password,password2);
             SEND_OTP(user);
 

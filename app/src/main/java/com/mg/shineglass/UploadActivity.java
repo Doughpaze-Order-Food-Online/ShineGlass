@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,7 @@ public class UploadActivity extends Activity implements deleteFile {
     private RecyclerView fileItem;
     private CompositeSubscription mSubscriptions;
     private RelativeLayout cancel,request;
+    private long mLastClickTime = 0;
 
 
     @Override
@@ -72,6 +74,11 @@ public class UploadActivity extends Activity implements deleteFile {
 
         cancel.setOnClickListener(view->finish());
         request.setOnClickListener(view-> {
+
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             try {
                 SEND_REQUEST();
             } catch (URISyntaxException e) {
@@ -196,14 +203,24 @@ public class UploadActivity extends Activity implements deleteFile {
     private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) throws URISyntaxException {
         // use the FileUtils to get the actual file by uri
         String filePath=FileUtils.getPath(this,fileUri);
+        String filetype;
         assert filePath != null;
         File file = new File(filePath);
+
+        if(filePath.substring(filePath.lastIndexOf(".")).equals(".pdf"))
+        {
+            filetype="application/pdf";
+        }
+        else
+        {
+            filetype="image/"+filePath.substring(filePath.lastIndexOf("."));
+        }
 
 
        
 
         // create RequestBody instance from file
-        RequestBody requestFile = RequestBody.create(MediaType.parse("*/*"), file);
+        RequestBody requestFile = RequestBody.create(MediaType.parse(filetype), file);
 
         // MultipartBody.Part is used to send also the actual file name
         return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);

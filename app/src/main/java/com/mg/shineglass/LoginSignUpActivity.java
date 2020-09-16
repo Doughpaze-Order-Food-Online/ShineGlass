@@ -11,14 +11,16 @@ import android.widget.TextView;
 
 public class LoginSignUpActivity extends AppCompatActivity {
 
-    RelativeLayout login = findViewById(R.id.login_btn);
-    Button otp_login = findViewById(R.id.login_with_otp_btn);
-    TextView sign_up = findViewById(R.id.signup_txt);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_signup_activity);
+
+        RelativeLayout login = findViewById(R.id.login_btn);
+        Button otp_login = findViewById(R.id.login_with_otp_btn);
+        TextView sign_up = findViewById(R.id.signup_txt);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

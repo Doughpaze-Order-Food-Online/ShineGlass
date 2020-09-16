@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,20 +31,37 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.home_icon:
                     fragment=new HomePageFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
                     break;
                 case R.id.request_icon:
                     fragment=new MyRequestsFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
                     break;
                 case R.id.myOrders_icon:
                     fragment=new MyOrdersFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
                     break;
                 case R.id.my_account_icon:
-                    fragment=new MyAccountFragment();
+                    SharedPreferences sharedPreferences = PreferenceManager
+                            .getDefaultSharedPreferences(MainActivity.this);
+
+                    if(sharedPreferences.getString("token", null) == null)
+                    {
+                        Intent i=new Intent(MainActivity.this,LoginSignUpActivity.class);
+                        startActivity(i);
+                    }
+                    else
+                    {
+                        fragment=new MyAccountFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
+                    }
+
                     break;
             }
-            assert fragment != null;
-            getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
+
             return true;
         }
     };
+
+
 }
