@@ -215,6 +215,15 @@
 
     </FrameLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/description_uploaded_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        tools:itemCount="4"/>
+
     <RelativeLayout
         android:id="@+id/request_quotation_btn"
         android:layout_width="208dp"
