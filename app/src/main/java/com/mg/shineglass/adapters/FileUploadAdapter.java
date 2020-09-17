@@ -32,18 +32,20 @@ public class FileUploadAdapter extends RecyclerView.Adapter<FileUploadAdapter.Fi
     private List<Uri> list;
     private Context context;
     private deleteFile deleteFile;
+    private Boolean flag;
 
-    public FileUploadAdapter(List<Uri> list, Context context,deleteFile deleteFile) {
+    public FileUploadAdapter(List<Uri> list, Context context,deleteFile deleteFile,Boolean flag) {
         this.list=list;
         this.context=context;
         this.deleteFile=deleteFile;
+        this.flag=flag;
     }
 
 
     @NonNull
     @Override
     public FileUploadAdapter.FileUploadItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.uploaded_file_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(flag?R.layout.uploaded_cart_item:R.layout.uploaded_file_item, parent, false);
         return new FileUploadAdapter.FileUploadItemHolder(view);
     }
 

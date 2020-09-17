@@ -38,6 +38,7 @@
         android:textSize="16sp" />
 
     <RadioGroup
+        android:id="@+id/scale"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -195,6 +196,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <FrameLayout
+        android:id="@+id/upload"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginLeft="16dp"

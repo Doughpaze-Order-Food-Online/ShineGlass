@@ -77,16 +77,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                categoryItemHolder.image.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
-                       Bundle bundle=new Bundle();
+                      Intent i=new Intent(categoryItemHolder.itemView.getContext(),Subcategory_Activity.class);
                        Gson gson=new Gson();
                        String subcategory= gson.toJson(sub);
-                       bundle.putString("subcategory",subcategory);
-                       bundle.putString("category",category.getCategory());
-                       Fragment fragment=new Subcategory_Activity();
-                       fragment.setArguments(bundle);
-                       MainActivity mainActivity=(MainActivity)context;
-                       mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
-
+                       i.putExtra("subcategory",subcategory);
+                       i.putExtra("category",category.getCategory());
+                       categoryItemHolder.itemView.getContext().startActivity(i);
                    }
                });
            }
@@ -95,14 +91,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                categoryItemHolder.image.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
-                       Bundle bundle=new Bundle();
-                       bundle.putString("subcategory",null);
-                       bundle.putString("category",category.getCategory());
-                       Fragment fragment=new NewRequestActivity();
-                       fragment.setArguments(bundle);
-                       MainActivity mainActivity=(MainActivity)context;
-                       mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
 
+                       Intent i=new Intent(categoryItemHolder.itemView.getContext(),NewRequestActivity.class);
+                       i.putExtra("category",category.getCategory());
+                       categoryItemHolder.itemView.getContext().startActivity(i);
                    }
                });
            }
@@ -112,14 +104,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             categoryItemHolder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Bundle bundle=new Bundle();
-                    bundle.putString("subcategory",null);
-                    bundle.putString("category",category.getCategory());
-                    Fragment fragment=new NewRequestActivity();
-                    fragment.setArguments(bundle);
-                    MainActivity mainActivity=(MainActivity)context;
-                    mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
-
+                    Intent i=new Intent(categoryItemHolder.itemView.getContext(),NewRequestActivity.class);
+                    i.putExtra("category",category.getCategory());
+                    categoryItemHolder.itemView.getContext().startActivity(i);
                 }
             });
         }

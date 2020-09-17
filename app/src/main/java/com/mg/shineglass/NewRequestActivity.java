@@ -1,67 +1,376 @@
 package com.mg.shineglass;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.fragment.app.Fragment;
+import android.widget.Toast;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mg.shineglass.Interface.deleteFile;
+import com.mg.shineglass.adapters.FileUploadAdapter;
+import com.mg.shineglass.models.Quotation;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-public class NewRequestActivity  extends Fragment {
-    private String category,subcategory;
-    private TextView type;
+
+import static com.mg.shineglass.utils.validation.validateEmail;
+import static com.mg.shineglass.utils.validation.validateFields;
+
+public class NewRequestActivity  extends FragmentActivity implements deleteFile {
+    private String category, subcategory;
+    private TextView type,subtype;
     private RecyclerView rvItem;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
-    private TextInputLayout thickness,width,height,quantity;
+    private TextInputLayout thickness, width, height, quantity;
+    private RelativeLayout button;
+    private FrameLayout upload;
+    List<Uri> arrayList = new ArrayList<>();
+    final int REQUEST_EXTERNAL_STORAGE = 100;
+    private EditText Ethickness, Ewidth, Eheight, Equantity;
 
-    private EditText Ethickness,Ewidth,Eheight,Equantity;
 
-    public NewRequestActivity() {
-        // Required empty public constructor
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.category_description_fragment);
+
+        // Inflate the layout for this fragment
+        Intent i=getIntent();
+        subcategory = i.getStringExtra("subcategory") ;
+        category = i.getStringExtra("category");
+
+
+        type = findViewById(R.id.item_name_txt);
+        subtype=findViewById(R.id.type_of_glass_txt);
+        type.setText(category);
+        if (subcategory != null) {
+           subtype.setText(subcategory);
+        }
+        else
+        {
+            subtype.setText(null);
+        }
+
+
+
+        thickness = findViewById(R.id.thickness);
+        width = findViewById(R.id.width);
+        height = findViewById(R.id.height);
+        quantity = findViewById(R.id.quantity);
+        button=findViewById(R.id.request_quotation_btn);
+        upload=findViewById(R.id.upload);
+        radioGroup=findViewById(R.id.scale);
+
+
+        Ethickness = findViewById(R.id.thickness_edt);
+        Ewidth = findViewById(R.id.width_edt);
+        Eheight = findViewById(R.id.height_edt);
+        Equantity = findViewById(R.id.quantity_edt);
+        button.setOnClickListener(view -> REQUEST());
+
+        upload.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(NewRequestActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(NewRequestActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
+//                    return;
+                } else {
+                    launchGalleryIntent();
+                }
+            }
+        });
+    }
+
+
+
+    private void REQUEST() {
+        setError();
+
+
+        String Tthickness = Objects.requireNonNull( Ethickness.getText()).toString();
+        String Twidth = Objects.requireNonNull(Ewidth .getText()).toString();
+        String Theight = Objects.requireNonNull(Eheight .getText()).toString();
+        String Tquantity = Objects.requireNonNull(Equantity .getText()).toString();
+        String TScale=null;
+
+
+
+        int err = 0;
+
+        if (!validateFields(Tthickness)) {
+
+            err++;
+            thickness.setError("Thickness is required !");
+        }
+
+        if (!validateEmail(Twidth)) {
+
+            err++;
+            width.setError("Width is required !");
+        }
+
+
+        if (!validateFields(Theight)) {
+
+            err++;
+            height.setError("Height is required !");
+        }
+
+        if (!validateEmail(Tquantity)) {
+
+            err++;
+            quantity.setError("Quantity is required !");
+        }
+
+        if(validateFields(Tthickness) &&
+                validateFields(Twidth)
+                && validateFields(Theight)
+                && validateFields(Tquantity))
+        {
+            if(radioGroup.getCheckedRadioButtonId()==-1)
+            {   err++;
+                Toast.makeText(this, "Select The Scale", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+
+
+        if (err == 0) {
+
+            if(radioGroup.getCheckedRadioButtonId()==R.id.inch_radio_btn)
+            {
+                TScale="inches";
+            }
+            else
+            {
+                TScale="mm";
+            }
+
+
+            Quotation quotation =new Quotation(Tthickness,Twidth,Theight,Tquantity,TScale);
+            ADD(quotation);
+
+        } else {
+
+            showSnackBarMessage();
+        }
+    }
+
+    private void setError() {
+
+        thickness.setError(null);
+        width.setError(null);
+        height.setError(null);
+        quantity.setError(null);
+
+    }
+
+    private void ADD(Quotation quotation)
+    {
+        Gson gson=new Gson();
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+        if(sharedPreferences.getString("quotation", null)!=null)
+        {
+            List<Quotation> list=new ArrayList<>();
+            Type type=new TypeToken<List<Quotation>>(){}.getType();
+            list=gson.fromJson(sharedPreferences.getString("quotation", null),type);
+
+            list.add(quotation);
+
+            String s=gson.toJson(list);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("quotation",s);
+            editor.apply();
+        }
+        else
+        {
+           List<Quotation> list=new ArrayList<>();
+           list.add(quotation);
+            String s=gson.toJson(list);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("quotation",s);
+            editor.apply();
+        }
+
+
+        if(sharedPreferences.getString("files", null)!=null)
+        {
+            List<Uri> list=new ArrayList<>();
+            Type type=new TypeToken<List<Uri>>(){}.getType();
+            list=gson.fromJson(sharedPreferences.getString("quotation", null),type);
+
+            assert list != null;
+            list.addAll(arrayList);
+
+            String f=gson.toJson(list);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("files",f);
+            editor.apply();
+        }
+        else
+        {
+            String f=gson.toJson(arrayList);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("files",f);
+            editor.apply();
+        }
+
+
+        Toast.makeText(this, "Request Added to Queue!", Toast.LENGTH_LONG).show();
+        Eheight.setText(null);
+        Equantity.setText(null);
+        Ewidth.setText(null);
+        Ethickness.setText(null);
+    }
+
+
+    private View getRootView() {
+        final ViewGroup contentViewGroup = (ViewGroup) Objects.requireNonNull(this).findViewById(android.R.id.content);
+        View rootView = null;
+
+        if(contentViewGroup != null)
+            rootView = contentViewGroup.getChildAt(0);
+
+        if(rootView == null)
+            rootView = getWindow().getDecorView().getRootView();
+
+        return rootView;
+    }
+
+    private void showSnackBarMessage() {
+        Snackbar.make(getRootView(), "Enter All Details !",Snackbar.LENGTH_SHORT).show();
+
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void launchGalleryIntent() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        String[] mimeTypes = {"image/*", "application/pdf"};
+        intent.setType("image/*|application/pdf");
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(Intent.createChooser(intent,"select file"), REQUEST_EXTERNAL_STORAGE);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_EXTERNAL_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    launchGalleryIntent();
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_EXTERNAL_STORAGE && resultCode == RESULT_OK) {
+
+            if (data != null) {
+                if (data.getClipData() != null) {
+                    int count = data.getClipData().getItemCount();
+                    int currentItem = 0;
+                    while (currentItem < count) {
+                        Uri imageUri = data.getClipData().getItemAt(currentItem).getUri();
+                        currentItem = currentItem + 1;
+
+                        Log.d("Uri Selected", imageUri.toString());
+
+                        try {
+                            arrayList.add(imageUri);
+                            FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this::remove,true);
+                            LinearLayoutManager LinearLayout = new LinearLayoutManager(this);
+                            rvItem.setLayoutManager(LinearLayout);
+                            rvItem.setAdapter(fileUploadAdapter);
+
+                        } catch (Exception e) {
+                            Log.e("Upload", "File select error", e);
+                        }
+                    }
+
+                } else if (data.getData() != null) {
+
+                    final Uri uri = data.getData();
+                    Log.i("Upload", "Uri = " + uri.toString());
+
+                    try {
+                        arrayList.add(uri);
+                        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this::remove,true);
+                        LinearLayoutManager LinearLayout = new LinearLayoutManager(this);
+                        rvItem.setLayoutManager(LinearLayout);
+                        rvItem.setAdapter(fileUploadAdapter);
+
+                    } catch (Exception e) {
+                        Log.e("Upload", "File select error", e);
+                    }
+                }
+
+            }
+
+        }
+    }
+
+
+
+    @Override
+    public void remove(int i) {
+        arrayList.remove(i);
+        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this::remove,true);
+        LinearLayoutManager LinearLayout = new LinearLayoutManager(this);
+        rvItem.setLayoutManager(LinearLayout);
+        rvItem.setAdapter(fileUploadAdapter);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.category_description_fragment, container, false);
-        Bundle bundle=getArguments();
-        if(bundle!=null)
-        {
-            subcategory= bundle.getString("subcategory");
-            category=bundle.getString("category");
-        }
-
-        type=view.findViewById(R.id.item_name_txt);
-        String s=category+"\n"+subcategory;
-        type.setText(s);
-
-        thickness= view.findViewById(R.id.thickness);
-        width=view.findViewById(R.id.width);
-        height=view.findViewById(R.id.height);
-        quantity=view.findViewById(R.id.quantity);
-
-
-        Ethickness= view.findViewById(R.id.thickness_edt);
-        Ewidth=view.findViewById(R.id.width_edt);
-        Eheight=view.findViewById(R.id.height_edt);
-        Equantity=view.findViewById(R.id.quantity_edt);
-
-
-
-
-
-        return view;
-
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
-
 }

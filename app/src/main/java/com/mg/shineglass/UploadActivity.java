@@ -1,50 +1,41 @@
 package com.mg.shineglass;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mg.shineglass.Interface.deleteFile;
 import com.mg.shineglass.adapters.FileUploadAdapter;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
-import com.mg.shineglass.models.Qoutation;
+import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.constants;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -54,15 +45,14 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
+
 public class UploadActivity extends Activity implements deleteFile {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
     private FrameLayout upload;
     List<Uri> arrayList = new ArrayList<>();
-    ArrayList<String> files = new ArrayList<>();
     private RecyclerView fileItem;
     private CompositeSubscription mSubscriptions;
-    private ActionBar actionBar;
     private RelativeLayout cancel,request;
     private long mLastClickTime = 0;
 
@@ -175,7 +165,7 @@ public class UploadActivity extends Activity implements deleteFile {
 
                         try {
                             arrayList.add(imageUri);
-                            FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove);
+                            FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove,false);
                             LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
                             fileItem.setLayoutManager(LinearLayout);
                             fileItem.setAdapter(fileUploadAdapter);
@@ -192,7 +182,7 @@ public class UploadActivity extends Activity implements deleteFile {
 
                     try {
                         arrayList.add(uri);
-                        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove);
+                        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove,false);
                         LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
                         fileItem.setLayoutManager(LinearLayout);
                         fileItem.setAdapter(fileUploadAdapter);
@@ -212,7 +202,7 @@ public class UploadActivity extends Activity implements deleteFile {
     @Override
     public void remove(int i) {
         arrayList.remove(i);
-        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove);
+        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, UploadActivity.this, this::remove,false);
         LinearLayoutManager LinearLayout = new LinearLayoutManager(UploadActivity.this);
         fileItem.setLayoutManager(LinearLayout);
         fileItem.setAdapter(fileUploadAdapter);
@@ -263,7 +253,7 @@ public class UploadActivity extends Activity implements deleteFile {
 
         }
 
-        List<Qoutation> list=new ArrayList<>();
+        List<Quotation> list=new ArrayList<>();
 
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);

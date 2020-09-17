@@ -2,27 +2,21 @@ package com.mg.shineglass;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.fragment.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mg.shineglass.adapters.CategoryAdapter;
 import com.mg.shineglass.adapters.SubCategoryAdapter;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class Subcategory_Activity extends Fragment {
+public class Subcategory_Activity extends FragmentActivity {
     private List<String> subcategory;
     private String category;
     private TextView type;
@@ -33,43 +27,36 @@ public class Subcategory_Activity extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.categories_fragment);
 
 
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.categories_fragment, container, false);
-        Bundle bundle=getArguments();
-        if(bundle!=null)
-        {
-            Gson gson=new Gson();
-            Type type=new TypeToken<List<String>>(){}.getType();
-            subcategory= gson.fromJson(bundle.getString("subcategory"),type);
-            category=bundle.getString("category");
-        }
+        Intent i=getIntent();
+        Gson gson=new Gson();
+        Type t=new TypeToken<List<String>>(){}.getType();
+        subcategory= gson.fromJson(i.getStringExtra("subcategory"),t);
+        category=i.getStringExtra("category");
 
-        type=view.findViewById(R.id.type_of_glass_txt);
+        type=findViewById(R.id.type_of_glass_txt);
         type.setText(category);
 
-        rvItem=view.findViewById(R.id.categories_container);
+        rvItem=findViewById(R.id.categories_container);
 
-        SubCategoryAdapter subCategoryAdapter=new SubCategoryAdapter(subcategory,getActivity(),category);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
+        SubCategoryAdapter subCategoryAdapter=new SubCategoryAdapter(subcategory,this,category);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(this,2);
         rvItem.setLayoutManager(gridLayoutManager);
         rvItem.setAdapter(subCategoryAdapter);
 
-//        OnBackPressedCallback onBackPressedCallback=new OnBackPressedCallback(true) {
-//            @Override
-//            public void handleOnBackPressed() {
-//                MainActivity mainActivity=new MainActivity();
-//                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container,new HomePageFragment()).commit();
-//                getActivity().finish();
-//            }
-//        };
-//        requireActivity().getOnBackPressedDispatcher().addCallback(this,onBackPressedCallback);
 
-        return view;
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
 
