@@ -48,13 +48,11 @@
             android:id="@+id/inch_radio_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/MediumGrayColor"
             android:scaleX="0.8"
             android:scaleY="0.8"
             android:text="@string/inch"
             android:textColor="@color/BlackTextColor"
-            android:textSize="12sp"
-            app:buttonTint="@color/MediumGrayColor" />
+            android:textSize="12sp" />
 
         <RadioButton
             android:id="@+id/mm_radio_btn"
@@ -62,13 +60,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
-            android:buttonTint="@color/MediumGrayColor"
             android:scaleX="0.8"
             android:scaleY="0.8"
             android:text="@string/mm"
             android:textColor="@color/BlackTextColor"
-            android:textSize="12sp"
-            app:buttonTint="@color/MediumGrayColor" />
+            android:textSize="12sp" />
 
     </RadioGroup>
 
