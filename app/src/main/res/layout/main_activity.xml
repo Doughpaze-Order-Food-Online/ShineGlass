@@ -78,6 +78,8 @@
         android:id="@+id/bottom_navigation_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

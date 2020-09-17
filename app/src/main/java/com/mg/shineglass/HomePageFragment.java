@@ -30,6 +30,7 @@ import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.Category;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.Rates;
+import com.mg.shineglass.models.SpanningGridLayoutManager;
 import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.constants;
 
@@ -129,7 +130,8 @@ public class HomePageFragment extends Fragment {
 
          ratesAdapter=new RatesAdapter(response.body());
         LinearLayoutManager LinearLayout=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
-        rates.setLayoutManager(LinearLayout);
+        SpanningGridLayoutManager spanningGridLayoutManager=new SpanningGridLayoutManager(getContext(), 3, LinearLayoutManager.VERTICAL,false);
+        rates.setLayoutManager(spanningGridLayoutManager);
         rates.setAdapter(ratesAdapter);
 
     }
@@ -145,8 +147,10 @@ public class HomePageFragment extends Fragment {
         categoryList.add(new Category("MIRROR",R.drawable.mirror));
 
         categoryAdapter=new CategoryAdapter(categoryList,getActivity(),response);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2,LinearLayoutManager.HORIZONTAL,false);
-        category.setLayoutManager(gridLayoutManager);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),3,LinearLayoutManager.VERTICAL,false);
+
+        SpanningGridLayoutManager spanningGridLayoutManager=new SpanningGridLayoutManager(getContext(), 3, LinearLayoutManager.VERTICAL,false);
+        category.setLayoutManager(spanningGridLayoutManager);
         category.setAdapter(categoryAdapter);
     }
 

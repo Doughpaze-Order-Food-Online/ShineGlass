@@ -50,7 +50,7 @@
     <string name="plus">+</string>
     <string name="image">IMAGE</string>
     <string name="_12mm">12MM</string>
-    <string name="rs">=RS\ </string>
+    <string name="rs">=Rs</string>
     <string name="colon">/;</string>
     <string name="_75">75</string>
     <string name="black_tinted_glass">BLACK TINTED GLASS</string>
@@ -119,4 +119,8 @@
     //facebook api
     <string name="facebook_app_id">611652142750083</string>
     <string name="fb_login_protocol_scheme">fb611652142750083</string>
+    <string name="edit_details">edit details</string>
+    <string name="order_no">order no.</string>
+    <string name="status">status</string>
+    <string name="in_transit">in transit</string>
 </resources>

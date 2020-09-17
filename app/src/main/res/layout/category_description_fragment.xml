@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textAlignment="center"
             android:fontFamily="sans-serif-medium"
             android:text="@string/black_tinted_glass"
             android:textAllCaps="true"
@@ -203,7 +204,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/upload_block_shape">
+        android:background="@drawable/roundedrectangle">
 
         <TextView
             android:layout_width="wrap_content"
