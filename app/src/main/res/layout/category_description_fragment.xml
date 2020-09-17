@@ -230,7 +230,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="@string/request_quotation"
+            android:text="@string/add_to_cart"
             android:textAllCaps="true"
             android:textColor="@color/whiteTextColor"
             android:textSize="10sp"
@@ -245,7 +245,7 @@
             android:layout_toEndOf="@id/request_quotation_txt"
             android:layout_toRightOf="@id/request_quotation_txt"
             android:contentDescription="@string/todo"
-            android:src="@drawable/loginend" />
+            android:src="@drawable/addtocart" />
 
     </RelativeLayout>
 
