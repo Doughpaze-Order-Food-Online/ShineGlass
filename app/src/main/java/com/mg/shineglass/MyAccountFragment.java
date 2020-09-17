@@ -52,7 +52,7 @@ public class MyAccountFragment extends Fragment {
 
         name=rootView.findViewById(R.id.user_name);
         mobile_no=rootView.findViewById(R.id.phone_no);
-        email=rootView.findViewById(R.id.user_email_input_txt);
+        email=rootView.findViewById(R.id.user_email);
 
         logout=rootView.findViewById(R.id.logout_btn);
 
