@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     android:orientation="vertical"
     tools:context=".HomePageFragment">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/banners_container"
             android:layout_width="match_parent"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_height="144dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
             android:background="@color/LightGrayColor"
@@ -26,17 +28,17 @@
                 android:id="@+id/today_rate_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="6"
+                android:layout_weight="8"
                 android:drawableTint="@color/BlackTextColor"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:text="@string/today_s_rate"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="11sp"
+                android:textSize="10sp"
                 app:drawableEndCompat="@drawable/forwardfinal"
                 app:drawableRightCompat="@drawable/forwardfinal"
                 app:drawableTint="@color/BlackTextColor"
@@ -53,6 +55,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="sans-serif-medium"
@@ -65,17 +69,19 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categories_container"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="260dp"
+            android:layout_marginRight="4dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginStart="16dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:text="@string/already_have_your_specification_ready"
@@ -88,8 +94,8 @@
             android:id="@+id/upload_image_pdf_block"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/roundedrectangle">
 
