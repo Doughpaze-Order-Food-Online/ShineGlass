@@ -123,4 +123,7 @@
     <string name="order_no">order no.</string>
     <string name="status">status</string>
     <string name="in_transit">in transit</string>
+    <string name="my_cart">my cart</string>
+    <string name="images_pdf_uploaded">images/pdf uploaded</string>
+    <string name="remove">remove</string>
 </resources>
