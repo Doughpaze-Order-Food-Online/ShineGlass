@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -48,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment=null;
             switch (item.getItemId()){
                 case R.id.home_icon:
+                    InputMethodManager imm = (InputMethodManager)getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mBottomNavigationView.getWindowToken(), 0);
                     fragment=new HomePageFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
                     break;
