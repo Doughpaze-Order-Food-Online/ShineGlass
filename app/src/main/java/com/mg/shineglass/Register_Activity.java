@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,10 +54,18 @@ public class Register_Activity extends AppCompatActivity {
     private User user;
     private RelativeLayout register;
 
+    private ImageView backImgBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setContentView(R.layout.create_account_activity);
+
+        backImgBtn=findViewById(R.id.back_btn_img);
+        backImgBtn.setOnClickListener(v -> finish());
         initViews();
     }
 

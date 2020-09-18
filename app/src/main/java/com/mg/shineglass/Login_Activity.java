@@ -8,8 +8,10 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -43,12 +45,17 @@ public class Login_Activity extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private SharedPreferences mSharedPreferences;
 
+    private ImageView backImgBtn;
+
     RelativeLayout register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
+        backImgBtn=findViewById(R.id.back_btn_img);
+        backImgBtn.setOnClickListener(v -> finish());
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         initViews();
     }
 
