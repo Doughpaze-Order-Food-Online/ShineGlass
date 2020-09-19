@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.mg.shineglass.Interface.deleteFile;
 import com.mg.shineglass.MainActivity;
+import com.mg.shineglass.NewRequestActivity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.Category;
 
@@ -63,7 +64,11 @@ public class FileUploadAdapter extends RecyclerView.Adapter<FileUploadAdapter.Fi
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if(list!=null)
+        {
+            return list.size();
+        }
+        return 0;
 
     }
 
@@ -88,7 +93,7 @@ public class FileUploadAdapter extends RecyclerView.Adapter<FileUploadAdapter.Fi
 
 
     public String getFileName(Uri uri) {
-        String result = null;
+      String result = null;
         if (uri.getScheme().equals("content")) {
             Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
             try {

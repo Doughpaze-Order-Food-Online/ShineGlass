@@ -3,7 +3,6 @@
     package="com.mg.shineglass">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
@@ -33,9 +32,11 @@
         <activity android:name=".OTP_Acitvities.Number_OTP_Activity" android:screenOrientation="portrait" />
         <activity android:name=".OTP_Acitvities.Google_Otp_Activity" android:screenOrientation="portrait" />
         <activity android:name=".Google_Enter_Number" android:screenOrientation="portrait" />
+        <activity android:name=".NewRequestActivity" android:screenOrientation="portrait" />
+        <activity android:name=".Subcategory_Activity" android:screenOrientation="portrait" />
+        <activity android:name=".CartActivity" android:screenOrientation="portrait" />
         <activity android:name=".UploadActivity" android:screenOrientation="portrait"
             android:theme="@style/Theme_Dialog"/>
-        <activity android:name=".Subcategory_Activity" android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

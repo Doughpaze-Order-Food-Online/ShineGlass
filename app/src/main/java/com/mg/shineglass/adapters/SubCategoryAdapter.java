@@ -1,6 +1,7 @@
 package com.mg.shineglass.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,13 +55,11 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
         SubcategoryItemHolder.name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("subcategory", name);
-                bundle.putString("category", category);
-                Fragment fragment = new NewRequestActivity();
-                fragment.setArguments(bundle);
-                MainActivity mainActivity = (MainActivity) context;
-                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
+
+                Intent i=new Intent(SubcategoryItemHolder.itemView.getContext(),NewRequestActivity.class);
+                i.putExtra("subcategory", name);
+                i.putExtra("category", category);
+                SubcategoryItemHolder.itemView.getContext().startActivity(i);
 
             }
         });

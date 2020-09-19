@@ -1,12 +1,15 @@
 package com.mg.shineglass;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
@@ -27,11 +32,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 import com.mg.shineglass.Interface.deleteFile;
 import com.mg.shineglass.adapters.FileUploadAdapter;
 import com.mg.shineglass.models.Quotation;
 import java.lang.reflect.Type;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -45,12 +58,12 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
     private TextView type,subtype;
     private RecyclerView rvItem;
     private RadioGroup radioGroup;
-    private RadioButton radioButton;
     private TextInputLayout thickness, width, height, quantity;
     private RelativeLayout button;
     private FrameLayout upload;
     List<Uri> arrayList = new ArrayList<>();
     final int REQUEST_EXTERNAL_STORAGE = 100;
+
     private EditText Ethickness, Ewidth, Eheight, Equantity;
 
 
@@ -86,6 +99,7 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
         button=findViewById(R.id.request_quotation_btn);
         upload=findViewById(R.id.upload);
         radioGroup=findViewById(R.id.scale);
+        rvItem=findViewById(R.id.description_uploaded_container);
 
 
         Ethickness = findViewById(R.id.thickness_edt);
@@ -106,6 +120,7 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
                 }
             }
         });
+
     }
 
 
@@ -115,9 +130,9 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
 
 
         String Tthickness = Objects.requireNonNull( Ethickness.getText()).toString();
-        String Twidth = Objects.requireNonNull(Ewidth .getText()).toString();
-        String Theight = Objects.requireNonNull(Eheight .getText()).toString();
-        String Tquantity = Objects.requireNonNull(Equantity .getText()).toString();
+        String Twidth = Objects.requireNonNull(Ewidth.getText()).toString();
+        String Theight = Objects.requireNonNull(Eheight.getText()).toString();
+        String Tquantity = Objects.requireNonNull(Equantity.getText()).toString();
         String TScale=null;
 
 
@@ -130,7 +145,7 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
             thickness.setError("Thickness is required !");
         }
 
-        if (!validateEmail(Twidth)) {
+        if (!validateFields(Twidth)) {
 
             err++;
             width.setError("Width is required !");
@@ -143,7 +158,7 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
             height.setError("Height is required !");
         }
 
-        if (!validateEmail(Tquantity)) {
+        if (!validateFields(Tquantity)) {
 
             err++;
             quantity.setError("Quantity is required !");
@@ -175,12 +190,12 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
             }
 
 
-            Quotation quotation =new Quotation(Tthickness,Twidth,Theight,Tquantity,TScale);
+            Quotation quotation =new Quotation(Tthickness,Twidth,Theight,Tquantity,TScale,category,subcategory);
             ADD(quotation);
 
         } else {
 
-            showSnackBarMessage();
+            showSnackBarMessage("Enter All Details !");
         }
     }
 
@@ -225,12 +240,16 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
 
         if(sharedPreferences.getString("files", null)!=null)
         {
-            List<Uri> list=new ArrayList<>();
-            Type type=new TypeToken<List<Uri>>(){}.getType();
-            list=gson.fromJson(sharedPreferences.getString("quotation", null),type);
+            List<String> list=new ArrayList<>();
+            Type type=new TypeToken<List<String>>(){}.getType();
+            list=gson.fromJson(sharedPreferences.getString("files", null),type);
 
             assert list != null;
-            list.addAll(arrayList);
+
+            for(Uri x:arrayList)
+            {
+                list.add(String.valueOf(x));
+            }
 
             String f=gson.toJson(list);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -239,18 +258,31 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
         }
         else
         {
-            String f=gson.toJson(arrayList);
+            List<String> list=new ArrayList<>();
+
+            for(Uri x:arrayList)
+            {
+                list.add(String.valueOf(x));
+            }
+            String f=gson.toJson(list);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("files",f);
             editor.apply();
         }
 
 
-        Toast.makeText(this, "Request Added to Queue!", Toast.LENGTH_LONG).show();
+        showSnackBarMessage("Request Added to Queue!");
         Eheight.setText(null);
         Equantity.setText(null);
         Ewidth.setText(null);
         Ethickness.setText(null);
+
+        arrayList.clear();
+
+        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this,true);
+        LinearLayoutManager LinearLayout = new LinearLayoutManager(this);
+        rvItem.setLayoutManager(LinearLayout);
+        rvItem.setAdapter(fileUploadAdapter);
     }
 
 
@@ -267,15 +299,15 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
         return rootView;
     }
 
-    private void showSnackBarMessage() {
-        Snackbar.make(getRootView(), "Enter All Details !",Snackbar.LENGTH_SHORT).show();
+    private void showSnackBarMessage(String message) {
+        Snackbar.make(getRootView(), message,Snackbar.LENGTH_SHORT).show();
 
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void launchGalleryIntent() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         String[] mimeTypes = {"image/*", "application/pdf"};
         intent.setType("image/*|application/pdf");
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
@@ -286,21 +318,18 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_EXTERNAL_STORAGE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    launchGalleryIntent();
-                } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
+                                           String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_EXTERNAL_STORAGE) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // permission was granted, yay! Do the
+                // contacts-related task you need to do.
+                launchGalleryIntent();
+            } else {
+                // permission denied, boo! Disable the
+                // functionality that depends on this permission.
             }
+            return;
 
             // other 'case' lines to check for other
             // permissions this app might request.
@@ -325,7 +354,7 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
 
                         try {
                             arrayList.add(imageUri);
-                            FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this::remove,true);
+                            FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this,true);
                             LinearLayoutManager LinearLayout = new LinearLayoutManager(this);
                             rvItem.setLayoutManager(LinearLayout);
                             rvItem.setAdapter(fileUploadAdapter);
@@ -342,7 +371,7 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
 
                     try {
                         arrayList.add(uri);
-                        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this::remove,true);
+                        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this,true);
                         LinearLayoutManager LinearLayout = new LinearLayoutManager(this);
                         rvItem.setLayoutManager(LinearLayout);
                         rvItem.setAdapter(fileUploadAdapter);
@@ -362,7 +391,7 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
     @Override
     public void remove(int i) {
         arrayList.remove(i);
-        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this::remove,true);
+        FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this,true);
         LinearLayoutManager LinearLayout = new LinearLayoutManager(this);
         rvItem.setLayoutManager(LinearLayout);
         rvItem.setAdapter(fileUploadAdapter);
@@ -373,4 +402,7 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
         super.onBackPressed();
         finish();
     }
+
+
+
 }

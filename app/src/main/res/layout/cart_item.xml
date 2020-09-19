@@ -18,9 +18,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/type_of_glass"
+            android:text="CATEGORY"
             android:textAllCaps="true"
             android:layout_marginTop="2dp"
+            android:textSize="12sp"
+            android:textColor="@color/PrimaryTextColor"
+            android:fontFamily="sans-serif-medium"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SUBCATEGORY"
+            android:textAllCaps="true"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
+            android:textColor="@color/PrimaryTextColor"
+            android:fontFamily="sans-serif-medium"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="THICKNESS"
+            android:layout_marginTop="8dp"
+            android:textAllCaps="true"
             android:textSize="12sp"
             android:textColor="@color/PrimaryTextColor"
             android:fontFamily="sans-serif-medium"/>
@@ -55,6 +75,16 @@
             android:textColor="@color/PrimaryTextColor"
             android:fontFamily="sans-serif-medium"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SCALE"
+            android:textAllCaps="true"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
+            android:textColor="@color/PrimaryTextColor"
+            android:fontFamily="sans-serif-medium"/>
+
     </LinearLayout>
 
 
@@ -68,7 +98,7 @@
         android:layout_marginEnd="16dp">
 
         <TextView
-            android:id="@+id/type_of_glass_txt"
+            android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="158"
@@ -78,7 +108,27 @@
             android:fontFamily="sans-serif-medium"/>
 
         <TextView
-            android:id="@+id/glass_width"
+            android:id="@+id/subcategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_11_05_2020"
+            android:layout_marginTop="8dp"
+            android:textAllCaps="true"
+            android:textSize="12sp"
+            android:textColor="@color/BlackTextColor"
+            android:fontFamily="sans-serif-medium"/>
+        <TextView
+            android:id="@+id/thickness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_11_05_2020"
+            android:layout_marginTop="8dp"
+            android:textAllCaps="true"
+            android:textSize="12sp"
+            android:textColor="@color/BlackTextColor"
+            android:fontFamily="sans-serif-medium"/>
+        <TextView
+            android:id="@+id/width"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_11_05_2020"
@@ -89,7 +139,7 @@
             android:fontFamily="sans-serif-medium"/>
 
         <TextView
-            android:id="@+id/glass_height"
+            android:id="@+id/height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/in_transit"
@@ -100,7 +150,18 @@
             android:fontFamily="sans-serif-medium"/>
 
         <TextView
-            android:id="@+id/glass_quantity"
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/in_transit"
+            android:textAllCaps="true"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
+            android:textColor="@color/BlackTextColor"
+            android:fontFamily="sans-serif-medium"/>
+
+        <TextView
+            android:id="@+id/scale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/in_transit"
