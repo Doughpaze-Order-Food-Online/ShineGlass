@@ -87,7 +87,7 @@
         <RelativeLayout
             android:id="@+id/request_quotation_btn"
             android:layout_toRightOf="@id/dash_line_2"
-            android:layout_width="128dp"
+            android:layout_width="match_parent"
             android:gravity="center"
             android:paddingTop="4dp"
             android:layout_marginLeft="16dp"
@@ -95,7 +95,8 @@
             android:layout_centerVertical="true"
             android:background="@drawable/login_bordershape"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/dash_line_2">
+            android:layout_toEndOf="@id/dash_line_2"
+            android:layout_marginStart="16dp">
 
             <TextView
                 android:id="@+id/request_quotation_txt"

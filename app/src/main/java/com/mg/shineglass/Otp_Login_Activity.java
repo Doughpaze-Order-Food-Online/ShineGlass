@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -39,9 +41,14 @@ public class Otp_Login_Activity extends AppCompatActivity {
     private User user;
     private RelativeLayout button;
 
+    private ImageView backImgBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+
         setContentView(R.layout.login_with_otp_activity);
         mobile_EditText = findViewById(R.id.user_email_mobile_input_txt);
         mobile_Layout = findViewById(R.id.user_email_mobile);
@@ -49,6 +56,9 @@ public class Otp_Login_Activity extends AppCompatActivity {
         button = findViewById(R.id.send_otp_btn);
 
         button.setOnClickListener(view -> NUMBER_LOGIN());
+
+        backImgBtn=findViewById(R.id.back_btn_img);
+        backImgBtn.setOnClickListener(v -> finish());
     }
 
     private void NUMBER_LOGIN() {

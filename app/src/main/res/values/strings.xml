@@ -126,4 +126,8 @@
     <string name="my_cart">my cart</string>
     <string name="images_pdf_uploaded">images/pdf uploaded</string>
     <string name="remove">remove</string>
+    <string name="cashbacks">cashbacks</string>
+    <string name="wallet_cash">wallet cash</string>
+    <string name="history">history</string>
+    <string name="set">Set</string>
 </resources>

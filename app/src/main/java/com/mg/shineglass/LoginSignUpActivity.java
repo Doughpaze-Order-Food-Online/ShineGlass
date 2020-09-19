@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,12 +54,17 @@ public class LoginSignUpActivity extends AppCompatActivity {
     private static final int SIGN_IN = 9001;
     private CompositeSubscription mSubscriptions;
     private CallbackManager callbackManager;
+    private ImageView backImgBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_signup_activity);
 
+        backImgBtn=findViewById(R.id.back_btn_img);
+        backImgBtn.setOnClickListener(v -> finish());
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         mSubscriptions = new CompositeSubscription();
 
         RelativeLayout login = findViewById(R.id.login_btn);
@@ -75,20 +82,14 @@ public class LoginSignUpActivity extends AppCompatActivity {
             }
         });
 
-        otp_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(LoginSignUpActivity.this,Otp_Login_Activity.class);
-                startActivity(i);
-            }
+        otp_login.setOnClickListener(v -> {
+            Intent i=new Intent(LoginSignUpActivity.this,Otp_Login_Activity.class);
+            startActivity(i);
         });
 
-        sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(LoginSignUpActivity.this,Register_Activity.class);
-                startActivity(i);
-            }
+        sign_up.setOnClickListener(v -> {
+            Intent i=new Intent(LoginSignUpActivity.this,Register_Activity.class);
+            startActivity(i);
         });
 
         facebook.setOnClickListener(view->FACEBOOK());

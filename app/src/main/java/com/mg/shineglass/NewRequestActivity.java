@@ -1,5 +1,6 @@
 package com.mg.shineglass;
 
+
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,19 +9,27 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.FrameLayout;
+import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,26 +54,31 @@ import com.mg.shineglass.adapters.FileUploadAdapter;
 import com.mg.shineglass.models.Quotation;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-
-import static com.mg.shineglass.utils.validation.validateEmail;
 import static com.mg.shineglass.utils.validation.validateFields;
 
-public class NewRequestActivity  extends FragmentActivity implements deleteFile {
-    private String category, subcategory;
+
+
+public class NewRequestActivity  extends FragmentActivity implements NumberPicker.OnValueChangeListener ,deleteFile{
+    private String category,subcategory;
     private TextView type,subtype;
     private RecyclerView rvItem;
     private RadioGroup radioGroup;
-    private TextInputLayout thickness, width, height, quantity;
-    private RelativeLayout button;
+    private RadioButton InchRadioButton,MmRadioButton;
+    private TextInputLayout thickness,width,height,quantity;
     private FrameLayout upload;
     List<Uri> arrayList = new ArrayList<>();
     final int REQUEST_EXTERNAL_STORAGE = 100;
-
+    private RelativeLayout button;
     private EditText Ethickness, Ewidth, Eheight, Equantity;
+    private String[] floatNum = new String[10000];
+
+    public NewRequestActivity() {
+        // Required empty public constructor
+    }
 
 
     @Override
@@ -74,6 +88,7 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
         setContentView(R.layout.category_description_fragment);
 
         // Inflate the layout for this fragment
+
         Intent i=getIntent();
         subcategory = i.getStringExtra("subcategory") ;
         category = i.getStringExtra("category");
@@ -90,8 +105,8 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
             subtype.setText(null);
         }
 
-
-
+        MmRadioButton=findViewById(R.id.mm_radio_btn);
+        InchRadioButton=findViewById(R.id.inch_radio_btn);
         thickness = findViewById(R.id.thickness);
         width = findViewById(R.id.width);
         height = findViewById(R.id.height);
@@ -121,6 +136,57 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
             }
         });
 
+        Ethickness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MmRadioButton.isChecked())
+                    show(Ethickness, MmRadioButton);
+                else if(InchRadioButton.isChecked()){
+                    show(Ethickness,InchRadioButton);
+                }
+                else{
+                    Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+        Ewidth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MmRadioButton.isChecked())
+                    show(Ewidth, MmRadioButton);
+                else if(InchRadioButton.isChecked()){
+                    show(Ewidth,InchRadioButton);
+                }
+                else{
+                    Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        Eheight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MmRadioButton.isChecked())
+                    show(Eheight, MmRadioButton);
+                else if(InchRadioButton.isChecked()){
+                    show(Eheight,InchRadioButton);
+                }
+                else{
+                    Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH or MM", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        float n=0;
+        for(int j=0;j<10000;j++)
+        {
+            n+=0.1;
+            DecimalFormat dec=new DecimalFormat("#0.0");
+            floatNum[j]= dec.format(n);
+        }
+
     }
 
 
@@ -141,6 +207,7 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
 
         if (!validateFields(Tthickness)) {
 
+
             err++;
             thickness.setError("Thickness is required !");
         }
@@ -151,8 +218,8 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
             width.setError("Width is required !");
         }
 
-
         if (!validateFields(Theight)) {
+
 
             err++;
             height.setError("Height is required !");
@@ -197,7 +264,17 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
 
             showSnackBarMessage("Enter All Details !");
         }
+
     }
+
+
+
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+
+
+    }
+
 
     private void setError() {
 
@@ -404,5 +481,29 @@ public class NewRequestActivity  extends FragmentActivity implements deleteFile 
     }
 
 
+
+
+    public void show(EditText edt, RadioButton rd)
+    {
+        final Dialog d = new Dialog(NewRequestActivity.this);
+        Objects.requireNonNull(d.getWindow()).setLayout(240, ViewGroup.LayoutParams.WRAP_CONTENT);
+        d.setContentView(R.layout.number_picker_dialogue);
+        Button b1 = (Button) d.findViewById(R.id.button1);
+        Button b2 = (Button) d.findViewById(R.id.button2);
+        TextView title=d.findViewById(R.id.title);
+        title.setText(edt.getHint()+" in "+ rd.getText());
+        final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
+        np.setMaxValue(floatNum.length-1);
+        np.setMinValue(0);
+        np.setWrapSelectorWheel(false);
+        np.setDisplayedValues(floatNum);
+        np.setOnValueChangedListener(this);
+        b1.setOnClickListener(v -> {
+            edt.setText(String.valueOf(floatNum[np.getValue()]));
+            d.dismiss();
+        });
+        b2.setOnClickListener(v -> d.dismiss());
+        d.show();
+    }
 
 }
