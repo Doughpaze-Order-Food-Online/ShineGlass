@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -56,6 +58,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
     private long mLastClickTime = 0;
     private CompositeSubscription mSubscriptions;
     private ArrayList<Quotation> cartlist;
+    private ImageView backbtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +67,10 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
         cartItem=findViewById(R.id.cart_container);
         fileItem=findViewById(R.id.uploaded_container);
         request=findViewById(R.id.request);
+
+        backbtn=findViewById(R.id.back_btn_img);
+
+        backbtn.setOnClickListener(v -> finish());
 
         mSubscriptions = new CompositeSubscription();
 
