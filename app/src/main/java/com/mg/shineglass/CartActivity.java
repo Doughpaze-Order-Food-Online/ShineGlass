@@ -55,7 +55,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
     private RelativeLayout request;
     private long mLastClickTime = 0;
     private CompositeSubscription mSubscriptions;
-    private List<Quotation> cartlist;
+    private ArrayList<Quotation> cartlist;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -187,6 +187,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
         }
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
+
         mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null)).REQUEST_QUOTATION(files,cartlist,sharedPreferences.getString(constants.PHONE, null))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -203,6 +204,8 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
         Intent intent = new Intent(CartActivity.this,MainActivity.class );
         startActivity(intent);
         finish();
+
+
 
     }
 

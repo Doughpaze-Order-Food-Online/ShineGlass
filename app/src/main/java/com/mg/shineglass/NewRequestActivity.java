@@ -293,10 +293,11 @@ public class NewRequestActivity  extends FragmentActivity implements NumberPicke
 
         if(sharedPreferences.getString("quotation", null)!=null)
         {
-            List<Quotation> list=new ArrayList<>();
-            Type type=new TypeToken<List<Quotation>>(){}.getType();
+            ArrayList<Quotation> list=new ArrayList<>();
+            Type type=new TypeToken<ArrayList<Quotation>>(){}.getType();
             list=gson.fromJson(sharedPreferences.getString("quotation", null),type);
 
+            assert list != null;
             list.add(quotation);
 
             String s=gson.toJson(list);
@@ -306,8 +307,9 @@ public class NewRequestActivity  extends FragmentActivity implements NumberPicke
         }
         else
         {
-           List<Quotation> list=new ArrayList<>();
+           ArrayList<Quotation> list=new ArrayList<>();
            list.add(quotation);
+
             String s=gson.toJson(list);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("quotation",s);

@@ -30,7 +30,7 @@
             android:textSize="8sp"
             tools:ignore="SmallSp" />
         <TextView
-            android:id="@+id/request_no.value"
+            android:id="@+id/request_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="48dp"
@@ -45,11 +45,11 @@
             android:layout_width="0.5dp"
             android:layout_height="40dp"
             android:background="@color/MediumGrayColor"
-            android:layout_toEndOf="@id/request_no.value"
+            android:layout_toEndOf="@id/request_no"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_toRightOf="@id/request_no.value"
+            android:layout_toRightOf="@id/request_no"
             android:layout_marginStart="16dp" />
 
         <TextView

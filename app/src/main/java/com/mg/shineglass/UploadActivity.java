@@ -272,7 +272,7 @@ public class UploadActivity extends Activity implements deleteFile {
 
         }
 
-        List<Quotation> list=new ArrayList<>();
+        ArrayList<Quotation> list=new ArrayList<>();
 
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);

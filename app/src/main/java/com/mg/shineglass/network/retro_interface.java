@@ -6,10 +6,12 @@ import com.mg.shineglass.models.Banners;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.Category;
 import com.mg.shineglass.models.LoginResponse;
+import com.mg.shineglass.models.MyQuotation;
 import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.models.Rates;
 import com.mg.shineglass.models.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -62,7 +64,10 @@ public interface retro_interface {
 
     @Multipart
     @POST("quotation")
-    Observable<Response<LoginResponse>> REQUEST_QUOTATION(@Part List<MultipartBody.Part> files, @Part("quotation") List<Quotation> quotation, @Query("mobile") String mobile);
+    Observable<Response<LoginResponse>> REQUEST_QUOTATION(@Part List<MultipartBody.Part> files, @Part("quotation") ArrayList<Quotation> quotation, @Query("mobile") String mobile);
+
+    @GET("quotation")
+    Observable<List<MyQuotation>> GET_QUOTATION();
 
 
 }
