@@ -32,4 +32,11 @@
         <item name="android:windowMinWidthMinor">94%</item>"
     </style>
 
+    <style name="Theme_Edit_details" parent="Theme.MaterialComponents.Light.Dialog.Alert.Bridge">
+        <item name="android:windowMinWidthMajor">94%</item>
+        <item name="android:windowMinWidthMinor">94%</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
 </resources>

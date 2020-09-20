@@ -27,6 +27,8 @@ import com.mg.shineglass.utils.constants;
 
 import java.util.Objects;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the  factory method to
@@ -38,6 +40,7 @@ public class MyAccountFragment extends Fragment {
     private Button logout;
     private GoogleSignInClient mGoogleSignInClient;
     private String type;
+    CircleImageView circleImageView;
 
     public MyAccountFragment() {
         // Required empty public constructor
@@ -55,6 +58,16 @@ public class MyAccountFragment extends Fragment {
         email=rootView.findViewById(R.id.user_email);
 
         logout=rootView.findViewById(R.id.logout_btn);
+
+        circleImageView=rootView.findViewById(R.id.profile_icon_img);
+
+        circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(),EditDetailsPopUpActivity.class);
+                startActivity(i);
+            }
+        });
 
 
         SharedPreferences sharedPreferences = PreferenceManager

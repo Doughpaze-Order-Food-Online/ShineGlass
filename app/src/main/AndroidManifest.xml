@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ShineGlassSplashActivity"  android:screenOrientation="portrait"
+        <activity android:name=".EditDetailsPopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_Edit_details"/>
+
+        <activity
+            android:name=".ShineGlassSplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,21 +27,47 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginSignUpActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".Login_Activity" android:screenOrientation="portrait"
-            android:theme="@style/loginWindowBackgroundTheme"/>
-        <activity android:name=".Register_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".Otp_Login_Activity" android:screenOrientation="portrait" />
-        <activity android:name=".OTP_Acitvities.Register_OTP_Activity" android:screenOrientation="portrait" />
-        <activity android:name=".OTP_Acitvities.Number_OTP_Activity" android:screenOrientation="portrait" />
-        <activity android:name=".OTP_Acitvities.Google_Otp_Activity" android:screenOrientation="portrait" />
-        <activity android:name=".Google_Enter_Number" android:screenOrientation="portrait" />
-        <activity android:name=".NewRequestActivity" android:screenOrientation="portrait" />
-        <activity android:name=".Subcategory_Activity" android:screenOrientation="portrait" />
-        <activity android:name=".CartActivity" android:screenOrientation="portrait" />
-        <activity android:name=".UploadActivity" android:screenOrientation="portrait"
-            android:theme="@style/Theme_Dialog"/>
+        <activity
+            android:name=".LoginSignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Login_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/loginWindowBackgroundTheme" />
+        <activity
+            android:name=".Register_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Otp_Login_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OTP_Acitvities.Register_OTP_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OTP_Acitvities.Number_OTP_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OTP_Acitvities.Google_Otp_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Google_Enter_Number"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewRequestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Subcategory_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UploadActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_Edit_details" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -47,9 +78,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBbkyU3NIHJV2HiMQXAh40FeO0XFsRkAZM" />
-
-
-
     </application>
 
 </manifest>

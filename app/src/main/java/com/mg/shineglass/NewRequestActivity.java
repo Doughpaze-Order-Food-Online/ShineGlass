@@ -155,57 +155,39 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
             }
         });
 
-        Ethickness.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(MmRadioButton.isChecked())
-                    show(Ethickness, MmRadioButton);
-                else if(InchRadioButton.isChecked()){
-                    show(Ethickness,InchRadioButton);
-                }
-                else{
-                    Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
-                }
+        Ethickness.setOnClickListener(v -> {
+            if(MmRadioButton.isChecked())
+                show(Ethickness, MmRadioButton);
+            else if(InchRadioButton.isChecked()){
+                show(Ethickness,InchRadioButton);
+            }
+            else{
+                Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
             }
         });
 
 
-        Ewidth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(MmRadioButton.isChecked())
-                    show(Ewidth, MmRadioButton);
-                else if(InchRadioButton.isChecked()){
-                    show(Ewidth,InchRadioButton);
-                }
-                else{
-                    Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
-                }
+        Ewidth.setOnClickListener(v -> {
+            if(MmRadioButton.isChecked())
+                show(Ewidth, MmRadioButton);
+            else if(InchRadioButton.isChecked()){
+                show(Ewidth,InchRadioButton);
+            }
+            else{
+                Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
             }
         });
 
-        Eheight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(MmRadioButton.isChecked())
-                    show(Eheight, MmRadioButton);
-                else if(InchRadioButton.isChecked()){
-                    show(Eheight,InchRadioButton);
-                }
-                else{
-                    Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH or MM", Toast.LENGTH_LONG).show();
-                }
+        Eheight.setOnClickListener(v -> {
+            if(MmRadioButton.isChecked())
+                show(Eheight, MmRadioButton);
+            else if(InchRadioButton.isChecked()){
+                show(Eheight,InchRadioButton);
+            }
+            else{
+                Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH or MM", Toast.LENGTH_LONG).show();
             }
         });
-
-        float n=0;
-        for(int j=0;j<10000;j++)
-        {
-            n+=0.1;
-            DecimalFormat dec=new DecimalFormat("#0.0");
-            floatNum[j]= dec.format(n);
-        }
-
     }
 
 
@@ -506,6 +488,13 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
 
     public void show(EditText edt, RadioButton rd)
     {
+        float n=0;
+        for(int j=0;j<10000;j++)
+        {
+            n+=0.1;
+            DecimalFormat dec=new DecimalFormat("#0.0");
+            floatNum[j]= dec.format(n);
+        }
         final Dialog d = new Dialog(NewRequestActivity.this);
         Objects.requireNonNull(d.getWindow()).setLayout(240, ViewGroup.LayoutParams.WRAP_CONTENT);
         d.setContentView(R.layout.number_picker_dialogue);

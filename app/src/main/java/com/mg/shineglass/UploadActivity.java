@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +49,7 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 
-public class UploadActivity extends Activity implements deleteFile {
+public class UploadActivity extends AppCompatActivity implements deleteFile {
 
     final int REQUEST_EXTERNAL_STORAGE = 100;
     private FrameLayout upload;
@@ -63,6 +64,7 @@ public class UploadActivity extends Activity implements deleteFile {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_pop_activity);
+        this.setFinishOnTouchOutside(false);
         upload = findViewById(R.id.choose_file_block1);
         fileItem = findViewById(R.id.file_container);
         mSubscriptions = new CompositeSubscription();
