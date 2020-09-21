@@ -131,4 +131,7 @@
     <string name="history">history</string>
     <string name="set">Set</string>
     <string name="update">update</string>
+    <string name="your_cart_is_empty">Your Cart is Empty!!</string>
+    <string name="no_requests_yet">No requests yet!!</string>
+    <string name="please_login_to_see_your_requests">Please Login to see your Requests</string>
 </resources>
