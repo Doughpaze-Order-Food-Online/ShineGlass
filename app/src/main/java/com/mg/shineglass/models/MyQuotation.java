@@ -34,7 +34,7 @@ public class MyQuotation {
     @SerializedName("status")
     String status;
 
-    @SerializedName(" valuation")
+    @SerializedName("valuation")
     Boolean  valuation;
 
     @SerializedName("url")

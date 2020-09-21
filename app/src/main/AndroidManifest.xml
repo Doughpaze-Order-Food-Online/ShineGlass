@@ -69,6 +69,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme_Edit_details" />
 
+        <activity
+            android:name=".Quotation_Activity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

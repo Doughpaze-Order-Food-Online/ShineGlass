@@ -7,7 +7,8 @@
     android:layout_marginTop="8dp"
     android:paddingLeft="32dp"
     android:paddingRight="32dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Quotation_Activity">
 
     <View
         android:layout_width="match_parent"
@@ -62,7 +63,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/webview_border"
-        tools:ignore="UnusedAttribute" />
+        tools:ignore="UnusedAttribute"/>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 
     </FrameLayout>
 

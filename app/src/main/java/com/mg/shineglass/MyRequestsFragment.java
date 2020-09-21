@@ -1,5 +1,6 @@
 package com.mg.shineglass;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -12,6 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -43,6 +47,9 @@ public class MyRequestsFragment extends Fragment {
 
     private CompositeSubscription mSubscriptions;
     private RecyclerView rvItem;
+    private LinearLayout login;
+    private TextView empty;
+    private RelativeLayout login_btn;
 
 
     public MyRequestsFragment() {
@@ -58,8 +65,14 @@ public class MyRequestsFragment extends Fragment {
         mSubscriptions = new CompositeSubscription();
 
        rvItem=view.findViewById(R.id.requests_container);
+       login=view.findViewById(R.id.empty_login_block);
+       empty=view.findViewById(R.id.empty_text);
+       login_btn=view.findViewById(R.id.login_btn);
 
-
+        login_btn.setOnClickListener(v->{
+            Intent intent=new Intent(getContext(),LoginSignUpActivity.class);
+            startActivity(intent);
+        });
 
         FETCH_DATA();
 
@@ -71,19 +84,44 @@ public class MyRequestsFragment extends Fragment {
     {
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getContext());
-        mSubscriptions.add(
-                networkUtils.getRetrofit(sharedPreferences.getString("token", null)).GET_QUOTATION()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(this::handleResponse,this::handleError)
-        );
+      if(sharedPreferences.getString("token", null)==null)
+      {
+            login.setVisibility(View.VISIBLE);
+            rvItem.setVisibility(View.GONE);
+            empty.setVisibility(View.GONE);
+      }
+      else
+      {
+          login.setVisibility(View.GONE);
+          rvItem.setVisibility(View.VISIBLE);
+          empty.setVisibility(View.GONE);
+
+
+          mSubscriptions.add(
+                  networkUtils.getRetrofit(sharedPreferences.getString("token", null)).GET_QUOTATION()
+                          .observeOn(AndroidSchedulers.mainThread())
+                          .subscribeOn(Schedulers.io())
+                          .subscribe(this::handleResponse,this::handleError)
+          );
+      }
     }
 
     private void handleResponse(List<MyQuotation> response) {
-        MyRequestAdapter myRequestAdapter = new MyRequestAdapter(response);
-        LinearLayoutManager LinearLayout = new LinearLayoutManager(getContext());
-        rvItem.setLayoutManager(LinearLayout);
-        rvItem.setAdapter(myRequestAdapter);
+
+        if(response.size()>0 && response.get(0) !=null)
+        {
+            MyRequestAdapter myRequestAdapter = new MyRequestAdapter(response);
+            LinearLayoutManager LinearLayout = new LinearLayoutManager(getContext());
+            rvItem.setLayoutManager(LinearLayout);
+            rvItem.setAdapter(myRequestAdapter);
+        }
+        else
+        {
+            login.setVisibility(View.GONE);
+            rvItem.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+
+        }
 
 
     }

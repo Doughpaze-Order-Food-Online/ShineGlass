@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -59,6 +60,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
     private CompositeSubscription mSubscriptions;
     private ArrayList<Quotation> cartlist;
     private ImageView backbtn;
+    private TextView empty;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
         cartItem=findViewById(R.id.cart_container);
         fileItem=findViewById(R.id.uploaded_container);
         request=findViewById(R.id.request);
+        empty=findViewById(R.id.empty_text);
 
         backbtn=findViewById(R.id.back_btn_img);
 
@@ -77,6 +80,22 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
         Gson gson=new Gson();
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
+
+        if(sharedPreferences.getString("quotation", null)==null)
+        {
+            cartItem.setVisibility(View.GONE);
+            fileItem.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+            request.setVisibility(View.GONE);
+
+        }
+        else
+        {
+            cartItem.setVisibility(View.VISIBLE);
+            fileItem.setVisibility(View.VISIBLE);
+            empty.setVisibility(View.GONE);
+            request.setVisibility(View.VISIBLE);
+        }
 
        cartlist=new ArrayList<>();
         Type type=new TypeToken<List<Quotation>>(){}.getType();
@@ -208,13 +227,23 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
 
         Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(CartActivity.this,MainActivity.class );
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("files", null);
+        editor.putString("quotation", null);
+        editor.apply();
+
+
+        Intent intent = new Intent(CartActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
 
-
-
     }
+
+
 
     private void handleError(Throwable error) {
 
