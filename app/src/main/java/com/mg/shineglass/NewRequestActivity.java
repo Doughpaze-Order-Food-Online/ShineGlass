@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -188,6 +189,9 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
                 Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH or MM", Toast.LENGTH_LONG).show();
             }
         });
+
+        FloatNumber floatNumber=new FloatNumber();
+        floatNumber.execute();
     }
 
 
@@ -488,13 +492,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
 
     public void show(EditText edt, RadioButton rd)
     {
-        float n=0;
-        for(int j=0;j<10000;j++)
-        {
-            n+=0.1;
-            DecimalFormat dec=new DecimalFormat("#0.0");
-            floatNum[j]= dec.format(n);
-        }
+
         final Dialog d = new Dialog(NewRequestActivity.this);
         Objects.requireNonNull(d.getWindow()).setLayout(240, ViewGroup.LayoutParams.WRAP_CONTENT);
         d.setContentView(R.layout.number_picker_dialogue);
@@ -514,6 +512,23 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         });
         b2.setOnClickListener(v -> d.dismiss());
         d.show();
+    }
+
+    public class FloatNumber extends AsyncTask<Void,Void,Void>{
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            float n=0;
+            for(int j=0;j<10000;j++)
+            {
+                n+=0.1;
+                DecimalFormat dec=new DecimalFormat("#0.0");
+                floatNum[j]= dec.format(n);
+            }
+
+            return null;
+        }
     }
 
 }

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.mg.shineglass.adapters.BannerAdapter;
 import com.mg.shineglass.adapters.CategoryAdapter;
 import com.mg.shineglass.adapters.RatesAdapter;
@@ -36,6 +37,7 @@ import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.constants;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -52,14 +54,14 @@ import rx.subscriptions.CompositeSubscription;
  * create an instance of this fragment.
  */
 public class HomePageFragment extends Fragment {
-    private CompositeSubscription mSubscriptions;
+
     private RecyclerView rates,category;
     private ViewPager viewPager;
     private BannerAdapter bannerAdapter;
     private RatesAdapter ratesAdapter;
     private CategoryAdapter categoryAdapter;
     private FrameLayout upload;
-    private List<Category> mainList;
+    private SharedPreferences sharedPreferences;
 
 
     public HomePageFragment() {
@@ -79,7 +81,7 @@ public class HomePageFragment extends Fragment {
     }
 
     private void initView(View view) {
-        mSubscriptions = new CompositeSubscription();
+
         rates=view.findViewById(R.id.rates_container);
         category=view.findViewById(R.id.categories_container);
         viewPager =  view.findViewById(R.id.banners_container);
@@ -99,38 +101,35 @@ public class HomePageFragment extends Fragment {
             }
         });
 
+        sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(getContext());
 
-        FETCH_DATA();
+        BANNER();
+        RATES();
+        CATEGORY();
+
+
+
+
     }
 
+    private void BANNER() {
+        Gson gson=new Gson();
 
-
-
-    private void FETCH_DATA()
-    {
-        mSubscriptions.addAll(
-
-                networkUtils.getRetrofit().GET_RATES()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(this::handleResponse1,this::handleError),
-
-                networkUtils.getRetrofit().GET_IMAGES()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(this::handleResponse2,this::handleError),
-                networkUtils.getRetrofit().GET_CATEGORY()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(this::handleResponse3,this::handleError)
-                );
+        List<Banners> list=new ArrayList<>();
+        Type type=new TypeToken<List<Banners>>(){}.getType();
+        list=gson.fromJson(sharedPreferences.getString("banner", null),type);
+        bannerAdapter=new BannerAdapter(Objects.requireNonNull(getContext()),list);
+        bannerAdapter.setTimer(viewPager,5,5,1);
+        viewPager.setAdapter(bannerAdapter);
     }
 
-
-
-    private void handleResponse1(Response<List<Rates>> response) {
-
-         ratesAdapter=new RatesAdapter(response.body());
+    private void RATES() {
+        Gson gson=new Gson();
+        List<Rates> list=new ArrayList<>();
+        Type type=new TypeToken<List<Rates>>(){}.getType();
+        list=gson.fromJson(sharedPreferences.getString("rates", null),type);
+        ratesAdapter=new RatesAdapter(list);
         LinearLayoutManager LinearLayout=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         SpanningGridLayoutManager spanningGridLayoutManager=new SpanningGridLayoutManager(getContext(), 3, LinearLayoutManager.VERTICAL,false);
         rates.setLayoutManager(spanningGridLayoutManager);
@@ -138,7 +137,11 @@ public class HomePageFragment extends Fragment {
 
     }
 
-    private void handleResponse3(List<Category> response) {
+    private void CATEGORY() {
+        Gson gson=new Gson();
+        List<Category> list=new ArrayList<>();
+        Type type=new TypeToken<List<Category>>(){}.getType();
+        list=gson.fromJson(sharedPreferences.getString("category", null),type);
 
         List<Category> categoryList=new ArrayList<>();
         categoryList.add(new Category("CLEAR GLASS",R.drawable.clearglass));
@@ -148,7 +151,7 @@ public class HomePageFragment extends Fragment {
         categoryList.add(new Category("LACQUERED GLASS",R.drawable.laqueredglass));
         categoryList.add(new Category("MIRROR",R.drawable.mirror));
 
-        categoryAdapter=new CategoryAdapter(categoryList,getActivity(),response);
+        categoryAdapter=new CategoryAdapter(categoryList,getActivity(),list);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),3,LinearLayoutManager.VERTICAL,false);
 
         SpanningGridLayoutManager spanningGridLayoutManager=new SpanningGridLayoutManager(getContext(), 3, LinearLayoutManager.VERTICAL,false);
@@ -156,52 +159,5 @@ public class HomePageFragment extends Fragment {
         category.setAdapter(categoryAdapter);
     }
 
-    private void handleResponse2(Response<List<Banners>> response) {
 
-        bannerAdapter=new BannerAdapter(Objects.requireNonNull(getContext()),response.body());
-        bannerAdapter.setTimer(viewPager,5,5,1);
-        viewPager.setAdapter(bannerAdapter);
-
-    }
-
-    private void handleError(Throwable error) {
-
-        Log.e("error",error.toString());
-
-        if (error instanceof HttpException) {
-
-            Gson gson = new GsonBuilder().create();
-
-            try {
-
-                String errorBody = ((HttpException) error).response().errorBody().string();
-                Response<BasicResponse> response = gson.fromJson(errorBody,Response.class);
-                assert response.body() != null;
-                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            Toast.makeText(getContext(), "Network Error !", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(mSubscriptions!=null)
-        {
-            mSubscriptions.unsubscribe();
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        if(mSubscriptions!=null)
-        {
-            mSubscriptions.unsubscribe();
-        }
-    }
 }
