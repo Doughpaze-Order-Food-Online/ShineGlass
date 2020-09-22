@@ -73,6 +73,7 @@ Glass Sotre App to order glass furniture items online
 - implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 ### User Instructions
+- Do not use Login with OTP although its authentication is implemented completely due to limited paid resources.
 - Till now Please Login with Google or login manually As the facebook authentication is not yet fully implemented.
 
 
