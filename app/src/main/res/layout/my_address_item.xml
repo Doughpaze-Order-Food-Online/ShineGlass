@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    android:layout_margin="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/address_no._txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_123"
+            android:textColor="@color/BlackTextColor"
+            android:textSize="12sp"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:id="@+id/address_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/address_no._txt"
+            android:layout_toStartOf="@id/delete_btn"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="dndsnldsnvlkd vlkds vklmdsklvndlsk vld vodsnvds vsdlk vldjs vkds vlsd vls vvljdnvldnvldv ld vd vld vjds vkjd v"
+            android:layout_toRightOf="@id/address_no._txt"
+            android:textColor="@color/BlackTextColor"
+            android:textSize="12sp"
+            android:layout_marginStart="16dp"
+            android:layout_toLeftOf="@id/delete_btn"
+            android:layout_marginEnd="16dp" />
+
+        <FrameLayout
+            android:id="@+id/delete_btn"
+            android:layout_width="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/circle"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true">
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:src="@drawable/bluecross"
+            android:layout_gravity="center"
+            android:contentDescription="@string/todo" />
+
+        </FrameLayout>
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

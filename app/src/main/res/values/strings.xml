@@ -134,4 +134,7 @@
     <string name="your_cart_is_empty">Your Cart is Empty!!</string>
     <string name="no_requests_yet">No requests yet!!</string>
     <string name="please_login_to_see_your_requests">Please Login to see your Requests</string>
+    <string name="my_addresses">my addresses</string>
+    <string name="saved_addresses">Saved Addresses</string>
+    <string name="add_new">Add New +</string>
 </resources>
