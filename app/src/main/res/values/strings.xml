@@ -137,4 +137,6 @@
     <string name="my_addresses">my addresses</string>
     <string name="saved_addresses">Saved Addresses</string>
     <string name="add_new">Add New +</string>
+    <string name="reset_password">Reset password</string>
+    <string name="enter_the_new_password_you_would_like_to_use_and_nlogin_again">Enter the new password you would like to use and \nlogin again.</string>
 </resources>

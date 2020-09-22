@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_below="@id/title"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="112dp"
         android:gravity="center_horizontal"
         android:text="@string/no_requests_yet"
         android:textColor="@color/PrimaryTextColor"
