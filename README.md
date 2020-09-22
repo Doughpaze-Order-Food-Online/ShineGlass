@@ -16,7 +16,7 @@ Glass Sotre App to order glass furniture items online
 - Bottom Navigation Menu
 - Side Navigation Menu
 - ViewPager with Image Slider
-- Alert Dialogue, DatePicker, Popup activity
+- Alert Dialogue, NumberPicker, Popup activity
 
 ## Development Approach
 ### Programming Languages Used
