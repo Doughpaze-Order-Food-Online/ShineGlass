@@ -1,75 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@android:color/white"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="8dp"
+    android:background="@android:color/white">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/LightGrayColor" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/my_requests"
+        android:textAllCaps="true"
+        android:textColor="@color/LightBlackColor"
+        android:textSize="18sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/requests_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_below="@id/title" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/LightGrayColor" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/my_requests"
-            android:textAllCaps="true"
-            android:textColor="@color/LightBlackColor"
-            android:textSize="18sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/requests_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/empty_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
-            android:text="@string/no_requests_yet"
-            android:textColor="@color/PrimaryTextColor"
-            android:textSize="16sp"
-            app:drawableTopCompat="@drawable/emptycart" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/empty_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/title"
+        android:layout_marginTop="112dp"
+        android:gravity="center_horizontal"
+        android:text="@string/no_requests_yet"
+        android:textColor="@color/PrimaryTextColor"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:drawableTopCompat="@drawable/emptycart" />
 
     <LinearLayout
         android:id="@+id/empty_login_block"
+        android:layout_below="@id/title"
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="112dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textColor="@color/PrimaryTextColor"
-            android:textSize="16sp"
             android:text="@string/please_login_to_see_your_requests"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/PrimaryTextColor"
+            android:textSize="16sp" />
 
         <RelativeLayout
             android:id="@+id/login_btn"
@@ -105,6 +99,7 @@
                 android:src="@drawable/loginend" />
 
         </RelativeLayout>
+
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

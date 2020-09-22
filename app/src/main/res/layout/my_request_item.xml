@@ -113,6 +113,8 @@
                         android:layout_toRightOf="@id/eye_img"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/view_quotation"
+                        android:gravity="center_horizontal"
+                        android:textAlignment="center"
                         android:textAllCaps="true"
                         android:textColor="@color/whiteTextColor"
                         android:textSize="8sp"
