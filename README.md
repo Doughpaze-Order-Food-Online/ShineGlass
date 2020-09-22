@@ -1,6 +1,9 @@
 # ShineGlass
 Glass Sotre App to order glass furniture items online
 
+## Status
+- Developing
+
 ## Main Componets of the Project
 - Android app
 - Admin Panel
