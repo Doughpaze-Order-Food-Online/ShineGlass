@@ -46,12 +46,10 @@ public class Register_Activity extends AppCompatActivity {
     private TextInputLayout username_Layout,
             email_Layout,mobile_Layout,
             password_Layout,rpassword_layout;
-    private ProgressDialog progressDialog;
 
     private EditText username_EditText,
             email_EditText,mobile_EditText,
             password_EditText,rpassword_EditText;
-    private TextView timer;
 
     private CompositeSubscription mSubscriptions;
     private User user;
@@ -177,11 +175,6 @@ public class Register_Activity extends AppCompatActivity {
 
     private void SEND_OTP(User u) {
 
-        progressDialog=new ProgressDialog(this);
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_loading);
-        Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
 
 
         mSubscriptions.add(

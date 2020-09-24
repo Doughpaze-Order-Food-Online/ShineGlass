@@ -50,7 +50,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
 
     private static final String EMAIL = "email";
     private static final String AUTH_TYPE = "rerequest";
-    private ProgressDialog progressDialog;
+
 
 
     private GoogleSignInClient mGoogleSignInClient;
@@ -107,11 +107,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
 
         setUpFacebookCallBack();
 
-        progressDialog=new ProgressDialog(this);
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_loading);
-        Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
     }
 
 
