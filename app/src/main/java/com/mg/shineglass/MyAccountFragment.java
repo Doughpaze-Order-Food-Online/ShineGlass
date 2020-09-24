@@ -132,7 +132,7 @@ public class MyAccountFragment extends Fragment {
 
     private void goToHome() {
         Toast.makeText(getActivity(), "LogOut Success! ", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), LoginSignUpActivity.class);
         startActivity(intent);
         Objects.requireNonNull(getActivity()).finish();
     }

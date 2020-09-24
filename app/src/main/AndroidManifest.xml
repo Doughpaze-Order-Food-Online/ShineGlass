@@ -4,6 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
@@ -71,6 +76,18 @@
 
         <activity
             android:name=".Quotation_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".New_Address_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".My_Address_Actiivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Order_Confirmation_Activity"
             android:screenOrientation="portrait" />
 
         <meta-data

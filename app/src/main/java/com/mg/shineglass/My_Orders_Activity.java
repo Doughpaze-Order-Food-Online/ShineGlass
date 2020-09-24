@@ -1,24 +1,32 @@
 package com.mg.shineglass;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mg.shineglass.adapters.MyRequestAdapter;
 import com.mg.shineglass.adapters.OrdersAdapter;
 import com.mg.shineglass.models.BasicResponse;
+import com.mg.shineglass.models.FinalOrder;
 import com.mg.shineglass.models.MyOrders;
+import com.mg.shineglass.models.MyQuotation;
 import com.mg.shineglass.network.networkUtils;
 
 import java.io.IOException;
@@ -29,12 +37,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the  factory method to
- * create an instance of this fragment.
- */
-public class MyOrdersFragment extends Fragment {
+
+public class My_Orders_Activity extends Fragment {
 
     private CompositeSubscription mSubscriptions;
     private RecyclerView rvItem;
@@ -43,15 +47,16 @@ public class MyOrdersFragment extends Fragment {
 //    private RelativeLayout login_btn;
 
 
-    public MyOrdersFragment() {
+    public My_Orders_Activity() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-       View view= inflater.inflate(R.layout.fragment_my_orders, container, false);
+
+        View view=inflater.inflate(R.layout.fragment_my_orders, container, false);
+
         mSubscriptions = new CompositeSubscription();
 
         rvItem=view.findViewById(R.id.orders_container);

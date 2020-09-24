@@ -82,6 +82,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
     private EditText Ethickness, Ewidth, Eheight, Equantity;
     private String[] floatNum = new String[10000];
     private ImageView backbtn;
+    private long mLastClickTime = 0;
     public NewRequestActivity() {
         // Required empty public constructor
     }
@@ -139,7 +140,14 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         Ewidth = findViewById(R.id.width_edt);
         Eheight = findViewById(R.id.height_edt);
         Equantity = findViewById(R.id.quantity_edt);
-        button.setOnClickListener(view -> REQUEST());
+        button.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+
+            REQUEST();
+        });
 
         Equantity.setOnClickListener(v -> Equantity.setCursorVisible(true));
 

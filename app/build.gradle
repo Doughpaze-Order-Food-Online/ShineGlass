@@ -1,13 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.mg.shineglass"
-        minSdkVersion 16
-        targetSdkVersion 29
+        minSdkVersion 18
+        targetSdkVersion 30
+        multiDexEnabled true
+
         versionCode 1
         versionName "1.0"
 
@@ -61,5 +63,10 @@ dependencies {
 
     //circular ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    // paytm all in one sdk
+    implementation 'com.paytm.appinvokesdk:appinvokesdk:1.3'
 
 }

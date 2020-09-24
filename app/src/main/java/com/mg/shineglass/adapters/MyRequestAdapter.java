@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mg.shineglass.Interface.DeleteCartItem;
+import com.mg.shineglass.My_Address_Actiivity;
 import com.mg.shineglass.Quotation_Activity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.MyQuotation;
@@ -47,7 +48,8 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yyyy");
     MyRequestItemHolder.date.setText(simpleDateFormat.format(quotation.getDate()));
 
-    if(quotation.getValuation())
+
+    if(quotation.getValuation() && !quotation.getAccept())
     {
         MyRequestItemHolder.reject.setVisibility(View.VISIBLE);
         MyRequestItemHolder.accept.setVisibility(View.VISIBLE);
@@ -65,14 +67,21 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
 
     MyRequestItemHolder.view.setOnClickListener(v -> {
         Intent intent=new Intent(MyRequestItemHolder.itemView.getContext(), Quotation_Activity.class);
-        intent.putExtra("quotationNo",quotation.getQuotationNo());
+        intent.putExtra("quotation",quotation.getQuotationNo());
         intent.putExtra("url",quotation.getUrl());
+        intent.putExtra("total",String.valueOf(quotation.getTotal()));
+        intent.putExtra("date",simpleDateFormat.format(quotation.getDate()));
         MyRequestItemHolder.itemView.getContext().startActivity(intent);
     });
 
 
         MyRequestItemHolder.accept.setOnClickListener(v -> {
-            Toast.makeText(MyRequestItemHolder.itemView.getContext(), "Accepted", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(MyRequestItemHolder.itemView.getContext(), My_Address_Actiivity.class);
+            intent.putExtra("quotation",quotation.getQuotationNo());
+            intent.putExtra("total",String.valueOf(quotation.getTotal()));
+            intent.putExtra("url",quotation.getUrl());
+            intent.putExtra("date",simpleDateFormat.format(quotation.getDate()));
+            MyRequestItemHolder.itemView.getContext().startActivity(intent);
         });
 
         MyRequestItemHolder.reject.setOnClickListener(v -> {

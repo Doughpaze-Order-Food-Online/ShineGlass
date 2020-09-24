@@ -137,4 +137,7 @@
     <string name="my_addresses">my addresses</string>
     <string name="saved_addresses">Saved Addresses</string>
     <string name="add_new">Add New +</string>
+
+    <string name="service_not_available">Error</string>
+    <string name="no_address_found">Address Not Foubd</string>
 </resources>

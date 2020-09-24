@@ -37,6 +37,9 @@ public class MyQuotation {
     @SerializedName("valuation")
     Boolean  valuation;
 
+    @SerializedName("accept")
+    Boolean  accept;
+
     @SerializedName("url")
     String url;
 
@@ -83,5 +86,38 @@ public class MyQuotation {
         return quotation;
     }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public void setQuotationNo(String quotationNo) {
+        QuotationNo = quotationNo;
+    }
+
+
+    public void setValuation(Boolean valuation) {
+        this.valuation = valuation;
+    }
+
+    public Boolean getAccept() {
+        return accept;
+    }
+
+    public void setAccept(Boolean accept) {
+        this.accept = accept;
+    }
 }
+
+

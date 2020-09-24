@@ -19,14 +19,17 @@ public class Quotation_Activity extends Activity {
     private ProgressBar loading;
     private TextView quotation;
     private RelativeLayout accept,reject;
+    String Quotation,url,date,total;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quotation_fragment);
         Intent intent=getIntent();
-        String quotationNo=intent.getStringExtra("quotationNo");
-        String url=intent.getStringExtra("url");
+        Quotation=intent.getStringExtra("quotation");
+        url=intent.getStringExtra("url");
+        date=intent.getStringExtra("date");
+        total=intent.getStringExtra("total");
 
         pdf=findViewById(R.id.webView);
         loading=findViewById(R.id.loading);
@@ -34,7 +37,7 @@ public class Quotation_Activity extends Activity {
         accept=findViewById(R.id.accept_btn);
         reject=findViewById(R.id.reject_btn);
 
-        quotation.setText(quotationNo);
+        quotation.setText(Quotation);
         loading.setVisibility(View.VISIBLE);
       pdf.setVisibility(View.GONE);
       pdf.getSettings().setJavaScriptEnabled(true);
@@ -58,7 +61,13 @@ public class Quotation_Activity extends Activity {
         });
 
         accept.setOnClickListener(v -> {
-            Toast.makeText(this, "Accepted", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent(Quotation_Activity.this, My_Address_Actiivity.class);
+            i.putExtra("quotation",Quotation);
+            i.putExtra("total",total);
+            i.putExtra("url",url);
+            i.putExtra("date",date);
+            startActivity(i);
+            finish();
         });
 
         reject.setOnClickListener(v -> {

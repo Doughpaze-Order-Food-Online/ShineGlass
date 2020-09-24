@@ -43,6 +43,7 @@ public class ShineGlassSplashActivity extends AppCompatActivity {
     private Handler handler;
     private  Runnable runnable;
     private SharedPreferences mSharedPreferences;
+    private Intent i;
 
 
     @Override
@@ -54,7 +55,15 @@ public class ShineGlassSplashActivity extends AppCompatActivity {
         mSubscriptions = new CompositeSubscription();
 
         runnable= () -> {
-            Intent i = new Intent(ShineGlassSplashActivity.this,MainActivity.class);
+            if(mSharedPreferences.getString("token", null) == null)
+            {
+                i= new Intent(ShineGlassSplashActivity.this,LoginSignUpActivity.class);
+            }
+            else
+            {
+                i= new Intent(ShineGlassSplashActivity.this,MainActivity.class);
+            }
+
             startActivity(i);
             finish();
         };

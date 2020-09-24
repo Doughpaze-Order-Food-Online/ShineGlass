@@ -7,7 +7,8 @@
     android:layout_marginTop="8dp"
     android:paddingLeft="32dp"
     android:paddingRight="32dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".New_Address_Activity">
 
     <View
         android:layout_width="match_parent"
@@ -78,6 +79,8 @@
         android:background="@drawable/edt_bg_selector"
         android:hint="@string/enter_address_manually"
         android:layout_marginTop="16dp"
+        android:minLines="3"
+        android:maxLines="10"
         android:textColorHint="@color/BlackTextColor"
         android:textSize="12sp"
         android:inputType="number"
@@ -92,6 +95,7 @@
         android:background="@color/MediumGrayColor"/>
 
     <CheckBox
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_for_future"
