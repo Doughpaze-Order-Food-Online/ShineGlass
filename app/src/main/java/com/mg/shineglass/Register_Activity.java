@@ -1,11 +1,13 @@
 package com.mg.shineglass;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,6 +46,7 @@ public class Register_Activity extends AppCompatActivity {
     private TextInputLayout username_Layout,
             email_Layout,mobile_Layout,
             password_Layout,rpassword_layout;
+    private ProgressDialog progressDialog;
 
     private EditText username_EditText,
             email_EditText,mobile_EditText,
@@ -173,6 +176,13 @@ public class Register_Activity extends AppCompatActivity {
 
 
     private void SEND_OTP(User u) {
+
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.progress_loading);
+        Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
+
 
         mSubscriptions.add(
                 networkUtils.getRetrofit().REGISTER_OTP(u)
