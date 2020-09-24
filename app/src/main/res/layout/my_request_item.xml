@@ -18,8 +18,6 @@
         android:paddingRight="16dp"
         android:paddingBottom="16dp">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +27,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="2">
 
             <TextView
                 android:id="@+id/request_no_txt"
@@ -42,14 +40,15 @@
 
             <TextView
                 android:id="@+id/request_no"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/request_no_txt"
+                android:layout_toStartOf="@id/dash_line_1"
                 android:fontFamily="sans-serif-medium"
                 android:minWidth="48dp"
                 android:text="@string/_123"
                 android:textColor="@color/BlackTextColor"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
             <View
                 android:id="@+id/dash_line_1"
@@ -86,7 +85,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/_12_10_2020"
                 android:textColor="@color/BlackTextColor"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
             <View
                 android:id="@+id/dash_line_2"
@@ -109,9 +108,9 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:gravity="center"
-                android:paddingLeft="16dp"
+                android:paddingLeft="8dp"
                 android:paddingTop="4dp"
-                android:paddingRight="16dp"
+                android:paddingRight="8dp"
                 android:paddingBottom="4dp">
 
                 <TextView
