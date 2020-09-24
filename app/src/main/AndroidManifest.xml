@@ -18,10 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditDetailsPopUpActivity"
+
+        <activity android:name=".ResetPassword"
             android:screenOrientation="portrait"
             android:theme="@style/Theme_Edit_details"/>
 
+        <activity
+            android:name=".EditDetailsPopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_Edit_details" />
         <activity
             android:name=".ShineGlassSplashActivity"
             android:screenOrientation="portrait"
@@ -73,7 +78,6 @@
             android:name=".UploadActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme_Edit_details" />
-
         <activity
             android:name=".Quotation_Activity"
             android:screenOrientation="portrait" />

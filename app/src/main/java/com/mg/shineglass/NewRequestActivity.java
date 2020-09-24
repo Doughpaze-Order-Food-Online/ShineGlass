@@ -80,9 +80,12 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
     final int REQUEST_EXTERNAL_STORAGE = 100;
     private RelativeLayout button;
     private EditText Ethickness, Ewidth, Eheight, Equantity;
-    private String[] floatNum = new String[10000];
+    private String[] floatNum = new String[100];
     private ImageView backbtn;
     private long mLastClickTime = 0;
+    private Button b1,b2;
+    private NumberPicker np;
+
     public NewRequestActivity() {
         // Required empty public constructor
     }
@@ -504,14 +507,15 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         final Dialog d = new Dialog(NewRequestActivity.this);
         Objects.requireNonNull(d.getWindow()).setLayout(240, ViewGroup.LayoutParams.WRAP_CONTENT);
         d.setContentView(R.layout.number_picker_dialogue);
-        Button b1 = (Button) d.findViewById(R.id.button1);
-        Button b2 = (Button) d.findViewById(R.id.button2);
+        b1 = (Button) d.findViewById(R.id.button1);
+        b2 = (Button) d.findViewById(R.id.button2);
         TextView title=d.findViewById(R.id.title);
         title.setText(edt.getHint()+" in "+ rd.getText());
-        final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
+        np = (NumberPicker) d.findViewById(R.id.numberPicker1);
         np.setMaxValue(floatNum.length-1);
         np.setMinValue(0);
         np.setWrapSelectorWheel(false);
+        if(floatNum!=null)
         np.setDisplayedValues(floatNum);
         np.setOnValueChangedListener(this);
         b1.setOnClickListener(v -> {
@@ -522,21 +526,28 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         d.show();
     }
 
-    public class FloatNumber extends AsyncTask<Void,Void,Void>{
+    public class FloatNumber extends AsyncTask<Void,Void,String[]>{
 
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected String[] doInBackground(Void... voids) {
             float n=0;
-            for(int j=0;j<10000;j++)
+            for(int j=0;j<100;j++)
             {
                 n+=0.1;
                 DecimalFormat dec=new DecimalFormat("#0.0");
                 floatNum[j]= dec.format(n);
             }
 
-            return null;
+            return floatNum;
+        }
+
+        @Override
+        protected void onPostExecute(String[] strings) {
+            super.onPostExecute(strings);
         }
     }
 
 }
+
+

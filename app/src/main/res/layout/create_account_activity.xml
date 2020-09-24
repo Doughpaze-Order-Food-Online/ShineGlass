@@ -148,6 +148,7 @@
                         app:hintAnimationEnabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:passwordToggleEnabled="true"
                         android:textColorHint="@color/BlackTextColor"
                         app:startIconDrawable="@drawable/keyfinal"
                         app:startIconTint="@color/colorPrimaryDark">
@@ -174,6 +175,7 @@
                         app:hintAnimationEnabled="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:passwordToggleEnabled="true"
                         android:textColorHint="@color/BlackTextColor"
                         app:startIconDrawable="@drawable/keyfinal"
                         app:startIconTint="@color/colorPrimaryDark">

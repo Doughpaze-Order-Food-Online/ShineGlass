@@ -27,6 +27,27 @@
             android:textColor="@color/whiteTextColor"
             android:textSize="16sp" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/my_cart_btn"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginRight="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/addtocart"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp"
+                app:tint="@color/colorPrimaryDark" />
+
+        </androidx.cardview.widget.CardView>
+
     </FrameLayout>
 
     <TextView
@@ -62,6 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/type_of_glass_txt">
 
@@ -224,9 +246,9 @@
                     android:id="@+id/quantity_edt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:cursorVisible="false"
                     android:autofillHints="no"
                     android:background="@drawable/edt_bg_selector"
+                    android:cursorVisible="false"
                     android:hint="@string/quantity"
                     android:inputType="number"
                     android:textColorHint="@color/BlackTextColor"
