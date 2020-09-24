@@ -1,11 +1,13 @@
 package com.mg.shineglass;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,7 +50,6 @@ public class Register_Activity extends AppCompatActivity {
     private EditText username_EditText,
             email_EditText,mobile_EditText,
             password_EditText,rpassword_EditText;
-    private TextView timer;
 
     private CompositeSubscription mSubscriptions;
     private User user;
@@ -173,6 +174,8 @@ public class Register_Activity extends AppCompatActivity {
 
 
     private void SEND_OTP(User u) {
+
+
 
         mSubscriptions.add(
                 networkUtils.getRetrofit().REGISTER_OTP(u)

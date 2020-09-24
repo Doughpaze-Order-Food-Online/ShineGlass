@@ -250,22 +250,19 @@
                     android:layout_toRightOf="@+id/noAccount_txt" />
             </RelativeLayout>
 
+
+
         </LinearLayout>
+
+
+
 
     </ScrollView>
 
-    <ImageView
-        android:id="@+id/back_btn_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_arrow_back_24"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/colorPrimaryDark"
-        android:contentDescription="@string/todo"
-        android:layout_marginStart="32dp" />
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

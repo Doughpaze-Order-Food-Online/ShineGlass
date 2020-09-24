@@ -39,4 +39,10 @@
         <item name="windowActionBar">false</item>
     </style>
 
+    <style name="CustomProgressBar" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/loading</item>
+
+    </style>
+
 </resources>

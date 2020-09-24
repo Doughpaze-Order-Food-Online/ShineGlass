@@ -14,8 +14,6 @@ public class constants {
     public static final String PHONE= "mobile_no";
 
 
-    private static final String PACKAGE_NAME="com.example.doughpaze";
-
     //paytm gateway
     public static final String MID="BACSyb72631279595265";
 

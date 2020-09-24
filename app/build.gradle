@@ -69,4 +69,7 @@ dependencies {
     // paytm all in one sdk
     implementation 'com.paytm.appinvokesdk:appinvokesdk:1.3'
 
+    //gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+
 }

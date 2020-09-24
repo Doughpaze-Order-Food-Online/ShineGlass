@@ -3,6 +3,7 @@ package com.mg.shineglass;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Collections;
+import java.util.Objects;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
@@ -48,6 +50,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
 
     private static final String EMAIL = "email";
     private static final String AUTH_TYPE = "rerequest";
+
 
 
     private GoogleSignInClient mGoogleSignInClient;
@@ -103,6 +106,8 @@ public class LoginSignUpActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(LoginSignUpActivity.this, gso);
 
         setUpFacebookCallBack();
+
+
     }
 
 
