@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNavigationView;
     private CardView cart;
+    private CardView wallet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         mBottomNavigationView=findViewById(R.id.bottom_nav_menu);
         cart=findViewById(R.id.my_cart_btn);
+
+        wallet=findViewById(R.id.my_wallet_btn);
+
+        wallet.setOnClickListener(view -> {
+            Intent i=new Intent(MainActivity.this,WalletActivity.class);
+            startActivity(i);
+        });
 
         cart.setOnClickListener(v -> {
             Intent i=new Intent(MainActivity.this,CartActivity.class);

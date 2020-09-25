@@ -52,6 +52,7 @@
                 android:id="@+id/my_cart_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="@dimen/dimen_4dp"
                 android:layout_gravity="center_horizontal"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp">
@@ -92,13 +93,14 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/my_wallet_btn"
                 android:layout_width="40dp"
+                android:layout_marginTop="@dimen/dimen_4dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="44dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/rupey"
@@ -119,7 +121,7 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <ScrollView
+    <FrameLayout
         android:id="@+id/bottom_navigation_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"

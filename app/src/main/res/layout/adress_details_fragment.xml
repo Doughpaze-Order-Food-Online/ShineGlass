@@ -4,34 +4,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="8dp"
-    android:paddingLeft="32dp"
-    android:paddingRight="32dp"
+    android:paddingTop="@dimen/dimen_16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:orientation="vertical"
     tools:context=".New_Address_Activity">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/LightGrayColor"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/address_details"
-        android:textAllCaps="true"
-        android:textSize="18sp"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="@color/LightBlackColor"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/back_btn_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryDark"
+            android:tint="@color/colorPrimaryDark"
+            android:contentDescription="@string/todo"
+            tools:ignore="UseAppTint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address_details"
+            android:textAllCaps="true"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/LightBlackColor"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"/>
+
+    </FrameLayout>
+
 
     <RelativeLayout
         android:id="@+id/cancel_btn"
         android:layout_width="208dp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="@dimen/dimen_16dp"
         android:layout_marginTop="16dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
@@ -81,27 +98,19 @@
         android:layout_marginTop="16dp"
         android:minLines="3"
         android:maxLines="10"
-        android:textColorHint="@color/BlackTextColor"
         android:textSize="12sp"
         android:inputType="textMultiLine"
         android:textColor="@color/BlackTextColor"
         android:autofillHints="@null"
         tools:ignore="TextFields" />
 
-    <View
-        android:layout_marginTop="48dp"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/MediumGrayColor"/>
 
     <CheckBox
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_for_future"
-        android:layout_marginTop="64dp"
-        android:buttonTint="@color/MediumGrayColor"
-        app:buttonTint="@color/MediumGrayColor"
+        android:layout_marginTop="32dp"
         android:textSize="12sp"/>
 
     <RelativeLayout

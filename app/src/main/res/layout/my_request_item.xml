@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_marginTop="@dimen/dimen_8dp"
+    android:layout_marginBottom="@dimen/dimen_8dp"
+    android:layout_marginRight="@dimen/dimen_16dp"
+    android:layout_marginLeft="@dimen/dimen_16dp"
     app:cardCornerRadius="2dp"
     app:cardElevation="8dp">
 
@@ -27,7 +30,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_weight="1.5">
 
             <TextView
                 android:id="@+id/request_no_txt"

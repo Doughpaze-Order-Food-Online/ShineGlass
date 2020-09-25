@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="64dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
         android:orientation="vertical"
         android:layout_marginStart="16dp">
 
@@ -20,28 +22,30 @@
             android:layout_height="wrap_content"
             android:text="CATEGORY"
             android:textAllCaps="true"
-            android:layout_marginTop="2dp"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
+            android:textColor="@color/PrimaryTextColor"
+            android:fontFamily="sans-serif-medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/subcategory"
+            android:textAllCaps="true"
+            android:layout_marginTop="8dp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/PrimaryTextColor"
             android:fontFamily="sans-serif-medium"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SUBCATEGORY"
-            android:textAllCaps="true"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:textColor="@color/PrimaryTextColor"
-            android:fontFamily="sans-serif-medium"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="THICKNESS"
+            android:text="@string/thickness"
             android:layout_marginTop="8dp"
             android:textAllCaps="true"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/PrimaryTextColor"
             android:fontFamily="sans-serif-medium"/>
 
@@ -51,7 +55,8 @@
             android:text="@string/width"
             android:layout_marginTop="8dp"
             android:textAllCaps="true"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/PrimaryTextColor"
             android:fontFamily="sans-serif-medium"/>
 
@@ -61,7 +66,8 @@
             android:text="@string/height"
             android:textAllCaps="true"
             android:layout_marginTop="8dp"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/PrimaryTextColor"
             android:fontFamily="sans-serif-medium"/>
 
@@ -71,17 +77,19 @@
             android:text="@string/quantity"
             android:textAllCaps="true"
             android:layout_marginTop="8dp"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/PrimaryTextColor"
             android:fontFamily="sans-serif-medium"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SCALE"
+            android:text="@string/scale"
             android:textAllCaps="true"
             android:layout_marginTop="8dp"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/PrimaryTextColor"
             android:fontFamily="sans-serif-medium"/>
 
@@ -93,6 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
         android:layout_gravity="end"
         android:orientation="vertical"
         android:layout_marginEnd="16dp">
@@ -103,7 +112,8 @@
             android:layout_height="wrap_content"
             android:text="158"
             android:textAllCaps="true"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/BlackTextColor"
             android:fontFamily="sans-serif-medium"/>
 
@@ -114,7 +124,8 @@
             android:text="@string/_11_05_2020"
             android:layout_marginTop="8dp"
             android:textAllCaps="true"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/BlackTextColor"
             android:fontFamily="sans-serif-medium"/>
         <TextView
@@ -124,7 +135,8 @@
             android:text="@string/_11_05_2020"
             android:layout_marginTop="8dp"
             android:textAllCaps="true"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/BlackTextColor"
             android:fontFamily="sans-serif-medium"/>
         <TextView
@@ -134,7 +146,8 @@
             android:text="@string/_11_05_2020"
             android:layout_marginTop="8dp"
             android:textAllCaps="true"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/BlackTextColor"
             android:fontFamily="sans-serif-medium"/>
 
@@ -145,7 +158,8 @@
             android:text="@string/in_transit"
             android:textAllCaps="true"
             android:layout_marginTop="8dp"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/BlackTextColor"
             android:fontFamily="sans-serif-medium"/>
 
@@ -156,7 +170,8 @@
             android:text="@string/in_transit"
             android:textAllCaps="true"
             android:layout_marginTop="8dp"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/BlackTextColor"
             android:fontFamily="sans-serif-medium"/>
 
@@ -167,7 +182,8 @@
             android:text="@string/in_transit"
             android:textAllCaps="true"
             android:layout_marginTop="8dp"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
             android:textColor="@color/BlackTextColor"
             android:fontFamily="sans-serif-medium"/>
 
@@ -179,13 +195,11 @@
         android:layout_height="30dp"
         android:background="@drawable/login_bordershape"
         android:text="@string/remove"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
         android:layout_gravity="bottom|center_horizontal"
         android:textAllCaps="true"
         android:textSize="12sp"
-        android:textColor="@color/whiteTextColor"
-        android:layout_marginStart="16dp" />
+        android:textColor="@color/whiteTextColor" />
 
 </androidx.cardview.widget.CardView>

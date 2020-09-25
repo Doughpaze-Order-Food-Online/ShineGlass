@@ -4,24 +4,43 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="8dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".WalletActivity">
 
-    <View
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/LightGrayColor"/>
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/my_requests"
-        android:textAllCaps="true"
-        android:textSize="18sp"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="@color/LightBlackColor"
-        android:layout_marginTop="32dp"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_marginTop="@dimen/dimen_16dp">
+
+        <ImageView
+            android:id="@+id/back_btn_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryDark"
+            android:tint="@color/colorPrimaryDark"
+            android:contentDescription="@string/todo"
+            android:layout_marginStart="16dp"
+            tools:ignore="UseAppTint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wallet"
+            android:textAllCaps="true"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/LightBlackColor"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"/>
+
+    </FrameLayout>
+
 
     <RelativeLayout
         android:id="@+id/login_with_facebook_btn"
@@ -155,9 +174,8 @@
         android:id="@+id/transactions_container_card"
         android:layout_below="@id/my_transactions_txt"
         android:layout_width="match_parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:visibility="gone"
+        android:layout_margin="@dimen/dimen_16dp"
         android:layout_height="wrap_content"
         app:cardElevation="2dp">
 

@@ -1,318 +1,455 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="8dp"
     android:orientation="vertical"
     tools:context=".Order_Confirmation_Activity">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/LightGrayColor"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/order_and_payment_details"
-        android:textAllCaps="true"
-        android:textSize="18sp"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="@color/LightBlackColor"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal"/>
-
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="8dp">
+        android:layout_marginTop="@dimen/dimen_16dp">
+
+        <ImageView
+            android:id="@+id/back_btn_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:tint="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryDark"
+            tools:ignore="UseAppTint" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/order_and_payment_details"
+            android:textAllCaps="true"
+            android:textColor="@color/LightBlackColor"
+            android:textSize="18sp" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp"
-            android:paddingBottom="16dp"
-            android:paddingTop="24dp">
+            android:orientation="vertical">
 
-            <RelativeLayout
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_16dp"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="4dp">
 
-                <TextView
-                    android:id="@+id/request_no_txt"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/request_no"
-                    android:textAllCaps="true"
-                    android:textSize="8sp"
-                    tools:ignore="SmallSp" />
-                <TextView
-                    android:id="@+id/request_no.value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minWidth="48dp"
-                    android:layout_below="@id/request_no_txt"
-                    android:textSize="14sp"
-                    android:text="@string/_123"
-                    android:textColor="@color/BlackTextColor"
-                    android:fontFamily="sans-serif-medium" />
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="16dp">
 
-                <View
-                    android:id="@+id/dash_line_1"
-                    android:layout_width="0.5dp"
-                    android:layout_height="40dp"
-                    android:background="@color/MediumGrayColor"
-                    android:layout_toEndOf="@id/request_no.value"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_toRightOf="@id/request_no.value"
-                    android:layout_marginStart="16dp" />
+                    <LinearLayout
+                        android:id="@+id/order_details_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/date_txt"
-                    android:layout_toEndOf="@id/dash_line_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/date"
-                    android:textAllCaps="true"
-                    android:textSize="8sp"
-                    tools:ignore="SmallSp"
-                    android:layout_toRightOf="@id/dash_line_1" />
-                <TextView
-                    android:id="@+id/date_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/date_txt"
-                    android:layout_toEndOf="@id/dash_line_1"
-                    android:textSize="14sp"
-                    android:text="@string/_12_10_2020"
-                    android:textColor="@color/BlackTextColor"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_toRightOf="@id/dash_line_1" />
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5">
 
-                <View
-                    android:id="@+id/dash_line_2"
-                    android:layout_width="0.5dp"
-                    android:layout_height="40dp"
-                    android:background="@color/LightGrayColor"
-                    android:layout_toEndOf="@id/date_value"
-                    android:layout_marginLeft="16dp"
-                    android:layout_toRightOf="@id/date_value"
-                    android:layout_marginStart="16dp" />
+                            <TextView
+                                android:id="@+id/request_no_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/request_no"
+                                android:textAllCaps="true"
+                                android:textSize="8sp"
+                                tools:ignore="SmallSp" />
 
-                <RelativeLayout
-                    android:id="@+id/request_quotation_btn"
-                    android:layout_toRightOf="@id/dash_line_2"
-                    android:layout_width="128dp"
-                    android:gravity="center"
-                    android:paddingTop="4dp"
-                    android:layout_marginLeft="16dp"
-                    android:paddingBottom="4dp"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/login_bordershape"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/dash_line_2">
+                            <TextView
+                                android:id="@+id/request_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/request_no_txt"
+                                android:layout_toStartOf="@id/dash_line_1"
+                                android:fontFamily="sans-serif-medium"
+                                android:minWidth="48dp"
+                                android:text="@string/_123"
+                                android:textColor="@color/BlackTextColor"
+                                android:textSize="10sp" />
 
-                    <TextView
-                        android:id="@+id/request_quotation_txt"
+                            <View
+                                android:id="@+id/dash_line_1"
+                                android:layout_width="0.5dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginRight="8dp"
+                                android:background="@color/MediumGrayColor" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/date_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/date"
+                                android:textAllCaps="true"
+                                android:textSize="8sp"
+                                tools:ignore="SmallSp" />
+
+                            <TextView
+                                android:id="@+id/date_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/date_txt"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@string/_12_10_2020"
+                                android:textColor="@color/BlackTextColor"
+                                android:textSize="10sp" />
+
+                            <View
+                                android:id="@+id/dash_line_2"
+                                android:layout_width="0.5dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="8dp"
+                                android:background="@color/MediumGrayColor" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/request_quotation_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="2"
+                            android:background="@drawable/login_bordershape"
+                            android:gravity="center"
+                            android:paddingLeft="8dp"
+                            android:paddingTop="4dp"
+                            android:paddingRight="8dp"
+                            android:paddingBottom="4dp"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:id="@+id/request_quotation_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@id/eye_img"
+                                android:layout_toRightOf="@id/eye_img"
+                                android:fontFamily="sans-serif-medium"
+                                android:gravity="center_horizontal"
+                                android:text="@string/view_quotation"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/whiteTextColor"
+                                android:textSize="8sp"
+                                android:textStyle="bold"
+                                tools:ignore="SmallSp" />
+
+                            <ImageView
+                                android:id="@+id/eye_img"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="4dp"
+                                android:layout_marginRight="4dp"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/eye"
+                                app:tint="@color/whiteTextColor" />
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="24dp"
+                        android:background="@color/LightGrayColor" />
+
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="@string/view_quotation"
-                        android:layout_toEndOf="@id/eye_img"
-                        android:fontFamily="sans-serif-medium"
-                        android:textAllCaps="true"
-                        android:textColor="@color/whiteTextColor"
-                        android:textSize="8sp"
-                        android:textStyle="bold"
-                        tools:ignore="SmallSp"
-                        android:layout_toRightOf="@id/eye_img" />
-                    <ImageView
-                        android:id="@+id/eye_img"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/eye"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="4dp"
-                        android:contentDescription="@string/todo"
-                        android:layout_marginEnd="4dp"
-                        app:tint="@color/whiteTextColor" />
+                        android:layout_gravity="right"
+                        android:layout_marginTop="16dp">
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/total_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/total"
+                            android:textAllCaps="true"
+                            android:textColor="@color/LightBlackColor"
+                            android:textSize="12sp" />
 
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/total_charge_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_toEndOf="@id/total_txt"
+                            android:layout_toRightOf="@id/total_txt"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/_1400"
+                            android:textColor="@color/BlackTextColor"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="24dp"
-                android:background="@color/LightGrayColor"/>
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/LightGrayColor" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/redeem_wallet_amount"
+                android:textColor="@color/BlackTextColor" />
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/wallet_cash_history_block"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="16dp">
-            <TextView
-                android:id="@+id/total_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/total"
-                android:textColor="@color/LightBlackColor"
-                android:textSize="12sp"
-                android:fontFamily="sans-serif-medium"
-                android:textAllCaps="true"/>
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:background="@drawable/webview_border"
+                android:paddingStart="16dp"
+                android:paddingLeft="16dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp">
 
-            <TextView
-                android:id="@+id/total_charge_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/total_txt"
-                android:layout_marginStart="4dp"
-                android:textSize="16sp"
-                android:text="@string/_1400"
-                android:textColor="@color/BlackTextColor"
-                android:fontFamily="sans-serif-medium"
-                android:layout_toRightOf="@id/total_txt"
-                android:layout_marginLeft="4dp" />
+                <TextView
+                    android:id="@+id/wallet_cash_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/transparent"
+                    android:text="@string/wallet_cash"
+                    android:textAllCaps="true"
+                    android:textColor="@color/LightBlackColor"
+                    android:textSize="12sp" />
+
+                <View
+                    android:id="@+id/vertical_dash_line_1"
+                    android:layout_width="0.5dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_toEndOf="@id/wallet_cash_txt"
+                    android:layout_toRightOf="@id/wallet_cash_txt"
+                    android:background="@color/MediumGrayColor" />
+
+                <TextView
+                    android:id="@+id/rupay_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toEndOf="@id/vertical_dash_line_1"
+                    android:layout_toRightOf="@id/vertical_dash_line_1"
+                    android:background="@android:color/transparent"
+                    android:text="@string/rupey"
+                    android:textAllCaps="true"
+                    android:textColor="@color/LightBlackColor"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/wallet_cash_value_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toEndOf="@id/rupay_txt"
+                    android:layout_toRightOf="@id/rupay_txt"
+                    android:background="@android:color/transparent"
+                    android:text="@string/_1400"
+                    android:textAllCaps="true"
+                    android:textColor="@color/LightBlackColor"
+                    android:textSize="14sp" />
 
             </RelativeLayout>
 
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:background="@color/LightGrayColor"
-        android:layout_marginTop="16dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delivery_address"
-        android:textColor="@color/BlackTextColor"
-        android:fontFamily="sans-serif-medium"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp"
-            android:paddingBottom="16dp"
-            android:paddingTop="8dp">
-
-            <TextView
-                android:id="@+id/name_txt"
+            <CheckBox
+                android:id="@+id/redeem_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/BlackTextColor"
-                android:text="@string/shikha_das"
-                tools:ignore="SmallSp" />
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Redeem"
+                android:textSize="@dimen/dimen_12sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/LightGrayColor" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/delivery_address"
+                android:textColor="@color/BlackTextColor" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_16dp">
+
+                    <TextView
+                        android:id="@+id/name_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shikha_das"
+                        android:textColor="@color/BlackTextColor"
+                        android:textSize="12sp"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <RadioGroup
+                android:id="@+id/mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/offline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+
+                    android:text="@string/cash_on_delivery"
+                    android:textSize="12sp"
+                    tools:ignore="SmallSp" />
+
+                <RadioButton
+                    android:id="@+id/online"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/pay_online_credit_card_debit_card_upi"
+                    android:textSize="12sp"
+                    tools:ignore="SmallSp" />
+            </RadioGroup>
+
+            <RelativeLayout
+                android:id="@+id/place_order_btn"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/login_bordershape"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+
+                <TextView
+                    android:id="@+id/place_order_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/place_order"
+                    android:textAllCaps="true"
+                    android:textColor="@color/whiteTextColor"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toEndOf="@id/place_order_txt"
+                    android:layout_toRightOf="@id/place_order_txt"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/addtocart" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 
-
-    </androidx.cardview.widget.CardView>
-
-    <RadioGroup
-        android:id="@+id/mode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp">
-
-        <RadioButton
-            android:id="@+id/offline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/MediumGrayColor"
-            app:buttonTint="@color/MediumGrayColor"
-            android:text="@string/cash_on_delivery"
-
-            android:textSize="12sp"
-            android:fontFamily="sans-serif-medium"
-            tools:ignore="SmallSp" />
-
-        <RadioButton
-            android:id="@+id/online"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:buttonTint="@color/MediumGrayColor"
-            app:buttonTint="@color/MediumGrayColor"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/pay_online_credit_card_debit_card_upi"
-            android:textSize="12sp"
-            tools:ignore="SmallSp" />
-    </RadioGroup>
-
-    <RelativeLayout
-        android:id="@+id/place_order_btn"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/login_bordershape"
-        android:gravity="center"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:layout_marginStart="32dp">
-
-        <TextView
-            android:id="@+id/place_order_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/place_order"
-            android:textAllCaps="true"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="@color/whiteTextColor"
-            android:textSize="10sp"
-            tools:ignore="SmallSp" />
-
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_toEndOf="@id/place_order_txt"
-            android:layout_toRightOf="@id/place_order_txt"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/addtocart" />
-
-    </RelativeLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -36,9 +36,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/saved_addresses_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/add_new_button"
@@ -82,7 +80,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/colorPrimaryDark"
+        android:tint="@color/colorPrimaryDark"
         android:contentDescription="@string/todo"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        tools:ignore="UseAppTint" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,37 +6,34 @@
     android:background="@android:color/white"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
-
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="vertical"
-            android:paddingBottom="32dp">
+            android:paddingBottom="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cart_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp" />
+                android:layout_height="0dp"
+                android:layout_weight="5.5"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
 
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="24dp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:visibility="gone"
                 android:text="@string/images_pdf_uploaded"
@@ -47,18 +44,20 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/uploaded_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:layout_marginTop="@dimen/dimen_16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp" />
 
             <RelativeLayout
                 android:id="@+id/request"
                 android:layout_width="208dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
                 android:layout_gravity="center_horizontal"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="6dp"
                 android:background="@drawable/login_bordershape"
                 android:gravity="center"
                 android:paddingTop="12dp"
@@ -90,8 +89,6 @@
 
         </LinearLayout>
 
-    </ScrollView>
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -109,11 +106,10 @@
 
     <ImageView
         android:id="@+id/back_btn_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:contentDescription="@string/todo"
         android:tint="@color/colorPrimaryDark"
         android:src="@drawable/ic_baseline_arrow_back_24"

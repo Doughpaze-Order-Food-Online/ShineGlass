@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -48,12 +50,16 @@ public class Order_Confirmation_Activity extends Activity {
     private long mLastClickTime = 0;
     private String  TAG ="order_confirm_activity";
     private Integer ActivityRequestCode = 2;
+    private ImageView backBtnImg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_and_payment_details_fragment);
         mSubscriptions = new CompositeSubscription();
+
+        backBtnImg=findViewById(R.id.back_btn_img);
+        backBtnImg.setOnClickListener(view -> finish());
 
         Intent intent=getIntent();
         Quotation=intent.getStringExtra("quotation");
@@ -62,7 +68,7 @@ public class Order_Confirmation_Activity extends Activity {
         Address=intent.getStringExtra("address");
         Date=intent.getStringExtra("date");
 
-        quotation=findViewById(R.id.request_no_value);
+        quotation=findViewById(R.id.request_no);
         date=findViewById(R.id.date_value);
         address=findViewById(R.id.name_txt);
         total=findViewById(R.id.total_charge_value);
