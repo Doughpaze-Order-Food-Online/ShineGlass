@@ -114,7 +114,9 @@ public class Save_Profile_Otp extends AppCompatActivity {
 
     private void SAVE_PROFILE() {
         viewDialog.showDialog();
-        mSubscriptions.add(networkUtils.getRetrofit().SAVE_PROFILE_DETAILS(user)
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null)).SAVE_PROFILE_DETAILS(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse2,this::handleError));

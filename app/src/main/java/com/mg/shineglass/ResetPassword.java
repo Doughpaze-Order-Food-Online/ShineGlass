@@ -2,7 +2,9 @@ package com.mg.shineglass;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -97,8 +99,11 @@ public class ResetPassword extends AppCompatActivity {
 
             viewDialog.showDialog();
 
+            SharedPreferences sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(this);
+
             mSubscriptions.add(
-                    networkUtils.getRetrofit().RESET_PASSWORD(user)
+                    networkUtils.getRetrofit(sharedPreferences.getString("token", null)).RESET_PASSWORD(user)
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
                             .subscribe(this::handleResponse,this::handleError));

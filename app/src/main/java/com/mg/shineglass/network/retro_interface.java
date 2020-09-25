@@ -67,6 +67,12 @@ public interface retro_interface {
     @POST("auth/number_login")
     Observable<LoginResponse> NUMBER_LOGIN(@Body User user);
 
+    @POST("auth/reset_password")
+    Observable<BasicResponse> RESET_PASSWORD(@Body User user);
+
+    @POST("auth/save_profile")
+    Observable<BasicResponse> SAVE_PROFILE_DETAILS(@Body User user);
+
     @Multipart
     @POST("quotation")
     Observable<Response<LoginResponse>> REQUEST_QUOTATION(@Part List<MultipartBody.Part> files, @Part("quotation") ArrayList<Quotation> quotation, @Query("mobile") String mobile);
@@ -91,8 +97,7 @@ public interface retro_interface {
     Observable<Integer> PLACE_ONLINE_ORDER(@Query("mid") String mid, @Body PaymentDetails paymentDetails, @Query("quotation") String Quotation);
 
 
-    @POST("save_profile")
-    Observable<BasicResponse> SAVE_PROFILE_DETAILS(@Body User user);
+
 
 
     @GET("order")
@@ -102,8 +107,7 @@ public interface retro_interface {
     Observable<String> GET_TOKEN(@Query("mid") String mid,@Body FinalOrder finalOrder);
 
 
-    @POST("reset_password")
-    Observable<BasicResponse> RESET_PASSWORD(@Body User user);
+
 
 
 }

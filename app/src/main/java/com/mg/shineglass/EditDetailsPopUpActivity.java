@@ -161,8 +161,11 @@ public class EditDetailsPopUpActivity extends AppCompatActivity {
 
                if(change)
                {
+                   SharedPreferences sharedPreferences = PreferenceManager
+                           .getDefaultSharedPreferences(this);
+                   viewDialog.showDialog();
                    mSubscriptions.add(
-                           networkUtils.getRetrofit().SAVE_PROFILE_DETAILS(user)
+                           networkUtils.getRetrofit(sharedPreferences.getString("token", null)).SAVE_PROFILE_DETAILS(user)
                                    .observeOn(AndroidSchedulers.mainThread())
                                    .subscribeOn(Schedulers.io())
                                    .subscribe(this::handleResponse2,this::handleError));
