@@ -52,6 +52,7 @@
                 android:id="@+id/my_cart_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="@dimen/dimen_4dp"
                 android:layout_gravity="center_horizontal"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp">
@@ -92,6 +93,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/my_wallet_btn"
                 android:layout_width="40dp"
+                android:layout_marginTop="@dimen/dimen_4dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 app:cardCornerRadius="20dp"

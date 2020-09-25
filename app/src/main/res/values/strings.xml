@@ -147,5 +147,6 @@
     <string name="wallet">wallet</string>
     <string name="scale">SCALE</string>
     <string name="subcategory">SUBCATEGORY</string>
+    <string name="redeem_wallet_amount">Redeem Wallet Amount</string>
 
 </resources>
