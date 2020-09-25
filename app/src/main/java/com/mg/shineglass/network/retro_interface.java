@@ -91,11 +91,19 @@ public interface retro_interface {
     Observable<Integer> PLACE_ONLINE_ORDER(@Query("mid") String mid, @Body PaymentDetails paymentDetails, @Query("quotation") String Quotation);
 
 
+    @POST("save_profile")
+    Observable<BasicResponse> SAVE_PROFILE_DETAILS(@Body User user);
+
+
     @GET("order")
     Observable<List<MyOrders>> GET_ORDERS();
 
     @POST("token")
     Observable<String> GET_TOKEN(@Query("mid") String mid,@Body FinalOrder finalOrder);
+
+
+    @POST("reset_password")
+    Observable<BasicResponse> RESET_PASSWORD(@Body User user);
 
 
 }

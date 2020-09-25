@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,10 +38,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MyAccountFragment extends Fragment {
 
     private TextView name, mobile_no, email;
-    private Button logout,myaddress;
+    private Button logout;
+    private RelativeLayout myaddress,reset_password;
     private GoogleSignInClient mGoogleSignInClient;
     private String type;
     CircleImageView circleImageView;
+    SharedPreferences sharedPreferences;
 
     public MyAccountFragment() {
         // Required empty public constructor
@@ -57,10 +60,17 @@ public class MyAccountFragment extends Fragment {
         mobile_no=rootView.findViewById(R.id.phone_no);
         email=rootView.findViewById(R.id.user_email);
         myaddress=rootView.findViewById(R.id.myAddresses_btn);
+        reset_password=rootView.findViewById(R.id.cancel_btn);
 
         logout=rootView.findViewById(R.id.logout_btn);
 
         circleImageView=rootView.findViewById(R.id.profile_icon_img);
+
+
+    reset_password.setOnClickListener(v -> {
+        Intent i=new Intent(getContext(),ResetPassword.class);
+        startActivity(i);
+    });
 
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,8 +85,7 @@ public class MyAccountFragment extends Fragment {
             startActivity(i);
         });
 
-
-        SharedPreferences sharedPreferences = PreferenceManager
+        sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getContext());
 
         name.setText(sharedPreferences.getString(constants.USERNAME,null));
@@ -141,5 +150,17 @@ public class MyAccountFragment extends Fragment {
         Intent intent = new Intent(getActivity(), LoginSignUpActivity.class);
         startActivity(intent);
         Objects.requireNonNull(getActivity()).finish();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+            sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(getContext());
+
+            name.setText(sharedPreferences.getString(constants.USERNAME,null));
+            email.setText(sharedPreferences.getString(constants.EMAIL,null));
+            mobile_no.setText(sharedPreferences.getString(constants.PHONE,null));
     }
 }

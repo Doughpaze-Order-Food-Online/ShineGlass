@@ -65,6 +65,10 @@
             android:name=".Google_Enter_Number"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".OTP_Acitvities.Save_Profile_Otp"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".NewRequestActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -84,7 +88,14 @@
             android:name=".New_Address_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".My_Address_Actiivity"
+            android:name=".My_Address_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".My_Account_Address_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".My_Account_New_Address"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Order_Confirmation_Activity"

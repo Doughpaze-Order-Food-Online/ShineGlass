@@ -36,10 +36,10 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class Google_Otp_Activity extends AppCompatActivity {
+public class Save_Profile_Otp extends AppCompatActivity {
 
     private User user;
-    private String otp,type,token;
+    private String otp;
     private EditText E1;
     private EditText E2;
     private EditText E3;
@@ -62,13 +62,12 @@ public class Google_Otp_Activity extends AppCompatActivity {
         mSubscriptions = new CompositeSubscription();
 
         Intent intent=getIntent();
-        user=new User(intent.getStringExtra("name"),
-                intent.getStringExtra("email"),
-                intent.getStringExtra("password"),
-                intent.getStringExtra("phone"));
-        type=intent.getStringExtra("type");
+        user=new User();
+        user.setMobile(intent.getStringExtra("phone"));
+        user.setEmail(intent.getStringExtra("email"));
+        user.setUsername(intent.getStringExtra("name"));
         otp=intent.getStringExtra("otp");
-        token=intent.getStringExtra("token");
+
 
 
 
@@ -83,10 +82,10 @@ public class Google_Otp_Activity extends AppCompatActivity {
         Resend_block=findViewById(R.id.resend_otp_block);
         resend=findViewById(R.id.signup_txt);
 
-        E1.addTextChangedListener(new Google_Otp_Activity.GenericTextWatcher(E1));
-        E2.addTextChangedListener(new Google_Otp_Activity.GenericTextWatcher(E2));
-        E3.addTextChangedListener(new Google_Otp_Activity.GenericTextWatcher(E3));
-        E4.addTextChangedListener(new Google_Otp_Activity.GenericTextWatcher(E4));
+        E1.addTextChangedListener(new Save_Profile_Otp.GenericTextWatcher(E1));
+        E2.addTextChangedListener(new Save_Profile_Otp.GenericTextWatcher(E2));
+        E3.addTextChangedListener(new Save_Profile_Otp.GenericTextWatcher(E3));
+        E4.addTextChangedListener(new Save_Profile_Otp.GenericTextWatcher(E4));
 
         button.setOnClickListener(view -> NUMBER_LOGIN());
         resend.setOnClickListener(view->RESEND_OTP(user));
@@ -102,7 +101,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
         {
 
 
-            SAVE_NUMBER();
+            SAVE_PROFILE();
 
 
         }
@@ -113,9 +112,9 @@ public class Google_Otp_Activity extends AppCompatActivity {
         }
     }
 
-    private void SAVE_NUMBER() {
+    private void SAVE_PROFILE() {
         viewDialog.showDialog();
-        mSubscriptions.add(networkUtils.getRetrofit().NUMBER_SAVE(user)
+        mSubscriptions.add(networkUtils.getRetrofit().SAVE_PROFILE_DETAILS(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse2,this::handleError));
@@ -131,30 +130,25 @@ public class Google_Otp_Activity extends AppCompatActivity {
                 .subscribe(this::handleResponse,this::handleError));
     }
 
-    private void handleResponse2(LoginResponse response) {
+    private void handleResponse2(BasicResponse response) {
 
         viewDialog.hideDialog();
-
-
-        Toast.makeText(Google_Otp_Activity.this, "Login success!", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(constants.TOKEN,token);
         editor.putString(constants.EMAIL,user.getEmail());
         editor.putString(constants.USERNAME,user.getUsername());
         editor.putString(constants.PHONE,user.getMobile());
-        editor.putString(constants.TYPE,type);
         editor.apply();
-        goToHome();
+        finish();
 
     }
 
     private void handleResponse(LoginResponse response) {
         viewDialog.hideDialog();
-
         otp=response.getOtp();
+
     }
 
     private void handleError(Throwable error) {
@@ -223,11 +217,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
         }.start();
     }
 
-    private void goToHome() {
-        Intent intent = new Intent(Google_Otp_Activity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
 
     public class GenericTextWatcher implements TextWatcher {
         private View view;
@@ -273,3 +263,4 @@ public class Google_Otp_Activity extends AppCompatActivity {
         }
     }
 }
+

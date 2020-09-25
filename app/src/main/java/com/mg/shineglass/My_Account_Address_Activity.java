@@ -58,7 +58,7 @@ public class My_Account_Address_Activity extends Activity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(My_Account_Address_Activity.this, New_Address_Activity.class);
+                Intent i = new Intent(My_Account_Address_Activity.this, My_Account_New_Address.class);
                 startActivity(i);
                 finish();
             }
@@ -123,6 +123,10 @@ public class My_Account_Address_Activity extends Activity {
         }
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FetchAddress();
+    }
 }
 
