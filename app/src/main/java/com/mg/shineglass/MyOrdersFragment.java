@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -38,9 +39,7 @@ public class MyOrdersFragment extends Fragment {
 
     private CompositeSubscription mSubscriptions;
     private RecyclerView rvItem;
-//    private LinearLayout login;
-//    private TextView empty;
-//    private RelativeLayout login_btn;
+    private TextView empty;
 
 
     public MyOrdersFragment() {
@@ -55,14 +54,7 @@ public class MyOrdersFragment extends Fragment {
         mSubscriptions = new CompositeSubscription();
 
         rvItem=view.findViewById(R.id.orders_container);
-//        login=view.findViewById(R.id.empty_login_block);
-//        empty=view.findViewById(R.id.empty_text);
-//        login_btn=view.findViewById(R.id.login_btn);
-//
-//        login_btn.setOnClickListener(v->{
-//            Intent intent=new Intent(getContext(),LoginSignUpActivity.class);
-//            startActivity(intent);
-//        });
+        empty=view.findViewById(R.id.empty_text);
 
         FETCH_DATA();
 
@@ -76,15 +68,15 @@ public class MyOrdersFragment extends Fragment {
                 .getDefaultSharedPreferences(getContext());
         if(sharedPreferences.getString("token", null)==null)
         {
-//            login.setVisibility(View.VISIBLE);
-//            rvItem.setVisibility(View.GONE);
-//            empty.setVisibility(View.GONE);
+
+            rvItem.setVisibility(View.GONE);
+            empty.setVisibility(View.GONE);
         }
         else
         {
-//            login.setVisibility(View.GONE);
-//            rvItem.setVisibility(View.VISIBLE);
-//            empty.setVisibility(View.GONE);
+
+            rvItem.setVisibility(View.VISIBLE);
+            empty.setVisibility(View.GONE);
 
 
             mSubscriptions.add(
@@ -108,9 +100,8 @@ public class MyOrdersFragment extends Fragment {
         }
         else
         {
-//            login.setVisibility(View.GONE);
-//            rvItem.setVisibility(View.GONE);
-//            empty.setVisibility(View.VISIBLE);
+            rvItem.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
 
         }
 

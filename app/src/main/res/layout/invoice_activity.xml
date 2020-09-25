@@ -1,59 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="8dp"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:orientation="vertical"
+    tools:context=".Quotation_Activity">
 
-    <RelativeLayout
+
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/dimen_16dp">
+        android:background="@drawable/webview_border"
+        android:layout_below="@+id/quotation_block"
+        android:layout_above="@id/button_block"
+        android:layout_marginTop="16dp" >
 
-    <WebView
-        android:id="@+id/invoice_webView"
-        android:layout_width="match_parent"
-        android:layout_above="@id/cancel_btn"
-        android:layout_marginBottom="@dimen/dimen_16dp"
-        android:layout_height="match_parent"/>
+        <WebView
+            android:id="@+id/webView"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/webview_border"
+            tools:ignore="UnusedAttribute"/>
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/button_block"
+        android:layout_width="208dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <RelativeLayout
-            android:id="@+id/cancel_btn"
-            android:layout_centerHorizontal="true"
-            android:layout_width="208dp"
-            android:layout_alignParentBottom="true"
+            android:id="@+id/reject_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="32dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:paddingRight="32dp"
-            android:paddingLeft="32dp"
-            android:background="@drawable/signup_bordershape"
+            android:padding="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/request_border"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/cancel_txt"
+                android:id="@+id/reject_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="@string/cancel"
+                android:layout_toEndOf="@id/cross_img"
+                android:text="@string/reject"
                 android:textAllCaps="true"
+                android:layout_marginStart="8dp"
                 android:textColor="@color/PrimaryTextColor"
-                android:textSize="10sp" />
+                android:textSize="12sp"
+                android:layout_toRightOf="@id/cross_img"
+                android:layout_marginLeft="8dp" />
             <ImageView
+                android:id="@+id/cross_img"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
-                android:layout_toEndOf="@id/cancel_txt"
-                android:src="@drawable/cross"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/bluecross"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/cancel_txt"
-                android:layout_marginLeft="8dp"
                 android:contentDescription="@string/todo"
-                android:layout_marginStart="8dp" />
+                app:tint="@color/colorPrimaryDark" />
 
         </RelativeLayout>
 
 
-    </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -15,6 +15,13 @@ public class MyOrders {
     @SerializedName("status")
     String status;
 
+    @SerializedName("invoice")
+    String invoice;
+
+    @SerializedName("invoice_generated")
+    Boolean  invoice_generated;
+
+
 
     public String getStatus() {
         return status;
@@ -27,4 +34,13 @@ public class MyOrders {
     public String getOrderNo() {
         return OrderNo;
     }
+
+    public Boolean getInvoice_generated() {
+        return invoice_generated;
+    }
+
+    public String getInvoice() {
+        return invoice;
+    }
+
 }

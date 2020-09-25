@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mg.shineglass.Invoice_Activity;
 import com.mg.shineglass.My_Address_Actiivity;
 import com.mg.shineglass.Quotation_Activity;
 import com.mg.shineglass.R;
@@ -46,6 +47,20 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersItem
         OrderItemHolder.date.setText(simpleDateFormat.format(orders.getOrder_date()));
         OrderItemHolder.status.setText(orders.getStatus());
 
+       if(orders.getInvoice_generated())
+       {OrderItemHolder.invoice.setVisibility(View.VISIBLE);
+
+           OrderItemHolder.invoice.setOnClickListener(v -> {
+               Intent intent=new Intent(OrderItemHolder.itemView.getContext(), Invoice_Activity.class);
+               intent.putExtra("invoice",orders.getInvoice());
+               OrderItemHolder.itemView.getContext().startActivity(intent);
+           });
+
+       }
+       else
+       {
+           OrderItemHolder.invoice.setVisibility(View.GONE);
+       }
 
 
 
@@ -69,6 +84,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersItem
     class  OrdersItemHolder extends RecyclerView.ViewHolder {
 
         TextView quotationNo,date,status;
+        RelativeLayout invoice;
 
 
         OrdersItemHolder (View itemView) {
@@ -76,6 +92,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersItem
             quotationNo=itemView.findViewById(R.id.order_no__txt);
             date=itemView.findViewById(R.id.date_txt);
             status=itemView.findViewById(R.id.status_txt);
+            invoice=itemView.findViewById(R.id.request_quotation_btn);
 
 
 
