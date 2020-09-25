@@ -22,6 +22,7 @@ import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 
 import java.util.Objects;
 
@@ -40,7 +41,7 @@ public class Otp_Login_Activity extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private User user;
     private RelativeLayout button;
-
+    private ViewDialog viewDialog;
     private ImageView backImgBtn;
 
     @Override
@@ -57,6 +58,7 @@ public class Otp_Login_Activity extends AppCompatActivity {
 
         button.setOnClickListener(view -> NUMBER_LOGIN());
 
+        viewDialog=new ViewDialog(this);
         backImgBtn=findViewById(R.id.back_btn_img);
         backImgBtn.setOnClickListener(v -> finish());
     }
@@ -95,7 +97,7 @@ public class Otp_Login_Activity extends AppCompatActivity {
     }
 
     private void SEND_OTP(User user)
-    {
+    {   viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit().NUMBER_LOGIN(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -103,14 +105,14 @@ public class Otp_Login_Activity extends AppCompatActivity {
     }
 
     private void handleResponse(LoginResponse response) {
-
+        viewDialog.hideDialog();
 
         GoToOtp(response.getOtp(),response.getUser(),response.getToken());
     }
 
     private void handleError(Throwable error) {
 
-
+    viewDialog.hideDialog();
 
         if (error instanceof HttpException) {
 

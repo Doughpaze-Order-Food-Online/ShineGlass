@@ -27,6 +27,7 @@ import com.mg.shineglass.models.Banners;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.MyQuotation;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,7 +50,7 @@ public class MyRequestsFragment extends Fragment {
     private RecyclerView rvItem;
     private LinearLayout login;
     private TextView empty;
-    private RelativeLayout login_btn;
+    private ViewDialog viewDialog;
 
 
     public MyRequestsFragment() {
@@ -65,14 +66,8 @@ public class MyRequestsFragment extends Fragment {
         mSubscriptions = new CompositeSubscription();
 
        rvItem=view.findViewById(R.id.requests_container);
-       login=view.findViewById(R.id.empty_login_block);
        empty=view.findViewById(R.id.empty_text);
-       login_btn=view.findViewById(R.id.login_btn);
-
-        login_btn.setOnClickListener(v->{
-            Intent intent=new Intent(getContext(),LoginSignUpActivity.class);
-            startActivity(intent);
-        });
+        viewDialog = new ViewDialog(getActivity());
 
         FETCH_DATA();
 
@@ -86,17 +81,16 @@ public class MyRequestsFragment extends Fragment {
                 .getDefaultSharedPreferences(getContext());
       if(sharedPreferences.getString("token", null)==null)
       {
-            login.setVisibility(View.VISIBLE);
+
             rvItem.setVisibility(View.GONE);
             empty.setVisibility(View.GONE);
       }
       else
       {
-          login.setVisibility(View.GONE);
           rvItem.setVisibility(View.VISIBLE);
           empty.setVisibility(View.GONE);
 
-
+        viewDialog.showDialog();
           mSubscriptions.add(
                   networkUtils.getRetrofit(sharedPreferences.getString("token", null)).GET_QUOTATION()
                           .observeOn(AndroidSchedulers.mainThread())
@@ -107,6 +101,7 @@ public class MyRequestsFragment extends Fragment {
     }
 
     private void handleResponse(List<MyQuotation> response) {
+        viewDialog.hideDialog();
 
         if(response.size()>0 && response.get(0) !=null)
         {
@@ -117,7 +112,7 @@ public class MyRequestsFragment extends Fragment {
         }
         else
         {
-            login.setVisibility(View.GONE);
+
             rvItem.setVisibility(View.GONE);
             empty.setVisibility(View.VISIBLE);
 
@@ -127,6 +122,7 @@ public class MyRequestsFragment extends Fragment {
     }
 
     private void handleError(Throwable error) {
+        viewDialog.hideDialog();
 
     Log.e("error",error.toString());
 

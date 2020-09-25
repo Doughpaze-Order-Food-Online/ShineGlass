@@ -37,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MyAccountFragment extends Fragment {
 
     private TextView name, mobile_no, email;
-    private Button logout;
+    private Button logout,myaddress;
     private GoogleSignInClient mGoogleSignInClient;
     private String type;
     CircleImageView circleImageView;
@@ -56,6 +56,7 @@ public class MyAccountFragment extends Fragment {
         name=rootView.findViewById(R.id.user_name);
         mobile_no=rootView.findViewById(R.id.phone_no);
         email=rootView.findViewById(R.id.user_email);
+        myaddress=rootView.findViewById(R.id.myAddresses_btn);
 
         logout=rootView.findViewById(R.id.logout_btn);
 
@@ -67,6 +68,11 @@ public class MyAccountFragment extends Fragment {
                 Intent i=new Intent(getContext(),EditDetailsPopUpActivity.class);
                 startActivity(i);
             }
+        });
+
+        myaddress.setOnClickListener(v -> {
+            Intent i=new Intent(getContext(),My_Account_Address_Activity.class);
+            startActivity(i);
         });
 
 

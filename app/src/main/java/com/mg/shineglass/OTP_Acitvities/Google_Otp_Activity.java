@@ -27,6 +27,7 @@ import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
 
 import retrofit2.Response;
@@ -48,6 +49,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private RelativeLayout Resend_block;
     private ImageView backImgBtn;
+    private ViewDialog viewDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
 
         button.setOnClickListener(view -> NUMBER_LOGIN());
         resend.setOnClickListener(view->RESEND_OTP(user));
+        viewDialog = new ViewDialog(this);
 
         CountDownTime();
     }
@@ -111,6 +114,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
     }
 
     private void SAVE_NUMBER() {
+        viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit().NUMBER_SAVE(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -120,6 +124,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
 
     private void RESEND_OTP(User user)
     {
+        viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit().GOOGLE_FACEBOOK_OTP(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -127,6 +132,10 @@ public class Google_Otp_Activity extends AppCompatActivity {
     }
 
     private void handleResponse2(LoginResponse response) {
+
+        viewDialog.hideDialog();
+
+
         Toast.makeText(Google_Otp_Activity.this, "Login success!", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
@@ -143,6 +152,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
     }
 
     private void handleResponse(LoginResponse response) {
+        viewDialog.hideDialog();
 
         otp=response.getOtp();
         token=response.getToken();
@@ -151,7 +161,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
 
     private void handleError(Throwable error) {
 
-
+        viewDialog.hideDialog();
 
         if (error instanceof HttpException) {
 

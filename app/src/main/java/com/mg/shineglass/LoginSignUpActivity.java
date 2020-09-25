@@ -33,6 +33,7 @@ import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
 
 import org.json.JSONException;
@@ -50,24 +51,22 @@ public class LoginSignUpActivity extends AppCompatActivity {
 
     private static final String EMAIL = "email";
     private static final String AUTH_TYPE = "rerequest";
-
+    private ViewDialog viewDialog;
 
 
     private GoogleSignInClient mGoogleSignInClient;
     private static final int SIGN_IN = 9001;
     private CompositeSubscription mSubscriptions;
     private CallbackManager callbackManager;
-    private ImageView backImgBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_signup_activity);
 
-        backImgBtn=findViewById(R.id.back_btn_img);
-        backImgBtn.setOnClickListener(v -> finish());
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         mSubscriptions = new CompositeSubscription();
 
         RelativeLayout login = findViewById(R.id.login_btn);
@@ -95,8 +94,14 @@ public class LoginSignUpActivity extends AppCompatActivity {
             startActivity(i);
         });
 
-        facebook.setOnClickListener(view->FACEBOOK());
-        google.setOnClickListener(view->GOOGLE());
+        facebook.setOnClickListener(view->{
+            viewDialog.showDialog();
+            FACEBOOK();
+        });
+        google.setOnClickListener(view->{
+            viewDialog.showDialog();
+            GOOGLE();
+        });
 
         //google signin
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -106,6 +111,8 @@ public class LoginSignUpActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(LoginSignUpActivity.this, gso);
 
         setUpFacebookCallBack();
+
+        viewDialog = new ViewDialog(this);
 
 
     }
@@ -117,7 +124,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
 
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, SIGN_IN);
-
+        viewDialog.hideDialog();
 
     }
 
@@ -130,6 +137,8 @@ public class LoginSignUpActivity extends AppCompatActivity {
 
         LoginManager.getInstance().setAuthType(AUTH_TYPE);
         // Register a callback to respond to the user
+
+        viewDialog.hideDialog();
     }
 
 
@@ -166,21 +175,9 @@ public class LoginSignUpActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
 
 
-        if(resultCode!=0)
-        {
-//            progressDialog=new ProgressDialog(getContext());
-//            progressDialog.show();
-//            progressDialog.setContentView(R.layout.progress_loading);
-//            Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
-        }
-
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-
-
 
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
@@ -210,6 +207,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
     private void Google_Login(String idToken){
        User user=new User();
        user.setIdToken(idToken);
+       viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit().GOOGLE_LOGIN(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -222,6 +220,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
         user.setAccessToken(token);
         user.setUserID(userid);
 
+        viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit().FACEBOOK_LOGIN(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -229,6 +228,8 @@ public class LoginSignUpActivity extends AppCompatActivity {
     }
 
     private void handleResponse(LoginResponse response) {
+
+        viewDialog.hideDialog();
 
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
@@ -241,7 +242,6 @@ public class LoginSignUpActivity extends AppCompatActivity {
             intent.putExtra("email",response.getUser().getEmail());
             intent.putExtra("name",response.getUser().getUsername());
             startActivity(intent);
-            //progressDialog.dismiss();
             finish();
 
         }
@@ -269,7 +269,8 @@ public class LoginSignUpActivity extends AppCompatActivity {
 
     private void handleError(Throwable error) {
 
-        //progressDialog.dismiss();
+
+        viewDialog.hideDialog();
 
         if (error instanceof HttpException) {
 
@@ -294,7 +295,6 @@ public class LoginSignUpActivity extends AppCompatActivity {
     private void goToHome() {
         Intent intent = new Intent(LoginSignUpActivity.this, MainActivity.class);
         startActivity(intent);
-        //progressDialog.dismiss();
         finish();
     }
 

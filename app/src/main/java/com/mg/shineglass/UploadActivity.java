@@ -33,6 +33,7 @@ import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
 import java.io.File;
 import java.io.IOException;
@@ -58,6 +59,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     private CompositeSubscription mSubscriptions;
     private RelativeLayout cancel,request;
     private long mLastClickTime = 0;
+    private ViewDialog viewDialog;
 
 
     @Override
@@ -131,6 +133,8 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
                 }
             }
         });
+
+        viewDialog = new ViewDialog(this);
 
     }
 
@@ -263,6 +267,8 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     }
 
     private void SEND_REQUEST() throws URISyntaxException {
+
+        viewDialog.showDialog();
        final List<MultipartBody.Part> files = new ArrayList<>();
 
 
@@ -288,7 +294,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
 
     private void handleResponse(Response<LoginResponse> response) {
 
-
+        viewDialog.hideDialog();
         Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(UploadActivity.this,MainActivity.class );
@@ -298,7 +304,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     }
 
     private void handleError(Throwable error) {
-
+        viewDialog.hideDialog();
 
         Log.e("error",error.toString());
         if (error instanceof HttpException) {

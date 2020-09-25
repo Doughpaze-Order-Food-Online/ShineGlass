@@ -19,6 +19,7 @@ import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 
 import java.util.Objects;
 
@@ -39,6 +40,7 @@ public class Google_Enter_Number extends AppCompatActivity {
     private RelativeLayout button;
     private String token,type,email,Number,username;
     private TextView title;
+    private ViewDialog viewDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class Google_Enter_Number extends AppCompatActivity {
         title.setText("Enter Mobile Number");
 
         button.setOnClickListener(view -> SEND_OTP());
+
+        viewDialog=new ViewDialog(this);
     }
 
     private void SEND_OTP() {
@@ -87,6 +91,7 @@ public class Google_Enter_Number extends AppCompatActivity {
             user = new User(number);
             user.setEmail(email);
 
+            viewDialog.showDialog();
             mSubscriptions.add(networkUtils.getRetrofit().GOOGLE_FACEBOOK_OTP(user)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
@@ -103,14 +108,14 @@ public class Google_Enter_Number extends AppCompatActivity {
 
     private void handleResponse(LoginResponse response) {
 
-
+        viewDialog.hideDialog();
         GoToOtp(response.getOtp(),token);
     }
 
     private void handleError(Throwable error) {
 
 
-
+        viewDialog.hideDialog();
         if (error instanceof HttpException) {
 
             Gson gson = new Gson();

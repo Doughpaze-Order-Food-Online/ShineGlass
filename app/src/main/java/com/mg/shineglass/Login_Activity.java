@@ -25,6 +25,7 @@ import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
 
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class Login_Activity extends AppCompatActivity {
     private EditText userfield_EditText, password_EditText;
     private CompositeSubscription mSubscriptions;
     private SharedPreferences mSharedPreferences;
-
+    private ViewDialog viewDialog;
     private ImageView backImgBtn;
 
     RelativeLayout register;
@@ -61,7 +62,7 @@ public class Login_Activity extends AppCompatActivity {
 
 
     private void initViews() {
-
+        viewDialog=new ViewDialog(this);
         userfield_Layout= findViewById(R.id.user_email_mobile);
         password_Layout=findViewById(R.id.user_password);
 
@@ -118,6 +119,8 @@ public class Login_Activity extends AppCompatActivity {
 
     private void loginProcess(User user) {
 
+        viewDialog.showDialog();
+
         mSubscriptions.add(networkUtils.getRetrofit().LOGIN(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -128,7 +131,7 @@ public class Login_Activity extends AppCompatActivity {
     private void handleResponse(LoginResponse response) {
 
 
-
+    viewDialog.hideDialog();
         Toast.makeText(Login_Activity.this, response.getMessage(), Toast.LENGTH_SHORT).show();
 
         SharedPreferences.Editor editor = mSharedPreferences.edit();
@@ -150,7 +153,7 @@ public class Login_Activity extends AppCompatActivity {
 
     private void handleError(Throwable error) {
 
-
+        viewDialog.hideDialog();
 
         if (error instanceof HttpException) {
 
@@ -188,22 +191,6 @@ public class Login_Activity extends AppCompatActivity {
         Snackbar.make(getRootView(),message,Snackbar.LENGTH_SHORT).show();
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void initSharedPreferences() {
 

@@ -19,11 +19,7 @@ import androidx.loader.content.CursorLoader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 
-import static com.mg.shineglass.Filepath.isDownloadsDocument;
-import static com.mg.shineglass.Filepath.isExternalStorageDocument;
-import static com.mg.shineglass.Filepath.isMediaDocument;
 
 
 public class FileUtils {

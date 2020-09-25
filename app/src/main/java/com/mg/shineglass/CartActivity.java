@@ -33,6 +33,7 @@ import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
 
 import java.io.File;
@@ -61,6 +62,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
     private ArrayList<Quotation> cartlist;
     private ImageView backbtn;
     private TextView empty;
+    private ViewDialog viewDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -167,7 +169,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
 
 
         });
-
+        viewDialog = new ViewDialog(this);
 
 
     }
@@ -214,6 +216,8 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
+        viewDialog.showDialog();
+
         mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null)).REQUEST_QUOTATION(files,cartlist,sharedPreferences.getString(constants.PHONE, null))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -223,7 +227,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
     }
 
     private void handleResponse(Response<LoginResponse> response) {
-
+        viewDialog.hideDialog();
 
         Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
 
@@ -237,6 +241,8 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
         editor.apply();
 
 
+
+
         Intent intent = new Intent(CartActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -247,7 +253,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
 
     private void handleError(Throwable error) {
 
-
+        viewDialog.hideDialog();
         Log.e("error",error.toString());
         if (error instanceof HttpException) {
 

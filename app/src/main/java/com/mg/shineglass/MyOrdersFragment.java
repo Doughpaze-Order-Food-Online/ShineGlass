@@ -21,6 +21,7 @@ import com.mg.shineglass.adapters.OrdersAdapter;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.MyOrders;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,6 +41,7 @@ public class MyOrdersFragment extends Fragment {
     private CompositeSubscription mSubscriptions;
     private RecyclerView rvItem;
     private TextView empty;
+    private ViewDialog viewDialog;
 
 
     public MyOrdersFragment() {
@@ -55,6 +57,8 @@ public class MyOrdersFragment extends Fragment {
 
         rvItem=view.findViewById(R.id.orders_container);
         empty=view.findViewById(R.id.empty_text);
+
+        viewDialog = new ViewDialog(getActivity());
 
         FETCH_DATA();
 
@@ -78,7 +82,7 @@ public class MyOrdersFragment extends Fragment {
             rvItem.setVisibility(View.VISIBLE);
             empty.setVisibility(View.GONE);
 
-
+            viewDialog.showDialog();
             mSubscriptions.add(
                     networkUtils.getRetrofit(sharedPreferences.getString("token", null))
                             .GET_ORDERS()
@@ -90,6 +94,7 @@ public class MyOrdersFragment extends Fragment {
     }
 
     private void handleResponse(List<MyOrders> response) {
+        viewDialog.hideDialog();
 
         if(response.size()>0 && response.get(0) !=null)
         {
@@ -109,6 +114,7 @@ public class MyOrdersFragment extends Fragment {
     }
 
     private void handleError(Throwable error) {
+        viewDialog.hideDialog();
 
         Log.e("error",error.toString());
 

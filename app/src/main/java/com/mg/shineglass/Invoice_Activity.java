@@ -51,7 +51,7 @@ public class Invoice_Activity extends Activity {
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
-                Toast.makeText(Invoice_Activity.this, "Error Occured", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Invoice_Activity.this, "Error Occurred", Toast.LENGTH_SHORT).show();
             }
         });
 

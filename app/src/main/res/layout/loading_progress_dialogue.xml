@@ -7,18 +7,9 @@
 
     <ImageView
         android:id="@+id/loading_gif"
-        android:layout_width="140dp"
+        android:layout_width="120dp"
         android:layout_height="120dp"
         android:src="@drawable/loading"
         android:contentDescription="@string/todo" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loading_gif"
-        android:text="@string/loading"
-        android:textSize="@dimen/dimen_16sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/dimen_8dp"/>
 
 </RelativeLayout>

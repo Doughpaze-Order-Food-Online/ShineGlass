@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -58,10 +59,16 @@ public class Quotation_Activity extends Activity {
                 view.loadUrl(url);
                 return true;
             }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                Toast.makeText(Quotation_Activity.this, "Error Occurred", Toast.LENGTH_SHORT).show();
+            }
         });
 
         accept.setOnClickListener(v -> {
-            Intent i=new Intent(Quotation_Activity.this, My_Address_Actiivity.class);
+            Intent i=new Intent(Quotation_Activity.this, My_Address_Activity.class);
             i.putExtra("quotation",Quotation);
             i.putExtra("total",total);
             i.putExtra("url",url);

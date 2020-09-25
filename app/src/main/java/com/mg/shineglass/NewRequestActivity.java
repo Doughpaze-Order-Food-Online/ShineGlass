@@ -58,6 +58,8 @@ import com.google.gson.reflect.TypeToken;
 import com.mg.shineglass.Interface.deleteFile;
 import com.mg.shineglass.adapters.FileUploadAdapter;
 import com.mg.shineglass.models.Quotation;
+import com.mg.shineglass.utils.ViewDialog;
+
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.text.DecimalFormat;
@@ -85,6 +87,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
     private long mLastClickTime = 0;
     private Button b1,b2;
     private NumberPicker np;
+    private ViewDialog viewDialog;
 
     public NewRequestActivity() {
         // Required empty public constructor
@@ -203,6 +206,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
 
         FloatNumber floatNumber=new FloatNumber();
         floatNumber.execute();
+        viewDialog.showDialog();
     }
 
 
@@ -532,7 +536,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         @Override
         protected String[] doInBackground(Void... voids) {
             float n=0;
-            for(int j=0;j<100;j++)
+            for(int j=0;j<10000;j++)
             {
                 n+=0.1;
                 DecimalFormat dec=new DecimalFormat("#0.0");
@@ -545,6 +549,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         @Override
         protected void onPostExecute(String[] strings) {
             super.onPostExecute(strings);
+            viewDialog.hideDialog();
         }
     }
 

@@ -28,6 +28,7 @@ import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
 
 import retrofit2.Response;
@@ -49,6 +50,8 @@ public class Number_OTP_Activity extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private RelativeLayout Resend_block;
     private ImageView backImgBtn;
+    private ViewDialog viewDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +93,8 @@ public class Number_OTP_Activity extends AppCompatActivity {
         button.setOnClickListener(view -> NUMBER_LOGIN());
         resend.setOnClickListener(view->RESEND_OTP(user));
 
+        viewDialog = new ViewDialog(this);
+
         CountDownTime();
     }
 
@@ -121,6 +126,7 @@ public class Number_OTP_Activity extends AppCompatActivity {
 
     private void RESEND_OTP(User user)
     {
+        viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit().NUMBER_LOGIN(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -128,14 +134,14 @@ public class Number_OTP_Activity extends AppCompatActivity {
     }
 
     private void handleResponse(LoginResponse response) {
-
+           viewDialog.hideDialog();
             otp=response.getOtp();
             token=response.getToken();
 
     }
 
     private void handleError(Throwable error) {
-
+        viewDialog.hideDialog();
 
 
         if (error instanceof HttpException) {

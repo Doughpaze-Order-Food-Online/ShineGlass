@@ -30,6 +30,7 @@ import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
 
 import java.io.IOException;
@@ -53,6 +54,7 @@ public class Register_OTP_Activity extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private RelativeLayout Resend_block;
     private ImageView backImgBtn;
+    private ViewDialog viewDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +93,7 @@ public class Register_OTP_Activity extends AppCompatActivity {
 
         button.setOnClickListener(view -> register());
         resend.setOnClickListener(view->SEND_OTP(user));
+        viewDialog = new ViewDialog(this);
 
         CountDownTime();
     }
@@ -175,6 +178,8 @@ public class Register_OTP_Activity extends AppCompatActivity {
 
     private void RegisterUser(User user) {
 
+        viewDialog.showDialog();
+
         mSubscriptions.add(networkUtils.getRetrofit().REGISTER(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -183,7 +188,7 @@ public class Register_OTP_Activity extends AppCompatActivity {
 
     private void handleResponse(LoginResponse response) {
 
-
+        viewDialog.hideDialog();
         Toast.makeText(Register_OTP_Activity.this, "SignUp success!", Toast.LENGTH_SHORT).show();
         showSnackBarMessage(response.getMessage());
         SharedPreferences sharedPreferences = PreferenceManager
@@ -202,7 +207,7 @@ public class Register_OTP_Activity extends AppCompatActivity {
     }
 
     private void handleError(Throwable error) {
-
+        viewDialog.hideDialog();
 
 
         if (error instanceof HttpException) {
@@ -252,7 +257,7 @@ public class Register_OTP_Activity extends AppCompatActivity {
 
 
     private void SEND_OTP(User u) {
-
+        viewDialog.showDialog();
         mSubscriptions.add(
                 networkUtils.getRetrofit().REGISTER_OTP(u)
                         .observeOn(AndroidSchedulers.mainThread())
@@ -261,7 +266,7 @@ public class Register_OTP_Activity extends AppCompatActivity {
     }
 
     private void handleResponse2(BasicResponse response) {
-
+        viewDialog.hideDialog();
 
         Toast.makeText(this, "One Time Password Sent Your Mobile Number!", Toast.LENGTH_SHORT).show();
         otp=response.getOtp();

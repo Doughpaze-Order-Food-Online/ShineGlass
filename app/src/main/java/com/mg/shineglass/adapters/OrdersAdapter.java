@@ -6,18 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.mg.shineglass.Invoice_Activity;
-import com.mg.shineglass.My_Address_Actiivity;
-import com.mg.shineglass.Quotation_Activity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.MyOrders;
-import com.mg.shineglass.models.MyQuotation;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -47,20 +39,22 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersItem
         OrderItemHolder.date.setText(simpleDateFormat.format(orders.getOrder_date()));
         OrderItemHolder.status.setText(orders.getStatus());
 
-       if(orders.getInvoice_generated())
-       {OrderItemHolder.invoice.setVisibility(View.VISIBLE);
+        OrderItemHolder.invoice.setVisibility(View.GONE);
 
-           OrderItemHolder.invoice.setOnClickListener(v -> {
-               Intent intent=new Intent(OrderItemHolder.itemView.getContext(), Invoice_Activity.class);
-               intent.putExtra("invoice",orders.getInvoice());
-               OrderItemHolder.itemView.getContext().startActivity(intent);
-           });
-
-       }
-       else
-       {
-           OrderItemHolder.invoice.setVisibility(View.GONE);
-       }
+//       if(orders.getInvoice_generated())
+//       {OrderItemHolder.invoice.setVisibility(View.VISIBLE);
+//
+//           OrderItemHolder.invoice.setOnClickListener(v -> {
+//               Intent intent=new Intent(OrderItemHolder.itemView.getContext(), Invoice_Activity.class);
+//               intent.putExtra("invoice",orders.getInvoice());
+//               OrderItemHolder.itemView.getContext().startActivity(intent);
+//           });
+//
+//       }
+//       else
+//       {
+//           OrderItemHolder.invoice.setVisibility(View.GONE);
+//       }
 
 
 

@@ -7,33 +7,37 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mg.shineglass.adapters.Address_Adapter;
 import com.mg.shineglass.models.Address;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class My_Address_Actiivity extends Activity {
+public class My_Account_Address_Activity extends Activity {
     private RecyclerView rvItem;
     private CompositeSubscription mSubscriptions;
     private SharedPreferences mSharedPreferences;
     private Button add;
     private String Quotation,Date,Total,url;
+    private ViewDialog viewDialog;
 
 
 
@@ -54,17 +58,15 @@ public class My_Address_Actiivity extends Activity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(My_Address_Actiivity.this, New_Address_Activity.class);
-                i.putExtra("quotation",Quotation);
-                i.putExtra("total",Total);
-                i.putExtra("url",url);
-                i.putExtra("date",Date);
+                Intent i = new Intent(My_Account_Address_Activity.this, New_Address_Activity.class);
                 startActivity(i);
                 finish();
             }
         });
         mSubscriptions = new CompositeSubscription();
+        viewDialog = new ViewDialog(this);
         FetchAddress();
+
     }
 
 
@@ -73,6 +75,7 @@ public class My_Address_Actiivity extends Activity {
         mSharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
+        viewDialog.showDialog();
 
         mSubscriptions.add(networkUtils.getRetrofit(mSharedPreferences.getString(constants.TOKEN, null))
                 .GET_ADDRESS()
@@ -83,11 +86,12 @@ public class My_Address_Actiivity extends Activity {
 
     private void handleResponse(BasicResponse response) {
 
+        viewDialog.hideDialog();
         List<Address> list = new ArrayList<>();
         list=response.getAddressList();
 
-        Address_Adapter Adapter = new Address_Adapter(list,Quotation,url,Total,Date);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(My_Address_Actiivity.this);
+        Address_Adapter Adapter = new Address_Adapter(list,Quotation,url,Total,Date,false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(My_Account_Address_Activity.this);
         rvItem.setAdapter(Adapter);
         rvItem.setLayoutManager(layoutManager);
 
@@ -96,7 +100,7 @@ public class My_Address_Actiivity extends Activity {
 
     private void handleError(Throwable error) {
 
-
+        viewDialog.hideDialog();
 
         if (error instanceof HttpException) {
 
@@ -121,3 +125,4 @@ public class My_Address_Actiivity extends Activity {
 
 
 }
+

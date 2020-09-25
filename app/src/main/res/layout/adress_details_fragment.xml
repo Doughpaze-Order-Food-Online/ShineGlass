@@ -83,7 +83,7 @@
         android:maxLines="10"
         android:textColorHint="@color/BlackTextColor"
         android:textSize="12sp"
-        android:inputType="number"
+        android:inputType="textMultiLine"
         android:textColor="@color/BlackTextColor"
         android:autofillHints="@null"
         tools:ignore="TextFields" />

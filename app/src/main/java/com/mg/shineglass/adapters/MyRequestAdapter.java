@@ -4,23 +4,16 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.mg.shineglass.Interface.DeleteCartItem;
-import com.mg.shineglass.My_Address_Actiivity;
+import com.mg.shineglass.My_Address_Activity;
 import com.mg.shineglass.Quotation_Activity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.MyQuotation;
-import com.mg.shineglass.models.Quotation;
-
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. MyRequestItemHolder>  {
@@ -76,7 +69,7 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
 
 
         MyRequestItemHolder.accept.setOnClickListener(v -> {
-            Intent intent=new Intent(MyRequestItemHolder.itemView.getContext(), My_Address_Actiivity.class);
+            Intent intent=new Intent(MyRequestItemHolder.itemView.getContext(), My_Address_Activity.class);
             intent.putExtra("quotation",quotation.getQuotationNo());
             intent.putExtra("total",String.valueOf(quotation.getTotal()));
             intent.putExtra("url",quotation.getUrl());

@@ -26,6 +26,7 @@ import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -50,6 +51,7 @@ public class Register_Activity extends AppCompatActivity {
     private EditText username_EditText,
             email_EditText,mobile_EditText,
             password_EditText,rpassword_EditText;
+    private ViewDialog viewDialog;
 
     private CompositeSubscription mSubscriptions;
     private User user;
@@ -90,7 +92,7 @@ public class Register_Activity extends AppCompatActivity {
         register=findViewById(R.id.signUp_btn);
         register.setOnClickListener(view->Register());
 
-
+        viewDialog = new ViewDialog(this);
 
 
     }
@@ -175,7 +177,7 @@ public class Register_Activity extends AppCompatActivity {
 
     private void SEND_OTP(User u) {
 
-
+        viewDialog.showDialog();
 
         mSubscriptions.add(
                 networkUtils.getRetrofit().REGISTER_OTP(u)
@@ -186,7 +188,7 @@ public class Register_Activity extends AppCompatActivity {
 
     private void handleResponse(BasicResponse response) {
 
-
+        viewDialog.hideDialog();
         Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
 
         GoToOtp(response.getOtp(),user);
@@ -194,7 +196,7 @@ public class Register_Activity extends AppCompatActivity {
 
     private void handleError(Throwable error) {
 
-
+        viewDialog.hideDialog();
 
         if (error instanceof HttpException) {
 

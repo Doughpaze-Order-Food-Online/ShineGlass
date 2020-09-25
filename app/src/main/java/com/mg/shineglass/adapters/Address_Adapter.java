@@ -48,14 +48,16 @@ public class Address_Adapter extends RecyclerView.Adapter<Address_Adapter.Addres
     Context context;
     private int pos=-1;
     private String Quotation, url, total, date;
+    private Boolean flag;
 
 
-    public Address_Adapter(List<Address> list,String Quotation,String url,String total,String date) {
+    public Address_Adapter(List<Address> list,String Quotation,String url,String total,String date,Boolean flag) {
         this.list=list;
         this.Quotation=Quotation;
         this.url=url;
         this.total=total;
         this.date=date;
+        this.flag=flag;
     }
 
 
@@ -73,21 +75,24 @@ public class Address_Adapter extends RecyclerView.Adapter<Address_Adapter.Addres
         addressItemHolder.address.setText(newaddress.getAddress());
         addressItemHolder.no.setText(String.valueOf(i+1));
 
-        addressItemHolder.parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+       if(flag)
+       {
+           addressItemHolder.parent.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
 
 
 
-                Intent intent=new Intent(addressItemHolder.itemView.getContext(), Order_Confirmation_Activity.class);
-                intent.putExtra("quotation",Quotation);
-                intent.putExtra("total",total);
-                intent.putExtra("url",url);
-                intent.putExtra("date",date);
-                intent.putExtra("address",newaddress.getAddress());
-                addressItemHolder.itemView.getContext().startActivity(intent);
-            }
-        });
+                   Intent intent=new Intent(addressItemHolder.itemView.getContext(), Order_Confirmation_Activity.class);
+                   intent.putExtra("quotation",Quotation);
+                   intent.putExtra("total",total);
+                   intent.putExtra("url",url);
+                   intent.putExtra("date",date);
+                   intent.putExtra("address",newaddress.getAddress());
+                   addressItemHolder.itemView.getContext().startActivity(intent);
+               }
+           });
+       }
 
         addressItemHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override

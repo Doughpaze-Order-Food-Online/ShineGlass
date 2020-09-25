@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,40 +44,35 @@ import rx.subscriptions.CompositeSubscription;
 
 import static com.mg.shineglass.utils.validation.validateFields;
 
-public class New_Address_Activity extends Activity {
+public class My_Account_New_Address extends Activity {
 
     private CompositeSubscription mSubscriptions;
     private RelativeLayout automatic,proceed;
     private EditText address;
     private CheckBox save;
-    private ResultReceiver resultReceiver;
     private SharedPreferences mSharedPreferences;
     private FusedLocationProviderClient mFusedLocationClient;
     private static final String TAG = New_Address_Activity.class.getSimpleName();
     private double latitude, longitude;
-    private String Quotation,Date,Total,url,newaddress;
+    private String newaddress;
     private ViewDialog viewDialog;
 
     // Constants
     private static final int REQUEST_LOCATION_PERMISSION = 1;
-    private static final String TRACKING_LOCATION_KEY = "tracking_location";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adress_details_fragment);
-
-        Intent intent=getIntent();
-        Quotation=intent.getStringExtra("quotation");
-        url=intent.getStringExtra("url");
-        Total=intent.getStringExtra("total");
-        Date=intent.getStringExtra("date");
-
         mSubscriptions = new CompositeSubscription();
 
         automatic=findViewById(R.id.cancel_btn);
         address=findViewById(R.id.user_email_mobile_input_txt);
         save=findViewById(R.id.save);
+        save.setVisibility(View.GONE);
+
+        TextView text=findViewById(R.id.request_quotation_txt);
+        text.setText("SAVE");
         proceed=findViewById(R.id.proceed_to_buy_btn);
 
 
@@ -95,7 +91,7 @@ public class New_Address_Activity extends Activity {
 
 
     private void DETAILS() {
-       address.setError(null);
+        address.setError(null);
 
         int err=0;
 
@@ -122,22 +118,13 @@ public class New_Address_Activity extends Activity {
             mSharedPreferences = PreferenceManager
                     .getDefaultSharedPreferences(this);
 
-            if(save.isChecked())
-            {
-
-                String token = mSharedPreferences.getString(constants.TOKEN, null);
-                viewDialog.showDialog();
-                mSubscriptions.add(networkUtils.getRetrofit(token)
-                        .SAVE_ADDRESS(address)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(this::handleResponse,this::handleError));
-            }
-            else
-            {
-                GO_TO_CONFIRM_PAGE();
-
-            }
+            String token = mSharedPreferences.getString(constants.TOKEN, null);
+            viewDialog.showDialog();
+            mSubscriptions.add(networkUtils.getRetrofit(token)
+                    .SAVE_ADDRESS(address)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::handleResponse,this::handleError));
         }
 
     }
@@ -146,10 +133,8 @@ public class New_Address_Activity extends Activity {
 
     private void handleResponse(BasicResponse response) {
         viewDialog.hideDialog();
-
         Toast.makeText(this, "Address Saved!", Toast.LENGTH_SHORT).show();
-
-        GO_TO_CONFIRM_PAGE();
+        finish();
     }
 
     private void handleError(Throwable error) {
@@ -176,17 +161,7 @@ public class New_Address_Activity extends Activity {
     }
 
 
-    private void GO_TO_CONFIRM_PAGE() {
-        Intent intent=new Intent(New_Address_Activity.this, Order_Confirmation_Activity.class);
-        intent.putExtra("quotation",Quotation);
-        intent.putExtra("total",Total);
-        intent.putExtra("url",url);
-        intent.putExtra("date",Date);
-        intent.putExtra("address",newaddress);
-        startActivity(intent);
-        finish();
 
-    }
 
 
     private void getLocation() {
@@ -211,7 +186,7 @@ public class New_Address_Activity extends Activity {
 
                     setAddress(location);
                 } else {
-                    Toast.makeText(New_Address_Activity.this,
+                    Toast.makeText(My_Account_New_Address.this,
                             "Permisson denied",
                             Toast.LENGTH_SHORT).show();
 
@@ -221,7 +196,7 @@ public class New_Address_Activity extends Activity {
     }
 
     private void setAddress(Location location) {
-        Geocoder geocoder = new Geocoder(New_Address_Activity.this,
+        Geocoder geocoder = new Geocoder(My_Account_New_Address.this,
                 Locale.getDefault());
         List<Address> addresses = null;
         String resultMessage = "";
@@ -234,14 +209,14 @@ public class New_Address_Activity extends Activity {
                     1);
         } catch (IOException ioException) {
             // Catch network or other I/O problems
-            resultMessage =New_Address_Activity.this
+            resultMessage =My_Account_New_Address.this
                     .getString(R.string.service_not_available);
             Log.e(TAG, resultMessage, ioException);
         }
 
         if (addresses == null || addresses.size() == 0) {
             if (resultMessage.isEmpty()) {
-                resultMessage =New_Address_Activity.this
+                resultMessage =My_Account_New_Address.this
                         .getString(R.string.no_address_found);
                 Log.e(TAG, resultMessage);
             }
@@ -281,3 +256,4 @@ public class New_Address_Activity extends Activity {
         }
     }
 }
+
