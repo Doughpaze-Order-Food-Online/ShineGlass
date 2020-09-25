@@ -5,18 +5,15 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="8dp"
-    android:paddingLeft="32dp"
-    android:paddingRight="32dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:orientation="vertical"
     tools:context=".Quotation_Activity">
-
-
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/webview_border"
-        android:layout_below="@+id/quotation_block"
         android:layout_above="@id/button_block"
         android:layout_marginTop="16dp" >
 
@@ -65,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/cross_img"
-                android:text="@string/reject"
+                android:text="@string/close"
                 android:textAllCaps="true"
                 android:layout_marginStart="8dp"
                 android:textColor="@color/PrimaryTextColor"
