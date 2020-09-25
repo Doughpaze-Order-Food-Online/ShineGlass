@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -55,6 +56,7 @@ public class New_Address_Activity extends Activity {
     private static final String TAG = New_Address_Activity.class.getSimpleName();
     private double latitude, longitude;
     private String Quotation,Date,Total,url,newaddress;
+    private ImageView backBtnImg;
 
     // Constants
     private static final int REQUEST_LOCATION_PERMISSION = 1;
@@ -77,6 +79,10 @@ public class New_Address_Activity extends Activity {
         address=findViewById(R.id.user_email_mobile_input_txt);
         save=findViewById(R.id.save);
         proceed=findViewById(R.id.proceed_to_buy_btn);
+
+        backBtnImg=findViewById(R.id.back_btn_img);
+
+        backBtnImg.setOnClickListener(view -> finish());
 
 
         automatic.setOnClickListener(new View.OnClickListener() {

@@ -57,17 +57,13 @@ public class My_Address_Actiivity extends Activity {
         backBtnImage.setOnClickListener(view -> finish());
 
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(My_Address_Actiivity.this, New_Address_Activity.class);
-                i.putExtra("quotation",Quotation);
-                i.putExtra("total",Total);
-                i.putExtra("url",url);
-                i.putExtra("date",Date);
-                startActivity(i);
-                finish();
-            }
+        add.setOnClickListener(v -> {
+            Intent i = new Intent(My_Address_Actiivity.this, New_Address_Activity.class);
+            i.putExtra("quotation",Quotation);
+            i.putExtra("total",Total);
+            i.putExtra("url",url);
+            i.putExtra("date",Date);
+            startActivity(i);
         });
         mSubscriptions = new CompositeSubscription();
         FetchAddress();
