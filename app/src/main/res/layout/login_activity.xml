@@ -181,8 +181,10 @@
         android:layout_marginLeft="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:tint="@color/colorPrimaryDark"
         app:tint="@color/colorPrimaryDark"
         android:contentDescription="@string/todo"
-        android:layout_marginStart="32dp" />
+        android:layout_marginStart="32dp"
+        tools:ignore="UseAppTint" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

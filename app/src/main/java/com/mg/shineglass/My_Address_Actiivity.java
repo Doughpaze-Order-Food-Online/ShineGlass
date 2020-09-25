@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ public class My_Address_Actiivity extends Activity {
     private CompositeSubscription mSubscriptions;
     private SharedPreferences mSharedPreferences;
     private Button add;
+    private ImageView backBtnImage;
     private String Quotation,Date,Total,url;
 
 
@@ -42,6 +44,8 @@ public class My_Address_Actiivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_addresses);
 
+        backBtnImage=findViewById(R.id.back_btn_img);
+
         Intent intent=getIntent();
         Quotation=intent.getStringExtra("quotation");
         url=intent.getStringExtra("url");
@@ -49,6 +53,8 @@ public class My_Address_Actiivity extends Activity {
         Date=intent.getStringExtra("date");
         add=findViewById(R.id.add_new_button);
         rvItem=findViewById(R.id.saved_addresses_container);
+
+        backBtnImage.setOnClickListener(view -> finish());
 
 
         add.setOnClickListener(new View.OnClickListener() {

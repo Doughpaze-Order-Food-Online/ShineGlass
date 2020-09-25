@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="64dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
         android:orientation="vertical"
         android:layout_marginStart="16dp">
 
@@ -93,6 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
         android:layout_gravity="end"
         android:orientation="vertical"
         android:layout_marginEnd="16dp">

@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="8dp"
@@ -13,6 +14,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
         android:orientation="vertical"
         android:layout_marginStart="16dp">
 
@@ -54,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
         android:layout_gravity="end"
         android:orientation="vertical"
         android:layout_marginEnd="16dp">
@@ -101,7 +104,7 @@
         android:visibility="visible"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="96dp"
         android:layout_marginBottom="@dimen/dimen_16dp"
         android:gravity="center"
         android:paddingLeft="8dp"

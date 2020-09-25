@@ -4,13 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".Subcategory_Activity">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="96dp"
             android:background="@drawable/descriptionbackground">
+
+            <ImageView
+                android:id="@+id/back_btn_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                android:tint="@color/whiteTextColor"
+                app:tint="@color/whiteTextColor"
+                tools:ignore="UseAppTint" />
 
             <TextView
                 android:id="@+id/category_name_txt"
