@@ -229,7 +229,7 @@
                             android:fontFamily="sans-serif-medium"
                             android:text="@string/_1400"
                             android:textColor="@color/BlackTextColor"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                     </RelativeLayout>
 
@@ -334,6 +334,15 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Redeem"
                 android:textSize="@dimen/dimen_12sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/LightGrayColor" />
 
 
             <TextView
