@@ -148,5 +148,10 @@
     <string name="scale">SCALE</string>
     <string name="subcategory">SUBCATEGORY</string>
     <string name="redeem_wallet_amount">Redeem Wallet Amount</string>
+    <string name="recent_activities">\  Recent Activities</string>
+    <string name="show_all">show all</string>
+    <string name="current_orders">Current Orders</string>
+    <string name="previous_orders">Previous Orders</string>
+    <string name="no_current_orders">No Current Orders!!</string>
 
 </resources>

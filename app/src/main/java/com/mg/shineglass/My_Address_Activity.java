@@ -66,7 +66,6 @@ public class My_Address_Activity extends Activity {
                 i.putExtra("url",url);
                 i.putExtra("date",Date);
                 startActivity(i);
-                finish();
             }
         });
         mSubscriptions = new CompositeSubscription();

@@ -268,7 +268,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/personal_details_block"
-        android:text="@string/my_transactions"
+        android:text="@string/recent_activities"
         android:textSize="14sp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/LightBlackColor"
@@ -279,7 +279,7 @@
         android:layout_marginStart="16dp" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/transactions_container_card"
+        android:id="@+id/recent_activities_container_card"
         android:layout_below="@id/my_transactions_txt"
         android:layout_width="match_parent"
         android:layout_marginLeft="16dp"
@@ -421,64 +421,38 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/transaction_details_card"
-        android:layout_below="@id/transactions_container_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        app:cardElevation="2dp">
+    <Button
+        android:id="@+id/show_more_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:background="@android:color/transparent"
+        android:layout_below="@id/recent_activities_container_card"
+        android:text="@string/show_all"
+        android:drawableStart="@drawable/eye"
+        android:drawableTint="@color/colorPrimaryDark"
+        app:drawableTint="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        android:textSize="@dimen/dimen_12sp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="16dp">
-            
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/transaction_details"
-                android:textAllCaps="true"
-                android:textColor="@color/LightBlackColor"
-                android:textSize="12sp"
-                android:fontFamily="sans-serif-medium"/>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/MediumGrayColor"
-                android:layout_marginTop="4dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="10sp"
-                android:text="njdnvjlnvldsnvlkdnvlkndlkvndklvndlkvndlkvndlkvndlkvndlknvlkdnvlkdnvkjdnkd kd kd kd kjd kjd kj vjk  kd kjd kjd kjd kjd kjd kjds kjd "
-                tools:ignore="SmallSp" />
-            
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/logout_btn"
-        android:layout_below="@+id/transaction_details_card"
+        android:layout_below="@id/show_more_btn"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"
-        android:layout_width="176dp"
-        android:layout_height="30dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"
+        android:layout_height="36dp"
         android:background="@drawable/login_bordershape"
         android:text="@string/logout"
         android:layout_gravity="center_horizontal"
         android:textAllCaps="true"
         android:layout_marginBottom="32dp"
-        android:textSize="10sp"
+        android:textSize="14sp"
         android:textColor="@color/whiteTextColor"
         tools:ignore="SmallSp" />
 

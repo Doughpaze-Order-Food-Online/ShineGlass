@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         setContentView(R.layout.main_activity);
         mBottomNavigationView=findViewById(R.id.bottom_nav_menu);
         cart=findViewById(R.id.my_cart_btn);
@@ -58,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
         else{
             finishAffinity();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        InputMethodManager imm = (InputMethodManager)getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mBottomNavigationView.getWindowToken(), 0);
+        mBottomNavigationView.setSelectedItemId(R.id.home_icon);
     }
 
     @Override

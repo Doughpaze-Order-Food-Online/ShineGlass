@@ -134,6 +134,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
             }
         });
 
+
         viewDialog = new ViewDialog(this);
 
     }
