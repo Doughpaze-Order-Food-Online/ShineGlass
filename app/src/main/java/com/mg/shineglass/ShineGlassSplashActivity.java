@@ -61,7 +61,7 @@ public class ShineGlassSplashActivity extends AppCompatActivity {
             }
             else
             {
-                i= new Intent(ShineGlassSplashActivity.this,MainActivity.class);
+                i= new Intent(ShineGlassSplashActivity.this,mSharedPreferences.getString("userType", null).equals("user")?MainActivity.class:DeliveryBoyMainActivity.class);
             }
 
             startActivity(i);
@@ -70,7 +70,9 @@ public class ShineGlassSplashActivity extends AppCompatActivity {
 
         handler=new Handler();
         handler.postDelayed(runnable,TIME_OUT);
-        FETCH_DATA();
+
+       FETCH_DATA();
+
     }
 
     private void FETCH_DATA()

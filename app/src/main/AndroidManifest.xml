@@ -37,6 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".LoginSignUpActivity"
             android:screenOrientation="portrait" />
@@ -99,6 +100,10 @@
         <activity
             android:name=".Order_Confirmation_Activity"
             android:screenOrientation="portrait" />
+
+
+
+
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

@@ -12,6 +12,7 @@ public class constants {
     public static final String USERNAME= "username";
     public static final String TYPE= "type";
     public static final String PHONE= "mobile_no";
+    public static final String USER_TYPE= "userType";
 
 
     //paytm gateway

@@ -140,12 +140,13 @@ public class Login_Activity extends AppCompatActivity {
         editor.putString(constants.EMAIL,response.getUser().getEmail());
         editor.putString(constants.USERNAME,response.getUser().getUsername());
         editor.putString(constants.PHONE,response.getUser().getMobile());
+        editor.putString(constants.USER_TYPE,response.getUser().getUserType());
         editor.apply();
 
         userfield_EditText.setText(null);
         password_EditText.setText(null);
 
-        Intent intent = new Intent(Login_Activity.this,MainActivity.class );
+        Intent intent = new Intent(Login_Activity.this, response.getUser().getUserType().equals("user")?MainActivity.class:DeliveryBoyMainActivity.class);
         startActivity(intent);
         finish();
 

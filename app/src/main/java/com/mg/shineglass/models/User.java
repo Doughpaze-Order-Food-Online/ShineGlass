@@ -1,7 +1,7 @@
 package com.mg.shineglass.models;
 
 public class User {
-    String username,email,password,mobile,userfield;
+    String username,email,password,mobile,userfield,userType;
     String idToken,accessToken,userID;
 
     public User(String username, String email, String password, String mobile){
@@ -68,5 +68,9 @@ public class User {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getUserType() {
+        return userType;
     }
 }

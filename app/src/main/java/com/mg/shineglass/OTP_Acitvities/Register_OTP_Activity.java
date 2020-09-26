@@ -201,6 +201,7 @@ public class Register_OTP_Activity extends AppCompatActivity {
         editor.putString(constants.USERNAME,response.getUser().getUsername());
         editor.putString(constants.PHONE,response.getUser().getMobile());
         editor.putString(constants.TYPE,response.getType());
+        editor.putString(constants.USER_TYPE,response.getUser().getUserType());
         editor.apply();
         goToHome();
 
