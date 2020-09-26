@@ -24,6 +24,7 @@ public class DeliveryBoyMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.delivery_boy_activity_main);
+        mBottomNavigationView=findViewById(R.id.bottom_nav_menu);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         mBottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
         mBottomNavigationView.setSelectedItemId(R.id.home_icon);

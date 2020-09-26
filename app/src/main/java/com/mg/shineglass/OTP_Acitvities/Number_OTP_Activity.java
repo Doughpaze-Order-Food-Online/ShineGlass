@@ -40,7 +40,7 @@ import rx.subscriptions.CompositeSubscription;
 public class Number_OTP_Activity extends AppCompatActivity {
 
     private User user;
-    private String otp,type,token;
+    private String otp,type,token,userType;
     private EditText E1;
     private EditText E2;
     private EditText E3;
@@ -71,6 +71,7 @@ public class Number_OTP_Activity extends AppCompatActivity {
         type=intent.getStringExtra("type");
         otp=intent.getStringExtra("otp");
         token=intent.getStringExtra("token");
+        userType=intent.getStringExtra("userType");
 
 
 
@@ -114,6 +115,8 @@ public class Number_OTP_Activity extends AppCompatActivity {
           editor.putString(constants.USERNAME,user.getUsername());
           editor.putString(constants.PHONE,user.getMobile());
           editor.putString(constants.TYPE,type);
+          editor.putString(constants.USER_TYPE,userType);
+
           editor.apply();
           goToHome();
       }

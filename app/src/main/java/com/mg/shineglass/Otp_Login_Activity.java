@@ -146,6 +146,7 @@ public class Otp_Login_Activity extends AppCompatActivity {
         intent.putExtra("phone", user.getMobile());
         intent.putExtra("email", user.getEmail());
         intent.putExtra("name", user.getUsername());
+        intent.putExtra("userType", user.getUserType());
         startActivity(intent);
         finish();
     }

@@ -241,6 +241,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
             intent.putExtra("token",response.getToken());
             intent.putExtra("email",response.getUser().getEmail());
             intent.putExtra("name",response.getUser().getUsername());
+
             startActivity(intent);
             finish();
 
@@ -254,11 +255,12 @@ public class LoginSignUpActivity extends AppCompatActivity {
             editor.putString(constants.EMAIL,response.getUser().getEmail());
             editor.putString(constants.USERNAME,response.getUser().getUsername());
             editor.putString(constants.PHONE,response.getUser().getMobile());
-
+            editor.putString(constants.USER_TYPE,response.getUser().getUserType());
             editor.apply();
-
             Toast.makeText(this, "sign in success!", Toast.LENGTH_SHORT).show();
-            goToHome();
+            Intent intent = new Intent(LoginSignUpActivity.this,response.getUser().getUserType().equals("user")?MainActivity.class:DeliveryBoyMainActivity.class);
+            startActivity(intent);
+            finish();
         }
 
 

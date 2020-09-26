@@ -146,6 +146,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
         editor.putString(constants.USERNAME,user.getUsername());
         editor.putString(constants.PHONE,user.getMobile());
         editor.putString(constants.TYPE,type);
+        editor.putString(constants.USER_TYPE,response.getUser().getUserType());
         editor.apply();
         goToHome();
 

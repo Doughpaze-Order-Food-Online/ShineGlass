@@ -41,27 +41,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 import com.mg.shineglass.Interface.deleteFile;
 import com.mg.shineglass.adapters.FileUploadAdapter;
 import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.utils.ViewDialog;
-
 import java.lang.reflect.Type;
-import java.net.URISyntaxException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -205,8 +194,9 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         });
 
         FloatNumber floatNumber=new FloatNumber();
-        floatNumber.execute();
         viewDialog.showDialog();
+        floatNumber.execute();
+
     }
 
 
