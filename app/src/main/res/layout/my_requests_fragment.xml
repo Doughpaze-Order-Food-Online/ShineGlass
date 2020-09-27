@@ -7,113 +7,53 @@
     android:id="@+id/refresh"
     tools:context=".MyRequestsFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/LightGrayColor" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/my_requests"
-        android:textAllCaps="true"
-        android:textColor="@color/LightBlackColor"
-        android:textSize="18sp" />
-
-
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/requests_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_marginTop="@dimen/dimen_16dp"/>
-
-
-    <TextView
-        android:id="@+id/empty_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/title"
-        android:layout_marginTop="64dp"
-        android:gravity="center_horizontal"
-        android:text="@string/no_requests_yet"
-        android:textColor="@color/PrimaryTextColor"
-        android:textSize="16sp"
-        android:visibility="visible"
-        android:drawableTop="@drawable/emptycart"
-        app:drawableTopCompat="@drawable/emptycart" />
-
-    <LinearLayout
-        android:id="@+id/empty_login_block"
-        android:layout_below="@id/title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="64dp"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/LightGrayColor"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_requests"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/LightBlackColor"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/empty_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="64dp"
             android:gravity="center_horizontal"
-            android:text="@string/please_login_to_see_your_requests"
-            android:textAlignment="center"
+            android:text="@string/no_requests_yet"
             android:textColor="@color/PrimaryTextColor"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="visible"
+            android:drawableTop="@drawable/emptycart"
+            app:drawableTopCompat="@drawable/emptycart" />
 
-        <RelativeLayout
-            android:id="@+id/login_btn"
-            android:layout_width="176dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/login_bordershape"
-            android:gravity="center"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp">
 
-            <TextView
-                android:id="@+id/login_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/login"
-                android:textAllCaps="true"
-                android:textColor="@color/whiteTextColor"
-                android:textSize="14sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/requests_container"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/dimen_8dp"
+            android:paddingRight="@dimen/dimen_8dp"
+            android:layout_height="wrap_content"/>
 
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_toEndOf="@id/login_txt"
-                android:layout_toRightOf="@id/login_txt"
-                android:contentDescription="@string/todo"
-                android:src="@drawable/loginend" />
-
-        </RelativeLayout>
 
     </LinearLayout>
-    </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
