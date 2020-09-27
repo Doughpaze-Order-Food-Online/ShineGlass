@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".My_Address_Actiivity">
+    tools:context=".My_Address_Activity">
 
     <ScrollView
         android:layout_width="match_parent"

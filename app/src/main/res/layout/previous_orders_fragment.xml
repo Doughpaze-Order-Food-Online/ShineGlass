@@ -26,12 +26,6 @@
         android:layout_marginBottom="24dp"
         android:layout_gravity="center_horizontal"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/current_orders_container"
-        android:layout_width="match_parent"
-        android:paddingLeft="@dimen/dimen_8dp"
-        android:paddingRight="@dimen/dimen_8dp"
-        android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/empty_text"
         android:layout_width="match_parent"
@@ -45,5 +39,19 @@
         android:visibility="visible"
         android:drawableTop="@drawable/emptycart"
         app:drawableTopCompat="@drawable/emptycart" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/current_orders_container"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/dimen_8dp"
+        android:paddingRight="@dimen/dimen_8dp"
+        android:layout_height="wrap_content"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>
