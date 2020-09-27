@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -36,8 +38,8 @@ public class ResetPassword extends AppCompatActivity {
 
     private EditText password_EditText,rpassword_EditText,old_EditText;
     private CompositeSubscription mSubscriptions;
-    private RelativeLayout reset,cancel;
-    private ViewDialog viewDialog;
+    private RelativeLayout cancel,progress;
+    private Button reset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,9 @@ public class ResetPassword extends AppCompatActivity {
         password_EditText=findViewById(R.id.new_password_input_txt);
         rpassword_EditText=findViewById(R.id.reenter_new_password_input_txt);
         old_EditText=findViewById(R.id.old_password_input_txt);
+        progress=findViewById(R.id.progress);
 
-        reset=findViewById(R.id.update_btn);
+        reset=findViewById(R.id.change_btn);
         reset.setOnClickListener(view->RESET());
 
         cancel=findViewById(R.id.cancel_btn);
@@ -62,7 +65,7 @@ public class ResetPassword extends AppCompatActivity {
             finish();
         });
 
-        viewDialog = new ViewDialog(this);
+
     }
 
     @Override
@@ -84,7 +87,7 @@ public class ResetPassword extends AppCompatActivity {
         if (!validateFields(old)) {
 
 
-            password_Layout.setError("Old Password should not be empty !");
+            old_layout.setError("Old Password should not be empty !");
             return;
         }
 
@@ -102,6 +105,7 @@ public class ResetPassword extends AppCompatActivity {
             return;
         }
 
+
         if (!validateFields(password2)) {
 
 
@@ -116,12 +120,18 @@ public class ResetPassword extends AppCompatActivity {
             return;
         }
 
+        if(password.equals(old))
+        {
+            password_Layout.setError("New Password cannot be same as old password");
+            return;
+        }
+
 
                 User user=new User();
                 user.setPassword(password);
-                user.setPassword(old);
+                user.setOld_password(old);
 
-            viewDialog.showDialog();
+        progress.setVisibility(View.VISIBLE);
 
             SharedPreferences sharedPreferences = PreferenceManager
                     .getDefaultSharedPreferences(this);
@@ -136,16 +146,16 @@ public class ResetPassword extends AppCompatActivity {
 
 
     private void handleResponse(BasicResponse response) {
+        progress.setVisibility(View.GONE);
 
-        viewDialog.hideDialog();
         Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
         finish();
     }
 
     private void handleError(Throwable error) {
 
-        viewDialog.hideDialog();
 
+        progress.setVisibility(View.GONE);
         if (error instanceof HttpException) {
 
             Gson gson = new GsonBuilder().create();

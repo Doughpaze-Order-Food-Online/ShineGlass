@@ -57,9 +57,9 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     List<Uri> arrayList = new ArrayList<>();
     private RecyclerView fileItem;
     private CompositeSubscription mSubscriptions;
-    private RelativeLayout cancel,request;
+    private RelativeLayout cancel,request,progress;
     private long mLastClickTime = 0;
-    private ViewDialog viewDialog;
+
 
 
     @Override
@@ -72,6 +72,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
         mSubscriptions = new CompositeSubscription();
         cancel=findViewById(R.id.cancel_btn);
         request=findViewById(R.id.request);
+        progress=findViewById(R.id.progress);
 
         cancel.setOnClickListener(view->finish());
         request.setOnClickListener(view-> {
@@ -135,7 +136,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
         });
 
 
-        viewDialog = new ViewDialog(this);
+
 
     }
 
@@ -269,11 +270,17 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
 
     private void SEND_REQUEST() throws URISyntaxException {
 
-        viewDialog.showDialog();
+       progress.setVisibility(View.VISIBLE);
        final List<MultipartBody.Part> files = new ArrayList<>();
 
 
         if (arrayList != null) {
+
+            if(arrayList.size()==0)
+            {
+                Toast.makeText(this, "Select Files to Upload!", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             for (int i = 0; i < arrayList.size(); i++) {
                 files.add(prepareFilePart("files", arrayList.get(i))) ;
@@ -285,7 +292,8 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
 
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
-        mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null)).REQUEST_QUOTATION(files,list,sharedPreferences.getString(constants.PHONE, null))
+        mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null))
+                .REQUEST_QUOTATION(files,list,sharedPreferences.getString(constants.PHONE, null))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
@@ -295,9 +303,8 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
 
     private void handleResponse(Response<LoginResponse> response) {
 
-        viewDialog.hideDialog();
+       progress.setVisibility(View.GONE);
         Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
-
         Intent intent = new Intent(UploadActivity.this,MainActivity.class );
         startActivity(intent);
         finish();
@@ -305,8 +312,8 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     }
 
     private void handleError(Throwable error) {
-        viewDialog.hideDialog();
 
+        progress.setVisibility(View.GONE);
         Log.e("error",error.toString());
         if (error instanceof HttpException) {
 
@@ -326,10 +333,5 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
             Toast.makeText(this, "Network Error !", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
-
-
 }
 
