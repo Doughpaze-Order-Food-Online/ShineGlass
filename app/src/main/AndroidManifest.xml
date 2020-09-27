@@ -17,8 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DeliveryBoyMainActivity"></activity>
-        <activity android:name=".WalletActivity" />
+        <activity
+            android:name=".ChangePasswordPopUp"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_Edit_details" />
+
+        <activity
+            android:name=".DeliveryBoyMainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".WalletActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ResetPassword"
             android:screenOrientation="portrait"

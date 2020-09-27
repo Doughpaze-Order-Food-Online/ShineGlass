@@ -26,12 +26,18 @@
         android:textColor="@color/LightBlackColor"
         android:textSize="18sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/requests_container"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_16dp"
-        android:layout_below="@id/title" />
+        android:layout_below="@id/title">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/requests_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView
         android:id="@+id/empty_text"
@@ -44,7 +50,7 @@
         android:text="@string/no_requests_yet"
         android:textColor="@color/PrimaryTextColor"
         android:textSize="16sp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:drawableTop="@drawable/emptycart"
         app:drawableTopCompat="@drawable/emptycart" />
 

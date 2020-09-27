@@ -27,7 +27,7 @@ public class DeliveryBoyMainActivity extends AppCompatActivity {
         mBottomNavigationView=findViewById(R.id.bottom_nav_menu);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         mBottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
-        mBottomNavigationView.setSelectedItemId(R.id.home_icon);
+        mBottomNavigationView.setSelectedItemId(R.id.previousOrders_icon);
         getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, new DeliveryPreviousOrdersFragment()).commit();
     }
 
@@ -59,7 +59,7 @@ public class DeliveryBoyMainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
                     break;
                 case R.id.my_account_icon:
-                        fragment=new MyAccountFragment();
+                        fragment=new DeliveryMyAccountFragment();
                         getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
                     break;
             }

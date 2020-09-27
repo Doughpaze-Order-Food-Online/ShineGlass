@@ -153,5 +153,18 @@
     <string name="current_orders">Current Orders</string>
     <string name="previous_orders">Previous Orders</string>
     <string name="no_current_orders">No Current Orders!!</string>
+    <string name="order_details">order details</string>
+    <string name="order_id">order id :</string>
+    <string name="customer_name">customer name :</string>
+    <string name="customer_contact">customer contact :</string>
+    <string name="delivery_address2">delivery address :</string>
+    <string name="status2">status :</string>
+    <string name="order_date">order date :</string>
+    <string name="payment_mode">payment mode :</string>
+    <string name="_123456789777777">123456789777777</string>
+    <string name="get_the_directions">get the directions</string>
+    <string name="recent_transactions">wallet transactions</string>
+    <string name="previous_amount">previous amount</string>
+    <string name="updated_amount">updated amount</string>
 
 </resources>
