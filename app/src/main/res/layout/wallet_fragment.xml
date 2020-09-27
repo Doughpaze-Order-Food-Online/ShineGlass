@@ -200,6 +200,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:layout_gravity="center_vertical"
                     android:text="@string/recent_transactions"
                     android:layout_marginRight="16dp"
                     android:textColor="@color/LightBlackColor"
@@ -212,8 +213,9 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
                     android:layout_marginRight="16dp"
+                    android:gravity="center"
                     android:textColor="@color/LightBlackColor"
                     android:textAllCaps="true"
                     android:text="@string/previous_amount"
@@ -224,7 +226,8 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:textColor="@color/LightBlackColor"
                     android:textAllCaps="true"
                     android:text="@string/updated_amount"
