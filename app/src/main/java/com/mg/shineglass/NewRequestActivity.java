@@ -71,7 +71,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
     final int REQUEST_EXTERNAL_STORAGE = 100;
     private RelativeLayout button;
     private EditText Ethickness, Ewidth, Eheight, Equantity;
-    private String[] floatNum = new String[100];
+    private String[] floatNum = new String[10000];
     private ImageView backbtn;
     private long mLastClickTime = 0;
     private Button b1,b2;
@@ -192,7 +192,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
                 Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH or MM", Toast.LENGTH_LONG).show();
             }
         });
-
+        viewDialog=new ViewDialog(this);
         FloatNumber floatNumber=new FloatNumber();
         viewDialog.showDialog();
         floatNumber.execute();

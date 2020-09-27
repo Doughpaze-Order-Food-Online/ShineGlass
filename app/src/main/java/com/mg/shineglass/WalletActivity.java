@@ -69,6 +69,7 @@ public class WalletActivity extends AppCompatActivity {
         });
 
         viewDialog = new ViewDialog(this);
+        mSubscriptions = new CompositeSubscription();
 
         sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
@@ -77,6 +78,7 @@ public class WalletActivity extends AppCompatActivity {
         if(sharedPreferences.getString("wallet",null)==null)
         {
             FETCH_DATA();
+            amount.setVisibility(View.GONE);
         }
         else
         {
@@ -125,6 +127,7 @@ public class WalletActivity extends AppCompatActivity {
         viewDialog.hideDialog();
 
         amount.setText(String.valueOf(response.getWallet()));
+        amount.setVisibility(View.VISIBLE);
 
         if(response.getWallet_transaction().size()>0 && response.getWallet_transaction().get(0) !=null)
         {

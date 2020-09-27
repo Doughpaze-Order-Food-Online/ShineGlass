@@ -89,8 +89,8 @@ public class Address_Adapter extends RecyclerView.Adapter<Address_Adapter.Addres
                    intent.putExtra("url",url);
                    intent.putExtra("date",date);
                    intent.putExtra("address",newaddress.getAddress());
-                   intent.putExtra("latitude",newaddress.getLatitude());
-                   intent.putExtra("longitude",newaddress.getLongitude());
+                   intent.putExtra("latitude",newaddress.getLatitude().toString());
+                   intent.putExtra("longitude",newaddress.getLongitude().toString());
                    addressItemHolder.itemView.getContext().startActivity(intent);
                }
            });

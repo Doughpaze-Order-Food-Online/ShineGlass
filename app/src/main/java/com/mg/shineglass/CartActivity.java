@@ -61,7 +61,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
     private CompositeSubscription mSubscriptions;
     private ArrayList<Quotation> cartlist;
     private ImageView backbtn;
-    private TextView empty;
+    private TextView empty,images;
     private ViewDialog viewDialog;
 
     @Override
@@ -72,6 +72,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
         fileItem=findViewById(R.id.uploaded_container);
         request=findViewById(R.id.request);
         empty=findViewById(R.id.empty_text);
+        images=findViewById(R.id.images);
 
         backbtn=findViewById(R.id.back_btn_img);
 
@@ -89,6 +90,7 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
             fileItem.setVisibility(View.GONE);
             empty.setVisibility(View.VISIBLE);
             request.setVisibility(View.GONE);
+            images.setVisibility(View.GONE);
 
         }
         else
@@ -108,6 +110,15 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
         LinearLayoutManager LinearLayout = new LinearLayoutManager(this);
         cartItem.setLayoutManager(LinearLayout);
         cartItem.setAdapter(cartAdapter);
+
+        if(sharedPreferences.getString("files", null)==null)
+        {
+            images.setVisibility(View.GONE);
+        }
+        else
+        {
+            images.setVisibility(View.VISIBLE);
+        }
 
         filelist=new ArrayList<>();
         List<String> list=new ArrayList<>();
@@ -194,10 +205,20 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
 
         assert list != null;
         list.remove(i);
-        String f=gson.toJson(list);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("files",f);
-        editor.apply();
+
+        if(list.size()>0)
+        {
+            String f=gson.toJson(list);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("files",f);
+            editor.apply();
+        }
+        else {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("files",null);
+            editor.apply();
+        }
+
     }
 
 
@@ -323,10 +344,28 @@ public class CartActivity extends Activity implements deleteFile, DeleteCartItem
         assert list != null;
         list.remove(i);
 
-        String s=gson.toJson(list);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("quotation",s);
-        editor.apply();
+        if(list.size()>0)
+        {
+            String s=gson.toJson(list);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("quotation",s);
+            editor.apply();
+        }
+        else
+        {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("quotation",null);
+            editor.putString("files", null);
+            editor.apply();
+
+            cartItem.setVisibility(View.GONE);
+            fileItem.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+            request.setVisibility(View.GONE);
+            images.setVisibility(View.GONE);
+        }
+
+
 
     }
 }

@@ -49,7 +49,7 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.WalletItem
         }
         else {
             walletItemHolder.text.setText("Amount Debited from Wallet");
-            walletItemHolder.amount.setText("+ "+transaction.getAmount().toString());
+            walletItemHolder.amount.setText("- "+transaction.getAmount().toString());
             walletItemHolder.amount.setTextColor(Color.rgb(128,0,0));
         }
         walletItemHolder.total.setText(transaction.getTotal().toString());

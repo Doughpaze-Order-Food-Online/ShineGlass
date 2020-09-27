@@ -11,6 +11,8 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -18,14 +20,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mg.shineglass.adapters.WalletAdapter;
 import com.mg.shineglass.models.Address;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.FinalOrder;
 import com.mg.shineglass.models.PaymentDetails;
+import com.mg.shineglass.models.Wallet;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
@@ -41,9 +47,9 @@ import rx.subscriptions.CompositeSubscription;
 
 public class Order_Confirmation_Activity extends Activity {
 
-    private TextView quotation,date,address,total;
+    private TextView quotation,date,address,total,amount;
     private RelativeLayout view;
-    private String Quotation,Date,Address,Total,url;
+    private String Quotation,Date,Address,url;
     private RadioGroup radioGroup;
     private RelativeLayout confirm;
     private SharedPreferences mSharedPreferences;
@@ -54,6 +60,10 @@ public class Order_Confirmation_Activity extends Activity {
     private ImageView backBtnImg;
     private Double latitude,longitude;
     private Address newaddres;
+    private ViewDialog viewDialog;
+    private CheckBox redeem_checkbox;
+    private Double Amount,Wallet,Total;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,11 +77,17 @@ public class Order_Confirmation_Activity extends Activity {
         Intent intent=getIntent();
         Quotation=intent.getStringExtra("quotation");
         url=intent.getStringExtra("url");
-        Total=intent.getStringExtra("total");
+        Total=Double.parseDouble(Objects.requireNonNull(intent.getStringExtra("total")));
+        Amount=Double.parseDouble(Objects.requireNonNull(intent.getStringExtra("total")));
+        Wallet=0.0;
         Address=intent.getStringExtra("address");
         Date=intent.getStringExtra("date");
         latitude=Double.parseDouble(Objects.requireNonNull(intent.getStringExtra("latitude")));
         longitude=Double.parseDouble(Objects.requireNonNull(intent.getStringExtra("longitude")));
+        viewDialog = new ViewDialog(this);
+
+        sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
 
         newaddres=new Address();
         newaddres.setAddress(Address);
@@ -85,17 +101,38 @@ public class Order_Confirmation_Activity extends Activity {
         view=findViewById(R.id.request_quotation_btn);
         radioGroup=findViewById(R.id.mode);
         confirm=findViewById(R.id.place_order_btn);
-
+        amount=findViewById(R.id.wallet_cash_value_txt);
+        redeem_checkbox=findViewById(R.id.redeem_checkbox);
         quotation.setText(Quotation);
         date.setText(Date);
-        total.setText(Total);
+        total.setText(String.valueOf(Total));
         address.setText(Address);
+
+        amount.setVisibility(View.GONE);
+        mSharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+        redeem_checkbox.setEnabled(false);
+        redeem_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    Amount=Total-Wallet;
+                }
+                else
+                {
+                    Amount=Total;
+                }
+            }
+        });
+
 
         view.setOnClickListener(v -> {
             Intent i=new Intent(Order_Confirmation_Activity.this, Quotation_Activity.class);
             i.putExtra("quotationNo",Quotation);
             i.putExtra("url",url);
-            i.putExtra("total",Total);
+            i.putExtra("total",Total.toString());
             i.putExtra("date",Date);
             startActivity(i);
             finish();
@@ -138,18 +175,19 @@ public class Order_Confirmation_Activity extends Activity {
             }
         });
 
+        FETCH_DATA();
 
     }
 
 
 
     private void OFFLINE() {
-        mSharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(this);
-
         FinalOrder finalOrder=new FinalOrder();
         finalOrder.setAddress(newaddres);
         finalOrder.setQuotationNo(Quotation);
+        finalOrder.setTotal(Total);
+        finalOrder.setAmount(Amount);
+        finalOrder.setWallet(Wallet);
         mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
                 .PLACE_OFFLINE_ORDER(finalOrder)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -160,13 +198,14 @@ public class Order_Confirmation_Activity extends Activity {
 
     private void GET_TOKEN() {
 
-        mSharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(this);
+
 
         FinalOrder finalOrder=new FinalOrder();
         finalOrder.setAddress(newaddres);
         finalOrder.setQuotationNo(Quotation);
-        finalOrder.setAmount(Total);
+        finalOrder.setTotal(Total);
+        finalOrder.setAmount(Amount);
+        finalOrder.setWallet(Wallet);
         mSubscriptions.add(networkUtils.getRetrofit(mSharedPreferences.getString(constants.TOKEN, null))
                 .GET_TOKEN(constants.MID,finalOrder)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -174,10 +213,6 @@ public class Order_Confirmation_Activity extends Activity {
                 .subscribe(this::handleResponse2,this::handleError));
     }
 
-    private void ONLINE() {
-
-
-    }
 
     private void handleResponse(Integer status) {
 
@@ -187,6 +222,10 @@ public class Order_Confirmation_Activity extends Activity {
             startActivity(i);
             finish();
             Toast.makeText(this, "Order Placed!", Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("request",null);
+            editor.putString("orders",null);
+            editor.apply();
         }
         else
         {
@@ -198,7 +237,7 @@ public class Order_Confirmation_Activity extends Activity {
 
     private void handleResponse2(String token) {
 
-        String txnAmountString = total.getText().toString();
+        String txnAmountString = Amount.toString();
         String midString = constants.MID ;
         String orderIdString = Quotation;
         String txnTokenString = token;
@@ -299,6 +338,7 @@ public class Order_Confirmation_Activity extends Activity {
     }
 
     private void handleError(Throwable error) {
+        viewDialog.hideDialog();
 
         if (error instanceof HttpException) {
 
@@ -320,16 +360,40 @@ public class Order_Confirmation_Activity extends Activity {
 
     private void PLACE_ORDER(PaymentDetails paymentDetails) {
 
-        mSharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(this);
-
-
-
         mSubscriptions.add(networkUtils.getRetrofit(mSharedPreferences.getString(constants.TOKEN, null))
                 .PLACE_ONLINE_ORDER(constants.MID,paymentDetails,Quotation)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
 
+    }
+
+    private void FETCH_DATA() {
+
+        viewDialog.showDialog();
+        mSubscriptions.add(
+                networkUtils.getRetrofit(mSharedPreferences.getString("token", null))
+                        .GET_WALLET()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(this::handleResponse3,this::handleError)
+        );
+    }
+
+
+    private void handleResponse3(Wallet response) {
+        Wallet=response.getWallet();
+        viewDialog.hideDialog();
+        amount.setVisibility(View.VISIBLE);
+        amount.setText(String.valueOf(response.getWallet()));
+
+        if(response.getWallet()>0)
+        {
+            redeem_checkbox.setEnabled(true);
+        }
+        else
+        {
+            redeem_checkbox.setEnabled(false);
+        }
     }
 }
