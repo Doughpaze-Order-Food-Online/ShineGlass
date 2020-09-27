@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNavigationView;
     private CardView cart;
     private CardView wallet;
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             finishAffinity();
+            sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(this);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("orders", null);
+            editor.putString("orderId", null);
+            editor.putString("request", null);
+            editor.putString("wallet", null);
+            editor.apply();
         }
     }
 

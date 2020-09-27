@@ -14,6 +14,7 @@ import com.mg.shineglass.models.PaymentDetails;
 import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.models.Rates;
 import com.mg.shineglass.models.User;
+import com.mg.shineglass.models.Wallet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +98,8 @@ public interface retro_interface {
     Observable<Integer> PLACE_ONLINE_ORDER(@Query("mid") String mid, @Body PaymentDetails paymentDetails, @Query("quotation") String Quotation);
 
 
-
+    @GET("wallet")
+    Observable<Wallet> GET_WALLET();
 
 
     @GET("order")

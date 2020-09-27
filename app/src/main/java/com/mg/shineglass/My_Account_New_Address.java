@@ -56,6 +56,7 @@ public class My_Account_New_Address extends Activity {
     private double latitude, longitude;
     private String newaddress;
     private ViewDialog viewDialog;
+    private static final int REQUEST_LOCATION_PERMISSION2 = 2;
 
     // Constants
     private static final int REQUEST_LOCATION_PERMISSION = 1;
@@ -86,6 +87,16 @@ public class My_Account_New_Address extends Activity {
 
         proceed.setOnClickListener(view->DETAILS());
         viewDialog = new ViewDialog(this);
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]
+                            {Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION_PERMISSION2);
+        } else {
+            getCoordinates();
+        }
 
     }
 
@@ -241,6 +252,7 @@ public class My_Account_New_Address extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
         switch (requestCode) {
             case REQUEST_LOCATION_PERMISSION:
                 // If the permission is granted, get the location,
@@ -253,7 +265,41 @@ public class My_Account_New_Address extends Activity {
                             Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case REQUEST_LOCATION_PERMISSION2:
+                getCoordinates();
+                break;
         }
+
+    }
+
+
+    private void getCoordinates() {
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                } else {
+                    Toast.makeText(My_Account_New_Address.this,
+                            "Permisson denied",
+                            Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
     }
 }
 

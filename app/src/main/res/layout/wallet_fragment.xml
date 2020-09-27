@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
+    android:id="@+id/refresh"
     tools:context=".WalletActivity">
 
     <LinearLayout
@@ -214,6 +214,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginRight="16dp"
                     android:gravity="center"
                     android:textColor="@color/LightBlackColor"
@@ -246,7 +247,17 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/history_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="No Transactions"
+                android:gravity="center"
+                android:padding="15dp"
+                />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -47,6 +48,7 @@ public class MyOrdersFragment extends Fragment {
     private ViewDialog viewDialog;
     private SharedPreferences sharedPreferences;
 
+
     public MyOrdersFragment() {
         // Required empty public constructor
     }
@@ -60,8 +62,18 @@ public class MyOrdersFragment extends Fragment {
 
         rvItem=view.findViewById(R.id.orders_container);
         empty=view.findViewById(R.id.empty_text);
-
         viewDialog = new ViewDialog(getActivity());
+        SwipeRefreshLayout refreshLayout=view.findViewById(R.id.refresh);
+
+
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                FETCH_DATA();
+                refreshLayout.setRefreshing(false);
+            }
+        });
 
         sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getContext());
@@ -104,17 +116,6 @@ public class MyOrdersFragment extends Fragment {
 
     private void FETCH_DATA()
     {
-
-        if(sharedPreferences.getString("token", null)==null)
-        {
-
-            rvItem.setVisibility(View.GONE);
-            empty.setVisibility(View.GONE);
-        }
-        else
-        {
-
-
             rvItem.setVisibility(View.VISIBLE);
             empty.setVisibility(View.GONE);
 
@@ -126,7 +127,7 @@ public class MyOrdersFragment extends Fragment {
                             .subscribeOn(Schedulers.io())
                             .subscribe(this::handleResponse,this::handleError)
             );
-        }
+
     }
 
     private void handleResponse(List<MyOrders> response) {

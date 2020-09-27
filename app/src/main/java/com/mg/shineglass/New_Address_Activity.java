@@ -62,7 +62,7 @@ public class New_Address_Activity extends Activity {
     // Constants
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final int REQUEST_LOCATION_PERMISSION2 = 2;
-    private static final String TRACKING_LOCATION_KEY = "tracking_location";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

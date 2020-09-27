@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -92,6 +93,18 @@ public class MyAccountFragment extends Fragment {
         total=rootView.findViewById(R.id.amount_value);
 
         logout=rootView.findViewById(R.id.logout_btn);
+
+        SwipeRefreshLayout refreshLayout=rootView.findViewById(R.id.refresh);
+
+
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                FETCH_DATA();
+                refreshLayout.setRefreshing(false);
+            }
+        });
 
      sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getContext());
