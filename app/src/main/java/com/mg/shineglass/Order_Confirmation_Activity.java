@@ -21,6 +21,7 @@ import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mg.shineglass.models.Address;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.FinalOrder;
 import com.mg.shineglass.models.PaymentDetails;
@@ -51,6 +52,8 @@ public class Order_Confirmation_Activity extends Activity {
     private String  TAG ="order_confirm_activity";
     private Integer ActivityRequestCode = 2;
     private ImageView backBtnImg;
+    private Double latitude,longitude;
+    private Address newaddres;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +70,13 @@ public class Order_Confirmation_Activity extends Activity {
         Total=intent.getStringExtra("total");
         Address=intent.getStringExtra("address");
         Date=intent.getStringExtra("date");
+        latitude=Double.parseDouble(Objects.requireNonNull(intent.getStringExtra("latitude")));
+        longitude=Double.parseDouble(Objects.requireNonNull(intent.getStringExtra("longitude")));
+
+        newaddres=new Address();
+        newaddres.setAddress(Address);
+        newaddres.setLatitude(latitude);
+        newaddres.setLongitude(longitude);
 
         quotation=findViewById(R.id.request_no);
         date=findViewById(R.id.date_value);
@@ -138,7 +148,7 @@ public class Order_Confirmation_Activity extends Activity {
                 .getDefaultSharedPreferences(this);
 
         FinalOrder finalOrder=new FinalOrder();
-        finalOrder.setAddress(Address);
+        finalOrder.setAddress(newaddres);
         finalOrder.setQuotationNo(Quotation);
         mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
                 .PLACE_OFFLINE_ORDER(finalOrder)
@@ -154,7 +164,7 @@ public class Order_Confirmation_Activity extends Activity {
                 .getDefaultSharedPreferences(this);
 
         FinalOrder finalOrder=new FinalOrder();
-        finalOrder.setAddress(Address);
+        finalOrder.setAddress(newaddres);
         finalOrder.setQuotationNo(Quotation);
         finalOrder.setAmount(Total);
         mSubscriptions.add(networkUtils.getRetrofit(mSharedPreferences.getString(constants.TOKEN, null))

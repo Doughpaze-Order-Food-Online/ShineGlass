@@ -1,13 +1,18 @@
 package com.mg.shineglass.models;
 
 public class FinalOrder {
-    String QuotationNo,address,amount;
+    String QuotationNo,amount;
+    Address address;
 
     public void setQuotationNo(String quotationNo) {
         QuotationNo = quotationNo;
     }
 
-    public void setAddress(String address) {
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -15,9 +20,7 @@ public class FinalOrder {
         this.amount = amount;
     }
 
-    public String getAddress() {
-        return address;
-    }
+
 
     public String getQuotationNo() {
         return QuotationNo;

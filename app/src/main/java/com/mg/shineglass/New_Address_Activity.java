@@ -47,7 +47,7 @@ import static com.mg.shineglass.utils.validation.validateFields;
 public class New_Address_Activity extends Activity {
 
     private CompositeSubscription mSubscriptions;
-    private RelativeLayout automatic,proceed;
+    private RelativeLayout automatic, proceed;
     private EditText address;
     private CheckBox save;
     private ResultReceiver resultReceiver;
@@ -55,12 +55,13 @@ public class New_Address_Activity extends Activity {
     private FusedLocationProviderClient mFusedLocationClient;
     private static final String TAG = New_Address_Activity.class.getSimpleName();
     private double latitude, longitude;
-    private String Quotation,Date,Total,url,newaddress;
+    private String Quotation, Date, Total, url, newaddress;
     private ViewDialog viewDialog;
     private ImageView backBtnImg;
 
     // Constants
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private static final int REQUEST_LOCATION_PERMISSION2 = 2;
     private static final String TRACKING_LOCATION_KEY = "tracking_location";
 
     @Override
@@ -68,20 +69,20 @@ public class New_Address_Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adress_details_fragment);
 
-        Intent intent=getIntent();
-        Quotation=intent.getStringExtra("quotation");
-        url=intent.getStringExtra("url");
-        Total=intent.getStringExtra("total");
-        Date=intent.getStringExtra("date");
+        Intent intent = getIntent();
+        Quotation = intent.getStringExtra("quotation");
+        url = intent.getStringExtra("url");
+        Total = intent.getStringExtra("total");
+        Date = intent.getStringExtra("date");
 
         mSubscriptions = new CompositeSubscription();
 
-        automatic=findViewById(R.id.cancel_btn);
-        address=findViewById(R.id.user_email_mobile_input_txt);
-        save=findViewById(R.id.save);
-        proceed=findViewById(R.id.proceed_to_buy_btn);
+        automatic = findViewById(R.id.cancel_btn);
+        address = findViewById(R.id.user_email_mobile_input_txt);
+        save = findViewById(R.id.save);
+        proceed = findViewById(R.id.proceed_to_buy_btn);
 
-        backBtnImg=findViewById(R.id.back_btn_img);
+        backBtnImg = findViewById(R.id.back_btn_img);
 
         backBtnImg.setOnClickListener(view -> finish());
 
@@ -94,16 +95,26 @@ public class New_Address_Activity extends Activity {
             }
         });
 
-        proceed.setOnClickListener(view->DETAILS());
+        proceed.setOnClickListener(view -> DETAILS());
         viewDialog = new ViewDialog(this);
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]
+                            {Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION_PERMISSION2);
+        } else {
+            getCoordinates();
+        }
 
     }
 
 
     private void DETAILS() {
-       address.setError(null);
+        address.setError(null);
 
-        int err=0;
+        int err = 0;
 
         newaddress = address.getText().toString();
 
@@ -115,12 +126,10 @@ public class New_Address_Activity extends Activity {
         }
 
 
-
-        if(err==0)
-        {
+        if (err == 0) {
 
 
-            com.mg.shineglass.models.Address address=new com.mg.shineglass.models.Address();
+            com.mg.shineglass.models.Address address = new com.mg.shineglass.models.Address();
             address.setAddress(newaddress);
             address.setLatitude(latitude);
             address.setLongitude(longitude);
@@ -128,8 +137,7 @@ public class New_Address_Activity extends Activity {
             mSharedPreferences = PreferenceManager
                     .getDefaultSharedPreferences(this);
 
-            if(save.isChecked())
-            {
+            if (save.isChecked()) {
 
                 String token = mSharedPreferences.getString(constants.TOKEN, null);
                 viewDialog.showDialog();
@@ -137,17 +145,14 @@ public class New_Address_Activity extends Activity {
                         .SAVE_ADDRESS(address)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
-                        .subscribe(this::handleResponse,this::handleError));
-            }
-            else
-            {
+                        .subscribe(this::handleResponse, this::handleError));
+            } else {
                 GO_TO_CONFIRM_PAGE();
 
             }
         }
 
     }
-
 
 
     private void handleResponse(BasicResponse response) {
@@ -169,7 +174,7 @@ public class New_Address_Activity extends Activity {
             try {
 
                 String errorBody = ((HttpException) error).response().errorBody().string();
-                BasicResponse response = gson.fromJson(errorBody,BasicResponse.class);
+                BasicResponse response = gson.fromJson(errorBody, BasicResponse.class);
                 Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
@@ -183,12 +188,14 @@ public class New_Address_Activity extends Activity {
 
 
     private void GO_TO_CONFIRM_PAGE() {
-        Intent intent=new Intent(New_Address_Activity.this, Order_Confirmation_Activity.class);
-        intent.putExtra("quotation",Quotation);
-        intent.putExtra("total",Total);
-        intent.putExtra("url",url);
-        intent.putExtra("date",Date);
-        intent.putExtra("address",newaddress);
+        Intent intent = new Intent(New_Address_Activity.this, Order_Confirmation_Activity.class);
+        intent.putExtra("quotation", Quotation);
+        intent.putExtra("total", Total);
+        intent.putExtra("url", url);
+        intent.putExtra("date", Date);
+        intent.putExtra("address", newaddress);
+        intent.putExtra("latitude", latitude);
+        intent.putExtra("longitude",longitude);
         startActivity(intent);
         finish();
 
@@ -211,8 +218,8 @@ public class New_Address_Activity extends Activity {
             @Override
             public void onSuccess(Location location) {
                 if (location != null) {
-                    latitude=location.getLatitude();
-                    longitude=location.getLongitude();
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
 
 
                     setAddress(location);
@@ -240,14 +247,14 @@ public class New_Address_Activity extends Activity {
                     1);
         } catch (IOException ioException) {
             // Catch network or other I/O problems
-            resultMessage =New_Address_Activity.this
+            resultMessage = New_Address_Activity.this
                     .getString(R.string.service_not_available);
             Log.e(TAG, resultMessage, ioException);
         }
 
         if (addresses == null || addresses.size() == 0) {
             if (resultMessage.isEmpty()) {
-                resultMessage =New_Address_Activity.this
+                resultMessage = New_Address_Activity.this
                         .getString(R.string.no_address_found);
                 Log.e(TAG, resultMessage);
             }
@@ -268,8 +275,6 @@ public class New_Address_Activity extends Activity {
     }
 
 
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -284,6 +289,38 @@ public class New_Address_Activity extends Activity {
                             Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case REQUEST_LOCATION_PERMISSION2:
+                getCoordinates();
+                break;
         }
+    }
+
+    private void getCoordinates() {
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                } else {
+                    Toast.makeText(New_Address_Activity.this,
+                            "Permisson denied",
+                            Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -65,6 +66,7 @@ public class My_Account_Address_Activity extends Activity {
         });
         mSubscriptions = new CompositeSubscription();
         viewDialog = new ViewDialog(this);
+        viewDialog.showDialog();
         FetchAddress();
 
     }
@@ -75,7 +77,7 @@ public class My_Account_Address_Activity extends Activity {
         mSharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
-        viewDialog.showDialog();
+
 
         mSubscriptions.add(networkUtils.getRetrofit(mSharedPreferences.getString(constants.TOKEN, null))
                 .GET_ADDRESS()

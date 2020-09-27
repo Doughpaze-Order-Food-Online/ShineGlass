@@ -288,13 +288,15 @@
         app:cardElevation="2dp">
 
         <LinearLayout
+            android:id="@+id/recent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingRight="16dp"
             android:paddingLeft="16dp"
             android:paddingBottom="16dp"
-            android:layout_marginTop="4dp">
+            android:layout_marginTop="4dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -350,11 +352,14 @@
 
             </LinearLayout>
 
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/MediumGrayColor"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="4dp"
+                />
 
 
             <LinearLayout
@@ -418,6 +423,14 @@
 
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="No Recent Activity"
+            android:gravity="center"
+            android:padding="15dp" />
 
     </androidx.cardview.widget.CardView>
 

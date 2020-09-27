@@ -103,7 +103,7 @@
     <string name="ph_no">PH NO.</string>
     <string name="_9876543221">9876543221</string>
     <string name="my_transactions">\  MY TRANSACTIONS</string>
-    <string name="transaction_id">transaction id</string>
+    <string name="transaction_id">order id</string>
     <string name="mode">MODE</string>
     <string name="amount">AMOUNT</string>
     <string name="_77788889999">77788889999</string>

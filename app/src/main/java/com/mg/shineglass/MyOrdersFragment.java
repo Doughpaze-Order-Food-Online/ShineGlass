@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.mg.shineglass.adapters.OrdersAdapter;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.MyOrders;
@@ -24,6 +25,8 @@ import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.ViewDialog;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.adapter.rxjava.HttpException;
@@ -42,7 +45,7 @@ public class MyOrdersFragment extends Fragment {
     private RecyclerView rvItem;
     private TextView empty;
     private ViewDialog viewDialog;
-
+    private SharedPreferences sharedPreferences;
 
     public MyOrdersFragment() {
         // Required empty public constructor
@@ -60,7 +63,40 @@ public class MyOrdersFragment extends Fragment {
 
         viewDialog = new ViewDialog(getActivity());
 
-        FETCH_DATA();
+        sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(getContext());
+
+        if(sharedPreferences.getString("orders",null)==null)
+        {
+            FETCH_DATA();
+        }
+        else
+        {
+            if(sharedPreferences.getString("orders", null).equals("empty"))
+            {
+                rvItem.setVisibility(View.GONE);
+                empty.setVisibility(View.VISIBLE);
+
+            }
+            else {
+
+                rvItem.setVisibility(View.VISIBLE);
+                empty.setVisibility(View.GONE);
+
+                Gson gson=new Gson();
+                List<MyOrders> list=new ArrayList<>();
+                Type type=new TypeToken<List<MyOrders>>(){}.getType();
+                list=gson.fromJson(sharedPreferences.getString("orders", null),type);
+
+                OrdersAdapter ordersAdapter = new OrdersAdapter(list);
+                LinearLayoutManager LinearLayout = new LinearLayoutManager(getContext());
+                rvItem.setLayoutManager(LinearLayout);
+                rvItem.setAdapter(ordersAdapter);
+            }
+
+        }
+
+
 
         return view;
     }
@@ -68,8 +104,7 @@ public class MyOrdersFragment extends Fragment {
 
     private void FETCH_DATA()
     {
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(getContext());
+
         if(sharedPreferences.getString("token", null)==null)
         {
 
@@ -78,6 +113,7 @@ public class MyOrdersFragment extends Fragment {
         }
         else
         {
+
 
             rvItem.setVisibility(View.VISIBLE);
             empty.setVisibility(View.GONE);
@@ -98,6 +134,12 @@ public class MyOrdersFragment extends Fragment {
 
         if(response.size()>0 && response.get(0) !=null)
         {
+            Gson gson=new Gson();
+            String s=gson.toJson(response);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("orders", s);
+            editor.apply();
+
             OrdersAdapter ordersAdapter = new OrdersAdapter(response);
             LinearLayoutManager LinearLayout = new LinearLayoutManager(getContext());
             rvItem.setLayoutManager(LinearLayout);
@@ -105,6 +147,9 @@ public class MyOrdersFragment extends Fragment {
         }
         else
         {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("orders", "empty");
+            editor.apply();
             rvItem.setVisibility(View.GONE);
             empty.setVisibility(View.VISIBLE);
 

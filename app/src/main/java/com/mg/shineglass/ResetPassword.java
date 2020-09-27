@@ -32,9 +32,9 @@ import static com.mg.shineglass.utils.validation.validateFields;
 
 public class ResetPassword extends AppCompatActivity {
 
-    private TextInputLayout password_Layout,rpassword_layout;
+    private TextInputLayout password_Layout,rpassword_layout,old_layout;
 
-    private EditText password_EditText,rpassword_EditText;
+    private EditText password_EditText,rpassword_EditText,old_EditText;
     private CompositeSubscription mSubscriptions;
     private RelativeLayout reset,cancel;
     private ViewDialog viewDialog;
@@ -42,14 +42,16 @@ public class ResetPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reset_password_activity);
+        setContentView(R.layout.change_password_fragment);
         mSubscriptions = new CompositeSubscription();
 
         password_Layout=findViewById(R.id.new_password);
         rpassword_layout=findViewById(R.id.reenter_new_password);
+        old_layout=findViewById(R.id.old_password);
 
         password_EditText=findViewById(R.id.new_password_input_txt);
         rpassword_EditText=findViewById(R.id.reenter_new_password_input_txt);
+        old_EditText=findViewById(R.id.old_password_input_txt);
 
         reset=findViewById(R.id.update_btn);
         reset.setOnClickListener(view->RESET());
@@ -74,38 +76,50 @@ public class ResetPassword extends AppCompatActivity {
     private void RESET() {
 
         setError();
+        String old=Objects.requireNonNull(old_EditText.getText()).toString();
         String password = Objects.requireNonNull(password_EditText.getText()).toString();
         String password2 = Objects.requireNonNull(rpassword_EditText.getText()).toString();
-        int err=0;
+
+
+        if (!validateFields(old)) {
+
+
+            password_Layout.setError("Old Password should not be empty !");
+            return;
+        }
 
         if (!validateFields(password)) {
 
-            err++;
-            password_Layout.setError("Password should not be empty !");
+
+            password_Layout.setError("New Password should not be empty !");
+            return;
         }
-        else if(!VALIDATE_PASSWORD(password))
+
+        if(!VALIDATE_PASSWORD(password))
         {
-            err++;
+
             password_Layout.setError("Password should have atleast:\n6 characters \n1 uppercase\n1 special character \n1 number");
+            return;
         }
 
         if (!validateFields(password2)) {
 
-            err++;
+
             rpassword_layout.setError("Confirm Password should not be empty !");
+            return ;
         }
 
         if(!password.equals(password2) && validateFields(password) && validateFields(password2)  )
         {
-            err++;
+
             rpassword_layout.setError("Passwords do not match !");
+            return;
         }
 
 
-        if (err==0) {
-
                 User user=new User();
                 user.setPassword(password);
+                user.setPassword(old);
 
             viewDialog.showDialog();
 
@@ -117,7 +131,7 @@ public class ResetPassword extends AppCompatActivity {
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.io())
                             .subscribe(this::handleResponse,this::handleError));
-        }
+
     }
 
 
@@ -154,7 +168,7 @@ public class ResetPassword extends AppCompatActivity {
 
 
     private void setError()
-    {
+    {   old_layout.setError(null);
         password_Layout.setError(null);
         rpassword_layout.setError(null);
     }

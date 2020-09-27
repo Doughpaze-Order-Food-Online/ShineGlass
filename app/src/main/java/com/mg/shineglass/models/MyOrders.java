@@ -21,7 +21,23 @@ public class MyOrders {
     @SerializedName("invoice_generated")
     Boolean  invoice_generated;
 
+    @SerializedName("address")
+    Address address;
 
+    @SerializedName("payment_mode")
+    String payment_mode;
+
+    @SerializedName("total")
+    Double total;
+
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public String getPayment_mode() {
+        return payment_mode;
+    }
 
     public String getStatus() {
         return status;
@@ -43,4 +59,11 @@ public class MyOrders {
         return invoice;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }
