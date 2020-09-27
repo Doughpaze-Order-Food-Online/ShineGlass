@@ -61,23 +61,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        InputMethodManager imm = (InputMethodManager)getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mBottomNavigationView.getWindowToken(), 0);
-        mBottomNavigationView.setSelectedItemId(R.id.home_icon);
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        InputMethodManager imm = (InputMethodManager)getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mBottomNavigationView.getWindowToken(), 0);
-        mBottomNavigationView.setSelectedItemId(R.id.home_icon);
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        InputMethodManager imm = (InputMethodManager)getSystemService(
+//                Context.INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(mBottomNavigationView.getWindowToken(), 0);
+//        mBottomNavigationView.setSelectedItemId(R.id.home_icon);
+//    }
+//
+//    @Override
+//    protected void onPostResume() {
+//        super.onPostResume();
+//        InputMethodManager imm = (InputMethodManager)getSystemService(
+//                Context.INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(mBottomNavigationView.getWindowToken(), 0);
+//        mBottomNavigationView.setSelectedItemId(R.id.home_icon);
+//    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener=new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override

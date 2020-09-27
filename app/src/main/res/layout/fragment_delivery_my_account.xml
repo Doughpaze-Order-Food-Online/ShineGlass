@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DeliveryMyAccountFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/logout_btn">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -221,31 +226,29 @@
             android:layout_centerHorizontal="true"
             tools:ignore="SmallSp" />
 
-
-
-
-
-        <Button
-            android:id="@+id/logout_btn"
-            android:layout_below="@id/personal_details_block"
-            android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/dimen_16dp"
-            android:layout_marginRight="@dimen/dimen_16dp"
-            android:layout_height="36dp"
-            android:background="@drawable/login_bordershape"
-            android:text="@string/logout"
-            android:layout_gravity="center_horizontal"
-            android:textAllCaps="true"
-            android:layout_marginBottom="32dp"
-            android:textSize="14sp"
-            android:textColor="@color/whiteTextColor"
-            tools:ignore="SmallSp" />
-
     </RelativeLayout>
 
-</ScrollView>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"
+        android:layout_height="36dp"
+        android:background="@drawable/login_bordershape"
+        android:text="@string/logout"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="true"
+        android:layout_marginBottom="32dp"
+        android:textSize="14sp"
+        android:textColor="@color/whiteTextColor"
+        tools:ignore="SmallSp" />
+
+</RelativeLayout>
 
 
 
