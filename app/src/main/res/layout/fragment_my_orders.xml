@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="8dp"
-    android:background="@android:color/white"
-    android:orientation="vertical"
+
     tools:context=".MyOrdersFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
@@ -40,9 +45,6 @@
         android:drawableTop="@drawable/emptycart"
         app:drawableTopCompat="@drawable/emptycart" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orders_container"
@@ -51,7 +53,6 @@
         android:paddingRight="@dimen/dimen_8dp"
         android:layout_height="wrap_content"/>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

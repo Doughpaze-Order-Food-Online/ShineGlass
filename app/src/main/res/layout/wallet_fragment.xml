@@ -42,44 +42,44 @@
     </FrameLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/login_with_facebook_btn"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="0dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/webview_border"
-        android:layout_height="42dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="0dp">
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/login_with_facebook_btn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:paddingLeft="16dp"-->
+<!--        android:paddingRight="0dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:background="@drawable/webview_border"-->
+<!--        android:layout_height="42dp"-->
+<!--        android:paddingStart="16dp"-->
+<!--        android:paddingEnd="0dp">-->
 
-        <TextView
-            android:id="@+id/login_with_facebook_txt"
-            android:layout_width="wrap_content"
-            android:background="@android:color/transparent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/icon_img"
-            android:text="@string/cashbacks"
-            android:textAllCaps="true"
-            android:textColor="@color/LightBlackColor"
-            android:textSize="12sp"
-            android:layout_toRightOf="@id/icon_img" />
-        <ImageView
-            android:id="@+id/icon_img"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/cashback"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/todo"
-            android:layout_marginRight="16dp" />
+<!--        <TextView-->
+<!--            android:id="@+id/login_with_facebook_txt"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_toEndOf="@id/icon_img"-->
+<!--            android:text="@string/cashbacks"-->
+<!--            android:textAllCaps="true"-->
+<!--            android:textColor="@color/LightBlackColor"-->
+<!--            android:textSize="12sp"-->
+<!--            android:layout_toRightOf="@id/icon_img" />-->
+<!--        <ImageView-->
+<!--            android:id="@+id/icon_img"-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:layout_marginBottom="12dp"-->
+<!--            android:src="@drawable/cashback"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:contentDescription="@string/todo"-->
+<!--            android:layout_marginRight="16dp" />-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
 
     <RelativeLayout
         android:id="@+id/wallet_cash_history_block"
@@ -145,27 +145,27 @@
             android:layout_toRightOf="@id/rupay_txt"
             android:layout_marginStart="4dp" />
 
-        <View
-            android:id="@+id/vertical_dash_line_2"
-            android:layout_width="0.5dp"
-            android:layout_marginLeft="24dp"
-            android:layout_height="42dp"
-            android:background="@color/MediumGrayColor"
-            android:layout_toStartOf="@id/history_btn"
-            android:layout_marginStart="24dp"
-            android:layout_toLeftOf="@id/history_btn" />
+<!--        <View-->
+<!--            android:id="@+id/vertical_dash_line_2"-->
+<!--            android:layout_width="0.5dp"-->
+<!--            android:layout_marginLeft="24dp"-->
+<!--            android:layout_height="42dp"-->
+<!--            android:background="@color/MediumGrayColor"-->
+<!--            android:layout_toStartOf="@id/history_btn"-->
+<!--            android:layout_marginStart="24dp"-->
+<!--            android:layout_toLeftOf="@id/history_btn" />-->
 
-        <Button
-            android:id="@+id/history_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/holo_red_dark"
-            android:text="@string/history"
-            android:textAllCaps="true"
-            android:layout_alignParentEnd="true"
-            android:textSize="12sp"
-            android:layout_alignParentRight="true" />
+<!--        <Button-->
+<!--            android:id="@+id/history_btn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="42dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:textColor="@android:color/holo_red_dark"-->
+<!--            android:text="@string/history"-->
+<!--            android:textAllCaps="true"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:textSize="12sp"-->
+<!--            android:layout_alignParentRight="true" />-->
 
 
     </RelativeLayout>
@@ -173,7 +173,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/transactions_container_card"
         android:layout_width="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_margin="@dimen/dimen_16dp"
         android:layout_height="wrap_content"
         app:cardElevation="2dp">
@@ -195,7 +195,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="@string/transaction_id"
+                    android:text="@string/recent_transactions"
                     android:layout_marginRight="16dp"
                     android:textColor="@color/LightBlackColor"
                     android:textAllCaps="true"
@@ -203,14 +203,15 @@
                     tools:ignore="SmallSp"
                     android:layout_marginEnd="16dp" />
 
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1.5"
                     android:layout_marginRight="16dp"
                     android:textColor="@color/LightBlackColor"
                     android:textAllCaps="true"
-                    android:text="@string/date"
+                    android:text="@string/previous_amount"
                     android:textSize="10sp"
                     tools:ignore="SmallSp"
                     android:layout_marginEnd="16dp" />
@@ -218,22 +219,10 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginRight="16dp"
+                    android:layout_weight="1.5"
                     android:textColor="@color/LightBlackColor"
                     android:textAllCaps="true"
-                    android:text="@string/mode"
-                    android:textSize="10sp"
-                    tools:ignore="SmallSp"
-                    android:layout_marginEnd="16dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/LightBlackColor"
-                    android:textAllCaps="true"
-                    android:text="@string/amount"
+                    android:text="@string/updated_amount"
                     android:textSize="10sp"
                     tools:ignore="SmallSp"
                     />
@@ -246,22 +235,10 @@
                 android:background="@color/MediumGrayColor"
                 android:layout_marginTop="4dp"/>
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/history_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
-                </LinearLayout>
-
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

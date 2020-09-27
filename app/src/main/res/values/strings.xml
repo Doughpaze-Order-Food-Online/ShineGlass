@@ -163,5 +163,8 @@
     <string name="payment_mode">payment mode :</string>
     <string name="_123456789777777">123456789777777</string>
     <string name="get_the_directions">get the directions</string>
+    <string name="recent_transactions">wallet transactions</string>
+    <string name="previous_amount">previous amount</string>
+    <string name="updated_amount">updated amount</string>
 
 </resources>
