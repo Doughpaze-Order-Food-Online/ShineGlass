@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -40,6 +41,8 @@ public class My_Account_Address_Activity extends Activity {
     private String Quotation,Date,Total,url;
     private ViewDialog viewDialog;
 
+    private ImageView backBtnImg;
+
 
 
     @Override
@@ -55,13 +58,21 @@ public class My_Account_Address_Activity extends Activity {
         add=findViewById(R.id.add_new_button);
         rvItem=findViewById(R.id.saved_addresses_container);
 
+        backBtnImg=findViewById(R.id.back_btn_img_addresses);
+
+        backBtnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(My_Account_Address_Activity.this, My_Account_New_Address.class);
                 startActivity(i);
-                finish();
             }
         });
         mSubscriptions = new CompositeSubscription();

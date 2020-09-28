@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class My_Account_New_Address extends Activity {
     private double latitude, longitude;
     private String newaddress;
     private ViewDialog viewDialog;
+    private ImageView backBtnImg;
     private static final int REQUEST_LOCATION_PERMISSION2 = 2;
 
     // Constants
@@ -66,7 +68,7 @@ public class My_Account_New_Address extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.adress_details_fragment);
         mSubscriptions = new CompositeSubscription();
-
+        backBtnImg=findViewById(R.id.back_btn_img_address_details);
         automatic=findViewById(R.id.cancel_btn);
         address=findViewById(R.id.user_email_mobile_input_txt);
         save=findViewById(R.id.save);
@@ -76,6 +78,12 @@ public class My_Account_New_Address extends Activity {
         text.setText("SAVE");
         proceed=findViewById(R.id.proceed_to_buy_btn);
 
+        backBtnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         automatic.setOnClickListener(new View.OnClickListener() {
             @Override
