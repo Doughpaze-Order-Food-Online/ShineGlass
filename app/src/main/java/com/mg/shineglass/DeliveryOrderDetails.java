@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mg.shineglass.OTP_Acitvities.DeliveryBoyOtp_Activity;
 import com.mg.shineglass.models.MyOrders;
 
 import java.lang.reflect.Type;
@@ -63,8 +64,11 @@ public class DeliveryOrderDetails extends Activity {
             startActivity(i);
         });
 
-    otp.setOnClickListener(v -> {
-        Toast.makeText(this, "OTP", Toast.LENGTH_SHORT).show();
+        MyOrders finalOrders1 = orders;
+        otp.setOnClickListener(v -> {
+       Intent intent1=new Intent(DeliveryOrderDetails.this, DeliveryBoyOtp_Activity.class);
+       intent1.putExtra("orderId", finalOrders1.getOrderNo());
+       startActivity(intent1);
     });
 
 

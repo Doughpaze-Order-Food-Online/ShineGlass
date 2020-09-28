@@ -34,6 +34,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".OTP_Acitvities.DeliveryBoyOtp_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".WalletActivity"
             android:screenOrientation="portrait" />
         <activity

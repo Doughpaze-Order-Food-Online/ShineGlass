@@ -10,6 +10,7 @@ import com.mg.shineglass.models.FinalOrder;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.MyOrders;
 import com.mg.shineglass.models.MyQuotation;
+import com.mg.shineglass.models.OrderDeliver;
 import com.mg.shineglass.models.PaymentDetails;
 import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.models.Rates;
@@ -114,6 +115,9 @@ public interface retro_interface {
 
     @GET("previous")
     Observable<List<MyOrders>> GET_PREVIOUS_ORDERS();
+
+    @POST("verify_otp")
+    Observable<Integer> VERIFY_OTP(@Body OrderDeliver orderDeliver);
 
 
 

@@ -59,6 +59,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     private CompositeSubscription mSubscriptions;
     private RelativeLayout cancel,request,progress;
     private long mLastClickTime = 0;
+    private SharedPreferences sharedPreferences;
 
 
 
@@ -304,6 +305,13 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     private void handleResponse(Response<LoginResponse> response) {
 
        progress.setVisibility(View.GONE);
+
+        sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("request", null);
+        editor.apply();
         Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(UploadActivity.this,MainActivity.class );
         startActivity(intent);
