@@ -115,6 +115,7 @@ public class MyAccountFragment extends Fragment {
         show.setOnClickListener(v -> {
             Fragment fragment=new MyOrdersFragment();
            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
+           MainActivity.mBottomNavigationView.setSelectedItemId(R.id.myOrders_icon);
         });
 
 
