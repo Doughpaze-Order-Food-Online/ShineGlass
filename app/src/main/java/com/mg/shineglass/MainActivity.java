@@ -21,7 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView mBottomNavigationView;
+    public static BottomNavigationView mBottomNavigationView;
     private CardView cart;
     private CardView wallet;
     private SharedPreferences sharedPreferences;
