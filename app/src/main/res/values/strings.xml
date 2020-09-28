@@ -132,7 +132,7 @@
     <string name="set">Set</string>
     <string name="update">update</string>
     <string name="your_cart_is_empty">Your Cart is Empty!!</string>
-    <string name="no_requests_yet">No requests yet!!\nor\nPlease pull down to Refresh.</string>
+    <string name="no_requests_yet">No requests yet!!\nor\nSwipe down to Refresh.</string>
     <string name="please_login_to_see_your_requests">Please Login to see your Requests</string>
     <string name="my_addresses">my addresses</string>
     <string name="saved_addresses">Saved Addresses</string>
@@ -141,7 +141,7 @@
     <string name="no_address_found">Address Not Foubd</string>
     <string name="reset_password">Reset password</string>
     <string name="enter_the_new_password_you_would_like_to_use_and_nlogin_again">Enter the new password you would like to use and \nlogin again.</string>
-    <string name="no_orders_yet">No Orders yet!!\nor\nPlease pull down to Refresh.</string>
+    <string name="no_orders_yet">No Orders yet!!\nor\nSwipe down to Refresh.</string>
     <string name="loading">Loading ....</string>
     <string name="close">close</string>
     <string name="wallet">wallet</string>
@@ -152,7 +152,7 @@
     <string name="show_all">show all</string>
     <string name="current_orders">Current Orders</string>
     <string name="previous_orders">Previous Orders</string>
-    <string name="no_current_orders">No Current Orders!!\nor\nPlease pull down to Refresh</string>
+    <string name="no_current_orders">No Current Orders!!\nor\nSwipe down to Refresh</string>
     <string name="order_details">order details</string>
     <string name="order_id">order id :</string>
     <string name="customer_name">customer name :</string>
@@ -166,6 +166,7 @@
     <string name="recent_transactions">wallet transactions</string>
     <string name="previous_amount">Credit/Debit</string>
     <string name="updated_amount">updated amount</string>
-    <string name="no_recent_activity_nor_nplease_pull_down_to_refresh">No Recent Activity!!\nor\nPlease pull down to Refresh.</string>
+    <string name="no_recent_activity_nor_nplease_pull_down_to_refresh">No Recent Activity!!\nor\nSwipe down to Refresh.</string>
+    <string name="swipe_down_to_refresh">Swipe down to Refresh</string>
 
 </resources>

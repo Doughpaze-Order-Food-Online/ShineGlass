@@ -180,7 +180,7 @@
         android:layout_width="match_parent"
         android:visibility="visible"
         android:layout_margin="@dimen/dimen_16dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:cardElevation="2dp">
 
         <LinearLayout
@@ -254,7 +254,8 @@
                 android:id="@+id/empty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                android:layout_gravity="center_horizontal"
                 android:text="@string/no_recent_activity_nor_nplease_pull_down_to_refresh"
                 android:gravity="center"
                 android:padding="16dp" />

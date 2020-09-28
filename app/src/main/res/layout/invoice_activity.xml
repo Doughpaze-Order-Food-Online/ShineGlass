@@ -17,6 +17,10 @@
         android:layout_above="@id/button_block"
         android:layout_marginTop="16dp" >
 
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <WebView
             android:id="@+id/webView"
             android:backgroundTint="@android:color/transparent"
@@ -25,13 +29,23 @@
             android:background="@drawable/webview_border"
             tools:ignore="UnusedAttribute"/>
 
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
         <ProgressBar
             android:id="@+id/loading"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="gone"/>
 
+        <TextView
+            android:id="@+id/swipe_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/swipe_down_to_refresh"
+            android:gravity="center"
+            android:visibility="visible"
+            android:layout_gravity="center"/>
     </FrameLayout>
 
     <LinearLayout

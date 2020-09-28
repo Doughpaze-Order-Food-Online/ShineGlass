@@ -44,7 +44,7 @@ public class My_Address_Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_addresses);
 
-        backBtnImage=findViewById(R.id.back_btn_img);
+        backBtnImage=findViewById(R.id.back_btn_img_addresses);
 
         Intent intent=getIntent();
         Quotation=intent.getStringExtra("quotation");

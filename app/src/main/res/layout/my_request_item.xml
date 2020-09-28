@@ -16,10 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingTop="24dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="16dp">
+        android:padding="@dimen/dimen_16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -157,15 +154,17 @@
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginTop="24dp"
+            android:visibility="visible"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
             android:background="@color/MediumGrayColor" />
 
         <LinearLayout
             android:layout_width="208dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
             android:baselineAligned="false"
+            android:visibility="visible"
             android:orientation="horizontal">
 
             <RelativeLayout
