@@ -30,6 +30,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".DeliveryOrderDetails"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".WalletActivity"
             android:screenOrientation="portrait" />
         <activity

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class Quotation_Activity extends Activity {
     private WebView pdf;
@@ -67,6 +68,18 @@ public class Quotation_Activity extends Activity {
             }
         });
 
+
+        SwipeRefreshLayout refreshLayout=findViewById(R.id.refresh);
+
+
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pdf.reload();
+                refreshLayout.setRefreshing(false);
+            }
+        });
         accept.setOnClickListener(v -> {
             Intent i=new Intent(Quotation_Activity.this, My_Address_Activity.class);
             i.putExtra("quotation",Quotation);

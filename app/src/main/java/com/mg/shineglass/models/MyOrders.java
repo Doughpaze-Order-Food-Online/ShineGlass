@@ -12,6 +12,9 @@ public class MyOrders {
     @SerializedName("order_date")
     Date order_date;
 
+    @SerializedName("customer")
+    User user;
+
     @SerializedName("status")
     String status;
 
@@ -72,5 +75,9 @@ public class MyOrders {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

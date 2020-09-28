@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.mg.shineglass.DeliveryOrderDetails;
 import com.mg.shineglass.Invoice_Activity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.MyOrders;
@@ -52,7 +53,7 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
           {
               deliveryOrdersItemHolder.invoice.setVisibility(View.VISIBLE);
               deliveryOrdersItemHolder.invoice.setOnClickListener(v -> {
-                  Intent intent=new Intent(deliveryOrdersItemHolder.itemView.getContext(), Invoice_Activity.class);
+                  Intent intent=new Intent(deliveryOrdersItemHolder.itemView.getContext(), DeliveryOrderDetails.class);
                   Gson gson=new Gson();
                   intent.putExtra("order",gson.toJson(orders));
                   deliveryOrdersItemHolder.itemView.getContext().startActivity(intent);

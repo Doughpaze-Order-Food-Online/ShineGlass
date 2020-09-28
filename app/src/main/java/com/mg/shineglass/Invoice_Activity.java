@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class Invoice_Activity extends Activity {
     private WebView pdf;
@@ -54,7 +55,17 @@ public class Invoice_Activity extends Activity {
                 Toast.makeText(Invoice_Activity.this, "Error Occurred", Toast.LENGTH_SHORT).show();
             }
         });
+        SwipeRefreshLayout refreshLayout=findViewById(R.id.refresh);
 
+
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+               pdf.reload();
+                refreshLayout.setRefreshing(false);
+            }
+        });
 
     }
 }

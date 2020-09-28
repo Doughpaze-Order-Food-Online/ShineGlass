@@ -167,6 +167,6 @@
     <string name="previous_amount">Credit/Debit</string>
     <string name="updated_amount">updated amount</string>
     <string name="no_recent_activity_nor_nplease_pull_down_to_refresh">No Recent Activity!!\nor\nSwipe down to Refresh.</string>
-    <string name="swipe_down_to_refresh">Swipe down to Refresh</string>
+    <string name="swipe_down_to_refresh">(Didn\'t see pdf?? Swipe down to Refresh)</string>
 
 </resources>
