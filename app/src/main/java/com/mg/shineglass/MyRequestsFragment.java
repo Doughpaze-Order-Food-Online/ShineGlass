@@ -122,8 +122,7 @@ public class MyRequestsFragment extends Fragment {
 
     private void FETCH_DATA()
     {
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(getContext());
+
       if(sharedPreferences.getString("token", null)==null)
       {
 

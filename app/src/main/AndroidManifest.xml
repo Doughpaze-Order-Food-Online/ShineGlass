@@ -25,6 +25,9 @@
         <activity
             android:name=".DeliveryBoyMainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Invoice_Activity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".WalletActivity"

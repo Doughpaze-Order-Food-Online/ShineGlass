@@ -188,6 +188,8 @@ public class Order_Confirmation_Activity extends Activity {
         finalOrder.setTotal(Total);
         finalOrder.setAmount(Amount);
         finalOrder.setWallet(Wallet);
+
+        viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
                 .PLACE_OFFLINE_ORDER(finalOrder)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -206,6 +208,7 @@ public class Order_Confirmation_Activity extends Activity {
         finalOrder.setTotal(Total);
         finalOrder.setAmount(Amount);
         finalOrder.setWallet(Wallet);
+        viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit(mSharedPreferences.getString(constants.TOKEN, null))
                 .GET_TOKEN(constants.MID,finalOrder)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -215,7 +218,7 @@ public class Order_Confirmation_Activity extends Activity {
 
 
     private void handleResponse(Integer status) {
-
+        viewDialog.hideDialog();
         if(status==1)
         {
             Intent i=new Intent(Order_Confirmation_Activity.this,MainActivity.class);
@@ -236,7 +239,7 @@ public class Order_Confirmation_Activity extends Activity {
     }
 
     private void handleResponse2(String token) {
-
+        viewDialog.hideDialog();
         String txnAmountString = Amount.toString();
         String midString = constants.MID ;
         String orderIdString = Quotation;
@@ -359,7 +362,7 @@ public class Order_Confirmation_Activity extends Activity {
     }
 
     private void PLACE_ORDER(PaymentDetails paymentDetails) {
-
+        viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit(mSharedPreferences.getString(constants.TOKEN, null))
                 .PLACE_ONLINE_ORDER(constants.MID,paymentDetails,Quotation)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -382,6 +385,7 @@ public class Order_Confirmation_Activity extends Activity {
 
 
     private void handleResponse3(Wallet response) {
+
         Wallet=response.getWallet();
         viewDialog.hideDialog();
         amount.setVisibility(View.VISIBLE);

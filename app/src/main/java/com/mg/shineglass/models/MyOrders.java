@@ -30,6 +30,13 @@ public class MyOrders {
     @SerializedName("total")
     Double total;
 
+    @SerializedName("delivery_status")
+    Boolean delivery_status;
+
+
+    public Boolean getDelivery_status() {
+        return delivery_status;
+    }
 
     public Double getTotal() {
         return total;

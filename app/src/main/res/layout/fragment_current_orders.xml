@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".CurrentOrdersFragment">
+    tools:context=".CurrentOrdersFragment"
+    android:id="@+id/refresh">
 
     <LinearLayout
         android:layout_width="match_parent"

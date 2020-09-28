@@ -109,6 +109,13 @@ public interface retro_interface {
     Observable<String> GET_TOKEN(@Query("mid") String mid,@Body FinalOrder finalOrder);
 
 
+    @GET("current")
+    Observable<List<MyOrders>> GET_CURRENT_ORDERS();
+
+    @GET("previous")
+    Observable<List<MyOrders>> GET_PREVIOUS_ORDERS();
+
+
 
 
 

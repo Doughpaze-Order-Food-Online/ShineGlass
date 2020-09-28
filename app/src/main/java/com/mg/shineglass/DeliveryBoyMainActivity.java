@@ -19,16 +19,19 @@ import com.mg.shineglass.R;
 public class DeliveryBoyMainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNavigationView;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.delivery_boy_activity_main);
         mBottomNavigationView=findViewById(R.id.bottom_nav_menu);
+        sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         mBottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
-        mBottomNavigationView.setSelectedItemId(R.id.previousOrders_icon);
-        getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, new DeliveryPreviousOrdersFragment()).commit();
+        mBottomNavigationView.setSelectedItemId(R.id.current_orders_icon);
+        getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, new CurrentOrdersFragment()).commit();
     }
 
     @Override
@@ -39,6 +42,14 @@ public class DeliveryBoyMainActivity extends AppCompatActivity {
         }
         else{
             finishAffinity();
+
+        sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("previous",null);
+            editor.putString("current",null);
+            editor.apply();
         }
     }
 

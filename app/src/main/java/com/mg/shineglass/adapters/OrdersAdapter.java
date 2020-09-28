@@ -8,6 +8,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.mg.shineglass.Invoice_Activity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.MyOrders;
 import java.text.SimpleDateFormat;
@@ -41,20 +43,20 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersItem
 
         OrderItemHolder.invoice.setVisibility(View.GONE);
 
-//       if(orders.getInvoice_generated())
-//       {OrderItemHolder.invoice.setVisibility(View.VISIBLE);
-//
-//           OrderItemHolder.invoice.setOnClickListener(v -> {
-//               Intent intent=new Intent(OrderItemHolder.itemView.getContext(), Invoice_Activity.class);
-//               intent.putExtra("invoice",orders.getInvoice());
-//               OrderItemHolder.itemView.getContext().startActivity(intent);
-//           });
-//
-//       }
-//       else
-//       {
-//           OrderItemHolder.invoice.setVisibility(View.GONE);
-//       }
+       if(orders.getInvoice_generated())
+       {OrderItemHolder.invoice.setVisibility(View.VISIBLE);
+
+           OrderItemHolder.invoice.setOnClickListener(v -> {
+               Intent intent=new Intent(OrderItemHolder.itemView.getContext(), Invoice_Activity.class);
+               intent.putExtra("invoice",orders.getInvoice());
+               OrderItemHolder.itemView.getContext().startActivity(intent);
+           });
+
+       }
+       else
+       {
+           OrderItemHolder.invoice.setVisibility(View.GONE);
+       }
 
 
 
