@@ -51,10 +51,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/login_with_otp_txt"
+                        android:gravity="center"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="80dp"
+                        android:layout_marginBottom="48dp"
                         android:textColor="@color/BlackTextColor"
-                        android:textSize="24sp"/>
+                        android:textSize="@dimen/dimen_18sp"/>
 
 
                     <com.google.android.material.textfield.TextInputLayout

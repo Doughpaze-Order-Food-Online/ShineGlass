@@ -61,8 +61,8 @@ public class Register_OTP_Activity extends AppCompatActivity {
         setContentView(R.layout.enter_otp_activity);
         backImgBtn=findViewById(R.id.back_btn_img);
         backImgBtn.setOnClickListener(v -> finish());
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         mSubscriptions = new CompositeSubscription();
 
         Intent intent=getIntent();
@@ -130,6 +130,7 @@ public class Register_OTP_Activity extends AppCompatActivity {
                     if (text.length() == 0)
                         E3.requestFocus();
                     break;
+                default:E1.requestFocus();
             }
         }
 

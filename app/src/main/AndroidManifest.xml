@@ -35,7 +35,8 @@
 
         <activity
             android:name=".Forgot_Password_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_Edit_details"/>
 
         <activity
             android:name=".OTP_Acitvities.Forgot_Password_Otp"

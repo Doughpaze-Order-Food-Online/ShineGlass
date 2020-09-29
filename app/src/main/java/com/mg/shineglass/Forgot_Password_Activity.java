@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -35,8 +36,9 @@ public class Forgot_Password_Activity extends AppCompatActivity {
 
     private EditText password_EditText,rpassword_EditText;
     private CompositeSubscription mSubscriptions;
-    private RelativeLayout cancel,progress;
-    private Button reset;
+    private RelativeLayout cancel;
+    private ProgressBar progress;
+    private RelativeLayout reset;
     private String _id;
 
     @Override
@@ -55,9 +57,9 @@ public class Forgot_Password_Activity extends AppCompatActivity {
         password_EditText=findViewById(R.id.new_password_input_txt);
         rpassword_EditText=findViewById(R.id.reenter_new_password_input_txt);
 
-        progress=findViewById(R.id.progress);
+        progress=findViewById(R.id.progress_bar);
 
-        reset=findViewById(R.id.change_btn);
+        reset=findViewById(R.id.update_btn);
         reset.setOnClickListener(view->RESET());
 
         cancel=findViewById(R.id.cancel_btn);
