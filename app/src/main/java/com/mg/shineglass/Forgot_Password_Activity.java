@@ -42,7 +42,7 @@ public class Forgot_Password_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.change_password_fragment);
+        setContentView(R.layout.reset_password_activity);
         Intent i=getIntent();
         _id=i.getStringExtra("_id");
 
