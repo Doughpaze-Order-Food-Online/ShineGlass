@@ -59,7 +59,6 @@ public class Number_OTP_Activity extends AppCompatActivity {
 
         backImgBtn=findViewById(R.id.back_btn_img);
         backImgBtn.setOnClickListener(v -> finish());
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         mSubscriptions = new CompositeSubscription();
 

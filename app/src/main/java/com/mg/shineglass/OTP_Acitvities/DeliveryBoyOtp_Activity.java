@@ -61,8 +61,6 @@ public class DeliveryBoyOtp_Activity extends Activity {  private User user;
 
         Intent i=getIntent();
         orderId=i.getStringExtra("orderId");
-
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         mSubscriptions = new CompositeSubscription();
 
 

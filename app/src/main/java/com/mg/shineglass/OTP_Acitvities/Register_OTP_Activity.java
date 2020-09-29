@@ -62,7 +62,6 @@ public class Register_OTP_Activity extends AppCompatActivity {
         backImgBtn=findViewById(R.id.back_btn_img);
         backImgBtn.setOnClickListener(v -> finish());
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         mSubscriptions = new CompositeSubscription();
 
         Intent intent=getIntent();
