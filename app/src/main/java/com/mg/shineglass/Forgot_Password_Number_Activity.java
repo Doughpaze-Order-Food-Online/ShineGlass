@@ -2,33 +2,28 @@ package com.mg.shineglass;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.mg.shineglass.OTP_Acitvities.Forgot_Password_Otp;
-import com.mg.shineglass.OTP_Acitvities.Google_Otp_Activity;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.User;
 import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.ViewDialog;
-
 import java.util.Objects;
-
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
-
 import static com.mg.shineglass.utils.validation.validateFields;
 import static com.mg.shineglass.utils.validation.validatePhone;
 
@@ -40,6 +35,7 @@ public class Forgot_Password_Number_Activity extends AppCompatActivity {
     private RelativeLayout button;
     private TextView title;
     private ViewDialog viewDialog;
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +50,12 @@ public class Forgot_Password_Number_Activity extends AppCompatActivity {
 
         title.setText("Enter Registered Mobile Number");
 
-        button.setOnClickListener(view -> SEND_OTP());
+        button.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            SEND_OTP();});
 
         viewDialog=new ViewDialog(this);
     }

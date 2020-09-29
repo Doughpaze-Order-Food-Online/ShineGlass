@@ -6,8 +6,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,14 +41,14 @@ import static com.mg.shineglass.utils.validation.validatePhone;
 public class EditDetailsPopUpActivity extends AppCompatActivity {
 
     private RelativeLayout cancelBtn;
-    private TextView name, mobile_no, email;
+    private EditText name, mobile_no, email;
     private TextInputLayout Tname,Tmobile,Temail;
-    private RelativeLayout update;
+    private RelativeLayout update,progress;
     private SharedPreferences sharedPreferences;
     private Boolean otp=false,change=false;
     private CompositeSubscription mSubscriptions;
-    private ViewDialog viewDialog;
     private User user;
+    private long mLastClickTime = 0;
 
 
     @Override
@@ -59,7 +61,8 @@ public class EditDetailsPopUpActivity extends AppCompatActivity {
         mSubscriptions = new CompositeSubscription();
 
         cancelBtn=findViewById(R.id.cancel_btn);
-        viewDialog=new ViewDialog(this);
+        progress=findViewById(R.id.progress);
+
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +90,10 @@ public class EditDetailsPopUpActivity extends AppCompatActivity {
         mobile_no.setText(sharedPreferences.getString(constants.PHONE,null));
 
         update.setOnClickListener(v -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             UPDATE();
         });
 
@@ -149,9 +156,16 @@ public class EditDetailsPopUpActivity extends AppCompatActivity {
 
             if(otp)
             {
-                viewDialog.showDialog();
+                progress.setVisibility(View.VISIBLE);
+
+                name.setEnabled(false);
+                email.setEnabled(false);
+                mobile_no.setEnabled(false);
+                update.setEnabled(false);
+                cancelBtn.setEnabled(false);
                 mSubscriptions.add(
-                        networkUtils.getRetrofit().GOOGLE_FACEBOOK_OTP(user)
+                        networkUtils.getRetrofit()
+                                .GOOGLE_FACEBOOK_OTP(user)
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribeOn(Schedulers.io())
                                 .subscribe(this::handleResponse,this::handleError));
@@ -161,11 +175,17 @@ public class EditDetailsPopUpActivity extends AppCompatActivity {
 
                if(change)
                {
+                   name.setEnabled(false);
+                   email.setEnabled(false);
+                   mobile_no.setEnabled(false);
+                   update.setEnabled(false);
+                   cancelBtn.setEnabled(false);
                    SharedPreferences sharedPreferences = PreferenceManager
                            .getDefaultSharedPreferences(this);
-                   viewDialog.showDialog();
+                   progress.setVisibility(View.VISIBLE);
                    mSubscriptions.add(
-                           networkUtils.getRetrofit(sharedPreferences.getString("token", null)).SAVE_PROFILE_DETAILS(user)
+                           networkUtils.getRetrofit(sharedPreferences.getString("token", null))
+                                   .SAVE_PROFILE_DETAILS(user)
                                    .observeOn(AndroidSchedulers.mainThread())
                                    .subscribeOn(Schedulers.io())
                                    .subscribe(this::handleResponse2,this::handleError));
@@ -188,21 +208,41 @@ public class EditDetailsPopUpActivity extends AppCompatActivity {
 
     private void handleResponse(LoginResponse response) {
 
-        viewDialog.hideDialog();
+        progress.setVisibility(View.GONE);
         Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
 
-        GoToOtp(response.getOtp(),user);
+        GoToOtp(response.getOtp());
     }
 
-    private void handleResponse2(BasicResponse response) {
-        viewDialog.hideDialog();
+    private void handleResponse2(LoginResponse response) {
+        progress.setVisibility(View.GONE);
         Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if(user.getMobile()!=null)
+        {
+            editor.putString(constants.PHONE,user.getMobile());
+        }
+
+        if(user.getEmail()!=null)
+        {
+            editor.putString(constants.EMAIL,user.getEmail());
+        }
+
+        if(user.getUsername()!=null)
+        {
+            editor.putString(constants.USERNAME,user.getUsername());
+        }
+        editor.apply();
+
         finish();
     }
 
     private void handleError(Throwable error) {
 
-        viewDialog.hideDialog();
+        progress.setVisibility(View.GONE);
 
         if (error instanceof HttpException) {
 
@@ -226,7 +266,7 @@ public class EditDetailsPopUpActivity extends AppCompatActivity {
 
 
 
-    private void GoToOtp(String otp,User user){
+    private void GoToOtp(String otp){
 
         Intent intent = new Intent(EditDetailsPopUpActivity.this, Save_Profile_Otp.class);
         intent.putExtra("otp",otp);

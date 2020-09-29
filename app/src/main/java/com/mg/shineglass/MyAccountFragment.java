@@ -98,13 +98,7 @@ public class MyAccountFragment extends Fragment {
 
 
 
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                FETCH_DATA();
-                refreshLayout.setRefreshing(false);
-            }
-        });
+
 
      sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(getContext());
@@ -177,7 +171,13 @@ public class MyAccountFragment extends Fragment {
             }
         }
 
-
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                FETCH_DATA();
+                refreshLayout.setRefreshing(false);
+            }
+        });
 
 
         return rootView;
@@ -205,6 +205,12 @@ public class MyAccountFragment extends Fragment {
         editor.putString(constants.PHONE,null);
         editor.putString(constants.TYPE,null);
         editor.putString(constants.USER_TYPE,null);
+        editor.putString("orderId", null);
+        editor.putString("request", null);
+        editor.putString("wallet", null);
+        editor.putString("previous",null);
+        editor.putString("current",null);
+        editor.putString("orders", null);
         editor.apply();
         goToHome();
 

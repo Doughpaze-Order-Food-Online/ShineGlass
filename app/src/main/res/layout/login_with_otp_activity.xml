@@ -83,6 +83,7 @@
                             android:textSize="12sp"
                             android:inputType="number"
                             android:textColor="@color/BlackTextColor"
+                            android:maxLength="10"
                             android:autofillHints="@null"
                             tools:ignore="TextFields" />
 

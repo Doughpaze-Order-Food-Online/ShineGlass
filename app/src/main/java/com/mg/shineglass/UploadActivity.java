@@ -77,6 +77,11 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
 
         cancel.setOnClickListener(view->finish());
         request.setOnClickListener(view-> {
+            if(arrayList.size()==0)
+            {
+                Toast.makeText(this, "Select Files to Upload!", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             SharedPreferences sharedPreferences = PreferenceManager
                     .getDefaultSharedPreferences(this);

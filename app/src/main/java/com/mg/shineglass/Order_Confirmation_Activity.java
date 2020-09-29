@@ -65,6 +65,7 @@ public class Order_Confirmation_Activity extends Activity {
     private Double Amount,Wallet,Total;
     private SharedPreferences sharedPreferences;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

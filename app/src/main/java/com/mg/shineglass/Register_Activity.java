@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,7 @@ public class Register_Activity extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private User user;
     private RelativeLayout register;
-
+    private long mLastClickTime = 0;
     private ImageView backImgBtn;
 
     @Override
@@ -68,7 +69,12 @@ public class Register_Activity extends AppCompatActivity {
         setContentView(R.layout.create_account_activity);
 
         backImgBtn=findViewById(R.id.back_btn_img);
-        backImgBtn.setOnClickListener(v -> finish());
+        backImgBtn.setOnClickListener(v -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            finish();});
         initViews();
     }
 
@@ -90,7 +96,12 @@ public class Register_Activity extends AppCompatActivity {
         rpassword_EditText=findViewById(R.id.re_password_input_txt);
 
         register=findViewById(R.id.signUp_btn);
-        register.setOnClickListener(view->Register());
+        register.setOnClickListener(view->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            Register();});
 
         viewDialog = new ViewDialog(this);
 

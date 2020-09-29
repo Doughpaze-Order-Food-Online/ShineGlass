@@ -115,6 +115,7 @@
                     android:hint="@string/mob_no"
                     android:textColorHint="@color/BlackTextColor"
                     android:textSize="12sp"
+                    android:maxLength="10"
                     android:inputType="number"
                     android:textColor="@color/BlackTextColor"
                     android:autofillHints="@null" />
@@ -199,11 +200,18 @@
 
     </ScrollView>
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
+    <RelativeLayout
+        android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"/>
+        android:visibility="gone">
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

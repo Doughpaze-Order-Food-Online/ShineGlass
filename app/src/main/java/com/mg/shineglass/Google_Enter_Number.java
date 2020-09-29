@@ -2,6 +2,7 @@ package com.mg.shineglass;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class Google_Enter_Number extends AppCompatActivity {
     private String token,type,email,Number,username;
     private TextView title;
     private ViewDialog viewDialog;
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,13 @@ public class Google_Enter_Number extends AppCompatActivity {
 
         title.setText("Enter Mobile Number");
 
-        button.setOnClickListener(view -> SEND_OTP());
+        button.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            SEND_OTP();
+        });
 
         viewDialog=new ViewDialog(this);
     }

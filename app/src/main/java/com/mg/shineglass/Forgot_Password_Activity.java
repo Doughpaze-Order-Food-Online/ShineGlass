@@ -1,20 +1,15 @@
 package com.mg.shineglass;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,6 +25,7 @@ import rx.subscriptions.CompositeSubscription;
 import static com.mg.shineglass.utils.validation.VALIDATE_PASSWORD;
 import static com.mg.shineglass.utils.validation.validateFields;
 
+
 public class Forgot_Password_Activity extends AppCompatActivity {
 
     private TextInputLayout password_Layout,rpassword_layout;
@@ -37,9 +33,10 @@ public class Forgot_Password_Activity extends AppCompatActivity {
     private EditText password_EditText,rpassword_EditText;
     private CompositeSubscription mSubscriptions;
     private RelativeLayout cancel;
-    private ProgressBar progress;
+    private RelativeLayout progress;
     private RelativeLayout reset;
     private String _id;
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +54,16 @@ public class Forgot_Password_Activity extends AppCompatActivity {
         password_EditText=findViewById(R.id.new_password_input_txt);
         rpassword_EditText=findViewById(R.id.reenter_new_password_input_txt);
 
-        progress=findViewById(R.id.progress_bar);
+        progress=findViewById(R.id.progress);
 
         reset=findViewById(R.id.update_btn);
-        reset.setOnClickListener(view->RESET());
+        reset.setOnClickListener(view->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            RESET();
+        });
 
         cancel=findViewById(R.id.cancel_btn);
 
@@ -71,13 +74,6 @@ public class Forgot_Password_Activity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
-
-    }
 
     private void RESET() {
 
@@ -126,12 +122,7 @@ public class Forgot_Password_Activity extends AppCompatActivity {
 
 
         progress.setVisibility(View.VISIBLE);
-
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(this);
-
-        mSubscriptions.add(
-                networkUtils.getRetrofit(sharedPreferences.getString("token", null))
+        mSubscriptions.add(networkUtils.getRetrofit()
                         .FORGOT_PASSWORD(user)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
@@ -150,8 +141,10 @@ public class Forgot_Password_Activity extends AppCompatActivity {
 
     private void handleError(Throwable error) {
 
-
+        Log.e("error",error.toString());
         progress.setVisibility(View.GONE);
+
+
         if (error instanceof HttpException) {
 
             Gson gson = new GsonBuilder().create();

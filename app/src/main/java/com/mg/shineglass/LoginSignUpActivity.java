@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -52,6 +53,7 @@ public class LoginSignUpActivity extends AppCompatActivity {
     private static final String EMAIL = "email";
     private static final String AUTH_TYPE = "rerequest";
     private ViewDialog viewDialog;
+    private long mLastClickTime = 0;
 
 
     private GoogleSignInClient mGoogleSignInClient;
@@ -79,26 +81,46 @@ public class LoginSignUpActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 Intent i=new Intent(LoginSignUpActivity.this,Login_Activity.class);
                 startActivity(i);
             }
         });
 
         otp_login.setOnClickListener(v -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             Intent i=new Intent(LoginSignUpActivity.this,Otp_Login_Activity.class);
             startActivity(i);
         });
 
         sign_up.setOnClickListener(v -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             Intent i=new Intent(LoginSignUpActivity.this,Register_Activity.class);
             startActivity(i);
         });
 
         facebook.setOnClickListener(view->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             viewDialog.showDialog();
             FACEBOOK();
         });
         google.setOnClickListener(view->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             viewDialog.showDialog();
             GOOGLE();
         });

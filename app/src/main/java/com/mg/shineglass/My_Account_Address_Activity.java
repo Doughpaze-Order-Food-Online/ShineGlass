@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,7 @@ public class My_Account_Address_Activity extends Activity {
     private Button add;
     private String Quotation,Date,Total,url;
     private ViewDialog viewDialog;
+    private long mLastClickTime = 0;
 
     private ImageView backBtnImg;
 
@@ -71,6 +73,10 @@ public class My_Account_Address_Activity extends Activity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 Intent i = new Intent(My_Account_Address_Activity.this, My_Account_New_Address.class);
                 startActivity(i);
             }

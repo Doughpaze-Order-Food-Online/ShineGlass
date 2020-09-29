@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -49,6 +50,7 @@ public class Login_Activity extends AppCompatActivity {
     private ViewDialog viewDialog;
     private ImageView backImgBtn;
     private TextView forgot;
+    private long mLastClickTime = 0;
 
     RelativeLayout register;
 
@@ -70,6 +72,10 @@ public class Login_Activity extends AppCompatActivity {
         forgot=findViewById(R.id.forgot_password_txt);
 
         forgot.setOnClickListener(v -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             Intent intent=new Intent(Login_Activity.this,Forgot_Password_Number_Activity.class);
             startActivity(intent);
         });
@@ -79,7 +85,12 @@ public class Login_Activity extends AppCompatActivity {
 
 
         register=findViewById(R.id.login_btn);
-        register.setOnClickListener(view->Login());
+        register.setOnClickListener(view->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            Login();});
 
         mSubscriptions = new CompositeSubscription();
         initSharedPreferences();

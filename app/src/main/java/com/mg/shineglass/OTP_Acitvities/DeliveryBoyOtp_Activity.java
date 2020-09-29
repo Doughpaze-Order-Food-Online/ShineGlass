@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -37,7 +38,7 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 public class DeliveryBoyOtp_Activity extends Activity {  private User user;
-    private String otp;
+
     private EditText E1;
     private EditText E2;
     private EditText E3;
@@ -50,6 +51,7 @@ public class DeliveryBoyOtp_Activity extends Activity {  private User user;
     private ViewDialog viewDialog;
     private String orderId;
     private SharedPreferences sharedPreferences;
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +91,12 @@ public class DeliveryBoyOtp_Activity extends Activity {  private User user;
         E3.addTextChangedListener(new DeliveryBoyOtp_Activity.GenericTextWatcher(E3));
         E4.addTextChangedListener(new DeliveryBoyOtp_Activity.GenericTextWatcher(E4));
 
-        button.setOnClickListener(view -> VERIFY());
+        button.setOnClickListener(view ->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            VERIFY();});
 
         Resend_block.setVisibility(View.GONE);
 

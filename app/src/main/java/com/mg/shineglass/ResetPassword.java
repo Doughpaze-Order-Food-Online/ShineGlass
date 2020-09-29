@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -40,6 +41,7 @@ public class ResetPassword extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private RelativeLayout cancel,progress;
     private Button reset;
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,24 +59,27 @@ public class ResetPassword extends AppCompatActivity {
         progress=findViewById(R.id.progress);
 
         reset=findViewById(R.id.change_btn);
-        reset.setOnClickListener(view->RESET());
+        reset.setOnClickListener(view->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            RESET();});
 
         cancel=findViewById(R.id.cancel_btn);
 
         cancel.setOnClickListener(v->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             finish();
         });
 
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
 
-    }
 
     private void RESET() {
 

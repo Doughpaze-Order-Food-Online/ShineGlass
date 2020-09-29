@@ -73,7 +73,7 @@ public interface retro_interface {
     Observable<BasicResponse> RESET_PASSWORD(@Body User user);
 
     @POST("auth/save_profile")
-    Observable<BasicResponse> SAVE_PROFILE_DETAILS(@Body User user);
+    Observable<LoginResponse> SAVE_PROFILE_DETAILS(@Body User user);
 
     @Multipart
     @POST("quotation")

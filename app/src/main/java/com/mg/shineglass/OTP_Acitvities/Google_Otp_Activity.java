@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -50,6 +51,7 @@ public class Google_Otp_Activity extends AppCompatActivity {
     private RelativeLayout Resend_block;
     private ImageView backImgBtn;
     private ViewDialog viewDialog;
+    private long mLastClickTime = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,8 +89,18 @@ public class Google_Otp_Activity extends AppCompatActivity {
         E3.addTextChangedListener(new Google_Otp_Activity.GenericTextWatcher(E3));
         E4.addTextChangedListener(new Google_Otp_Activity.GenericTextWatcher(E4));
 
-        button.setOnClickListener(view -> NUMBER_LOGIN());
-        resend.setOnClickListener(view->RESEND_OTP(user));
+        button.setOnClickListener(view ->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            NUMBER_LOGIN();});
+        resend.setOnClickListener(view->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            RESEND_OTP(new User(intent.getStringExtra("phone")));});
         viewDialog = new ViewDialog(this);
 
         CountDownTime();
@@ -114,7 +126,8 @@ public class Google_Otp_Activity extends AppCompatActivity {
 
     private void SAVE_NUMBER() {
         viewDialog.showDialog();
-        mSubscriptions.add(networkUtils.getRetrofit().NUMBER_SAVE(user)
+        mSubscriptions.add(networkUtils.getRetrofit()
+                .NUMBER_SAVE(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse2,this::handleError));
@@ -124,7 +137,8 @@ public class Google_Otp_Activity extends AppCompatActivity {
     private void RESEND_OTP(User user)
     {
         viewDialog.showDialog();
-        mSubscriptions.add(networkUtils.getRetrofit().GOOGLE_FACEBOOK_OTP(user)
+        mSubscriptions.add(networkUtils.getRetrofit()
+                .GOOGLE_FACEBOOK_OTP(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));

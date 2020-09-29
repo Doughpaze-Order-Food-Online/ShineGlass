@@ -3,6 +3,7 @@ package com.mg.shineglass;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class Otp_Login_Activity extends AppCompatActivity {
     private RelativeLayout button;
     private ViewDialog viewDialog;
     private ImageView backImgBtn;
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +57,23 @@ public class Otp_Login_Activity extends AppCompatActivity {
         mSubscriptions = new CompositeSubscription();
         button = findViewById(R.id.send_otp_btn);
 
-        button.setOnClickListener(view -> NUMBER_LOGIN());
+        button.setOnClickListener(view ->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            NUMBER_LOGIN();});
 
         viewDialog=new ViewDialog(this);
         backImgBtn=findViewById(R.id.back_btn_img);
-        backImgBtn.setOnClickListener(v -> finish());
+        backImgBtn.setOnClickListener(v -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            finish();
+
+        });
     }
 
     private void NUMBER_LOGIN() {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -50,6 +51,7 @@ public class Save_Profile_Otp extends AppCompatActivity {
     private RelativeLayout Resend_block;
     private ImageView backImgBtn;
     private ViewDialog viewDialog;
+    private long mLastClickTime = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,8 +88,18 @@ public class Save_Profile_Otp extends AppCompatActivity {
         E3.addTextChangedListener(new Save_Profile_Otp.GenericTextWatcher(E3));
         E4.addTextChangedListener(new Save_Profile_Otp.GenericTextWatcher(E4));
 
-        button.setOnClickListener(view -> NUMBER_LOGIN());
-        resend.setOnClickListener(view->RESEND_OTP(user));
+        button.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            NUMBER_LOGIN();});
+        resend.setOnClickListener(view->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            RESEND_OTP(user);});
         viewDialog = new ViewDialog(this);
 
         CountDownTime();
@@ -132,16 +144,27 @@ public class Save_Profile_Otp extends AppCompatActivity {
                 .subscribe(this::handleResponse,this::handleError));
     }
 
-    private void handleResponse2(BasicResponse response) {
+    private void handleResponse2(LoginResponse response) {
 
         viewDialog.hideDialog();
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(constants.EMAIL,user.getEmail());
-        editor.putString(constants.USERNAME,user.getUsername());
-        editor.putString(constants.PHONE,user.getMobile());
+        if(user.getMobile()!=null)
+        {
+            editor.putString(constants.PHONE,user.getMobile());
+        }
+
+        if(user.getEmail()!=null)
+        {
+            editor.putString(constants.EMAIL,user.getEmail());
+        }
+
+        if(user.getUsername()!=null)
+        {
+            editor.putString(constants.USERNAME,user.getUsername());
+        }
         editor.apply();
         finish();
 

@@ -10,6 +10,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -58,6 +59,7 @@ public class New_Address_Activity extends Activity {
     private String Quotation, Date, Total, url, newaddress;
     private ViewDialog viewDialog;
     private ImageView backBtnImg;
+    private long mLastClickTime = 0;
 
     // Constants
     private static final int REQUEST_LOCATION_PERMISSION = 1;
@@ -90,12 +92,21 @@ public class New_Address_Activity extends Activity {
         automatic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 getLocation();
 
             }
         });
 
-        proceed.setOnClickListener(view -> DETAILS());
+        proceed.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            DETAILS();});
         viewDialog = new ViewDialog(this);
 
         if (ActivityCompat.checkSelfPermission(this,

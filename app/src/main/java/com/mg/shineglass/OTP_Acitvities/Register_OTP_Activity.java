@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -55,6 +56,8 @@ public class Register_OTP_Activity extends AppCompatActivity {
     private RelativeLayout Resend_block;
     private ImageView backImgBtn;
     private ViewDialog viewDialog;
+    private long mLastClickTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +93,18 @@ public class Register_OTP_Activity extends AppCompatActivity {
         E3.addTextChangedListener(new GenericTextWatcher(E3));
         E4.addTextChangedListener(new GenericTextWatcher(E4));
 
-        button.setOnClickListener(view -> register());
-        resend.setOnClickListener(view->SEND_OTP(user));
+        button.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            register();});
+        resend.setOnClickListener(view->{
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+            SEND_OTP(user);});
         viewDialog = new ViewDialog(this);
 
         CountDownTime();
