@@ -110,48 +110,62 @@ public class Register_Activity extends AppCompatActivity {
 
 
 
-        int err = 0;
 
         if (!validateFields(username)) {
 
-            err++;
+
             username_Layout.setError("Name should not be empty !");
+            showSnackBarMessage("Name should not be empty !");
+            return;
         }
 
         if (!validateEmail(email)) {
 
-            err++;
+
             email_Layout.setError("Email should be valid !");
+            showSnackBarMessage("Email should be valid !");
+            return;
         }
 
         if (!validateFields(password)) {
 
-            err++;
+
            password_Layout.setError("Password should not be empty !");
+            showSnackBarMessage("Password should not be empty !");
+            return;
         }
-        else if(!VALIDATE_PASSWORD(password))
+
+         if(!VALIDATE_PASSWORD(password))
         {
-            err++;
+
             password_Layout.setError("Password should have atleast:\n6 characters \n1 uppercase\n1 special character \n1 number");
+            showSnackBarMessage("Enter Valid Password!");
+            return;
         }
 
         if (!validateFields(password2)) {
 
-            err++;
+
             rpassword_layout.setError("Confirm Password should not be empty !");
+            showSnackBarMessage("Confirm Password should not be empty !");
+            return;
         }
 
 
         if (!validateFields(mobile_no)) {
 
-            err++;
+
             mobile_Layout.setError("Phone Number should not be empty !");
+            showSnackBarMessage("Phone Number should not be empty !");
+            return;
         }
 
         if(validateFields(mobile_no) && !validatePhone(mobile_no))
         {
-            err++;
+
             mobile_Layout.setError("Enter Valid Phone Number!");
+            showSnackBarMessage("Enter Valid Phone Number!");
+            return;
         }
 
 
@@ -159,19 +173,18 @@ public class Register_Activity extends AppCompatActivity {
 
         if(!password.equals(password2) && validateFields(password) && validateFields(password2)  )
         {
-            err++;
+
            rpassword_layout.setError("Passwords do not match !");
+            showSnackBarMessage("Passwords do not match !");
+            return;
         }
 
 
-        if (err==0) {
+
             user = new User(username,email,password,mobile_no);
             SEND_OTP(user);
 
-        } else {
 
-            showSnackBarMessage("Enter Valid Details !");
-        }
     }
 
 

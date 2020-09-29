@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,7 @@ public class Login_Activity extends AppCompatActivity {
     private SharedPreferences mSharedPreferences;
     private ViewDialog viewDialog;
     private ImageView backImgBtn;
+    private TextView forgot;
 
     RelativeLayout register;
 
@@ -65,6 +67,12 @@ public class Login_Activity extends AppCompatActivity {
         viewDialog=new ViewDialog(this);
         userfield_Layout= findViewById(R.id.user_email_mobile);
         password_Layout=findViewById(R.id.user_password);
+        forgot=findViewById(R.id.forgot_password_txt);
+
+        forgot.setOnClickListener(v -> {
+            Intent intent=new Intent(Login_Activity.this,Forgot_Password_Number_Activity.class);
+            startActivity(intent);
+        });
 
         userfield_EditText=findViewById(R.id.user_email_mobile_input_txt);
         password_EditText=findViewById(R.id.password_input_txt);
@@ -86,29 +94,24 @@ public class Login_Activity extends AppCompatActivity {
         String email = userfield_EditText.getText().toString();
         String password = password_EditText.getText().toString();
 
-        int err = 0;
+
 
         if (!validateFields(email)) {
-            err++;
+
             userfield_Layout.setError("Email/Number should not be empty !");
+            showSnackBarMessage("Email/Number should not be empty !");
+            return;
         }
 
         if (!validateFields(password)) {
 
-            err++;
-            password_Layout.setError("Password should not be empty !");
-        }
 
-        if (err == 0) {
+            password_Layout.setError("Password should not be empty !");
+            showSnackBarMessage("Password should not be empty !");
+            return;
+        }
 
             loginProcess(new User(email,password));
-
-
-
-        } else {
-
-            showSnackBarMessage("Enter Valid Details !");
-        }
     }
 
     private void setError() {

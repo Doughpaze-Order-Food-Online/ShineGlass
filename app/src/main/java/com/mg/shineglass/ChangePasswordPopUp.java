@@ -9,6 +9,6 @@ public class ChangePasswordPopUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.change_password_fragment);
+        setContentView(R.layout.reset_password_activity);
     }
 }

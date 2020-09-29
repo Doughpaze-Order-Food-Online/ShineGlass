@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.mg.shineglass.Forgot_Password_Activity;
 import com.mg.shineglass.MainActivity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.BasicResponse;
@@ -36,10 +37,10 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class Save_Profile_Otp extends AppCompatActivity {
+public class Forgot_Password_Otp  extends AppCompatActivity {
 
-    private User user;
-    private String otp;
+
+    private String otp,number,_id;
     private EditText E1;
     private EditText E2;
     private EditText E3;
@@ -50,6 +51,7 @@ public class Save_Profile_Otp extends AppCompatActivity {
     private RelativeLayout Resend_block;
     private ImageView backImgBtn;
     private ViewDialog viewDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,17 +59,14 @@ public class Save_Profile_Otp extends AppCompatActivity {
 
         backImgBtn=findViewById(R.id.back_btn_img);
         backImgBtn.setOnClickListener(v -> finish());
-
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         mSubscriptions = new CompositeSubscription();
 
         Intent intent=getIntent();
-        user=new User();
-        user.setMobile(intent.getStringExtra("phone"));
-        user.setEmail(intent.getStringExtra("email"));
-        user.setUsername(intent.getStringExtra("name"));
         otp=intent.getStringExtra("otp");
-
+        number=intent.getStringExtra("number");
+        _id=intent.getStringExtra("_id");
 
 
 
@@ -82,13 +81,14 @@ public class Save_Profile_Otp extends AppCompatActivity {
         Resend_block=findViewById(R.id.resend_otp_block);
         resend=findViewById(R.id.signup_txt);
 
-        E1.addTextChangedListener(new Save_Profile_Otp.GenericTextWatcher(E1));
-        E2.addTextChangedListener(new Save_Profile_Otp.GenericTextWatcher(E2));
-        E3.addTextChangedListener(new Save_Profile_Otp.GenericTextWatcher(E3));
-        E4.addTextChangedListener(new Save_Profile_Otp.GenericTextWatcher(E4));
+        E1.addTextChangedListener(new Forgot_Password_Otp.GenericTextWatcher(E1));
+        E2.addTextChangedListener(new Forgot_Password_Otp.GenericTextWatcher(E2));
+        E3.addTextChangedListener(new Forgot_Password_Otp.GenericTextWatcher(E3));
+        E4.addTextChangedListener(new Forgot_Password_Otp.GenericTextWatcher(E4));
 
         button.setOnClickListener(view -> NUMBER_LOGIN());
-        resend.setOnClickListener(view->RESEND_OTP(user));
+        resend.setOnClickListener(view->RESEND_OTP(new User(number)));
+
         viewDialog = new ViewDialog(this);
 
         CountDownTime();
@@ -99,11 +99,10 @@ public class Save_Profile_Otp extends AppCompatActivity {
         String enteredOtp = E1.getText().toString() + E2.getText().toString() + E3.getText().toString() + E4.getText().toString();
         if(enteredOtp.equals(otp))
         {
-
-
-            SAVE_PROFILE();
-
-
+            Intent intent = new Intent(Forgot_Password_Otp.this, Forgot_Password_Activity.class);
+            intent.putExtra("_id",_id);
+            startActivity(intent);
+            finish();
         }
         else
         {
@@ -112,51 +111,25 @@ public class Save_Profile_Otp extends AppCompatActivity {
         }
     }
 
-    private void SAVE_PROFILE() {
-        viewDialog.showDialog();
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(this);
-        mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null)).SAVE_PROFILE_DETAILS(user)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse2,this::handleError));
-
-    }
-
     private void RESEND_OTP(User user)
     {
         viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit()
-                .GOOGLE_FACEBOOK_OTP(user)
+                .FORGOT_PASSWORD_OTP(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
     }
 
-    private void handleResponse2(BasicResponse response) {
-
-        viewDialog.hideDialog();
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(this);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(constants.EMAIL,user.getEmail());
-        editor.putString(constants.USERNAME,user.getUsername());
-        editor.putString(constants.PHONE,user.getMobile());
-        editor.apply();
-        finish();
-
-    }
-
     private void handleResponse(LoginResponse response) {
         viewDialog.hideDialog();
         otp=response.getOtp();
-
+        _id=response.getUser().get_id();
     }
 
     private void handleError(Throwable error) {
-
         viewDialog.hideDialog();
+
 
         if (error instanceof HttpException) {
 
@@ -222,6 +195,7 @@ public class Save_Profile_Otp extends AppCompatActivity {
 
 
 
+
     public class GenericTextWatcher implements TextWatcher {
         private View view;
 
@@ -266,4 +240,3 @@ public class Save_Profile_Otp extends AppCompatActivity {
         }
     }
 }
-

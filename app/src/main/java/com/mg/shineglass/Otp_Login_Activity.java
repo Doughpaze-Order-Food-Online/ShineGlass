@@ -69,30 +69,28 @@ public class Otp_Login_Activity extends AppCompatActivity {
         String number = Objects.requireNonNull(mobile_EditText.getText()).toString();
 
 
-        int err = 0;
 
         if (!validateFields(number)) {
 
-            err++;
-            mobile_Layout.setError("Phone Number is required");
+            mobile_Layout.setError("Phone Number is required!");
+            showSnackBarMessage("Phone Number is required!");
+            return;
 
         }
-        else if(!validatePhone(number))
+
+       if(!validatePhone(number))
         {
-            err++;
+
             mobile_Layout.setError("Enter Valid Phone Number!");
+            showSnackBarMessage("Enter Valid Phone Number!");
+            return;
 
         }
 
-        if (err == 0) {
-            user = new User(number);
 
+            user = new User(number);
             SEND_OTP(user);
 
-        } else {
-            showSnackBarMessage("Enter Valid Details !");
-
-        }
 
     }
 

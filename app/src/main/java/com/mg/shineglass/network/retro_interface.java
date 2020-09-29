@@ -119,6 +119,12 @@ public interface retro_interface {
     @POST("verify_otp")
     Observable<Integer> VERIFY_OTP(@Body OrderDeliver orderDeliver);
 
+    @POST("auth/forgot_password_otp")
+    Observable<LoginResponse> FORGOT_PASSWORD_OTP(@Body User user);
+
+    @POST("auth/forgot_password")
+    Observable<BasicResponse> FORGOT_PASSWORD(@Body User user);
+
 
 
 

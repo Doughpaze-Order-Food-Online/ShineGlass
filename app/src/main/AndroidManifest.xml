@@ -34,6 +34,19 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".Forgot_Password_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".OTP_Acitvities.Forgot_Password_Otp"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Forgot_Password_Number_Activity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
             android:name=".OTP_Acitvities.DeliveryBoyOtp_Activity"
             android:screenOrientation="portrait" />
 

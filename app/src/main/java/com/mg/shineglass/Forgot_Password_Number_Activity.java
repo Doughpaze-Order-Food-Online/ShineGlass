@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import com.mg.shineglass.OTP_Acitvities.Forgot_Password_Otp;
 import com.mg.shineglass.OTP_Acitvities.Google_Otp_Activity;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.LoginResponse;
@@ -23,7 +24,6 @@ import com.mg.shineglass.utils.ViewDialog;
 
 import java.util.Objects;
 
-import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -32,13 +32,12 @@ import rx.subscriptions.CompositeSubscription;
 import static com.mg.shineglass.utils.validation.validateFields;
 import static com.mg.shineglass.utils.validation.validatePhone;
 
-public class Google_Enter_Number extends AppCompatActivity {
+public class Forgot_Password_Number_Activity extends AppCompatActivity {
     TextInputLayout mobile_Layout;
     EditText mobile_EditText;
     private CompositeSubscription mSubscriptions;
     private User user;
     private RelativeLayout button;
-    private String token,type,email,Number,username;
     private TextView title;
     private ViewDialog viewDialog;
 
@@ -47,18 +46,13 @@ public class Google_Enter_Number extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_with_otp_activity);
 
-        Intent i=getIntent();
-        token=i.getStringExtra("token");
-        type=i.getStringExtra("type");
-        email=i.getStringExtra("email");
-        username=i.getStringExtra("name");
         mobile_EditText = findViewById(R.id.user_email_mobile_input_txt);
         mobile_Layout = findViewById(R.id.user_email_mobile);
         mSubscriptions = new CompositeSubscription();
         button = findViewById(R.id.send_otp_btn);
         title=findViewById(R.id.enter_number);
 
-        title.setText("Enter Mobile Number");
+        title.setText("Enter Registered Mobile Number");
 
         button.setOnClickListener(view -> SEND_OTP());
 
@@ -89,15 +83,15 @@ public class Google_Enter_Number extends AppCompatActivity {
         }
 
 
-            Number=number;
-            user = new User(number);
 
-            viewDialog.showDialog();
-            mSubscriptions.add(networkUtils.getRetrofit()
-                    .GOOGLE_FACEBOOK_OTP(user)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(this::handleResponse,this::handleError));
+        user = new User(number);
+
+        viewDialog.showDialog();
+        mSubscriptions.add(networkUtils.getRetrofit()
+                .FORGOT_PASSWORD_OTP(user)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse,this::handleError));
 
 
 
@@ -106,8 +100,15 @@ public class Google_Enter_Number extends AppCompatActivity {
 
 
     private void handleResponse(LoginResponse response) {
+
         viewDialog.hideDialog();
-        GoToOtp(response.getOtp());
+
+        Intent intent = new Intent(Forgot_Password_Number_Activity.this, Forgot_Password_Otp.class);
+        intent.putExtra("otp",response.getOtp());
+        intent.putExtra("_id",response.getUser().get_id());
+        intent.putExtra("number",mobile_EditText.getText().toString());
+        startActivity(intent);
+        finish();
     }
 
     private void handleError(Throwable error) {
@@ -133,21 +134,6 @@ public class Google_Enter_Number extends AppCompatActivity {
 
         }
     }
-
-    private void GoToOtp(String otp){
-
-        Intent intent = new Intent(Google_Enter_Number.this, Google_Otp_Activity.class);
-        intent.putExtra("type",type);
-        intent.putExtra("otp",otp);
-        intent.putExtra("token", token);
-        intent.putExtra("phone", Number);
-        intent.putExtra("email", email);
-        intent.putExtra("name", username);
-        startActivity(intent);
-        finish();
-    }
-
-
 
 
     private void setError() {
