@@ -51,7 +51,6 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
 
         SubcategoryItemHolder.name.setText(subcategory.getName());
 
-        Toast.makeText(context, subcategory.getName(), Toast.LENGTH_SHORT).show();
 
 
         SubcategoryItemHolder.name.setOnClickListener(new View.OnClickListener() {
