@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -14,16 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.mg.shineglass.utils.constants;
 
-public class Quotation_Activity extends Activity {
+public class Quotation_Activity extends AppCompatActivity implements ViewTreeObserver.OnScrollChangedListener{
     private WebView pdf;
     private ProgressBar loading;
     private TextView quotation;
     private RelativeLayout accept,reject;
     String Quotation,url,date,total;
+    private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,8 +73,10 @@ public class Quotation_Activity extends Activity {
             }
         });
 
+        pdf.getViewTreeObserver().addOnScrollChangedListener(this);
 
-        SwipeRefreshLayout refreshLayout=findViewById(R.id.refresh);
+        refreshLayout=findViewById(R.id.refresh);
+
 
 
 
@@ -97,5 +102,15 @@ public class Quotation_Activity extends Activity {
         });
 
 
+    }
+
+
+    @Override
+    public void onScrollChanged() {
+        if (pdf.getScrollY() == 0) {
+            refreshLayout.setEnabled(true);
+        } else {
+            refreshLayout.setEnabled(false);
+        }
     }
 }
