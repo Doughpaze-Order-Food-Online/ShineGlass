@@ -30,7 +30,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     private List<Category> list,main;
     private Context context;
-    private List<String> sub;
+    private List<Category.subcategory> sub;
+
 
     public CategoryAdapter(List<Category> list,Context context,List<Category> main) {
         this.list=list;
@@ -50,7 +51,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryAdapter.CategoryItemHolder categoryItemHolder, int i) {
         Category category=list.get(i);
 
-            categoryItemHolder.name.setText(category.getCategory());
+            categoryItemHolder.name.setText(category.getName());
 
         Glide
                 .with(categoryItemHolder.itemView.getContext())
@@ -59,11 +60,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 .centerInside()
                 .into(categoryItemHolder.image);
 
+
+
         for(Category x:main)
         {
-            if(x.getCategory().toLowerCase().trim().equals(category.getCategory().toLowerCase().trim()))
+            if(x.getName().toLowerCase().trim().equals(category.getName().toLowerCase().trim()))
             {
-                sub=x.getSubcategoryList();
+                sub=x.getSubcategory();
                 break;
             }
         }
@@ -81,7 +84,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                        Gson gson=new Gson();
                        String subcategory= gson.toJson(sub);
                        i.putExtra("subcategory",subcategory);
-                       i.putExtra("category",category.getCategory());
+                       i.putExtra("category",category.getName());
                        categoryItemHolder.itemView.getContext().startActivity(i);
                    }
                });
@@ -93,7 +96,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                    public void onClick(View v) {
 
                        Intent i=new Intent(categoryItemHolder.itemView.getContext(),NewRequestActivity.class);
-                       i.putExtra("category",category.getCategory());
+                       i.putExtra("category",category.getName());
                        categoryItemHolder.itemView.getContext().startActivity(i);
                    }
                });
@@ -105,7 +108,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 @Override
                 public void onClick(View v) {
                     Intent i=new Intent(categoryItemHolder.itemView.getContext(),NewRequestActivity.class);
-                    i.putExtra("category",category.getCategory());
+                    i.putExtra("category",category.getName());
                     categoryItemHolder.itemView.getContext().startActivity(i);
                 }
             });

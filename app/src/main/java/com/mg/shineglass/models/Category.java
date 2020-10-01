@@ -5,10 +5,26 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Category {
+
+    public class subcategory{
+
+       @SerializedName("name")
+       String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
+    @SerializedName("name")
     String name;
 
     @SerializedName("subcategory")
-    List<String> subcategory;
+    List<subcategory> subcategory;
 
     int resourceID;
 
@@ -27,19 +43,20 @@ public class Category {
         return resourceID;
     }
 
-    public String getCategory() {
+
+    public String getName() {
         return name;
     }
 
-    public void setCategory(String category) {
-        this.name = category;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<String> getSubcategoryList() {
+    public List<Category.subcategory> getSubcategory() {
         return subcategory;
     }
 
-    public void setSubcategoryList(List<String> subcategoryList) {
-        this.subcategory = subcategoryList;
+    public void setSubcategory(List<Category.subcategory> subcategory) {
+        this.subcategory = subcategory;
     }
 }
