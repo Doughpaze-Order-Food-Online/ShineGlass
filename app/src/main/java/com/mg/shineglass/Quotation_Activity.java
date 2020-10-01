@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.mg.shineglass.utils.constants;
+
 public class Quotation_Activity extends Activity {
     private WebView pdf;
     private ProgressBar loading;
@@ -45,7 +47,7 @@ public class Quotation_Activity extends Activity {
       pdf.getSettings().setJavaScriptEnabled(true);
       pdf.getSettings().setBuiltInZoomControls(true);
       pdf.getSettings().setDisplayZoomControls(false);
-        pdf.loadUrl("https://docs.google.com/gview?embedded=true&url="+url);
+        pdf.loadUrl("https://docs.google.com/gview?embedded=true&url="+ constants.BANNER_URL+url);
 
         pdf.setWebViewClient(new WebViewClient(){
             @Override
