@@ -49,11 +49,25 @@
         android:layout_marginLeft="4dp" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/swipe_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/quotation_block"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/swipe_down_to_refresh"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        tools:ignore="SmallSp" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/webview_border"
-        android:layout_below="@+id/quotation_block"
+        android:layout_below="@+id/swipe_txt"
         android:layout_above="@id/button_block"
         android:layout_marginTop="16dp" >
 
@@ -78,15 +92,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/swipe_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/swipe_down_to_refresh"
-            android:gravity="center"
-            android:visibility="visible"
-            android:layout_gravity="center"/>
 
     </FrameLayout>
 
