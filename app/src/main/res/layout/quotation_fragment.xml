@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/refresh"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tool"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
+    android:layout_marginTop="8dp"
     android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:context=".Quotation_Activity">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/LightGrayColor"/>
+        android:background="@color/LightGrayColor" />
 
     <RelativeLayout
         android:id="@+id/quotation_block"
@@ -28,63 +21,51 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
 
-    <TextView
-        android:id="@+id/quotation_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/quotation_no"
-        android:textAllCaps="true"
-        android:textSize="16sp"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="@color/LightBlackColor"
-        android:layout_marginTop="32dp"
-        android:layout_gravity="center_horizontal"/>
-    <TextView
-        android:id="@+id/quotation_no_value"
-        android:layout_toEndOf="@id/quotation_txt"
-        android:layout_marginStart="4dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/_123"
-        android:textAllCaps="true"
-        android:textSize="16sp"
-        android:fontFamily="sans-serif-medium"
-        android:textColor="@color/LightBlackColor"
-        android:layout_marginTop="32dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_toRightOf="@id/quotation_txt"
-        android:layout_marginLeft="4dp" />
+        <TextView
+            android:id="@+id/quotation_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/quotation_no"
+            android:textAllCaps="true"
+            android:textColor="@color/LightBlackColor"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/quotation_no_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="32dp"
+            android:layout_toEndOf="@id/quotation_txt"
+            android:layout_toRightOf="@id/quotation_txt"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/_123"
+            android:textAllCaps="true"
+            android:textColor="@color/LightBlackColor"
+            android:textSize="16sp" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/swipe_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/quotation_block"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/swipe_down_to_refresh"
-        android:gravity="center"
-        android:textSize="10sp"
-        android:visibility="visible"
-        android:layout_gravity="center"
-        tools:ignore="SmallSp" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/webview_border"
-        android:layout_below="@+id/swipe_txt"
         android:layout_above="@id/button_block"
-        android:layout_marginTop="16dp" >
+        android:layout_below="@id/quotation_block"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/webview_border">
 
-    <WebView
-        android:id="@+id/webView"
-        android:backgroundTint="@android:color/transparent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/webview_border"
-        tools:ignore="UnusedAttribute"/>
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/webview_border"
+            android:backgroundTint="@android:color/transparent"
+            tools:ignore="UnusedAttribute" />
 
 
         <ProgressBar
@@ -92,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </FrameLayout>
 
@@ -100,46 +81,47 @@
         android:id="@+id/button_block"
         android:layout_width="208dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:id="@+id/reject_btn"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
             android:background="@drawable/request_border"
-            android:layout_height="wrap_content">
+            android:gravity="center"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/reject_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_toEndOf="@id/cross_img"
+                android:layout_toRightOf="@id/cross_img"
                 android:text="@string/reject"
                 android:textAllCaps="true"
-                android:layout_marginStart="8dp"
                 android:textColor="@color/PrimaryTextColor"
-                android:textSize="12sp"
-                android:layout_toRightOf="@id/cross_img"
-                android:layout_marginLeft="8dp" />
+                android:textSize="12sp" />
+
             <ImageView
                 android:id="@+id/cross_img"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/todo"
                 android:scaleX="0.8"
                 android:scaleY="0.8"
                 android:src="@drawable/bluecross"
-                android:layout_centerVertical="true"
-                android:contentDescription="@string/todo"
                 app:tint="@color/colorPrimaryDark" />
 
         </RelativeLayout>
@@ -147,11 +129,11 @@
         <RelativeLayout
             android:id="@+id/accept_btn"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:padding="8dp"
             android:background="@drawable/request_border"
-            android:layout_height="wrap_content">
+            android:gravity="center"
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/accept_txt"
@@ -162,21 +144,20 @@
                 android:textAllCaps="true"
                 android:textColor="@color/PrimaryTextColor"
                 android:textSize="12sp" />
+
             <ImageView
                 android:layout_width="14dp"
                 android:layout_height="14dp"
-                android:src="@drawable/accept"
                 android:layout_centerVertical="true"
-                android:layout_toStartOf="@id/accept_txt"
-                android:contentDescription="@string/todo"
+                android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_toStartOf="@id/accept_txt"
                 android:layout_toLeftOf="@id/accept_txt"
-                android:layout_marginEnd="8dp" />
+                android:contentDescription="@string/todo"
+                android:src="@drawable/accept" />
 
         </RelativeLayout>
 
     </LinearLayout>
 
-    </RelativeLayout>
-
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</RelativeLayout>
