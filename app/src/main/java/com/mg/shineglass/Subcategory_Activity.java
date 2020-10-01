@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mg.shineglass.adapters.SubCategoryAdapter;
+import com.mg.shineglass.models.Category;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 public class Subcategory_Activity extends FragmentActivity {
-    private List<String> subcategory;
+    private List<Category.subcategory> subcategory;
     private String category;
     private TextView type;
     private RecyclerView rvItem;
@@ -36,7 +37,7 @@ public class Subcategory_Activity extends FragmentActivity {
 
         Intent i=getIntent();
         Gson gson=new Gson();
-        Type t=new TypeToken<List<String>>(){}.getType();
+        Type t=new TypeToken<List<Category.subcategory>>(){}.getType();
         subcategory= gson.fromJson(i.getStringExtra("subcategory"),t);
         category=i.getStringExtra("category");
 

@@ -25,11 +25,11 @@ import java.util.List;
 
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.SubCategoryItemHolder> {
 
-    private List<String> list;
+    private List<Category.subcategory> list;
     private Context context;
     private String category;
 
-    public SubCategoryAdapter(List<String> list, Context context,String category) {
+    public SubCategoryAdapter(List<Category.subcategory> list, Context context, String category) {
         this.list = list;
         this.context = context;
         this.category=category;
@@ -45,9 +45,9 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SubCategoryAdapter.SubCategoryItemHolder SubcategoryItemHolder, int i) {
-        String name=list.get(i);
+        Category.subcategory subcategory=list.get(i);
 
-        SubcategoryItemHolder.name.setText(name);
+        SubcategoryItemHolder.name.setText(subcategory.getName());
 
 
 
@@ -57,7 +57,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
             public void onClick(View v) {
 
                 Intent i=new Intent(SubcategoryItemHolder.itemView.getContext(),NewRequestActivity.class);
-                i.putExtra("subcategory", name);
+                i.putExtra("subcategory", subcategory.getName());
                 i.putExtra("category", category);
                 SubcategoryItemHolder.itemView.getContext().startActivity(i);
 
