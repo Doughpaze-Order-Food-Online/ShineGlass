@@ -4,6 +4,8 @@ package com.mg.shineglass;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -22,6 +24,7 @@ public class Subcategory_Activity extends FragmentActivity {
     private String category;
     private TextView type;
     private RecyclerView rvItem;
+    private ImageView BackBtnImg;
 
     public Subcategory_Activity() {
         // Required empty public constructor
@@ -50,6 +53,14 @@ public class Subcategory_Activity extends FragmentActivity {
         GridLayoutManager gridLayoutManager=new GridLayoutManager(this,2);
         rvItem.setLayoutManager(gridLayoutManager);
         rvItem.setAdapter(subCategoryAdapter);
+
+        BackBtnImg=findViewById(R.id.back_btn_img);
+        BackBtnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
     }

@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="2dp"
     app:cardElevation="4dp"
+    android:layout_gravity="center"
     android:layout_margin="@dimen/dimen_8dp"
     app:cardBackgroundColor="@color/colorPrimaryDark"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
@@ -18,5 +19,5 @@
         android:fontFamily="sans-serif-medium"
         android:text="@string/clear_glass"
         android:textColor="@color/whiteTextColor"
-        android:textSize="18sp" />
+        android:textSize="12sp" />
 </androidx.cardview.widget.CardView>
