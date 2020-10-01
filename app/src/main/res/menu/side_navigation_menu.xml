@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="@string/about_us">
+
+
+
+        <menu>
+            <group
+                android:checkableBehavior="single">
+            <item
+                android:id="@+id/about_facebook"
+                android:title="@string/facebook"
+                android:icon="@drawable/drawerfacebook"/>
+
+            </group>
+
+        </menu>
+
+
+    </item>
+
+    <group
+        android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/terms_and_policies"
+        android:title="@string/terms_amp_policies"
+        android:icon="@drawable/ic_outline_policy_24"
+        android:iconTint="@color/uploadBorderBlue"
+        app:iconTint="@color/uploadBorderBlue"
+        tools:ignore="UnusedAttribute" />
+
+    <item
+        android:id="@+id/help_support"
+        android:title="@string/help_contact_us"
+        android:icon="@drawable/ic_outline_help_outline_24"
+        android:iconTint="@color/uploadBorderBlue"
+        app:iconTint="@color/uploadBorderBlue"
+        tools:ignore="UnusedAttribute" />
+    </group>
+
+
+</menu>

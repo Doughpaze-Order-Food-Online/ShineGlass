@@ -17,40 +17,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".HelpOrContactUs"></activity>
+        <activity android:name=".TermsAndPolicies" />
         <activity
             android:name=".ChangePasswordPopUp"
             android:screenOrientation="portrait"
             android:theme="@style/Theme_Edit_details" />
-
         <activity
             android:name=".DeliveryBoyMainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Invoice_Activity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".DeliveryOrderDetails"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Forgot_Password_Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme_Edit_details"/>
-
+            android:theme="@style/Theme_Edit_details" />
         <activity
             android:name=".OTP_Acitvities.Forgot_Password_Otp"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Forgot_Password_Number_Activity"
             android:screenOrientation="portrait" />
-
-
         <activity
             android:name=".OTP_Acitvities.DeliveryBoyOtp_Activity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".WalletActivity"
             android:screenOrientation="portrait" />
@@ -72,7 +66,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".LoginSignUpActivity"
             android:screenOrientation="portrait" />
@@ -135,10 +128,6 @@
         <activity
             android:name=".Order_Confirmation_Activity"
             android:screenOrientation="portrait" />
-
-
-
-
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

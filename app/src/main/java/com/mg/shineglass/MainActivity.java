@@ -3,6 +3,8 @@ package com.mg.shineglass;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
@@ -10,30 +12,36 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     public static BottomNavigationView mBottomNavigationView;
     private CardView cart;
     private CardView wallet;
     private SharedPreferences sharedPreferences;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private ImageView menuImgButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.side_navigation_drawer);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
-        setContentView(R.layout.main_activity);
         mBottomNavigationView=findViewById(R.id.bottom_nav_menu);
         cart=findViewById(R.id.my_cart_btn);
 
@@ -52,11 +60,22 @@ public class MainActivity extends AppCompatActivity {
         mBottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
         mBottomNavigationView.setSelectedItemId(R.id.home_icon);
         getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, new HomePageFragment()).commit();
+
+        drawerLayout=findViewById(R.id.drawer_main_activity);
+        navigationView=findViewById(R.id.nav_view);
+        menuImgButton=findViewById(R.id.menu_button);
+
+        menuImgButton.setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
+        navigationView.setItemIconTintList(null);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        if(mBottomNavigationView.getSelectedItemId()!=R.id.home_icon){
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else if(mBottomNavigationView.getSelectedItemId()!=R.id.home_icon){
             mBottomNavigationView.setSelectedItemId(R.id.home_icon);
             getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, new HomePageFragment()).commit();
         }
@@ -137,4 +156,25 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent=null;
+        switch (item.getItemId()){
+            case R.id.about_facebook:
+                Toast.makeText(MainActivity.this,"facebook",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.terms_and_policies:
+                intent=new Intent(MainActivity.this,TermsAndPolicies.class);
+                startActivity(intent);
+                break;
+
+            case R.id.help_support:
+                intent=new Intent(MainActivity.this,HelpOrContactUs.class);
+                startActivity(intent);
+                break;
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }

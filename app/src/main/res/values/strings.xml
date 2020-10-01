@@ -169,5 +169,9 @@
     <string name="no_recent_activity_nor_nplease_pull_down_to_refresh">No Recent Activity!!\nor\nSwipe down to Refresh.</string>
     <string name="swipe_down_to_refresh">(Didn\'t see the pdf?? Swipe down to Refresh)</string>
     <string name="invoice">invoice</string>
+    <string name="about_us">About Us</string>
+    <string name="facebook">facebook</string>
+    <string name="terms_amp_policies"><![CDATA[Terms & Policies]]></string>
+    <string name="help_contact_us">Help/Contact Us</string>
 
 </resources>
