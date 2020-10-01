@@ -84,7 +84,7 @@ public class New_Address_Activity extends Activity {
         save = findViewById(R.id.save);
         proceed = findViewById(R.id.proceed_to_buy_btn);
 
-        backBtnImg = findViewById(R.id.back_btn_img);
+        backBtnImg = findViewById(R.id.back_btn_img_address_details);
 
         backBtnImg.setOnClickListener(view -> finish());
 

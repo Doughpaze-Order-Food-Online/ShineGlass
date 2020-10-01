@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +37,7 @@ public class Forgot_Password_Number_Activity extends AppCompatActivity {
     private TextView title;
     private ViewDialog viewDialog;
     private long mLastClickTime = 0;
+    private ImageView backBtnImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,13 @@ public class Forgot_Password_Number_Activity extends AppCompatActivity {
             SEND_OTP();});
 
         viewDialog=new ViewDialog(this);
+        backBtnImg=findViewById(R.id.back_btn_img);
+        backBtnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void SEND_OTP() {
