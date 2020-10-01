@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -45,7 +46,7 @@ import rx.subscriptions.CompositeSubscription;
 
 import static com.mg.shineglass.utils.validation.validateFields;
 
-public class New_Address_Activity extends Activity {
+public class New_Address_Activity extends AppCompatActivity {
 
     private CompositeSubscription mSubscriptions;
     private RelativeLayout automatic, proceed;
@@ -84,7 +85,7 @@ public class New_Address_Activity extends Activity {
         save = findViewById(R.id.save);
         proceed = findViewById(R.id.proceed_to_buy_btn);
 
-        backBtnImg = findViewById(R.id.back_btn_img);
+        backBtnImg = findViewById(R.id.back_btn_img_address_details);
 
         backBtnImg.setOnClickListener(view -> finish());
 
@@ -205,8 +206,8 @@ public class New_Address_Activity extends Activity {
         intent.putExtra("url", url);
         intent.putExtra("date", Date);
         intent.putExtra("address", newaddress);
-        intent.putExtra("latitude", latitude);
-        intent.putExtra("longitude",longitude);
+        intent.putExtra("latitude", String.valueOf(latitude));
+        intent.putExtra("longitude",String.valueOf(longitude));
         startActivity(intent);
         finish();
 

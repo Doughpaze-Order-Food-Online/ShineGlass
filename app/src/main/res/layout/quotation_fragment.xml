@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="8dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
+
     android:orientation="vertical"
     tools:context=".Quotation_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
 
     <View
         android:layout_width="match_parent"
@@ -71,11 +78,6 @@
         android:layout_above="@id/button_block"
         android:layout_marginTop="16dp" >
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/refresh">
-
     <WebView
         android:id="@+id/webView"
         android:backgroundTint="@android:color/transparent"
@@ -84,7 +86,6 @@
         android:background="@drawable/webview_border"
         tools:ignore="UnusedAttribute"/>
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ProgressBar
             android:id="@+id/loading"
@@ -176,4 +177,6 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

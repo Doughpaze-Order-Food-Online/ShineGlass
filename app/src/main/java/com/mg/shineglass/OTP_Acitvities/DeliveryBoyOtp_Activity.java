@@ -19,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.mg.shineglass.MainActivity;
@@ -37,7 +39,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class DeliveryBoyOtp_Activity extends Activity {  private User user;
+public class DeliveryBoyOtp_Activity extends AppCompatActivity {  private User user;
 
     private EditText E1;
     private EditText E2;

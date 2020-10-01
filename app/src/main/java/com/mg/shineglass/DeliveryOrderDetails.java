@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeliveryOrderDetails extends Activity {
+public class DeliveryOrderDetails extends AppCompatActivity {
 
     private TextView orderId,customer,phone,status,order_date,payment_mode,address,direction;
     private RelativeLayout otp;

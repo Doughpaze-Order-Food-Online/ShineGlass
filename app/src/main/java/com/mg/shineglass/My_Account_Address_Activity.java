@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +35,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class My_Account_Address_Activity extends Activity {
+public class My_Account_Address_Activity extends AppCompatActivity {
     private RecyclerView rvItem;
     private CompositeSubscription mSubscriptions;
     private SharedPreferences mSharedPreferences;

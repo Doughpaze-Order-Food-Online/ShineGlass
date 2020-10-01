@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,6 +78,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
     private Button b1,b2;
     private NumberPicker np;
     private ViewDialog viewDialog;
+    private CardView cartBtn;
 
     public NewRequestActivity() {
         // Required empty public constructor
@@ -97,6 +99,15 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
                     Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(upload.getWindowToken(), 0);
             finish();
+        });
+
+        cartBtn=findViewById(R.id.my_cart_btn);
+        cartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(NewRequestActivity.this, CartActivity.class);
+                startActivity(i);
+            }
         });
 
 
