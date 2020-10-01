@@ -79,6 +79,10 @@ public class My_Account_New_Address extends AppCompatActivity {
 
         TextView text=findViewById(R.id.request_quotation_txt);
         text.setText("SAVE");
+
+        ImageView cartImg=findViewById(R.id.cartImg);
+        cartImg.setImageResource(R.drawable.loginend);
+
         proceed=findViewById(R.id.proceed_to_buy_btn);
 
         backBtnImg.setOnClickListener(new View.OnClickListener() {
