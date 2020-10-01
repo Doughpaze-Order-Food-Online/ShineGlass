@@ -6,19 +6,7 @@ import java.util.List;
 
 public class Category {
 
-    public class subcategory{
 
-       @SerializedName("name")
-       String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
 
     @SerializedName("name")
     String name;
@@ -28,13 +16,11 @@ public class Category {
 
     int resourceID;
 
-    Category(){
 
-    }
 
-    public Category(String category, int resourceID)
+    public Category(String name, int resourceID)
     {
-        this.name=category;
+        this.name=name;
         this.resourceID=resourceID;
     }
 
@@ -52,11 +38,11 @@ public class Category {
         this.name = name;
     }
 
-    public List<Category.subcategory> getSubcategory() {
+    public List<subcategory> getSubcategory() {
         return subcategory;
     }
 
-    public void setSubcategory(List<Category.subcategory> subcategory) {
+    public void setSubcategory(List<subcategory> subcategory) {
         this.subcategory = subcategory;
     }
 }

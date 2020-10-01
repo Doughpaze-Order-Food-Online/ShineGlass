@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,16 +21,17 @@ import com.mg.shineglass.NewRequestActivity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.Subcategory_Activity;
 import com.mg.shineglass.models.Category;
+import com.mg.shineglass.models.subcategory;
 
 import java.util.List;
 
 public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.SubCategoryItemHolder> {
 
-    private List<Category.subcategory> list;
+    private List<subcategory> list;
     private Context context;
     private String category;
 
-    public SubCategoryAdapter(List<Category.subcategory> list, Context context, String category) {
+    public SubCategoryAdapter(List<subcategory> list, Context context, String category) {
         this.list = list;
         this.context = context;
         this.category=category;
@@ -45,11 +47,11 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SubCategoryAdapter.SubCategoryItemHolder SubcategoryItemHolder, int i) {
-        Category.subcategory subcategory=list.get(i);
+        subcategory subcategory=list.get(i);
 
         SubcategoryItemHolder.name.setText(subcategory.getName());
 
-
+        Toast.makeText(context, subcategory.getName(), Toast.LENGTH_SHORT).show();
 
 
         SubcategoryItemHolder.name.setOnClickListener(new View.OnClickListener() {

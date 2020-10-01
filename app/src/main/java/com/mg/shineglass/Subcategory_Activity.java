@@ -13,12 +13,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mg.shineglass.adapters.SubCategoryAdapter;
 import com.mg.shineglass.models.Category;
+import com.mg.shineglass.models.subcategory;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 public class Subcategory_Activity extends FragmentActivity {
-    private List<Category.subcategory> subcategory;
+    private List<subcategory> subcategory;
     private String category;
     private TextView type;
     private RecyclerView rvItem;
@@ -37,11 +38,11 @@ public class Subcategory_Activity extends FragmentActivity {
 
         Intent i=getIntent();
         Gson gson=new Gson();
-        Type t=new TypeToken<List<Category.subcategory>>(){}.getType();
+        Type t=new TypeToken<List<subcategory>>(){}.getType();
         subcategory= gson.fromJson(i.getStringExtra("subcategory"),t);
         category=i.getStringExtra("category");
 
-        type=findViewById(R.id.type_of_glass_txt);
+        type=findViewById(R.id.category_name_txt);
         type.setText(category);
 
         rvItem=findViewById(R.id.categories_container);

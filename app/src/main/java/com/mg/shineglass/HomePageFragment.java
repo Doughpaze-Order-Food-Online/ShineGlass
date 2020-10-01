@@ -151,9 +151,8 @@ public class HomePageFragment extends Fragment {
         categoryList.add(new Category("LACQUERED GLASS",R.drawable.laqueredglass));
         categoryList.add(new Category("MIRROR",R.drawable.mirror));
 
-        categoryAdapter=new CategoryAdapter(categoryList,getActivity(),list);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),3,LinearLayoutManager.VERTICAL,false);
 
+        categoryAdapter=new CategoryAdapter(categoryList,getActivity(),list);
         SpanningGridLayoutManager spanningGridLayoutManager=new SpanningGridLayoutManager(getContext(), 3, LinearLayoutManager.VERTICAL,false);
         category.setLayoutManager(spanningGridLayoutManager);
         category.setAdapter(categoryAdapter);

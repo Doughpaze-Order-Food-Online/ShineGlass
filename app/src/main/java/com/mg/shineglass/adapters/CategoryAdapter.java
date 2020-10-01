@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ import com.mg.shineglass.NewRequestActivity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.Subcategory_Activity;
 import com.mg.shineglass.models.Category;
+import com.mg.shineglass.models.subcategory;
 
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     private List<Category> list,main;
     private Context context;
-    private List<Category.subcategory> sub;
+    private List<subcategory> sub=null;
 
 
     public CategoryAdapter(List<Category> list,Context context,List<Category> main) {
@@ -60,13 +62,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 .centerInside()
                 .into(categoryItemHolder.image);
 
-
-
-        for(Category x:main)
+        sub=null;
+        for(int j=0;j<main.size();j++)
         {
-            if(x.getName().toLowerCase().trim().equals(category.getName().toLowerCase().trim()))
+            if(main.get(j).getName().toLowerCase().trim().equals(category.getName().toLowerCase().trim()))
             {
-                sub=x.getSubcategory();
+                sub=main.get(j).getSubcategory();
+
                 break;
             }
         }
@@ -80,6 +82,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                categoryItemHolder.image.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
+
+                       for(int j=0;j<main.size();j++)
+                       {
+                           if(main.get(j).getName().toLowerCase().trim().equals(category.getName().toLowerCase().trim()))
+                           {
+                               sub=main.get(j).getSubcategory();
+
+                               break;
+                           }
+                       }
+
                       Intent i=new Intent(categoryItemHolder.itemView.getContext(),Subcategory_Activity.class);
                        Gson gson=new Gson();
                        String subcategory= gson.toJson(sub);
