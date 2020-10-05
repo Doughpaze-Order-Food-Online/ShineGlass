@@ -33,6 +33,7 @@ import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.CityDialogue;
 import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
 import java.io.File;
@@ -95,31 +96,41 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
             }
             else
             {
-                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-                    return;
-                }
-                mLastClickTime = SystemClock.elapsedRealtime();
 
-                new AlertDialog.Builder(UploadActivity.this)
-                        .setTitle("Are you sure??")
-                        .setMessage("Do you want to continue with the request??")
+                CityDialogue cityDialogue=new CityDialogue(this);
+                cityDialogue.showDialog();
+                RelativeLayout RContinue=cityDialogue.dialog.findViewById(R.id.update_btn);
+                RelativeLayout RCancel=cityDialogue.dialog.findViewById(R.id.cancel_btn);
+                RContinue.setOnClickListener(view1 -> {
+                    if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                        return;
+                    }
+                    mLastClickTime = SystemClock.elapsedRealtime();
 
-                        // Specifying a listener allows you to take an action before dismissing the dialog.
-                        // The dialog is automatically dismissed when a dialog button is clicked.
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    SEND_REQUEST();
-                                } catch (URISyntaxException e) {
-                                    e.printStackTrace();
+                    new AlertDialog.Builder(UploadActivity.this)
+                            .setTitle("Are you sure??")
+                            .setMessage("Do you want to continue with the request??")
+
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    try {
+                                        SEND_REQUEST();
+                                    } catch (URISyntaxException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
-                        })
+                            })
 
-                        // A null listener allows the button to dismiss the dialog and take no further action.
-                        .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setNegativeButton(android.R.string.no, null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    cityDialogue.hideDialog();
+                });
+
+                RCancel.setOnClickListener(view1 -> cityDialogue.hideDialog());
 
             }
 
