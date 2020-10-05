@@ -173,5 +173,8 @@
     <string name="facebook">facebook</string>
     <string name="terms_amp_policies"><![CDATA[Terms & Policies]]></string>
     <string name="help_contact_us">Help/Contact Us</string>
+    <string name="select_the_city">Select the City</string>
+    <string name="check_payment_status">check payment status</string>
+    <string name="enter_amount_to_redeem">Enter the amount to redeem</string>
 
 </resources>

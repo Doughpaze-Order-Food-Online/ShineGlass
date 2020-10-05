@@ -324,15 +324,15 @@
 
             </RelativeLayout>
 
-            <CheckBox
-                android:id="@+id/redeem_checkbox"
+            <EditText
+                android:id="@+id/redeem_amount_edt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_16dp"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:layout_marginBottom="@dimen/dimen_8dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Redeem"
+                android:hint="@string/enter_amount_to_redeem"
                 android:textSize="@dimen/dimen_12sp" />
 
             <View
