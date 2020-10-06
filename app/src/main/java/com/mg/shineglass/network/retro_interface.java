@@ -77,7 +77,7 @@ public interface retro_interface {
 
     @Multipart
     @POST("quotation")
-    Observable<Response<LoginResponse>> REQUEST_QUOTATION(@Part List<MultipartBody.Part> files, @Part("quotation") ArrayList<Quotation> quotation, @Query("mobile") String mobile,@Query("city") String city);
+    Observable<Response<LoginResponse>> REQUEST_QUOTATION(@Part List<MultipartBody.Part> files, @Part("quotation") ArrayList<Quotation> quotation, @Query("mobile") String mobile,@Part("city") String city);
 
     @GET("quotation")
     Observable<List<MyQuotation>> GET_QUOTATION();
