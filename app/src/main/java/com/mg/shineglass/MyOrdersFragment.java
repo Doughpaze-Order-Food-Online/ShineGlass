@@ -49,6 +49,7 @@ public class MyOrdersFragment extends Fragment {
     private SharedPreferences sharedPreferences;
 
 
+
     public MyOrdersFragment() {
         // Required empty public constructor
     }
@@ -100,7 +101,7 @@ public class MyOrdersFragment extends Fragment {
                 Type type=new TypeToken<List<MyOrders>>(){}.getType();
                 list=gson.fromJson(sharedPreferences.getString("orders", null),type);
 
-                OrdersAdapter ordersAdapter = new OrdersAdapter(list);
+                OrdersAdapter ordersAdapter = new OrdersAdapter(list,getActivity());
                 LinearLayoutManager LinearLayout = new LinearLayoutManager(getContext());
                 rvItem.setLayoutManager(LinearLayout);
                 rvItem.setAdapter(ordersAdapter);
@@ -141,7 +142,7 @@ public class MyOrdersFragment extends Fragment {
             editor.putString("orders", s);
             editor.apply();
 
-            OrdersAdapter ordersAdapter = new OrdersAdapter(response);
+            OrdersAdapter ordersAdapter = new OrdersAdapter(response,getActivity());
             LinearLayoutManager LinearLayout = new LinearLayoutManager(getContext());
             rvItem.setLayoutManager(LinearLayout);
             rvItem.setAdapter(ordersAdapter);

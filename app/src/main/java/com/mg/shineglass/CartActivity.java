@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -32,6 +33,7 @@ import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.CityDialogue;
 import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
 import java.io.File;
@@ -60,6 +62,7 @@ public class CartActivity extends AppCompatActivity implements deleteFile, Delet
     private ImageView backbtn;
     private TextView empty,images;
     private ViewDialog viewDialog;
+    private String city;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -147,31 +150,50 @@ public class CartActivity extends AppCompatActivity implements deleteFile, Delet
             }
             else
             {
-                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                CityDialogue cityDialogue=new CityDialogue(this);
+                cityDialogue.showDialog();
+
+                RelativeLayout RContinue=cityDialogue.dialog.findViewById(R.id.update_btn);
+                RelativeLayout RCancel=cityDialogue.dialog.findViewById(R.id.cancel_btn);
+                Spinner citySpinner=cityDialogue.dialog.findViewById(R.id.citySpinner);
+                city=citySpinner.getSelectedItem().toString();
+                if(city.toLowerCase().trim().equals("Tap to select".toLowerCase().trim()))
+                {
+                    Toast.makeText(this, "Select City!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                mLastClickTime = SystemClock.elapsedRealtime();
+                RContinue.setOnClickListener(view1 -> {
+                    if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                        return;
+                    }
+                    mLastClickTime = SystemClock.elapsedRealtime();
 
-                new AlertDialog.Builder(CartActivity.this)
-                        .setTitle("Are you sure??")
-                        .setMessage("Do you want to continue with the request??")
 
-                        // Specifying a listener allows you to take an action before dismissing the dialog.
-                        // The dialog is automatically dismissed when a dialog button is clicked.
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
-                                    SEND_REQUEST();
-                                } catch (URISyntaxException e) {
-                                    e.printStackTrace();
+
+                    new AlertDialog.Builder(CartActivity.this)
+                            .setTitle("Are you sure??")
+                            .setMessage("Do you want to continue with the request??")
+
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    try {
+                                        SEND_REQUEST();
+                                    } catch (URISyntaxException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
-                        })
+                            })
 
-                        // A null listener allows the button to dismiss the dialog and take no further action.
-                        .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setNegativeButton(android.R.string.no, null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                    cityDialogue.hideDialog();
+                });
+
+                RCancel.setOnClickListener(view1 -> cityDialogue.hideDialog());
 
             }
 
@@ -236,7 +258,8 @@ public class CartActivity extends AppCompatActivity implements deleteFile, Delet
 
         viewDialog.showDialog();
 
-        mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null)).REQUEST_QUOTATION(files,cartlist,sharedPreferences.getString(constants.PHONE, null))
+        mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null))
+                .REQUEST_QUOTATION(files,cartlist,sharedPreferences.getString(constants.PHONE, null),city)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));

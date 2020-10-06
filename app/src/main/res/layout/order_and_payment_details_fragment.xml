@@ -332,6 +332,7 @@
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:layout_marginBottom="@dimen/dimen_8dp"
                 android:fontFamily="sans-serif-medium"
+                android:inputType="numberDecimal"
                 android:hint="@string/enter_amount_to_redeem"
                 android:textSize="@dimen/dimen_12sp" />
 

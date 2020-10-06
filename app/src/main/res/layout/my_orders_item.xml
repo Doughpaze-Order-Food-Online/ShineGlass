@@ -118,7 +118,7 @@
             android:layout_toEndOf="@id/eye_img"
             android:layout_toRightOf="@id/eye_img"
             android:fontFamily="sans-serif-medium"
-            android:text="@string/view_quotation"
+            android:text="view invoice"
             android:gravity="center_horizontal"
             android:textAlignment="center"
             android:textAllCaps="true"

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
@@ -39,12 +41,15 @@ import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 import com.paytm.pgsdk.TransactionManager;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
+
+import static com.mg.shineglass.utils.validation.validateFields;
 
 public class Order_Confirmation_Activity extends AppCompatActivity {
 
@@ -62,7 +67,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
     private Double latitude,longitude;
     private Address newaddres;
     private ViewDialog viewDialog;
-    private CheckBox redeem_checkbox;
+    private EditText redeem_checkbox;
     private Double Amount,Wallet,Total;
     private SharedPreferences sharedPreferences;
 
@@ -104,7 +109,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         radioGroup=findViewById(R.id.mode);
         confirm=findViewById(R.id.place_order_btn);
         amount=findViewById(R.id.wallet_cash_value_txt);
-        redeem_checkbox=findViewById(R.id.redeem_checkbox);
+        redeem_checkbox=findViewById(R.id.redeem_amount_edt);
         quotation.setText(Quotation);
         date.setText(Date);
         total.setText(String.valueOf(Total));
@@ -114,20 +119,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         mSharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
-        redeem_checkbox.setEnabled(false);
-        redeem_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
-                    Amount=Total-Wallet;
-                }
-                else
-                {
-                    Amount=Total;
-                }
-            }
-        });
+
 
 
         view.setOnClickListener(v -> {
@@ -142,12 +134,20 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         });
 
         confirm.setOnClickListener(v -> {
+
+            if(Wallet>0 && !validateFields(redeem_checkbox.getText().toString()))
+            {
+                Toast.makeText(this, "Enter Amount to Redeem!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Amount=Total-Double.parseDouble(redeem_checkbox.getText().toString());
+
             if(radioGroup.getCheckedRadioButtonId()==-1)
             {
                 Toast.makeText(this, "Select Mode Of Payment!", Toast.LENGTH_SHORT).show();
+                return;
             }
-            else
-            {
+
                 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
                     return;
                 }
@@ -174,7 +174,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
 
-            }
+
         });
 
         FETCH_DATA();
@@ -298,31 +298,40 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
 
             @Override
             public void networkNotAvailable() {
+
+                Alert();
+
                 Log.e(TAG, "network not available ");
             }
 
             @Override
             public void onErrorProceed(String s) {
+                Alert();
                 Log.e(TAG, " onErrorProcess "+s.toString());
             }
 
             @Override
             public void clientAuthenticationFailed(String s) {
+                Alert();
                 Log.e(TAG, "Clientauth "+s);
             }
 
             @Override
-            public void someUIErrorOccurred(String s) {
+            public void someUIErrorOccurred(String s)
+            { Alert();
                 Log.e(TAG, " UI error "+s);
             }
 
             @Override
             public void onErrorLoadingWebPage(int i, String s, String s1) {
+                Alert();
                 Log.e(TAG, " error loading web "+s+"--"+s1);
             }
 
             @Override
             public void onBackPressedCancelTransaction() {
+
+                Alert();
                 Log.e(TAG, "backPress ");
             }
 
@@ -402,4 +411,29 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
             redeem_checkbox.setEnabled(false);
         }
     }
+
+
+    private void Alert()
+    {
+
+        new AlertDialog.Builder(Order_Confirmation_Activity.this)
+                .setTitle("Something Went Wrong!")
+                .setMessage("If Amount is Debited from your bank account, Check the status of the payment in My Orders, else place the order again :) ")
+                .setNeutralButton("Okay", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    Fragment fragment=new MyOrdersFragment();
+                    Objects.requireNonNull(this).getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
+                    MainActivity.mBottomNavigationView.setSelectedItemId(R.id.myOrders_icon);
+                    finish();
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+
+
+
+
+}
+
+
+
 }

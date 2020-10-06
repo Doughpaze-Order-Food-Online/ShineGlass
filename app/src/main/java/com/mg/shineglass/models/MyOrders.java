@@ -36,6 +36,9 @@ public class MyOrders {
     @SerializedName("delivery_status")
     Boolean delivery_status;
 
+    @SerializedName("QuotationNo")
+    String QuotationNo;
+
 
     public Boolean getDelivery_status() {
         return delivery_status;
@@ -79,5 +82,9 @@ public class MyOrders {
 
     public User getUser() {
         return user;
+    }
+
+    public String getQuotationNo() {
+        return QuotationNo;
     }
 }

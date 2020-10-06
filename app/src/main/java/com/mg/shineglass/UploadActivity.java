@@ -14,8 +14,10 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -61,6 +63,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     private RelativeLayout cancel,request,progress;
     private long mLastClickTime = 0;
     private SharedPreferences sharedPreferences;
+    private String city;
 
 
 
@@ -99,13 +102,24 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
 
                 CityDialogue cityDialogue=new CityDialogue(this);
                 cityDialogue.showDialog();
+
                 RelativeLayout RContinue=cityDialogue.dialog.findViewById(R.id.update_btn);
                 RelativeLayout RCancel=cityDialogue.dialog.findViewById(R.id.cancel_btn);
+                Spinner citySpinner=cityDialogue.dialog.findViewById(R.id.citySpinner);
+                city=citySpinner.getSelectedItem().toString();
+                if(city.toLowerCase().trim().equals("Tap to select".toLowerCase().trim()))
+                {
+                    Toast.makeText(this, "Select City!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 RContinue.setOnClickListener(view1 -> {
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
                         return;
                     }
                     mLastClickTime = SystemClock.elapsedRealtime();
+
+
 
                     new AlertDialog.Builder(UploadActivity.this)
                             .setTitle("Are you sure??")
@@ -310,7 +324,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
         SharedPreferences sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
         mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null))
-                .REQUEST_QUOTATION(files,list,sharedPreferences.getString(constants.PHONE, null))
+                .REQUEST_QUOTATION(files,list,sharedPreferences.getString(constants.PHONE, null),city)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));

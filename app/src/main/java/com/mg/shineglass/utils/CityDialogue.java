@@ -19,6 +19,7 @@ import java.util.List;
 public class CityDialogue {
     Activity activity;
     public Dialog dialog;
+    Spinner citySpinner;
 
     public CityDialogue(Activity activity) {
         this.activity = activity;
@@ -30,7 +31,7 @@ public class CityDialogue {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.city_dialogue);
-        Spinner citySpinner = dialog.findViewById(R.id.citySpinner);
+        citySpinner = dialog.findViewById(R.id.citySpinner);
         List<String> cityList = new ArrayList<String>();
         cityList.add("Tap to select");
         cityList.add("city1");
@@ -49,4 +50,6 @@ public class CityDialogue {
     public void hideDialog(){
         dialog.dismiss();
     }
+
+
 }
