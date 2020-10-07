@@ -106,14 +106,17 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
                 RelativeLayout RContinue=cityDialogue.dialog.findViewById(R.id.update_btn);
                 RelativeLayout RCancel=cityDialogue.dialog.findViewById(R.id.cancel_btn);
                 Spinner citySpinner=cityDialogue.dialog.findViewById(R.id.citySpinner);
-                city=citySpinner.getSelectedItem().toString();
-                if(city.toLowerCase().trim().equals("Tap to select".toLowerCase().trim()))
-                {
-                    Toast.makeText(this, "Select City!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+
+
 
                 RContinue.setOnClickListener(view1 -> {
+                    city=citySpinner.getSelectedItem().toString();
+                    if(city.toLowerCase().trim().equals("Tap to select".toLowerCase().trim()))
+                    {
+                        Toast.makeText(this, "Select City!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
                         return;
                     }
