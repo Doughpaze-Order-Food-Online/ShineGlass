@@ -103,16 +103,11 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
                 startActivity(i);
                 finish();
             }
-            else
-            {
+            else {
 
 
                 cityDialogue.showDialog();
-
-
-
             }
-
 
         });
 
