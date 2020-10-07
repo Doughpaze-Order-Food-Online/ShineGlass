@@ -96,7 +96,7 @@ public interface retro_interface {
     Observable<Integer> PLACE_OFFLINE_ORDER(@Body FinalOrder finalOrder);
 
     @POST("online_order")
-    Observable<Integer> PLACE_ONLINE_ORDER(@Query("mid") String mid, @Body PaymentDetails paymentDetails, @Query("quotation") String Quotation);
+    Observable<Integer> PLACE_ONLINE_ORDER(@Query("mid") String mid, @Query("quotation") String Quotation);
 
 
     @GET("wallet")

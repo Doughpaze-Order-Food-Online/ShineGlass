@@ -114,6 +114,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         date.setText(Date);
         total.setText(String.valueOf(Total));
         address.setText(Address);
+        redeem_checkbox.setText(String.valueOf(0.00));
 
         amount.setVisibility(View.GONE);
         mSharedPreferences = PreferenceManager
@@ -189,7 +190,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         finalOrder.setQuotationNo(Quotation);
         finalOrder.setTotal(Total);
         finalOrder.setAmount(Amount);
-        finalOrder.setWallet(Wallet);
+        finalOrder.setWallet(Double.parseDouble(redeem_checkbox.getText().toString()));
 
         viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
@@ -234,8 +235,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this, "Something Went Wrong, Try Again Sometime!", Toast.LENGTH_SHORT).show();
-            finish();
+            Alert();
         }
 
     }
@@ -263,34 +263,8 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
             public void onTransactionResponse(Bundle bundle) {
                 Log.e(TAG, "Response (onTransactionResponse) : "+bundle.toString());
                 PaymentDetails paymentDetails=new PaymentDetails();
+                    PLACE_ORDER();
 
-                if(bundle.get("RESPCODE").equals("01") || bundle.get("RESPCODE").equals("400"))
-                {
-                    paymentDetails.setBankname(bundle.getString("BANKNAME"));
-                    paymentDetails.setQuotationNo(bundle.getString("ORDERID"));
-                    paymentDetails.setAmountpaid(Double.parseDouble(bundle.getString("TXNAMOUNT")));
-                    paymentDetails.setDate(bundle.getString("TXNDATE"));
-                    paymentDetails.setTransactionId(bundle.getString("TXNID"));
-                    paymentDetails.setPaymentType(bundle.getString("PAYMENTMODE"));
-                    paymentDetails.setBankTransactionId(bundle.getString("BANKTXNID"));
-                    paymentDetails.setPayment_status(true);
-
-
-                    PLACE_ORDER(paymentDetails);
-                }
-                else
-                {
-                    paymentDetails.setBankname(bundle.getString("BANKNAME"));
-                    paymentDetails.setQuotationNo(bundle.getString("ORDERID"));
-                    paymentDetails.setAmountpaid(Double.parseDouble(bundle.getString("TXNAMOUNT")));
-                    paymentDetails.setDate(bundle.getString("TXNDATE"));
-                    paymentDetails.setTransactionId(bundle.getString("TXNID"));
-                    paymentDetails.setPaymentType(bundle.getString("PAYMENTMODE"));
-                    paymentDetails.setBankTransactionId(bundle.getString("BANKTXNID"));
-                    paymentDetails.setPayment_status(false);
-
-                    PLACE_ORDER(paymentDetails);
-                }
 
 
 
@@ -338,11 +312,6 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
             @Override
             public void onTransactionCancel(String s, Bundle bundle) {
                 Log.e(TAG, " transaction cancel "+s);
-                PaymentDetails paymentDetails=new PaymentDetails();
-                paymentDetails.setPayment_status(false);
-                paymentDetails.setStatus("Payment Transaction Cancelled");
-                paymentDetails.setQuotationNo(bundle.getString("ORDERID"));
-                PLACE_ORDER(paymentDetails);
             }
         });
 
@@ -372,10 +341,10 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         }
     }
 
-    private void PLACE_ORDER(PaymentDetails paymentDetails) {
+    private void PLACE_ORDER() {
         viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit(mSharedPreferences.getString(constants.TOKEN, null))
-                .PLACE_ONLINE_ORDER(constants.MID,paymentDetails,Quotation)
+                .PLACE_ONLINE_ORDER(constants.MID,Quotation)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
@@ -420,9 +389,8 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
                 .setTitle("Something Went Wrong!")
                 .setMessage("If Amount is Debited from your bank account, Check the status of the payment in My Orders, else place the order again :) ")
                 .setNeutralButton("Okay", (DialogInterface.OnClickListener) (dialog, which) -> {
-                    Fragment fragment=new MyOrdersFragment();
-                    Objects.requireNonNull(this).getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, fragment).commit();
-                    MainActivity.mBottomNavigationView.setSelectedItemId(R.id.myOrders_icon);
+                    Intent i=new Intent(Order_Confirmation_Activity.this,MainActivity.class);
+                    startActivity(i);
                     finish();
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
