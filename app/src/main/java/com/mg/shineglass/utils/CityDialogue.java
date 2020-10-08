@@ -21,16 +21,18 @@ public class CityDialogue {
     public Dialog dialog;
     Spinner citySpinner;
 
+
     public CityDialogue(Activity activity) {
         this.activity = activity;
-    }
-
-    public void showDialog() {
-
         dialog  = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.city_dialogue);
+    }
+
+    public void showDialog() {
+
+
         citySpinner = dialog.findViewById(R.id.citySpinner);
         List<String> cityList = new ArrayList<String>();
         cityList.add("Tap to select");

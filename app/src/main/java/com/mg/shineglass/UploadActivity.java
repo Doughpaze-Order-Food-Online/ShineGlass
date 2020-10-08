@@ -60,10 +60,12 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     List<Uri> arrayList = new ArrayList<>();
     private RecyclerView fileItem;
     private CompositeSubscription mSubscriptions;
-    private RelativeLayout cancel,request,progress;
+    private RelativeLayout cancel,request,progress, RContinue,RCancel;
     private long mLastClickTime = 0;
     private SharedPreferences sharedPreferences;
     private String city;
+    private CityDialogue cityDialogue;
+    private Spinner citySpinner;
 
 
 
@@ -78,6 +80,10 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
         cancel=findViewById(R.id.cancel_btn);
         request=findViewById(R.id.request);
         progress=findViewById(R.id.progress);
+        cityDialogue=new CityDialogue(this);
+        RContinue=cityDialogue.dialog.findViewById(R.id.update_btn);
+        RCancel=cityDialogue.dialog.findViewById(R.id.cancel_btn);
+        citySpinner=cityDialogue.dialog.findViewById(R.id.citySpinner);
 
         cancel.setOnClickListener(view->finish());
         request.setOnClickListener(view-> {
@@ -97,62 +103,51 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
                 startActivity(i);
                 finish();
             }
-            else
-            {
+            else {
 
-                CityDialogue cityDialogue=new CityDialogue(this);
+
                 cityDialogue.showDialog();
-
-                RelativeLayout RContinue=cityDialogue.dialog.findViewById(R.id.update_btn);
-                RelativeLayout RCancel=cityDialogue.dialog.findViewById(R.id.cancel_btn);
-                Spinner citySpinner=cityDialogue.dialog.findViewById(R.id.citySpinner);
-
-
-
-                RContinue.setOnClickListener(view1 -> {
-                    city=citySpinner.getSelectedItem().toString();
-                    if(city.toLowerCase().trim().equals("Tap to select".toLowerCase().trim()))
-                    {
-                        Toast.makeText(this, "Select City!", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-                        return;
-                    }
-                    mLastClickTime = SystemClock.elapsedRealtime();
-
-
-
-                    new AlertDialog.Builder(UploadActivity.this)
-                            .setTitle("Are you sure??")
-                            .setMessage("Do you want to continue with the request??")
-
-                            // Specifying a listener allows you to take an action before dismissing the dialog.
-                            // The dialog is automatically dismissed when a dialog button is clicked.
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    try {
-                                        SEND_REQUEST();
-                                    } catch (URISyntaxException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            })
-
-                            // A null listener allows the button to dismiss the dialog and take no further action.
-                            .setNegativeButton(android.R.string.no, null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                    cityDialogue.hideDialog();
-                });
-
-                RCancel.setOnClickListener(view1 -> cityDialogue.hideDialog());
-
             }
 
-
         });
+
+        RContinue.setOnClickListener(view1 -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+
+            city=citySpinner.getSelectedItem().toString();
+            if(city.toLowerCase().trim().equals("Tap to select".toLowerCase().trim()))
+            {
+                Toast.makeText(this, "Select City!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            new AlertDialog.Builder(UploadActivity.this)
+                    .setTitle("Are you sure??")
+                    .setMessage("Do you want to continue with the request??")
+
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                SEND_REQUEST();
+                            } catch (URISyntaxException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    })
+
+                    // A null listener allows the button to dismiss the dialog and take no further action.
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+            cityDialogue.hideDialog();
+        });
+
+        RCancel.setOnClickListener(view1 -> cityDialogue.hideDialog());
 
         fileItem=findViewById(R.id.file_container);
 
