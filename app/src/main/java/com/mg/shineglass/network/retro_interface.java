@@ -91,6 +91,9 @@ public interface retro_interface {
     @POST("address")
     Observable<BasicResponse> SAVE_ADDRESS(@Body  Address address);
 
+    @POST("reject")
+    Observable<BasicResponse> REJECT_QUOTATION(@Query("quotation") String Quotation);
+
 
     @POST("order")
     Observable<Integer> PLACE_OFFLINE_ORDER(@Body FinalOrder finalOrder);

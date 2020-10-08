@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mg.shineglass.Interface.FetchData;
 import com.mg.shineglass.Invoice_Activity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.BasicResponse;
@@ -42,10 +43,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersItem
     private ViewDialog viewDialog;
     private SharedPreferences sharedPreferences;
     private CompositeSubscription mSubscriptions;
+    private FetchData fetchData;
 
-    public  OrdersAdapter(List<MyOrders> list,Activity activity) {
+    public  OrdersAdapter(List<MyOrders> list,Activity activity,FetchData fetchData) {
         this.list=list;
         this.activity=activity;
+        this.fetchData=fetchData;
 
     }
 
@@ -147,9 +150,8 @@ private void CHECK_STATUS(String Quotation)
 {
 
     viewDialog.showDialog();
-    PaymentDetails paymentDetails=new PaymentDetails();
     mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString(constants.TOKEN, null))
-            .PLACE_ONLINE_ORDER(constants.MID,paymentDetails,Quotation)
+            .PLACE_ONLINE_ORDER(constants.MID,Quotation)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe(this::handleResponse,this::handleError));
@@ -158,7 +160,9 @@ private void CHECK_STATUS(String Quotation)
 }
 
     private void handleResponse(Integer integer) {
-        Toast.makeText(activity, "Payment Status is checked! Please Pull Down To Refresh :)", Toast.LENGTH_SHORT).show();
+        viewDialog.hideDialog();
+        fetchData.FETCH();
+        Toast.makeText(activity, "Payment Status is checked! Refreshing", Toast.LENGTH_SHORT).show();
     }
 
 

@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.mg.shineglass.Interface.FetchData;
 import com.mg.shineglass.adapters.BannerAdapter;
 import com.mg.shineglass.adapters.FileUploadAdapter;
 import com.mg.shineglass.adapters.MyRequestAdapter;
@@ -50,7 +51,7 @@ import rx.subscriptions.CompositeSubscription;
  * Use the  factory method to
  * create an instance of this fragment.
  */
-public class MyRequestsFragment extends Fragment {
+public class MyRequestsFragment extends Fragment implements FetchData {
 
     private CompositeSubscription mSubscriptions;
     private RecyclerView rvItem;
@@ -107,7 +108,7 @@ public class MyRequestsFragment extends Fragment {
                 }.getType();
                 list = gson.fromJson(sharedPreferences.getString("request", null), type);
 
-                MyRequestAdapter myRequestAdapter = new MyRequestAdapter(list);
+                MyRequestAdapter myRequestAdapter = new MyRequestAdapter(list,getContext(),getActivity(),this);
                 LinearLayoutManager LinearLayout = new LinearLayoutManager(getContext());
                 rvItem.setLayoutManager(LinearLayout);
                 rvItem.setAdapter(myRequestAdapter);
@@ -156,7 +157,7 @@ public class MyRequestsFragment extends Fragment {
             editor.putString("request", s);
             editor.apply();
 
-            MyRequestAdapter myRequestAdapter = new MyRequestAdapter(response);
+            MyRequestAdapter myRequestAdapter = new MyRequestAdapter(response,getContext(),getActivity(), this);
             LinearLayoutManager LinearLayout = new LinearLayoutManager(getContext());
             rvItem.setLayoutManager(LinearLayout);
             rvItem.setAdapter(myRequestAdapter);
@@ -197,4 +198,8 @@ public class MyRequestsFragment extends Fragment {
         }
     }
 
+    @Override
+    public void FETCH() {
+            FETCH_DATA();
+    }
 }

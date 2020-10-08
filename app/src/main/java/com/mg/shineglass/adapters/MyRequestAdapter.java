@@ -1,27 +1,63 @@
 package com.mg.shineglass.adapters;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.mg.shineglass.Interface.FetchData;
+import com.mg.shineglass.MainActivity;
 import com.mg.shineglass.My_Address_Activity;
 import com.mg.shineglass.Quotation_Activity;
 import com.mg.shineglass.R;
+import com.mg.shineglass.UploadActivity;
+import com.mg.shineglass.models.BasicResponse;
+import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.MyQuotation;
+import com.mg.shineglass.network.networkUtils;
+import com.mg.shineglass.utils.ViewDialog;
+import com.mg.shineglass.utils.constants;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import retrofit2.Response;
+import retrofit2.adapter.rxjava.HttpException;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. MyRequestItemHolder>  {
 
     private List<MyQuotation> list;
+    private Context context;
+    private CompositeSubscription mSubscriptions;
+    private ViewDialog viewDialog;
+    private Activity activity;
+    private FetchData fetchData;
 
-    public  MyRequestAdapter(List<MyQuotation> list) {
+    public  MyRequestAdapter(List<MyQuotation> list,Context context,Activity activity,FetchData fetchData) {
         this.list=list;
+        this.context=context;
+        this.activity=activity;
+        this.fetchData=fetchData;
 
     }
 
@@ -42,19 +78,42 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
     MyRequestItemHolder.date.setText(simpleDateFormat.format(quotation.getDate()));
 
 
-    if(quotation.getValuation() && !quotation.getAccept())
+    if(quotation.getValuation() && !quotation.getAccept() && !quotation.getReject())
     {
+
         MyRequestItemHolder.reject.setVisibility(View.VISIBLE);
         MyRequestItemHolder.accept.setVisibility(View.VISIBLE);
         MyRequestItemHolder.line.setVisibility(View.VISIBLE);
         MyRequestItemHolder.view.setVisibility(View.VISIBLE);
+        MyRequestItemHolder.imageView.setVisibility(View.GONE);
+        MyRequestItemHolder.imageView2.setVisibility(View.GONE);
     }
-    else
+    else if(quotation.getValuation() && quotation.getAccept() && !quotation.getReject())
     {
         MyRequestItemHolder.reject.setVisibility(View.GONE);
         MyRequestItemHolder.accept.setVisibility(View.GONE);
         MyRequestItemHolder.line.setVisibility(View.GONE);
+        MyRequestItemHolder.view.setVisibility(View.VISIBLE);
+        MyRequestItemHolder.imageView.setVisibility(View.VISIBLE);
+        MyRequestItemHolder.imageView2.setVisibility(View.GONE);
+    }
+    else if(quotation.getValuation() && !quotation.getAccept() && quotation.getReject())
+    {
+        MyRequestItemHolder.reject.setVisibility(View.GONE);
+        MyRequestItemHolder.accept.setVisibility(View.GONE);
+        MyRequestItemHolder.line.setVisibility(View.GONE);
+        MyRequestItemHolder.view.setVisibility(View.VISIBLE);
+        MyRequestItemHolder.imageView.setVisibility(View.GONE);
+        MyRequestItemHolder.imageView2.setVisibility(View.VISIBLE);
+    }
+    else  if(!quotation.getValuation() && !quotation.getAccept() && !quotation.getReject()){
+
+        MyRequestItemHolder.reject.setVisibility(View.GONE);
+        MyRequestItemHolder.accept.setVisibility(View.GONE);
+        MyRequestItemHolder.line.setVisibility(View.GONE);
         MyRequestItemHolder.view.setVisibility(View.GONE);
+        MyRequestItemHolder.imageView.setVisibility(View.GONE);
+        MyRequestItemHolder.imageView2.setVisibility(View.GONE);
     }
 
 
@@ -64,6 +123,9 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
         intent.putExtra("url",quotation.getUrl());
         intent.putExtra("total",String.valueOf(quotation.getTotal()));
         intent.putExtra("date",simpleDateFormat.format(quotation.getDate()));
+        intent.putExtra("accept",quotation.getAccept().toString());
+        intent.putExtra("valuation",quotation.getReject().toString());
+        intent.putExtra("reject",quotation.getReject().toString());
         MyRequestItemHolder.itemView.getContext().startActivity(intent);
     });
 
@@ -78,8 +140,37 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
         });
 
         MyRequestItemHolder.reject.setOnClickListener(v -> {
-            Toast.makeText(MyRequestItemHolder.itemView.getContext(), "Rejected", Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(context)
+                    .setTitle("Are you sure??")
+                    .setMessage("Do you want to reject??")
+
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            REJECT_QUOTATION(quotation.getQuotationNo());
+                        }
+                    })
+
+                    // A null listener allows the button to dismiss the dialog and take no further action.
+                    .setNegativeButton(android.R.string.no, null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
         });
+    }
+
+    private void REJECT_QUOTATION(String quotationNo) {
+
+
+        viewDialog.showDialog();
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null))
+                .REJECT_QUOTATION(quotationNo)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse,this::handleError));
     }
 
     @Override
@@ -97,16 +188,21 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
         TextView quotationNo,date;
         RelativeLayout view,reject,accept;
         View line;
+        ImageView imageView,imageView2;
 
 
         MyRequestItemHolder (View itemView) {
             super(itemView);
             quotationNo=itemView.findViewById(R.id.request_no);
             date=itemView.findViewById(R.id.date_value);
+            reject=itemView.findViewById(R.id.reject_btn);
             view=itemView.findViewById(R.id.request_quotation_btn);
             line=itemView.findViewById(R.id.line);
             accept=itemView.findViewById(R.id.accept_btn);
-            reject=itemView.findViewById(R.id.reject_btn);
+            imageView=itemView.findViewById(R.id.accepted_img);
+            imageView2=itemView.findViewById(R.id.rejected_img);
+            mSubscriptions = new CompositeSubscription();
+            viewDialog = new ViewDialog(activity);
 
 
         }
@@ -114,7 +210,35 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
 
 
 
+    private void handleResponse(BasicResponse response) {
 
+        viewDialog.hideDialog();
+        Toast.makeText(context, "Quotation Rejected! Refreshing", Toast.LENGTH_SHORT).show();
+        fetchData.FETCH();
+    }
+
+    private void handleError(Throwable error) {
+
+      viewDialog.hideDialog();
+        Log.e("error",error.toString());
+        if (error instanceof HttpException) {
+
+            Gson gson = new GsonBuilder().create();
+
+            try {
+
+                String errorBody = ((HttpException) error).response().errorBody().string();
+                Response<BasicResponse> response = gson.fromJson(errorBody,Response.class);
+                assert response.body() != null;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+            Toast.makeText(context, "Network Error !", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 

@@ -49,6 +49,9 @@ public class MyQuotation {
     @SerializedName("quotation")
     List<Quotation> quotation;
 
+    @SerializedName("reject")
+    Boolean reject;
+
 
     public String getUrl() {
         return url;
@@ -117,6 +120,14 @@ public class MyQuotation {
 
     public void setAccept(Boolean accept) {
         this.accept = accept;
+    }
+
+    public Boolean getReject() {
+        return reject;
+    }
+
+    public void setReject(Boolean reject) {
+        this.reject = reject;
     }
 }
 

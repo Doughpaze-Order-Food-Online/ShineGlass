@@ -235,7 +235,9 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         }
         else
         {
+
             Alert();
+
         }
 
     }
@@ -387,8 +389,12 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
 
         new AlertDialog.Builder(Order_Confirmation_Activity.this)
                 .setTitle("Something Went Wrong!")
-                .setMessage("If Amount is Debited from your bank account, Check the status of the payment in My Orders, else place the order again :) ")
+                .setMessage("If Amount is Debited from your bank account, Check the status of the payment in My Orders, else place the order again after sometime :) ")
                 .setNeutralButton("Okay", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("request",null);
+                    editor.putString("orders",null);
+                    editor.apply();
                     Intent i=new Intent(Order_Confirmation_Activity.this,MainActivity.class);
                     startActivity(i);
                     finish();

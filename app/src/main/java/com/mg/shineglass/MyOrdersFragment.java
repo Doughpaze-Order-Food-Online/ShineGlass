@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.mg.shineglass.Interface.FetchData;
 import com.mg.shineglass.adapters.OrdersAdapter;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.MyOrders;
@@ -40,7 +41,7 @@ import rx.subscriptions.CompositeSubscription;
  * Use the  factory method to
  * create an instance of this fragment.
  */
-public class MyOrdersFragment extends Fragment {
+public class MyOrdersFragment extends Fragment implements FetchData {
 
     private CompositeSubscription mSubscriptions;
     private RecyclerView rvItem;
@@ -101,7 +102,7 @@ public class MyOrdersFragment extends Fragment {
                 Type type=new TypeToken<List<MyOrders>>(){}.getType();
                 list=gson.fromJson(sharedPreferences.getString("orders", null),type);
 
-                OrdersAdapter ordersAdapter = new OrdersAdapter(list,getActivity());
+                OrdersAdapter ordersAdapter = new OrdersAdapter(list,getActivity(),this);
                 LinearLayoutManager LinearLayout = new LinearLayoutManager(getContext());
                 rvItem.setLayoutManager(LinearLayout);
                 rvItem.setAdapter(ordersAdapter);
@@ -142,7 +143,7 @@ public class MyOrdersFragment extends Fragment {
             editor.putString("orders", s);
             editor.apply();
 
-            OrdersAdapter ordersAdapter = new OrdersAdapter(response,getActivity());
+            OrdersAdapter ordersAdapter = new OrdersAdapter(response,getActivity(),this);
             LinearLayoutManager LinearLayout = new LinearLayoutManager(getContext());
             rvItem.setLayoutManager(LinearLayout);
             rvItem.setAdapter(ordersAdapter);
@@ -183,4 +184,8 @@ public class MyOrdersFragment extends Fragment {
         }
     }
 
+    @Override
+    public void FETCH() {
+        FETCH_DATA();
+    }
 }

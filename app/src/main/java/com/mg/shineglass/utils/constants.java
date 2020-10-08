@@ -4,7 +4,7 @@ public class constants {
 
 
 
-    public static final String BANNER_URL="http://192.168.43.13:3000";
+    public static final String BANNER_URL="http://3.131.127.136:3000";
     public static final String BASE_URL = BANNER_URL+"/api/";
 
     public static final String TOKEN = "token";
