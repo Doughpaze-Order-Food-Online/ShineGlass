@@ -16,6 +16,12 @@ public class BasicResponse {
     @SerializedName("Address")
     private List<Address> addressList;
 
+    @SerializedName("token")
+    String token;
+
+    @SerializedName("OrderNo")
+    String OrderNo;
+
 
 
     public String getMessage() {
@@ -40,5 +46,13 @@ public class BasicResponse {
 
     public void setAddressList(List<Address> addressList) {
         this.addressList = addressList;
+    }
+
+    public String getOrderNo() {
+        return OrderNo;
+    }
+
+    public String getToken() {
+        return token;
     }
 }

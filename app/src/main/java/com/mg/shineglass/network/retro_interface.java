@@ -99,7 +99,7 @@ public interface retro_interface {
     Observable<Integer> PLACE_OFFLINE_ORDER(@Body FinalOrder finalOrder);
 
     @POST("online_order")
-    Observable<Integer> PLACE_ONLINE_ORDER(@Query("mid") String mid, @Query("quotation") String Quotation);
+    Observable<Integer> PLACE_ONLINE_ORDER(@Query("mid") String mid, @Query("orderNo") String Quotation);
 
 
     @GET("wallet")
@@ -110,7 +110,7 @@ public interface retro_interface {
     Observable<List<MyOrders>> GET_ORDERS();
 
     @POST("token")
-    Observable<String> GET_TOKEN(@Query("mid") String mid,@Body FinalOrder finalOrder);
+    Observable<BasicResponse> GET_TOKEN(@Query("mid") String mid,@Body FinalOrder finalOrder);
 
 
     @GET("current")

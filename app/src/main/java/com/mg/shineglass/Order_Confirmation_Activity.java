@@ -242,12 +242,12 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
 
     }
 
-    private void handleResponse2(String token) {
+    private void handleResponse2(BasicResponse response) {
         viewDialog.hideDialog();
         String txnAmountString = Amount.toString();
         String midString = constants.MID ;
-        String orderIdString = Quotation;
-        String txnTokenString = token;
+        String orderIdString = response.getOrderNo();
+        String txnTokenString = response.getToken();
 
         // for test mode use it
         String host = "https://securegw-stage.paytm.in/";
@@ -265,7 +265,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
             public void onTransactionResponse(Bundle bundle) {
                 Log.e(TAG, "Response (onTransactionResponse) : "+bundle.toString());
                 PaymentDetails paymentDetails=new PaymentDetails();
-                    PLACE_ORDER();
+                    PLACE_ORDER(response.getOrderNo());
 
 
 
@@ -343,10 +343,10 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         }
     }
 
-    private void PLACE_ORDER() {
+    private void PLACE_ORDER(String orderNo) {
         viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit(mSharedPreferences.getString(constants.TOKEN, null))
-                .PLACE_ONLINE_ORDER(constants.MID,Quotation)
+                .PLACE_ONLINE_ORDER(constants.MID,orderNo)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));

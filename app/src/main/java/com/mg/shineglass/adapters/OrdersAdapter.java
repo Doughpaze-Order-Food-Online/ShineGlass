@@ -90,7 +90,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersItem
        {
            OrderItemHolder.check_status.setVisibility(View.VISIBLE);
            OrderItemHolder.check_status.setOnClickListener(v -> {
-               CHECK_STATUS(orders.getQuotationNo());
+               CHECK_STATUS(orders.getOrderNo());
            });
        }
 
