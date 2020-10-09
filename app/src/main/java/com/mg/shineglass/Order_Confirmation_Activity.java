@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -76,6 +77,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_and_payment_details_fragment);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         mSubscriptions = new CompositeSubscription();
 
         backBtnImg=findViewById(R.id.back_btn_img);
@@ -225,6 +227,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         if(status==1)
         {
             Intent i=new Intent(Order_Confirmation_Activity.this,MainActivity.class);
+            i.putExtra("callMyOrdersFragment","OrderConfirmationActivity");
             startActivity(i);
             finish();
             Toast.makeText(this, "Order Placed!", Toast.LENGTH_SHORT).show();
@@ -266,10 +269,6 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
                 Log.e(TAG, "Response (onTransactionResponse) : "+bundle.toString());
                 PaymentDetails paymentDetails=new PaymentDetails();
                     PLACE_ORDER(response.getOrderNo());
-
-
-
-
             }
 
             @Override

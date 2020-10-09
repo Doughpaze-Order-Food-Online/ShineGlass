@@ -287,7 +287,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
         }
 
 
-       
+
 
         // create RequestBody instance from file
         RequestBody requestFile = RequestBody.create(MediaType.parse(filetype), file);
@@ -299,8 +299,8 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
 
     private void SEND_REQUEST() throws URISyntaxException {
 
-       progress.setVisibility(View.VISIBLE);
-       final List<MultipartBody.Part> files = new ArrayList<>();
+        progress.setVisibility(View.VISIBLE);
+        final List<MultipartBody.Part> files = new ArrayList<>();
 
 
         if (arrayList != null) {
@@ -332,7 +332,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
 
     private void handleResponse(Response<LoginResponse> response) {
 
-       progress.setVisibility(View.GONE);
+        progress.setVisibility(View.GONE);
 
         sharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
@@ -342,6 +342,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
         editor.apply();
         Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(UploadActivity.this,MainActivity.class );
+        intent.putExtra("callMyRequestFragment","UploadActivity");
         startActivity(intent);
         finish();
 
@@ -370,4 +371,3 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
         }
     }
 }
-
