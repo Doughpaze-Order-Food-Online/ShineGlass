@@ -11,6 +11,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -20,11 +21,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.mg.shineglass.utils.constants;
 
 
-public class Invoice_Activity extends Activity {
+public class Invoice_Activity extends AppCompatActivity {
     private WebView pdfView;
 
     private ProgressBar loading;
     String invoice;
+
+    private RelativeLayout closeBtn;
 
 
     @Override
@@ -38,6 +41,9 @@ public class Invoice_Activity extends Activity {
         loading = findViewById(R.id.loading);
 
         showPdfFile((constants.BANNER_URL + invoice));
+
+        closeBtn=findViewById(R.id.close_btn);
+        closeBtn.setOnClickListener(view -> finish());
 
     }
 
