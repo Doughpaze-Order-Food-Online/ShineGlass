@@ -177,7 +177,14 @@ public class Quotation_Activity extends Activity {
         Intent i=new Intent(Quotation_Activity.this,MainActivity.class);
         startActivity(i);
         finish();
-        Toast.makeText(this, "Quotation Rejected! Pull Down to Refresh", Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPreferences;
+        sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("request",null);
+        editor.putString("orders",null);
+        editor.apply();
+        Toast.makeText(this, "Quotation Rejected!", Toast.LENGTH_SHORT).show();
     }
 
     private void handleError(Throwable error) {

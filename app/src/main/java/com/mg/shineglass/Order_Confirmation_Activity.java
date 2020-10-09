@@ -125,7 +125,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
 
         view.setOnClickListener(v -> {
             Intent i=new Intent(Order_Confirmation_Activity.this, Quotation_Activity.class);
-            i.putExtra("quotationNo",Quotation);
+            i.putExtra("quotation",Quotation);
             i.putExtra("url",url);
             i.putExtra("total",Total.toString());
             i.putExtra("date",Date);
