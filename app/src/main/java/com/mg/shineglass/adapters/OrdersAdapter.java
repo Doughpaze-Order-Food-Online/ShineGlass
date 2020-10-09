@@ -86,7 +86,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersItem
            OrderItemHolder.invoice.setVisibility(View.GONE);
        }
 
-       if(orders.getStatus().equals("Payment Initiated"))
+       if(orders.getStatus().equals("Payment Initiated") || orders.getStatus().equals("PENDING"))
        {
            OrderItemHolder.check_status.setVisibility(View.VISIBLE);
            OrderItemHolder.check_status.setOnClickListener(v -> {

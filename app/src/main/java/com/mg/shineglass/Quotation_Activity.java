@@ -69,17 +69,20 @@ public class Quotation_Activity extends Activity {
         accept=findViewById(R.id.accept_btn);
         reject=findViewById(R.id.reject_btn);
 
-        if(Accept.equals("true") && Reject.equals("false"))
-        {
-            accept.setVisibility(View.GONE);
-            reject.setVisibility(View.GONE);
-        }
+       if(Accept!=null && Reject!=null)
+       {
+           if(Accept.equals("true") && Reject.equals("false"))
+           {
+               accept.setVisibility(View.GONE);
+               reject.setVisibility(View.GONE);
+           }
 
-        if(Accept.equals("false") && Reject.equals("true"))
-        {
-            accept.setVisibility(View.GONE);
-            reject.setVisibility(View.GONE);
-        }
+           if(Accept.equals("false") && Reject.equals("true"))
+           {
+               accept.setVisibility(View.GONE);
+               reject.setVisibility(View.GONE);
+           }
+       }
 
 
 
