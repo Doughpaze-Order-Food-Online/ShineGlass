@@ -49,9 +49,11 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
         deliveryOrdersItemHolder.status.setText(orders.getStatus());
 
 
-          if(!orders.getDelivery_status())
+          if(!orders.getOrder_dispatched())
           {
               deliveryOrdersItemHolder.invoice.setVisibility(View.VISIBLE);
+
+              deliveryOrdersItemHolder.detail.setText("View Details");
               deliveryOrdersItemHolder.invoice.setOnClickListener(v -> {
                   Intent intent=new Intent(deliveryOrdersItemHolder.itemView.getContext(), DeliveryOrderDetails.class);
                   Gson gson=new Gson();
@@ -80,7 +82,7 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
 
     class DeliveryOrdersItemHolder extends RecyclerView.ViewHolder {
 
-        TextView quotationNo,date,status,text;
+        TextView quotationNo,date,status,text,detail;
         RelativeLayout invoice;
 
 
@@ -92,6 +94,7 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
             status=itemView.findViewById(R.id.status_txt);
             invoice=itemView.findViewById(R.id.request_quotation_btn);
             text=itemView.findViewById(R.id.request_quotation_txt);
+            detail=itemView.findViewById(R.id.check_payment_txt);
 
 
         }
