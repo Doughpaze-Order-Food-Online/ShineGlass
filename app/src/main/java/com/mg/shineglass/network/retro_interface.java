@@ -6,6 +6,7 @@ import com.mg.shineglass.models.Address;
 import com.mg.shineglass.models.Banners;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.Category;
+import com.mg.shineglass.models.City;
 import com.mg.shineglass.models.FinalOrder;
 import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.MyOrders;
@@ -42,6 +43,9 @@ public interface retro_interface {
 
     @GET("banner")
     Observable<Response<List<Banners>>> GET_IMAGES();
+
+    @GET("city")
+    Observable<Response<List<City>>> GET_CITY();
 
     @POST("auth/register")
     Observable<LoginResponse> REGISTER(@Body User user);

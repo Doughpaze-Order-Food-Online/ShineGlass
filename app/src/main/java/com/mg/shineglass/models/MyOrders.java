@@ -33,15 +33,15 @@ public class MyOrders {
     @SerializedName("total")
     Double total;
 
-    @SerializedName("delivery_status")
-    Boolean delivery_status;
+    @SerializedName("order_dispatched")
+    Boolean order_dispatched;
 
     @SerializedName("QuotationNo")
     String QuotationNo;
 
 
-    public Boolean getDelivery_status() {
-        return delivery_status;
+    public Boolean getOrder_dispatched() {
+        return order_dispatched;
     }
 
     public Double getTotal() {
