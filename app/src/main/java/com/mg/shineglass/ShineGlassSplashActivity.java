@@ -20,6 +20,7 @@ import com.mg.shineglass.adapters.RatesAdapter;
 import com.mg.shineglass.models.Banners;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.Category;
+import com.mg.shineglass.models.City;
 import com.mg.shineglass.models.Rates;
 import com.mg.shineglass.models.SpanningGridLayoutManager;
 import com.mg.shineglass.network.networkUtils;
@@ -91,7 +92,11 @@ public class ShineGlassSplashActivity extends AppCompatActivity {
                 networkUtils.getRetrofit().GET_CATEGORY()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
-                        .subscribe(this::handleResponse3,this::handleError)
+                        .subscribe(this::handleResponse3,this::handleError),
+                networkUtils.getRetrofit().GET_CITY()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(this::handleResponse4,this::handleError)
         );
     }
 
@@ -122,6 +127,14 @@ public class ShineGlassSplashActivity extends AppCompatActivity {
         Gson gson=new Gson();
         String s=gson.toJson(response.body());
         editor.putString("banner",s);
+        editor.apply();
+    }
+
+    private void handleResponse4(Response<List<City>> response) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        Gson gson=new Gson();
+        String s=gson.toJson(response.body());
+        editor.putString("city",s);
         editor.apply();
     }
 
