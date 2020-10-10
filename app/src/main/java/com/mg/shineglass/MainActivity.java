@@ -59,11 +59,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Bundle bundle=getIntent().getExtras();
         mBottomNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
-        if(bundle!=null&&bundle.getCharSequence("callMyRequestFragment").equals("UploadActivity")){
+        if(bundle!=null&&bundle.getCharSequence("callMyRequestFragment")!=null&&bundle.getCharSequence("callMyRequestFragment").equals("UploadActivity")){
             mBottomNavigationView.setSelectedItemId(R.id.request_icon);
             getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, new MyRequestsFragment()).commit();
         }
-        else if(bundle!=null&&bundle.getCharSequence("callMyOrdersFragment").equals("OrderConfirmationActivity")){
+        else if(bundle!=null&&bundle.getCharSequence("callMyOrdersFragment")!=null&&bundle.getCharSequence("callMyOrdersFragment").equals("OrderConfirmationActivity")){
             mBottomNavigationView.setSelectedItemId(R.id.myOrders_icon);
             getSupportFragmentManager().beginTransaction().replace(R.id.bottom_navigation_container, new MyOrdersFragment()).commit();
         }
