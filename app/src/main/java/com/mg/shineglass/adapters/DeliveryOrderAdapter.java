@@ -92,7 +92,7 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
             quotationNo=itemView.findViewById(R.id.order_no__txt);
             date=itemView.findViewById(R.id.date_txt);
             status=itemView.findViewById(R.id.status_txt);
-            invoice=itemView.findViewById(R.id.request_quotation_btn);
+            invoice=itemView.findViewById(R.id.check_payment_status_btn);
             text=itemView.findViewById(R.id.request_quotation_txt);
             detail=itemView.findViewById(R.id.check_payment_txt);
 

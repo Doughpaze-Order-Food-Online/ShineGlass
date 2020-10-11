@@ -64,7 +64,16 @@ public class Invoice_Activity extends AppCompatActivity {
                 checkOnPageStartedCalled = true;
             }
 
-        });
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                if (checkOnPageStartedCalled) {
+                    loading.setVisibility(View.GONE);
+                    pdfView.setVisibility(View.VISIBLE);
+                } else {
+                    showPdfFile(imageString);
+                }
+            }
+        });;
 
     }
 

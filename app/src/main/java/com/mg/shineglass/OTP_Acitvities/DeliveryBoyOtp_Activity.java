@@ -51,7 +51,7 @@ public class DeliveryBoyOtp_Activity extends AppCompatActivity {  private User u
     private RelativeLayout Resend_block;
     private ImageView backImgBtn;
     private ViewDialog viewDialog;
-    private String orderId;
+    private String orderId,id;
     private SharedPreferences sharedPreferences;
     private long mLastClickTime = 0;
 
@@ -65,6 +65,7 @@ public class DeliveryBoyOtp_Activity extends AppCompatActivity {  private User u
 
         Intent i=getIntent();
         orderId=i.getStringExtra("orderId");
+        id=i.getStringExtra("_id");
         mSubscriptions = new CompositeSubscription();
 
 
@@ -115,7 +116,8 @@ public class DeliveryBoyOtp_Activity extends AppCompatActivity {  private User u
         viewDialog.showDialog();
 
         OrderDeliver orderDeliver=new OrderDeliver();
-        orderDeliver.setOrderId(orderId);
+        orderDeliver.setOrderNo(orderId);
+        orderDeliver.set_id(id);
         orderDeliver.setOtp(Integer.parseInt(enteredOtp));
         mSubscriptions.add(networkUtils.getRetrofit(sharedPreferences.getString("token", null))
                 .VERIFY_OTP(orderDeliver)

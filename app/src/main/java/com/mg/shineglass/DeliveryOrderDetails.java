@@ -69,6 +69,7 @@ public class DeliveryOrderDetails extends AppCompatActivity {
         otp.setOnClickListener(v -> {
        Intent intent1=new Intent(DeliveryOrderDetails.this, DeliveryBoyOtp_Activity.class);
        intent1.putExtra("orderId", finalOrders1.getOrderNo());
+       intent1.putExtra("_id",finalOrders1.getUser().get_id());
        startActivity(intent1);
     });
 
