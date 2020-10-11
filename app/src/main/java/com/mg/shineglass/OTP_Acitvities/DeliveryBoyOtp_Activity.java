@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.mg.shineglass.DeliveryBoyMainActivity;
 import com.mg.shineglass.MainActivity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.BasicResponse;
@@ -135,7 +136,7 @@ public class DeliveryBoyOtp_Activity extends AppCompatActivity {  private User u
         if(response==1)
         {
             Toast.makeText(this, "Order Delivered!", Toast.LENGTH_SHORT).show();
-            Intent i=new Intent(DeliveryBoyOtp_Activity.this, MainActivity.class);
+            Intent i=new Intent(DeliveryBoyOtp_Activity.this, DeliveryBoyMainActivity.class);
             sharedPreferences = PreferenceManager
                     .getDefaultSharedPreferences(this);
 

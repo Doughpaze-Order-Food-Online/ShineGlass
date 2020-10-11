@@ -47,24 +47,29 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yyyy");
         deliveryOrdersItemHolder.date.setText(simpleDateFormat.format(orders.getOrder_date()));
         deliveryOrdersItemHolder.status.setText(orders.getStatus());
+        deliveryOrdersItemHolder.invoice2.setVisibility(View.GONE);
 
 
-          if(!orders.getOrder_dispatched())
+          if(orders.getOrder_dispatched())
           {
               deliveryOrdersItemHolder.invoice.setVisibility(View.VISIBLE);
 
               deliveryOrdersItemHolder.detail.setText("View Details");
+
               deliveryOrdersItemHolder.invoice.setOnClickListener(v -> {
                   Intent intent=new Intent(deliveryOrdersItemHolder.itemView.getContext(), DeliveryOrderDetails.class);
                   Gson gson=new Gson();
                   intent.putExtra("order",gson.toJson(orders));
                   deliveryOrdersItemHolder.itemView.getContext().startActivity(intent);
               });
+
           }
           else
           {
               deliveryOrdersItemHolder.invoice.setVisibility(View.GONE);
           }
+
+
 
 
 
@@ -83,7 +88,7 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
     class DeliveryOrdersItemHolder extends RecyclerView.ViewHolder {
 
         TextView quotationNo,date,status,text,detail;
-        RelativeLayout invoice;
+        RelativeLayout invoice,invoice2;
 
 
 
@@ -93,6 +98,7 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
             date=itemView.findViewById(R.id.date_txt);
             status=itemView.findViewById(R.id.status_txt);
             invoice=itemView.findViewById(R.id.check_payment_status_btn);
+            invoice2=itemView.findViewById(R.id.request_quotation_btn);
             text=itemView.findViewById(R.id.request_quotation_txt);
             detail=itemView.findViewById(R.id.check_payment_txt);
 

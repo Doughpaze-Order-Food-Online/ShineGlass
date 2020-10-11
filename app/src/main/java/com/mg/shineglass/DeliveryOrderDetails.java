@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class DeliveryOrderDetails extends AppCompatActivity {
 
     private TextView orderId,customer,phone,status,order_date,payment_mode,address,direction;
     private RelativeLayout otp;
+    private ImageView back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +44,12 @@ public class DeliveryOrderDetails extends AppCompatActivity {
         phone=findViewById(R.id.contact_value_txt);
         customer=findViewById(R.id.name_value_txt);
         otp=findViewById(R.id.send_otp_btn);
+        back=findViewById(R.id.back_btn_img);
+
+
+        back.setOnClickListener(v->{
+            finish();
+        });
 
         Gson gson=new Gson();
         MyOrders orders =new MyOrders();
