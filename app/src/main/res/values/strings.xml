@@ -177,5 +177,13 @@
     <string name="check_payment_status">check payment status</string>
     <string name="enter_amount_to_redeem">Enter the amount to redeem :</string>
     <string name="_0_00">0.00</string>
+    <string name="bank_account_details">Bank Account Details</string>
+    <string name="account_holder_name">Account Holder Name :</string>
+    <string name="bank_name">Bank Name :</string>
+    <string name="account_number">Account Number :</string>
+    <string name="ifsc_code">IFSC Code :</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="enter_the_transaction_id">Enter the Transaction ID :</string>
+    <string name="refer_the_above_bank_details_for_the_payment_respectively_and_enter_your_transaction_id_below">Refer the above bank details for the payment respectively and enter your Transaction ID below</string>
 
 </resources>

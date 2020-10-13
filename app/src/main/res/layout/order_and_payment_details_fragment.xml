@@ -198,7 +198,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
                         android:background="@color/LightGrayColor" />
 
                     <RelativeLayout
@@ -242,7 +242,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@color/LightGrayColor" />
 
@@ -254,106 +253,238 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="@string/redeem_wallet_amount"
+                android:text="@string/bank_account_details"
                 android:textColor="@color/BlackTextColor" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/dimen_4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                app:cardCornerRadius="2dp">
+
+
 
             <RelativeLayout
                 android:id="@+id/wallet_cash_history_block"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_16dp">
+
+                <TextView
+                    android:id="@+id/account_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:text="@string/account_holder_name"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/LightBlackColor"
+                    tools:ignore="SmallSp" />
+                <TextView
+                    android:id="@+id/account_name_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_4dp"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:textSize="11sp"
+                    android:text="Siddhant deepak khobragade"
+                    android:gravity="end"
+                    android:textAllCaps="true"
+                    android:textColor="@color/PrimaryTextColor"
+                    android:layout_toEndOf="@id/account_name_txt"
+                    tools:ignore="SmallSp" />
+
+
+                <TextView
+                    android:id="@+id/bank_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/account_name_value"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:text="@string/bank_name"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/LightBlackColor"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/bank_name_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/account_name_value"
+                    android:layout_marginStart="@dimen/dimen_4dp"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:layout_below="@id/account_name_value"
+                    android:textSize="11sp"
+                    android:text="indian overseas bank"
+                    android:gravity="end"
+                    android:textAllCaps="true"
+                    android:textColor="@color/PrimaryTextColor"
+                    android:layout_toEndOf="@id/account_name_txt"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/account_number_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/bank_name_value"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:text="@string/account_number"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/LightBlackColor"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/account_number_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/account_name_value"
+                    android:layout_marginStart="@dimen/dimen_4dp"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:layout_below="@id/bank_name_value"
+                    android:textSize="11sp"
+                    android:text="111111100000001111"
+                    android:gravity="end"
+                    android:textAllCaps="true"
+                    android:textColor="@color/PrimaryTextColor"
+                    android:layout_toEndOf="@id/account_name_txt"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/iFsc_code_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/account_number_value"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:text="@string/ifsc_code"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/LightBlackColor"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/iFsc_code_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/account_name_value"
+                    android:layout_marginStart="@dimen/dimen_4dp"
+                    android:layout_marginBottom="@dimen/dimen_8dp"
+                    android:layout_below="@id/account_number_value"
+                    android:textSize="11sp"
+                    android:text="ioba123456"
+                    android:gravity="end"
+                    android:textAllCaps="true"
+                    android:textColor="@color/PrimaryTextColor"
+                    android:layout_toEndOf="@id/account_name_txt"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/branch_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iFsc_code_value"
+                    android:text="Branch Name :"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/LightBlackColor"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/branch_name_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/account_name_value"
+                    android:layout_marginStart="@dimen/dimen_4dp"
+                    android:layout_below="@id/iFsc_code_value"
+                    android:textSize="11sp"
+                    android:text="indian overseas bank"
+                    android:gravity="end"
+                    android:textAllCaps="true"
+                    android:textColor="@color/PrimaryTextColor"
+                    android:layout_toEndOf="@id/account_name_txt"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/refer_the_above_bank_details_for_the_payment_respectively_and_enter_your_transaction_id_below"
+                    android:textSize="11sp"
+                    android:layout_below="@id/branch_name_txt"
+                    android:layout_marginTop="@dimen/dimen_8dp"/>
+
+
+
+            </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginBottom="@dimen/dimen_8dp"
-                android:background="@drawable/webview_border"
-                android:paddingStart="16dp"
-                android:paddingLeft="16dp"
-                android:paddingEnd="0dp"
-                android:paddingRight="0dp">
+                android:background="@color/LightGrayColor" />
 
-                <TextView
-                    android:id="@+id/wallet_cash_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:background="@android:color/transparent"
-                    android:text="@string/wallet_cash"
-                    android:textAllCaps="true"
-                    android:textColor="@color/LightBlackColor"
-                    android:textSize="12sp" />
-
-                <View
-                    android:id="@+id/vertical_dash_line_1"
-                    android:layout_width="0.5dp"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_toEndOf="@id/wallet_cash_txt"
-                    android:layout_toRightOf="@id/wallet_cash_txt"
-                    android:background="@color/MediumGrayColor" />
-
-                <TextView
-                    android:id="@+id/rupay_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_toEndOf="@id/vertical_dash_line_1"
-                    android:layout_toRightOf="@id/vertical_dash_line_1"
-                    android:background="@android:color/transparent"
-                    android:text="@string/rupey"
-                    android:textAllCaps="true"
-                    android:textColor="@color/LightBlackColor"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/wallet_cash_value_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_toEndOf="@id/rupay_txt"
-                    android:layout_toRightOf="@id/rupay_txt"
-                    android:background="@android:color/transparent"
-                    android:text="@string/_1400"
-                    android:textAllCaps="true"
-                    android:textColor="@color/LightBlackColor"
-                    android:textSize="14sp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_16dp"
-                android:layout_marginEnd="@dimen/dimen_16dp"
-                android:paddingTop="@dimen/dimen_8dp"
-                android:paddingBottom="@dimen/dimen_8dp">
-
-                <TextView
-                    android:id="@+id/enter_redeem"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/enter_amount_to_redeem"
-                    android:textColor="@color/LightBlackColor"/>
-
-
-            <EditText
-                android:id="@+id/redeem_amount_edt"
-                android:layout_width="match_parent"
-                android:layout_toEndOf="@id/enter_redeem"
-                android:textAlignment="center"
-                android:layout_marginStart="@dimen/dimen_16dp"
-                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:inputType="numberDecimal"
-                android:hint="@string/_0_00"
-                android:textSize="@dimen/dimen_12sp" />
+                android:text="@string/payment_details"
+                android:textColor="@color/BlackTextColor" />
 
-            </RelativeLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/dimen_4dp"
+                app:cardCornerRadius="2dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:layout_marginStart="@dimen/dimen_16dp"
+                android:layout_marginEnd="@dimen/dimen_16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dimen_16dp"
+                    android:paddingRight="@dimen/dimen_16dp"
+                    android:paddingTop="@dimen/dimen_8dp"
+                    android:paddingBottom="@dimen/dimen_8dp">
+
+                    <TextView
+                        android:id="@+id/transaction_id_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/enter_the_transaction_id"
+                        android:textSize="11sp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/LightBlackColor"
+                        android:fontFamily="sans-serif-medium"
+                        tools:ignore="SmallSp" />
+
+                    <EditText
+                        android:id="@+id/transaction_id_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp"
+                        tools:text="1111111111111111111"
+                        android:gravity="center"
+                        android:layout_toEndOf="@id/transaction_id_text"
+                        android:layout_marginStart="@dimen/dimen_4dp"
+                        tools:ignore="SmallSp" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
 
             <View
                 android:layout_width="match_parent"
@@ -379,56 +510,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_16dp"
-                app:cardElevation="4dp">
+                app:cardElevation="4dp"
+                app:cardCornerRadius="2dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_16dp">
 
                     <TextView
                         android:id="@+id/name_txt"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/shikha_das"
+                        android:padding="@dimen/dimen_16dp"
                         android:textColor="@color/BlackTextColor"
-                        android:textSize="12sp"
-                        tools:ignore="SmallSp" />
-
-                </LinearLayout>
+                        android:textSize="11sp"
+                        tools:ignore="SmallSp"/>
 
 
             </androidx.cardview.widget.CardView>
 
-            <RadioGroup
-                android:id="@+id/mode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="@dimen/dimen_16dp"
-                android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/offline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-
-                    android:text="@string/cash_on_delivery"
-                    android:textSize="12sp"
-                    tools:ignore="SmallSp" />
-
-                <RadioButton
-                    android:id="@+id/online"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/pay_online_credit_card_debit_card_upi"
-                    android:textSize="12sp"
-                    tools:ignore="SmallSp" />
-            </RadioGroup>
 
             <RelativeLayout
                 android:id="@+id/place_order_btn"
@@ -436,7 +535,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/login_bordershape"
                 android:gravity="center"
