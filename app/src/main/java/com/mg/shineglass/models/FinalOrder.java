@@ -1,9 +1,19 @@
 package com.mg.shineglass.models;
 
 public class FinalOrder {
-    String QuotationNo;
+    String QuotationNo,tid;
     Address address;
     Double total,wallet,Amount;
+
+
+    public String getTid() {
+        return tid;
+    }
+
+    public void setTid(String tid) {
+        this.tid = tid;
+    }
+
     public void setQuotationNo(String quotationNo) {
         QuotationNo = quotationNo;
     }
