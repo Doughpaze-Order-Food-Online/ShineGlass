@@ -113,7 +113,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         address.setText(Address);
         tid=findViewById(R.id.transaction_id_value);
 
-        amount.setVisibility(View.GONE);
+
         mSharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
