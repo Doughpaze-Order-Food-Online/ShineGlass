@@ -23,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.mg.shineglass.DeliveryBoyMainActivity;
+import com.mg.shineglass.Login_Activity;
 import com.mg.shineglass.MainActivity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.BasicResponse;
@@ -127,7 +129,6 @@ public class Number_OTP_Activity extends AppCompatActivity {
           editor.putString(constants.PHONE,user.getMobile());
           editor.putString(constants.TYPE,type);
           editor.putString(constants.USER_TYPE,userType);
-
           editor.apply();
           goToHome();
       }
@@ -221,9 +222,10 @@ public class Number_OTP_Activity extends AppCompatActivity {
     }
 
     private void goToHome() {
-        Intent intent = new Intent(Number_OTP_Activity.this, MainActivity.class);
+        Intent intent = new Intent(Number_OTP_Activity.this, userType.toLowerCase().trim().equals("user")?MainActivity.class: DeliveryBoyMainActivity.class);
         startActivity(intent);
         finish();
+
     }
 
 
