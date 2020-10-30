@@ -69,6 +69,11 @@ public class DeliveryOrderAdapter extends RecyclerView.Adapter<DeliveryOrderAdap
               deliveryOrdersItemHolder.invoice.setVisibility(View.GONE);
           }
 
+          if(orders.getOrder_delivered())
+          {
+              deliveryOrdersItemHolder.invoice.setVisibility(View.GONE);
+          }
+
 
 
 

@@ -39,9 +39,16 @@ public class MyOrders {
     @SerializedName("QuotationNo")
     String QuotationNo;
 
+    @SerializedName("order_delivered")
+    Boolean order_delivered;
+
 
     public Boolean getOrder_dispatched() {
         return order_dispatched;
+    }
+
+    public Boolean getOrder_delivered() {
+        return order_delivered;
     }
 
     public Double getTotal() {
