@@ -151,31 +151,9 @@
                 android:textColor="@color/LightBlackColor"/>
 
             <TextView
-                android:id="@+id/mode_txt"
-                android:layout_width="wrap_content"
-                android:layout_below="@id/date_value_txt"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_height="wrap_content"
-                android:text="@string/payment_mode"
-                android:textAllCaps="true"
-                android:textColor="@color/LightBlackColor"/>
-
-            <TextView
-                android:id="@+id/mode_value_txt"
-                android:layout_width="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@id/contact_txt"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_below="@id/date_value_txt"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_height="wrap_content"
-                android:text="@string/customer_name"
-                android:textColor="@color/LightBlackColor"/>
-
-            <TextView
                 android:id="@+id/delivery_address_txt"
                 android:layout_width="wrap_content"
-                android:layout_below="@id/mode_value_txt"
+                android:layout_below="@id/date_value_txt"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:layout_height="wrap_content"
                 android:text="@string/delivery_address2"
@@ -188,7 +166,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_toEndOf="@id/contact_txt"
                 android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_below="@id/mode_value_txt"
+                android:layout_below="@id/date_value_txt"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:layout_height="wrap_content"
                 android:text="@string/customer_name"

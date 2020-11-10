@@ -1,13 +1,11 @@
 package com.mg.shineglass;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +17,6 @@ import com.mg.shineglass.models.MyOrders;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DeliveryOrderDetails extends AppCompatActivity {
 
@@ -38,7 +34,6 @@ public class DeliveryOrderDetails extends AppCompatActivity {
         orderId=findViewById(R.id.order_id_value_txt);
         direction=findViewById(R.id.get_directions_btn);
         address=findViewById(R.id.delivery_value_txt);
-        payment_mode=findViewById(R.id.mode_value_txt);
         order_date=findViewById(R.id.date_value_txt);
         status=findViewById(R.id.status_value_txt);
         phone=findViewById(R.id.contact_value_txt);
@@ -60,7 +55,6 @@ public class DeliveryOrderDetails extends AppCompatActivity {
 
         orderId.setText(orders.getOrderNo());
         address.setText(orders.getAddress().getAddress());
-        payment_mode.setText(orders.getPayment_mode());
         order_date.setText(simpleDateFormat.format(orders.getOrder_date()));
         status.setText(orders.getStatus());
         phone.setText(orders.getUser().getMobile());

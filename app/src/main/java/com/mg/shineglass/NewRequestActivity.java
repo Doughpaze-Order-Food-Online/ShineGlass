@@ -2,16 +2,13 @@ package com.mg.shineglass;
 
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
@@ -22,7 +19,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -32,17 +28,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -51,11 +45,13 @@ import com.mg.shineglass.Interface.deleteFile;
 import com.mg.shineglass.adapters.FileUploadAdapter;
 import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.utils.ViewDialog;
+
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 import static com.mg.shineglass.utils.validation.validateFields;
 
 
@@ -72,7 +68,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
     final int REQUEST_EXTERNAL_STORAGE = 100;
     private RelativeLayout button;
     private EditText Ethickness, Ewidth, Eheight, Equantity;
-    private String[] floatNum = new String[10000];
+    private final String[] floatNum = new String[10000];
     private ImageView backbtn;
     private long mLastClickTime = 0;
     private Button b1,b2;
@@ -171,42 +167,27 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         });
 
         Ethickness.setOnClickListener(v -> {
-            if(MmRadioButton.isChecked())
-                show(Ethickness, MmRadioButton);
-            else if(InchRadioButton.isChecked()){
-                show(Ethickness,InchRadioButton);
-            }
-            else{
+            if (!MmRadioButton.isChecked() && !InchRadioButton.isChecked()) {
                 Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
             }
         });
 
 
         Ewidth.setOnClickListener(v -> {
-            if(MmRadioButton.isChecked())
-                show(Ewidth, MmRadioButton);
-            else if(InchRadioButton.isChecked()){
-                show(Ewidth,InchRadioButton);
-            }
-            else{
+            if (!MmRadioButton.isChecked() && !InchRadioButton.isChecked()) {
                 Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
             }
         });
 
         Eheight.setOnClickListener(v -> {
-            if(MmRadioButton.isChecked())
-                show(Eheight, MmRadioButton);
-            else if(InchRadioButton.isChecked()){
-                show(Eheight,InchRadioButton);
-            }
-            else{
-                Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH or MM", Toast.LENGTH_LONG).show();
+            if (!MmRadioButton.isChecked() && !InchRadioButton.isChecked()) {
+                Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
             }
         });
-        viewDialog=new ViewDialog(this);
-        FloatNumber floatNumber=new FloatNumber();
-        viewDialog.showDialog();
-        floatNumber.execute();
+//        viewDialog=new ViewDialog(this);
+//        FloatNumber floatNumber=new FloatNumber();
+//        viewDialog.showDialog();
+//        floatNumber.execute();
 
     }
 
@@ -387,7 +368,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
 
 
     private View getRootView() {
-        final ViewGroup contentViewGroup = (ViewGroup) Objects.requireNonNull(this).findViewById(android.R.id.content);
+        final ViewGroup contentViewGroup = Objects.requireNonNull(this).findViewById(android.R.id.content);
         View rootView = null;
 
         if(contentViewGroup != null)
@@ -504,9 +485,8 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
     }
 
 
-
-
-    public void show(EditText edt, RadioButton rd)
+//NumberPicker Dialogue
+/*    public void show(EditText edt, RadioButton rd)
     {
 
         final Dialog d = new Dialog(NewRequestActivity.this);
@@ -531,15 +511,16 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         d.show();
     }
 
-    public class FloatNumber extends AsyncTask<Void,Void,String[]>{
+ */
+
+    public class FloatNumber extends AsyncTask<Void, Void, String[]> {
 
 
         @Override
         protected String[] doInBackground(Void... voids) {
-            float n=0;
-            for(int j=0;j<10000;j++)
-            {
-                n+=0.1;
+            float n = 0;
+            for (int j = 0; j < 10000; j++) {
+                n += 0.1;
                 DecimalFormat dec=new DecimalFormat("#0.0");
                 floatNum[j]= dec.format(n);
             }
