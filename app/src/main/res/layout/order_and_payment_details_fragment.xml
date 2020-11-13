@@ -500,6 +500,7 @@
                         android:visibility="visible" />
 
                     <RelativeLayout
+                        android:id="@+id/file"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/attatch_payment_screenshot_btn"

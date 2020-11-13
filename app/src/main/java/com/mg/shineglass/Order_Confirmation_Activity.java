@@ -2,23 +2,32 @@ package com.mg.shineglass;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.view.View;
 import android.view.WindowManager;
 
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +40,7 @@ import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.models.FinalOrder;
 import com.mg.shineglass.models.PaymentDetails;
 import com.mg.shineglass.models.Wallet;
+import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
@@ -38,10 +48,14 @@ import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 import com.paytm.pgsdk.TransactionManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Objects;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -68,6 +82,11 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
     private EditText tid;
     private Double Total;
     private SharedPreferences sharedPreferences;
+    private Button image;
+    private Uri uri=null;
+    private TextView textView;
+    private RelativeLayout file;
+    private FrameLayout cross;
 
 
     @Override
@@ -104,6 +123,10 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         address=findViewById(R.id.name_txt);
         total=findViewById(R.id.total_charge_value);
         view=findViewById(R.id.request_quotation_btn);
+        file=findViewById(R.id.file);
+        file.setVisibility(View.GONE);
+        textView=findViewById(R.id.file_name_txt);
+        cross=findViewById(R.id.cross_btn);
 
         confirm=findViewById(R.id.place_order_btn);
         amount=findViewById(R.id.wallet_cash_value_txt);
@@ -114,6 +137,10 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         tid=findViewById(R.id.transaction_id_value);
 
 
+        cross.setOnClickListener(v -> {
+            uri=null;
+            file.setVisibility(View.GONE);
+        });
         mSharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
@@ -137,6 +164,12 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
                 tid.setError("Enter Transaction Id");
                 return ;
             }
+
+            if(uri==null)
+            {
+                Toast.makeText(this, "Attach Payment Slip", Toast.LENGTH_SHORT).show();
+                return ;
+            }
                 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
                     return;
                 }
@@ -147,7 +180,11 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
                         .setMessage("Do you want to place the order??")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                OFFLINE();
+                                try {
+                                    OFFLINE();
+                                } catch (URISyntaxException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         })
 
@@ -160,20 +197,22 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         });
 
 
+        image=findViewById(R.id.attatch_payment_screenshot_btn);
+        image.setOnClickListener(v -> {
+            Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(pickPhoto , 1);
+        });
 
     }
 
 
 
-    private void OFFLINE() {
+    private void OFFLINE() throws URISyntaxException {
 
-        FinalOrder finalOrder=new FinalOrder();
-        finalOrder.setAddress(newaddres);
-        finalOrder.setQuotationNo(Quotation);
-        finalOrder.setTid(tid.getText().toString());
+
         viewDialog.showDialog();
         mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
-                .PLACE_OFFLINE_ORDER(finalOrder)
+                .PLACE_OFFLINE_ORDER(prepareFilePart("payment", uri),Quotation,newaddres,tid.getText().toString())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
@@ -220,4 +259,63 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
 
 
 
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_CANCELED) {
+            switch (requestCode) {
+                case 0:
+                case 1:
+                    if (resultCode == RESULT_OK && data != null) {
+                        uri = data.getData();
+                        file.setVisibility(View.VISIBLE);
+                        textView.setText(getFileName(uri));
+                    }
+
+                    break;
+            }
+        }
+    }
+
+    @NonNull
+    private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) throws URISyntaxException {
+        // use the FileUtils to get the actual file by uri
+        String filePath= FileUtils.getPath(this,fileUri);
+
+        assert filePath != null;
+        File file = new File(filePath);
+
+
+
+        // create RequestBody instance from file
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+
+        // MultipartBody.Part is used to send also the actual file name
+        return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
+
+    }
+
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
 }

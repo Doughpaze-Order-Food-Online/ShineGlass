@@ -312,7 +312,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
             }
 
             for (int i = 0; i < arrayList.size(); i++) {
-                files.add(prepareFilePart("files", arrayList.get(i))) ;
+                files.add(prepareFilePart("files", arrayList.get(i)));
             }
 
         }
