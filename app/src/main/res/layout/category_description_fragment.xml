@@ -136,7 +136,7 @@
                         android:autofillHints="no"
                         android:background="@drawable/edt_bg_selector"
                         android:hint="@string/thickness"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:textColorHint="@color/BlackTextColor"
                         android:textSize="12sp" />
 
@@ -174,7 +174,7 @@
                             android:autofillHints="no"
                             android:background="@drawable/edt_bg_selector"
                             android:hint="@string/width"
-                            android:inputType="number"
+                            android:inputType="numberDecimal"
                             android:textColorHint="@color/BlackTextColor"
                             android:textSize="12sp" />
 
@@ -205,7 +205,7 @@
                             android:autofillHints="no"
                             android:background="@drawable/edt_bg_selector"
                             android:hint="@string/height"
-                            android:inputType="number"
+                            android:inputType="numberDecimal"
                             android:textColorHint="@color/BlackTextColor"
                             android:textSize="12sp" />
 

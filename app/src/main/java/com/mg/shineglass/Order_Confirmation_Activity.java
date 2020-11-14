@@ -2,22 +2,18 @@ package com.mg.shineglass;
 
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-
-import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -31,22 +27,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mg.shineglass.adapters.WalletAdapter;
 import com.mg.shineglass.models.Address;
 import com.mg.shineglass.models.BasicResponse;
-import com.mg.shineglass.models.FinalOrder;
-import com.mg.shineglass.models.PaymentDetails;
-import com.mg.shineglass.models.Wallet;
 import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
-import com.paytm.pgsdk.PaytmOrder;
-import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
-import com.paytm.pgsdk.TransactionManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,25 +53,25 @@ import static com.mg.shineglass.utils.validation.validateFields;
 
 public class Order_Confirmation_Activity extends AppCompatActivity {
 
-    private TextView quotation,date,address,total,amount;
+    private TextView quotation, date, address, total, amount;
     private RelativeLayout view;
-    private String Quotation,Date,Address,url;
+    private String Quotation, Date, Address, url;
     private RadioGroup radioGroup;
     private RelativeLayout confirm;
     private SharedPreferences mSharedPreferences;
     private CompositeSubscription mSubscriptions;
     private long mLastClickTime = 0;
-    private String  TAG ="order_confirm_activity";
-    private Integer ActivityRequestCode = 2;
+    private final String TAG = "order_confirm_activity";
+    private final Integer ActivityRequestCode = 2;
     private ImageView backBtnImg;
-    private Double latitude,longitude;
+    private Double latitude, longitude;
     private Address newaddres;
     private ViewDialog viewDialog;
     private EditText tid;
     private Double Total;
     private SharedPreferences sharedPreferences;
     private Button image;
-    private Uri uri=null;
+    private Uri uri = null;
     private TextView textView;
     private RelativeLayout file;
     private FrameLayout cross;
@@ -238,6 +226,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
     private void handleError(Throwable error) {
         viewDialog.hideDialog();
 
+        Log.d("OrderConfirmation", error.toString());
         if (error instanceof HttpException) {
 
             Gson gson = new GsonBuilder().create();
