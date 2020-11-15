@@ -1,12 +1,15 @@
 package com.mg.shineglass;
 
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
@@ -25,10 +28,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mg.shineglass.adapters.FileUploadAdapter;
 import com.mg.shineglass.models.Address;
 import com.mg.shineglass.models.BasicResponse;
 import com.mg.shineglass.network.FileUtils;
@@ -75,8 +82,10 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
     private TextView textView;
     private RelativeLayout file;
     private FrameLayout cross;
+    final int REQUEST_EXTERNAL_STORAGE = 100;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,8 +196,13 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
 
         image=findViewById(R.id.attatch_payment_screenshot_btn);
         image.setOnClickListener(v -> {
-            Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(pickPhoto , 1);
+            if (ActivityCompat.checkSelfPermission(Order_Confirmation_Activity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(Order_Confirmation_Activity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
+//                    return;
+            } else {
+                launchGalleryIntent();
+            }
+
         });
 
     }
@@ -226,7 +240,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
     private void handleError(Throwable error) {
         viewDialog.hideDialog();
 
-        Log.d("OrderConfirmation", error.toString());
+        Log.e("OrderConfirmation", error.toString());
         if (error instanceof HttpException) {
 
             Gson gson = new GsonBuilder().create();
@@ -251,22 +265,50 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_CANCELED) {
-            switch (requestCode) {
-                case 0:
-                case 1:
-                    if (resultCode == RESULT_OK && data != null) {
-                        uri = data.getData();
-                        file.setVisibility(View.VISIBLE);
-                        textView.setText(getFileName(uri));
+        if (requestCode == REQUEST_EXTERNAL_STORAGE && resultCode == RESULT_OK) {
+
+            if (data != null) {
+                if (data.getClipData() != null) {
+                    int count = data.getClipData().getItemCount();
+                    int currentItem = 0;
+                    while (currentItem < count) {
+                        Uri imageUri = data.getClipData().getItemAt(currentItem).getUri();
+                        currentItem = currentItem + 1;
+
+                        Log.d("Uri Selected", imageUri.toString());
+
+                        try {
+                           uri=imageUri;
+                           textView.setText(getFileName(uri));
+                           file.setVisibility(View.VISIBLE);
+
+                        } catch (Exception e) {
+                            Log.e("Upload", "File select error", e);
+                        }
                     }
 
-                    break;
+                } else if (data.getData() != null) {
+
+                    final Uri uri1 = data.getData();
+                    Log.i("Upload", "Uri = " + uri1.toString());
+
+                    try {
+                        uri=uri1;
+                        textView.setText(getFileName(uri));
+                        file.setVisibility(View.VISIBLE);
+
+                    } catch (Exception e) {
+                        Log.e("Upload", "File select error", e);
+                    }
+                }
+
             }
+
         }
     }
+
 
     @NonNull
     private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) throws URISyntaxException {
@@ -307,4 +349,37 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
         }
         return result;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void launchGalleryIntent() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent,"select file"), REQUEST_EXTERNAL_STORAGE);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_EXTERNAL_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    launchGalleryIntent();
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
+
+
 }
