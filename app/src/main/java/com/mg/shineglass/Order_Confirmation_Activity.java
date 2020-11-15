@@ -274,7 +274,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
                     int count = data.getClipData().getItemCount();
                     int currentItem = 0;
                     while (currentItem < count) {
-                        Uri imageUri = data.getClipData().getItemAt(currentItem).getUri();
+                        Uri imageUri = Uri.parse("file://" + data.getClipData().getItemAt(currentItem).getUri());
                         currentItem = currentItem + 1;
 
                         Log.d("Uri Selected", imageUri.toString());
@@ -291,7 +291,7 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
 
                 } else if (data.getData() != null) {
 
-                    final Uri uri1 = data.getData();
+                    final Uri uri1 = Uri.parse("file://" + data.getData());
                     Log.i("Upload", "Uri = " + uri1.toString());
 
                     try {
