@@ -1,7 +1,6 @@
 package com.mg.shineglass;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,11 +13,11 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -26,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mg.shineglass.Interface.deleteFile;
@@ -36,13 +36,14 @@ import com.mg.shineglass.models.Quotation;
 import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.CityDialogue;
-import com.mg.shineglass.utils.ViewDialog;
 import com.mg.shineglass.utils.constants;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -272,7 +273,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     @NonNull
     private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) throws URISyntaxException {
         // use the FileUtils to get the actual file by uri
-        String filePath=FileUtils.getPath(this,fileUri.toString());
+        String filePath = FileUtils.getPath(this, fileUri);
         String filetype;
         assert filePath != null;
         File file = new File(filePath);
