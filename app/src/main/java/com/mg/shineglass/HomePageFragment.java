@@ -120,7 +120,8 @@ public class HomePageFragment extends Fragment {
         Type type=new TypeToken<List<Banners>>(){}.getType();
         list=gson.fromJson(sharedPreferences.getString("banner", null),type);
         bannerAdapter=new BannerAdapter(Objects.requireNonNull(getContext()),list);
-        bannerAdapter.setTimer(viewPager,5,5,1);
+        assert list != null;
+        bannerAdapter.setTimer(viewPager,5,list.size(),0);
         viewPager.setAdapter(bannerAdapter);
     }
 
