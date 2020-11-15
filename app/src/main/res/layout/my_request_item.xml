@@ -27,7 +27,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5">
+            android:layout_weight="1.8">
 
             <TextView
                 android:id="@+id/request_no_txt"
@@ -84,6 +84,7 @@
                 android:layout_below="@id/date_txt"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/_12_10_2020"
+                android:layout_marginEnd="@dimen/dimen_8dp"
                 android:textColor="@color/BlackTextColor"
                 android:textSize="10sp" />
 

@@ -38,8 +38,9 @@
             android:layout_marginBottom="12dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/clear_glass"
+            android:textSize="7sp"
             android:textColor="@color/whiteTextColor"
-            android:textSize="8sp"
+            android:textStyle="bold"
             tools:ignore="SmallSp" />
     </androidx.cardview.widget.CardView>
 
