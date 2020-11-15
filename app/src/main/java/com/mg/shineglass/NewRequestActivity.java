@@ -428,7 +428,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
                     int count = data.getClipData().getItemCount();
                     int currentItem = 0;
                     while (currentItem < count) {
-                        Uri imageUri = data.getClipData().getItemAt(currentItem).getUri();
+                        Uri imageUri = Uri.parse("file://" + data.getClipData().getItemAt(currentItem).getUri());
                         currentItem = currentItem + 1;
 
                         Log.d("Uri Selected", imageUri.toString());
@@ -447,7 +447,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
 
                 } else if (data.getData() != null) {
 
-                    final Uri uri = data.getData();
+                    final Uri uri =Uri.parse("file://" + data.getData());
                     Log.i("Upload", "Uri = " + uri.toString());
 
                     try {
