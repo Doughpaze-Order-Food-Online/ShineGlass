@@ -272,7 +272,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     @NonNull
     private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) throws URISyntaxException {
         // use the FileUtils to get the actual file by uri
-        String filePath=FileUtils.getPath(this,fileUri.toString());
+        String filePath=FileUtils.getPath(this,fileUri);
         String filetype;
         assert filePath != null;
         File file = new File(filePath);
