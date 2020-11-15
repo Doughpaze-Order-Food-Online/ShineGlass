@@ -25,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mg.shineglass.Interface.deleteFile;
@@ -37,13 +36,11 @@ import com.mg.shineglass.network.FileUtils;
 import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.CityDialogue;
 import com.mg.shineglass.utils.constants;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
