@@ -214,7 +214,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
                     int count = data.getClipData().getItemCount();
                     int currentItem = 0;
                     while (currentItem < count) {
-                        Uri imageUri = Uri.parse("file://" + data.getClipData().getItemAt(currentItem).getUri());
+                        Uri imageUri = data.getClipData().getItemAt(currentItem).getUri();
                         currentItem = currentItem + 1;
 
                         Log.d("Uri Selected", imageUri.toString());
@@ -233,7 +233,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
 
                 } else if (data.getData() != null) {
 
-                    final Uri uri = Uri.parse("file://" + data.getData());
+                    final Uri uri =  data.getData();
                     Log.i("Upload", "Uri = " + uri.toString());
 
                     try {
@@ -272,7 +272,7 @@ public class UploadActivity extends AppCompatActivity implements deleteFile {
     @NonNull
     private MultipartBody.Part prepareFilePart(String partName, Uri fileUri) throws URISyntaxException {
         // use the FileUtils to get the actual file by uri
-        String filePath=FileUtils.getPath(this,fileUri);
+        String filePath=FileUtils.getPath(this,fileUri.toString());
         String filetype;
         assert filePath != null;
         File file = new File(filePath);
