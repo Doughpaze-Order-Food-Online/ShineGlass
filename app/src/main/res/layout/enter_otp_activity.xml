@@ -90,85 +90,25 @@
 
                     </RelativeLayout>
 
-                    <LinearLayout
-                        android:id="@+id/otp_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
 
                         <EditText
                             android:id="@+id/edt_1"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/edt_bg_selector"
                             android:textColorHint="@color/BlackTextColor"
-                            android:layout_weight="1"
                             android:hint="@null"
-                            android:textAlignment="center"
-                            android:maxLength="1"
+                            android:layout_marginStart="48dp"
                             android:inputType="number"
-                            android:layout_marginRight="8dp"
-                            android:textSize="14sp"
+                            android:layout_marginEnd="48dp"
                             android:textColor="@color/BlackTextColor"
                             android:autofillHints="@null"
                             tools:ignore="TextFields"
-                            android:layout_marginEnd="8dp"
-                            android:gravity="center_horizontal" />
-
-                        <EditText
-                            android:id="@+id/edt_2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edt_bg_selector"
-                            android:textColorHint="@color/BlackTextColor"
-                            android:layout_weight="1"
-                            android:layout_marginRight="8dp"
-                            android:gravity="center_horizontal"
-                            android:textSize="14sp"
-                            android:hint="@null"
-                            android:maxLength="1"
-                            android:inputType="number"
-                            android:textColor="@color/BlackTextColor"
-                            android:autofillHints="@null"
-                            tools:ignore="TextFields"
-                            android:layout_marginEnd="8dp" />
-
-                        <EditText
-                            android:id="@+id/edt_3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edt_bg_selector"
-                            android:textColorHint="@color/BlackTextColor"
-                            android:layout_marginRight="8dp"
-                            android:textSize="14sp"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:hint="@null"
-                            android:maxLength="1"
-                            android:inputType="number"
-                            android:textColor="@color/BlackTextColor"
-                            android:autofillHints="@null"
-                            tools:ignore="TextFields"
-                            android:layout_marginEnd="8dp" />
-
-                        <EditText
-                            android:id="@+id/edt_4"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edt_bg_selector"
-                            android:textColorHint="@color/BlackTextColor"
-                            android:layout_weight="1"
-                            android:textSize="14sp"
-                            android:gravity="center_horizontal"
-                            android:hint="@null"
-                            android:maxLength="1"
-                            android:inputType="number"
-                            android:textColor="@color/BlackTextColor"
-                            android:autofillHints="@null"
-                            tools:ignore="TextFields" />
+                            android:gravity="center"
+                            android:maxLength="4"
+                            android:textSize="18sp" />
 
 
-                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/invalid_otp_txt"

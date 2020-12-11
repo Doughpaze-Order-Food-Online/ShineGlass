@@ -7,12 +7,9 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.mg.shineglass.DeliveryBoyMainActivity;
-import com.mg.shineglass.Login_Activity;
 import com.mg.shineglass.MainActivity;
 import com.mg.shineglass.R;
 import com.mg.shineglass.models.BasicResponse;
@@ -45,9 +41,9 @@ public class Number_OTP_Activity extends AppCompatActivity {
     private User user;
     private String otp,type,token,userType;
     private EditText E1;
-    private EditText E2;
-    private EditText E3;
-    private EditText E4;
+    //    private EditText E2;
+//    private EditText E3;
+//    private EditText E4;
     private RelativeLayout button;
     private TextView timer, resend;
     private CompositeSubscription mSubscriptions;
@@ -72,36 +68,36 @@ public class Number_OTP_Activity extends AppCompatActivity {
                 intent.getStringExtra("password"),
                 intent.getStringExtra("phone"));
         type=intent.getStringExtra("type");
-        otp=intent.getStringExtra("otp");
-        token=intent.getStringExtra("token");
-        userType=intent.getStringExtra("userType");
-
+        otp = intent.getStringExtra("otp");
+        token = intent.getStringExtra("token");
+        userType = intent.getStringExtra("userType");
 
 
         //textView = (TextView) findViewById(R.id.valid_invalid_otp);
-        resend=(TextView)findViewById(R.id.signup_txt);
-        button =  findViewById(R.id.verify_btn);
+        resend = (TextView) findViewById(R.id.signup_txt);
+        button = findViewById(R.id.verify_btn);
         E1 = (EditText) findViewById(R.id.edt_1);
-        E2 = (EditText) findViewById(R.id.edt_2);
-        E3 = (EditText) findViewById(R.id.edt_3);
-        E4 = (EditText) findViewById(R.id.edt_4);
-        timer=findViewById(R.id.time_txt);
-        Resend_block=findViewById(R.id.resend_otp_block);
-        resend=findViewById(R.id.signup_txt);
+//        E2 = (EditText) findViewById(R.id.edt_2);
+//        E3 = (EditText) findViewById(R.id.edt_3);
+//        E4 = (EditText) findViewById(R.id.edt_4);
+        timer = findViewById(R.id.time_txt);
+        Resend_block = findViewById(R.id.resend_otp_block);
+        resend = findViewById(R.id.signup_txt);
 
-        E1.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E1));
-        E2.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E2));
-        E3.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E3));
-        E4.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E4));
+//        E1.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E1));
+//        E2.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E2));
+//        E3.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E3));
+//        E4.addTextChangedListener(new Number_OTP_Activity.GenericTextWatcher(E4));
 
-        button.setOnClickListener(view ->{
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+        button.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                 return;
             }
             mLastClickTime = SystemClock.elapsedRealtime();
-            NUMBER_LOGIN();});
-        resend.setOnClickListener(view->{
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+            NUMBER_LOGIN();
+        });
+        resend.setOnClickListener(view -> {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                 return;
             }
             mLastClickTime = SystemClock.elapsedRealtime();
@@ -114,7 +110,7 @@ public class Number_OTP_Activity extends AppCompatActivity {
 
     private void NUMBER_LOGIN() {
 
-        String enteredOtp = E1.getText().toString() + E2.getText().toString() + E3.getText().toString() + E4.getText().toString();
+        String enteredOtp = E1.getText().toString();
       if(enteredOtp.equals(otp))
       {
           Toast.makeText(Number_OTP_Activity.this, "Login success!", Toast.LENGTH_SHORT).show();
@@ -222,54 +218,54 @@ public class Number_OTP_Activity extends AppCompatActivity {
     }
 
     private void goToHome() {
-        Intent intent = new Intent(Number_OTP_Activity.this, userType.toLowerCase().trim().equals("user")?MainActivity.class: DeliveryBoyMainActivity.class);
+        Intent intent = new Intent(Number_OTP_Activity.this, userType.toLowerCase().trim().equals("user") ? MainActivity.class : DeliveryBoyMainActivity.class);
         startActivity(intent);
         finish();
 
     }
 
 
-    public class GenericTextWatcher implements TextWatcher {
-        private View view;
-
-        private GenericTextWatcher(View view) {
-            this.view = view;
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            String text = editable.toString();
-            switch (view.getId()) {
-
-                case R.id.edt_1:
-                    if (text.length() == 1)
-                        E2.requestFocus();
-                    break;
-                case R.id.edt_2:
-                    if (text.length() == 1)
-                        E3.requestFocus();
-                    else if (text.length() == 0)
-                        E1.requestFocus();
-                    break;
-                case R.id.edt_3:
-                    if (text.length() == 1)
-                        E4.requestFocus();
-                    else if (text.length() == 0)
-                        E2.requestFocus();
-                    break;
-                case R.id.edt_4:
-                    if (text.length() == 0)
-                        E3.requestFocus();
-                    break;
-            }
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        }
-    }
+//    public class GenericTextWatcher implements TextWatcher {
+//        private View view;
+//
+//        private GenericTextWatcher(View view) {
+//            this.view = view;
+//        }
+//
+//        @Override
+//        public void afterTextChanged(Editable editable) {
+//            String text = editable.toString();
+//            switch (view.getId()) {
+//
+//                case R.id.edt_1:
+//                    if (text.length() == 1)
+//                        E2.requestFocus();
+//                    break;
+//                case R.id.edt_2:
+//                    if (text.length() == 1)
+//                        E3.requestFocus();
+//                    else if (text.length() == 0)
+//                        E1.requestFocus();
+//                    break;
+//                case R.id.edt_3:
+//                    if (text.length() == 1)
+//                        E4.requestFocus();
+//                    else if (text.length() == 0)
+//                        E2.requestFocus();
+//                    break;
+//                case R.id.edt_4:
+//                    if (text.length() == 0)
+//                        E3.requestFocus();
+//                    break;
+//            }
+//        }
+//
+//        @Override
+//        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+//        }
+//
+//        @Override
+//        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+//        }
+//    }
 }
