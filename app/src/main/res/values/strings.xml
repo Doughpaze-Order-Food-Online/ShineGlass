@@ -185,5 +185,15 @@
     <string name="payment_details">Payment Details</string>
     <string name="enter_the_transaction_id">Enter the Transaction ID :</string>
     <string name="refer_the_above_bank_details_for_the_payment_respectively_and_enter_your_transaction_id_below">Refer the above bank details for the payment respectively and enter your Transaction ID below</string>
+    <string-array name="thickness_array">
+        <item>"THICKNESS"</item>
+        <item>" 4 "</item>
+        <item>" 5 "</item>
+        <item>" 6 "</item>
+        <item>" 8 "</item>
+        <item>" 10 "</item>
+        <item>" 15 "</item>
+        <item>" 19 "</item>
+    </string-array>
 
 </resources>

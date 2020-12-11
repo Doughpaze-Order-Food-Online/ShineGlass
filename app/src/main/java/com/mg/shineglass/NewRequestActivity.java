@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -25,6 +27,7 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,12 +78,14 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
     private NumberPicker np;
     private ViewDialog viewDialog;
     private CardView cartBtn;
+    private Spinner thicknessSpinner;
 
     public NewRequestActivity() {
         // Required empty public constructor
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +112,6 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         });
 
 
-
         // Inflate the layout for this fragment
 
         Intent i=getIntent();
@@ -119,25 +123,21 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         subtype=findViewById(R.id.type_of_glass_txt);
         type.setText(category);
         if (subcategory != null) {
-           subtype.setText(subcategory);
-        }
-        else
-        {
+            subtype.setText(subcategory);
+        } else {
             subtype.setText(null);
         }
 
         MmRadioButton=findViewById(R.id.mm_radio_btn);
         InchRadioButton=findViewById(R.id.inch_radio_btn);
-        thickness = findViewById(R.id.thickness);
         width = findViewById(R.id.width);
         height = findViewById(R.id.height);
         quantity = findViewById(R.id.quantity);
         button=findViewById(R.id.request_quotation_btn);
         upload=findViewById(R.id.upload);
         radioGroup=findViewById(R.id.scale);
-        rvItem=findViewById(R.id.description_uploaded_container);
-
-
+        rvItem = findViewById(R.id.description_uploaded_container);
+        thicknessSpinner = findViewById(R.id.thickness_spinner);
         Ethickness = findViewById(R.id.thickness_edt);
         Ewidth = findViewById(R.id.width_edt);
         Eheight = findViewById(R.id.height_edt);
@@ -166,6 +166,15 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
             }
         });
 
+        MmRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Ewidth.setFocusableInTouchMode(true);
+                Eheight.setFocusableInTouchMode(true);
+                thicknessSpinner.setEnabled(true);
+            }
+        });
+
         Ethickness.setOnClickListener(v -> {
             if (!MmRadioButton.isChecked() && !InchRadioButton.isChecked()) {
                 Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
@@ -184,6 +193,18 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
                 Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
             }
         });
+
+        thicknessSpinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (!MmRadioButton.isChecked() && !InchRadioButton.isChecked()) {
+                    Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
+                } else {
+                    thicknessSpinner.performClick();
+                }
+                return true;
+            }
+        });
 //        viewDialog=new ViewDialog(this);
 //        FloatNumber floatNumber=new FloatNumber();
 //        viewDialog.showDialog();
@@ -196,13 +217,14 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
     private void REQUEST() {
         setError();
 
-
-        String Tthickness = Objects.requireNonNull( Ethickness.getText()).toString();
+        String Tthickness = null;
+        if (thicknessSpinner.getSelectedItemPosition() > 0) {
+            Tthickness = thicknessSpinner.getSelectedItem().toString();
+        }
         String Twidth = Objects.requireNonNull(Ewidth.getText()).toString();
         String Theight = Objects.requireNonNull(Eheight.getText()).toString();
         String Tquantity = Objects.requireNonNull(Equantity.getText()).toString();
-        String TScale=null;
-
+        String TScale = null;
 
 
         int err = 0;
@@ -211,7 +233,10 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
 
 
             err++;
-            thickness.setError("Thickness is required !");
+            TextView errorText = (TextView) thicknessSpinner.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Thickness is required !");
         }
 
         if (!validateFields(Twidth)) {
@@ -279,8 +304,6 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
 
 
     private void setError() {
-
-        thickness.setError(null);
         width.setError(null);
         height.setError(null);
         quantity.setError(null);

@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,32 +115,33 @@
 
                 </RadioGroup>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/thickness"
-                    style="@style/Widget.Design.TextInputLayout"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:textColorHint="@color/BlackTextColor"
-                    app:endIconMode="clear_text"
-                    app:endIconTint="@color/BlackTextColor"
-                    app:hintAnimationEnabled="false"
-                    app:hintEnabled="false"
-                    app:startIconDrawable="@drawable/thickness"
-                    app:startIconTint="@color/colorPrimaryDark">
+                    android:background="@drawable/webview_border">
 
-                    <EditText
-                        android:id="@+id/thickness_edt"
+                    <ImageView
+                        android:id="@+id/thickness_img"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/thickness" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/thickness_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:autofillHints="no"
-                        android:background="@drawable/edt_bg_selector"
-                        android:hint="@string/thickness"
-                        android:inputType="numberDecimal"
-                        android:textColorHint="@color/BlackTextColor"
-                        android:textSize="12sp" />
+                        android:layout_margin="8dp"
+                        android:layout_toEndOf="@id/thickness_img"
+                        android:dropDownWidth="wrap_content"
+                        android:entries="@array/thickness_array"
+                        android:spinnerMode="dropdown"
+                        android:theme="@style/mySpinnerStyle" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </RelativeLayout>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -172,6 +173,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:autofillHints="no"
+                            android:focusableInTouchMode="false"
                             android:background="@drawable/edt_bg_selector"
                             android:hint="@string/width"
                             android:inputType="numberDecimal"
@@ -203,6 +205,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:autofillHints="no"
+                            android:focusableInTouchMode="false"
                             android:background="@drawable/edt_bg_selector"
                             android:hint="@string/height"
                             android:inputType="numberDecimal"
