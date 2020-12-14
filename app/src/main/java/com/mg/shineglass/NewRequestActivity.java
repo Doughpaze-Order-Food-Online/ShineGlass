@@ -175,6 +175,15 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
             }
         });
 
+        InchRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Ewidth.setFocusableInTouchMode(true);
+                Eheight.setFocusableInTouchMode(true);
+                thicknessSpinner.setEnabled(true);
+            }
+        });
+
 //        Ethickness.setOnClickListener(v -> {
 //            if (!MmRadioButton.isChecked() && !InchRadioButton.isChecked()) {
 //                Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
