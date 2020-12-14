@@ -60,21 +60,21 @@ import static com.mg.shineglass.utils.validation.validateFields;
 
 
 public class NewRequestActivity  extends AppCompatActivity implements NumberPicker.OnValueChangeListener ,deleteFile{
-    private String category,subcategory;
-    private TextView type,subtype;
+    private String category, subcategory;
+    private TextView type, subtype;
     private RecyclerView rvItem;
     private RadioGroup radioGroup;
-    private RadioButton InchRadioButton,MmRadioButton;
-    private TextInputLayout thickness,width,height,quantity;
+    private RadioButton InchRadioButton, MmRadioButton;
+    private TextInputLayout thickness, width, height, quantity;
     private FrameLayout upload;
     List<Uri> arrayList = new ArrayList<>();
     final int REQUEST_EXTERNAL_STORAGE = 100;
     private RelativeLayout button;
-    private EditText Ethickness, Ewidth, Eheight, Equantity;
+    private EditText Ewidth, Eheight, Equantity;
     private final String[] floatNum = new String[10000];
     private ImageView backbtn;
     private long mLastClickTime = 0;
-    private Button b1,b2;
+    private Button b1, b2;
     private NumberPicker np;
     private ViewDialog viewDialog;
     private CardView cartBtn;
@@ -138,7 +138,6 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         radioGroup=findViewById(R.id.scale);
         rvItem = findViewById(R.id.description_uploaded_container);
         thicknessSpinner = findViewById(R.id.thickness_spinner);
-        Ethickness = findViewById(R.id.thickness_edt);
         Ewidth = findViewById(R.id.width_edt);
         Eheight = findViewById(R.id.height_edt);
         Equantity = findViewById(R.id.quantity_edt);
@@ -388,7 +387,6 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         Eheight.setText(null);
         Equantity.setText(null);
         Ewidth.setText(null);
-        Ethickness.setText(null);
 
         arrayList.clear();
 
