@@ -160,6 +160,8 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
             {
                 tid.setError("Enter Transaction Id");
                 return ;
+            }
+
 
                 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
                     return;
