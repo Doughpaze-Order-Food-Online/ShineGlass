@@ -175,11 +175,11 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
             }
         });
 
-        Ethickness.setOnClickListener(v -> {
-            if (!MmRadioButton.isChecked() && !InchRadioButton.isChecked()) {
-                Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
-            }
-        });
+//        Ethickness.setOnClickListener(v -> {
+//            if (!MmRadioButton.isChecked() && !InchRadioButton.isChecked()) {
+//                Toast.makeText(NewRequestActivity.this, "Please select the measurement type in INCH OR MM", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
 
         Ewidth.setOnClickListener(v -> {
