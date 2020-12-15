@@ -146,7 +146,6 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
                 return;
             }
             mLastClickTime = SystemClock.elapsedRealtime();
-
             REQUEST();
         });
 
@@ -387,7 +386,7 @@ public class NewRequestActivity  extends AppCompatActivity implements NumberPick
         Eheight.setText(null);
         Equantity.setText(null);
         Ewidth.setText(null);
-
+        thicknessSpinner.setSelection(0);
         arrayList.clear();
 
         FileUploadAdapter fileUploadAdapter = new FileUploadAdapter(arrayList, this, this,true);
