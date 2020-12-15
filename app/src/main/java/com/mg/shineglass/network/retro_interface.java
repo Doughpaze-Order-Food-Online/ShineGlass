@@ -102,6 +102,10 @@ public interface retro_interface {
     @POST("order")
     Observable<Integer> PLACE_OFFLINE_ORDER(@Part MultipartBody.Part payment, @Part("QuotationNo") String QuotationNo,@Part("address") Address address,@Part("tid") String tid);
 
+    @Multipart
+    @POST("order")
+    Observable<Integer> PLACE_OFFLINE_ORDER(@Part("QuotationNo") String QuotationNo,@Part("address") Address address,@Part("tid") String tid);
+
     @POST("online_order")
     Observable<Integer> PLACE_ONLINE_ORDER(@Query("mid") String mid, @Query("orderNo") String Quotation);
 

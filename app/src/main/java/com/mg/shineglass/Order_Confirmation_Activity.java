@@ -209,11 +209,23 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
 
 
         viewDialog.showDialog();
-        mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
-                .PLACE_OFFLINE_ORDER(prepareFilePart("payment", uri),Quotation,newaddres,tid.getText().toString())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse,this::handleError));
+        if(uri==null)
+        {
+            mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
+                    .PLACE_OFFLINE_ORDER(Quotation,newaddres,tid.getText().toString())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::handleResponse,this::handleError));
+        }
+        else
+        {
+            mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
+                    .PLACE_OFFLINE_ORDER(prepareFilePart("payment", uri),Quotation,newaddres,tid.getText().toString())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::handleResponse,this::handleError));
+        }
+
 
     }
 
