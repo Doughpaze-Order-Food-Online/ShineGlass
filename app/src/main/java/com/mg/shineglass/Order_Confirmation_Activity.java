@@ -46,6 +46,8 @@ import com.mg.shineglass.utils.constants;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import okhttp3.MediaType;
@@ -209,22 +211,14 @@ public class Order_Confirmation_Activity extends AppCompatActivity {
 
 
         viewDialog.showDialog();
-        if(uri==null)
-        {
-            mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
-                    .PLACE_OFFLINE_ORDER(Quotation,newaddres,tid.getText().toString())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(this::handleResponse,this::handleError));
-        }
-        else
-        {
-            mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
-                    .PLACE_OFFLINE_ORDER(prepareFilePart("payment", uri),Quotation,newaddres,tid.getText().toString())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(this::handleResponse,this::handleError));
-        }
+        MultipartBody.Part files = null;
+        if(uri!=null)
+            files=prepareFilePart("payment", uri);
+        mSubscriptions.add(networkUtils.getRetrofit( mSharedPreferences.getString(constants.TOKEN, null))
+                .PLACE_OFFLINE_ORDER(files,Quotation,newaddres,tid.getText().toString())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse,this::handleError));
 
 
     }
