@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="Quotation Details"
+            android:text="Requirement Details"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
