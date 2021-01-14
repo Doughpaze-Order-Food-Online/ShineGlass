@@ -159,7 +159,10 @@ public class MyRequestAdapter extends RecyclerView.Adapter<MyRequestAdapter.MyRe
         MyRequestItemHolder.info_img_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, MyRequestDetailsPopUpActivity.class));
+                Intent i=new Intent(context, MyRequestDetailsPopUpActivity.class);
+                Gson gson=new Gson();
+                i.putExtra("quotation",gson.toJson(quotation.getQuotation()));
+                context.startActivity(i);
             }
         });
     }
