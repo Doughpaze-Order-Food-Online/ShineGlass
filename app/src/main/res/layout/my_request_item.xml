@@ -18,15 +18,24 @@
         android:orientation="vertical"
         android:padding="@dimen/dimen_16dp">
 
+        <ImageView
+            android:id="@+id/quotation_details_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="@dimen/dimen_8dp"
+            android:src="@drawable/ic_outline_info_24"
+            app:tint="@color/MediumGrayColor" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/order_details_container"
             android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
             android:layout_weight="1.5">
 
             <TextView

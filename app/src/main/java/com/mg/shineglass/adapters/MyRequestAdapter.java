@@ -15,26 +15,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mg.shineglass.Interface.FetchData;
-import com.mg.shineglass.MainActivity;
+import com.mg.shineglass.MyRequestDetailsPopUpActivity;
 import com.mg.shineglass.My_Address_Activity;
 import com.mg.shineglass.Quotation_Activity;
 import com.mg.shineglass.R;
-import com.mg.shineglass.UploadActivity;
 import com.mg.shineglass.models.BasicResponse;
-import com.mg.shineglass.models.LoginResponse;
 import com.mg.shineglass.models.MyQuotation;
 import com.mg.shineglass.network.networkUtils;
 import com.mg.shineglass.utils.ViewDialog;
-import com.mg.shineglass.utils.constants;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -44,20 +41,20 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. MyRequestItemHolder>  {
+public class MyRequestAdapter extends RecyclerView.Adapter<MyRequestAdapter.MyRequestItemHolder> {
 
-    private List<MyQuotation> list;
-    private Context context;
+    private final List<MyQuotation> list;
+    private final Context context;
     private CompositeSubscription mSubscriptions;
     private ViewDialog viewDialog;
-    private Activity activity;
-    private FetchData fetchData;
+    private final Activity activity;
+    private final FetchData fetchData;
 
-    public  MyRequestAdapter(List<MyQuotation> list,Context context,Activity activity,FetchData fetchData) {
-        this.list=list;
-        this.context=context;
-        this.activity=activity;
-        this.fetchData=fetchData;
+    public MyRequestAdapter(List<MyQuotation> list, Context context, Activity activity, FetchData fetchData) {
+        this.list = list;
+        this.context = context;
+        this.activity = activity;
+        this.fetchData = fetchData;
 
     }
 
@@ -158,6 +155,13 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
                     .show();
 
         });
+
+        MyRequestItemHolder.info_img_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, MyRequestDetailsPopUpActivity.class));
+            }
+        });
     }
 
     private void REJECT_QUOTATION(String quotationNo) {
@@ -188,7 +192,8 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
         TextView quotationNo,date;
         RelativeLayout view,reject,accept;
         View line;
-        ImageView imageView,imageView2;
+        ImageView imageView, imageView2;
+        ImageView info_img_btn;
 
 
         MyRequestItemHolder (View itemView) {
@@ -203,7 +208,7 @@ public class MyRequestAdapter extends RecyclerView.Adapter< MyRequestAdapter. My
             imageView2=itemView.findViewById(R.id.rejected_img);
             mSubscriptions = new CompositeSubscription();
             viewDialog = new ViewDialog(activity);
-
+            info_img_btn = itemView.findViewById(R.id.quotation_details_btn);
 
         }
     }

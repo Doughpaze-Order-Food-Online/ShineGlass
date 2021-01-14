@@ -13,13 +13,23 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HelpOrContactUs"></activity>
-        <activity android:name=".TermsAndPolicies" />
+        <activity
+            android:name=".MyRequestDetailsPopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_Quotation_details" />
+
+        <activity
+            android:name=".HelpOrContactUs"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".TermsAndPolicies"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ChangePasswordPopUp"
             android:screenOrientation="portrait"
@@ -75,8 +85,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Login_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/loginWindowBackgroundTheme" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Register_Activity"
             android:screenOrientation="portrait" />
