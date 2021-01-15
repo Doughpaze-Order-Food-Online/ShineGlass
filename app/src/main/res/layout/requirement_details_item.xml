@@ -11,12 +11,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="2"
+        android:layout_weight="1.5"
         android:gravity="center_horizontal"
         android:text="High Reflective Glass"
         android:textAllCaps="true"
         android:textColor="@color/black"
-        android:textSize="9sp" />
+        android:textSize="8sp" />
 
     <TextView
         android:id="@+id/sub_cat"
@@ -27,7 +27,7 @@
         android:gravity="center"
         android:text="clear"
         android:textColor="@color/black"
-        android:textSize="9sp" />
+        android:textSize="8sp" />
 
     <TextView
         android:id="@+id/Thickness"
@@ -38,7 +38,7 @@
         android:gravity="center_horizontal"
         android:text="12"
         android:textColor="@color/black"
-        android:textSize="9sp" />
+        android:textSize="8sp" />
 
     <TextView
         android:id="@+id/width"
@@ -49,7 +49,7 @@
         android:gravity="center_horizontal"
         android:text="36"
         android:textColor="@color/black"
-        android:textSize="9sp" />
+        android:textSize="8sp" />
 
     <TextView
         android:id="@+id/height"
@@ -60,18 +60,18 @@
         android:gravity="center_horizontal"
         android:text="48"
         android:textColor="@color/black"
-        android:textSize="9sp" />
+        android:textSize="8sp" />
 
     <TextView
         android:id="@+id/scale"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="0.5"
+        android:layout_weight="0.7"
         android:gravity="center_horizontal"
-        android:text="inch"
+        android:text="inches"
         android:textColor="@color/black"
-        android:textSize="9sp" />
+        android:textSize="8sp" />
 
     <TextView
         android:id="@+id/quantity"
@@ -82,6 +82,6 @@
         android:gravity="center_horizontal"
         android:text="5"
         android:textColor="@color/black"
-        android:textSize="9sp" />
+        android:textSize="8sp" />
 
 </LinearLayout>
